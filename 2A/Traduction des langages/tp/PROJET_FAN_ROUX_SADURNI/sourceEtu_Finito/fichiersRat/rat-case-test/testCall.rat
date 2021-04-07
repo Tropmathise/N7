@@ -1,0 +1,19 @@
+int get(int m) {
+    return 1;
+}
+
+int getInt(int m) {
+    int e = 0;
+    switch (call get(m)) {
+        case 1 : e=1;break;
+        case 2 : e=2;break;
+    }
+    return e;
+}
+
+test{
+    int m = 0;
+    int m2 = 7;
+    print (call getInt (m));
+    print (call getInt (m2));
+}

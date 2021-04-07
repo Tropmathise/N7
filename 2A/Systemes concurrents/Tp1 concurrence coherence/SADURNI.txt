@@ -1,0 +1,57 @@
+Exercices 
+
+Efficacité de la parallélisation:
+
+- le résultat naif que l'on peut espérer est que est que plus le nombre d'activité est important, 
+plus le temps d'éxecution est long en execution mono.
+- En effet, avec 1 activité et un temps de pause de 100ms, j'obtiens un temps d'execution mono de 
+107044ms contre 107112 en execution non synchronisé (soit 10 fois plus). 
+Le temps est similaire ce qui est logique car il y a qu'une seule activité. 
+En revanche, en utilisant 10 activité avec le meme temps de pause, j'obtiens un temps d'execution 
+10 fois plus long, mais le meme que précédemment (avec une seule activité)
+- On en conclut que plus on augmente le nombre N, plus la durée d'execution mono est longue, 
+mais la durée d'execution non synchronisé ne change pas en fonction de N. En revanche, j'ai remarqué 
+que pour 100ms le surcout est negatif pour N=3, je suis donc un peu confus...
+Apres avoir essyé plusieurs valeurs, j'ai tendance à penser que pour un tempd de 100ms, au dessus de 8 
+activités, on a un temps d'exection mono plus important que non synchronisé.
+On peut estimer le surcout comme ceci : (Tthread - Tsequence/N)/Tthread.
+
+Cout de la cohérence 
+
+- A priori les valeurs affichées dnas le cas ou il n'y a pas préemption du processeur entre threads 
+sont dans un ordre croissant.
+- A priori les valeurs affichées dans le cas ou la gestion des activités partage le temps processeur 
+par quantum de temps des threads ne sont pas dans l'ordre mais dans un ordre similaire au suivant si 
+on avait 4 threads et un compte allant jusqu'a 20:
+1,6,11,16,2,7,12,17,3,8,13,18,4,9,14,19,5,10,15,20  (il s'avere que les nombres sont par ordre croissant toujours)
+- La JVM suit la politique de la file
+- La valeur du compteur n'est pas égale au nombre total d'itérations car ....
+- En placant le synchronized dans uniquement dans l'incrémentation, on remarque que le cout est le meme 
+que s'il n'y etait pas.
+- En placant le synchronized dans la boucle interne on remarque que le temps est beacoup plus rapide, 
+voire meme 3fois plus rapide. 
+- Apres avoir changé le compteur en AtomicLong ainsi qu'en ajustant ce qui etait nécéssaire pour ne 
+pas avoir d'erreur de compilation (definir j comme AtomicLong et utilise la methode getandincrement(), 
+compareandset(long, long)),
+je n'ai pas l'impression que le resultat soit garanti, en effet, la valeur finale du compteur n'est pas 
+egale au nombre d'itération...
+- Si on déclare le compteur comme volatile, le nombre d'execution est correcte avec la valeur finale et le
+temps d'execution semble un peu plus rapide qu'en static seulement.
+- Conclusion : je ne pense pas avoir une conclusion correcte. 
+Le mecanisme de synchronized semble etre efficace et rapide, et la classe AtomicLong un peu moins efficace 
+car elle ne va pas jusqu'à la valeur finale (du moins de ce que j'ai codé, peut etre que j'ai fait des erreurs). 
+Enfin, sur les valeurs testées, je ne voi pas de différence avec la declaration du compteur comme volatile.
+
+Schéma producteurs consommateurs 
+
+Il n'y a pas l'appellation de join(). Et j'ai rajouté le try et les catch d'interruptedExecption avec des Threads.sleep.
+La chose la plus importante est que j'ai mis en volatile les attributs depot et retrait pour avoir un fonctionnement correcte.
+Cependant, l'affichage n'est pas si propre que ça...
+
+
+
+
+-Remarque : je pense avoir passé trop de temps sur ce TP en autonomie (4h) en attendant trop de temps entre 
+chaque execution et en ayant aucune aide venant du sujet concernant les methodes utilisant java.atomic, 
+je me suis senti perdu pendant la moitié du temps passé sur ce sujet... 
+j'espere avoir une correction détaillée

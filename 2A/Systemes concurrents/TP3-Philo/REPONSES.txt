@@ -1,0 +1,41 @@
+Première approche : les fourchettes sont des ressources critiques
+
+Strategie de base :
+fichier : PhiloBase.java 
+Avec la version de Base, les philosophes ne se bloquent pas. Je rajoute donc 
+une attente de quelques secondes entre chaque prise de fourchette pour que ce
+soit le cas. 
+En executant le PhiloBase avec 10 philosophes, ils se bloquent rapidement
+
+Pour pallier les interblocages je vais implanter plusieurs stratégies comme 
+vu en TD.
+1- avec les mutex (PhiloMutex) : il n'y a pas d'interblocage car le premier 
+philosophe a forcement les deux fourchettes
+
+2- classes ordonnées (PhiloOrdonnes): O est puni: les philosophes prennent 
+tous la fourchette de droite en premie sauf le philosophe numéroté 0 pour eviter
+l'interblocage.
+
+3- Relache si attente (PhiloRelache): Le philosophe rend la premiere fourchette
+s'il ne peut pas prendre la deuxieme.
+///////////////////////////////////////////////////////////////////////////////////////////////
+Seconde approche : contrôler la progression d'un philosophe en fonction de l'état de ses voisins.
+
+J'introduis la notion de l'état d'un philosophe : EtatPhilosophe = {Pense, Mange, Demande}
+Puis un nouveau tableau de Semaphore etatPhilo[N] initialisé à Pense.
+une methode peutManger(no) qui retourne un bool sur la possibilité de manger ou non.
+
+Avec cette version, il a plusieurs philosophes qui mangent en meme temps alors qu'avec les autres
+il n'y a qu'un seul qui mange a la fois. 
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+Equité 
+
+Il peut y avoir famine d'un philosophe car si un philosophe est trop gourmant, il peut 
+prendre les fourchette constamment et ne pas les laisser aux philosophes peu gourmants.
+
+
+
+
+
+

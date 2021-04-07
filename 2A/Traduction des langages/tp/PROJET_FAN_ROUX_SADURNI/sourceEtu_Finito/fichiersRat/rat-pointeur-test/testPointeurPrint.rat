@@ -1,0 +1,7 @@
+prog {
+    int* d1 = (new int);
+    int* m1 = (new int);
+    (*d1) = 15;
+    (*m1) = 17;
+    print ((*d1));
+}

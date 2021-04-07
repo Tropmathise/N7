@@ -1,0 +1,42 @@
+type token =
+    WHILE
+  | TRUE
+  | SLASH
+  | RETURN
+  | RAT
+  | PV
+  | PRINT
+  | PO
+  | PLUS
+  | PF
+  | NUM
+  | MULT
+  | INT
+  | INF
+  | IF
+  | ID of string
+  | FALSE
+  | EQUAL
+  | EOF
+  | ENTIER of int
+  | ELSE
+  | DENOM
+  | CONST
+  | CO
+  | CF
+  | CALL
+  | BOOL
+  | AO
+  | AF
+val menhir_begin_marker : int
+val xv_typ : Type.typ
+val xv_prog : Ast.AstSyntax.programme
+val xv_main : Ast.AstSyntax.programme
+val xv_is : Ast.AstSyntax.bloc
+val xv_i : Ast.AstSyntax.instruction
+val xv_fonc : Ast.AstSyntax.fonction
+val xv_e : Ast.AstSyntax.expression
+val xv_dp : (Type.typ * string) list
+val xv_cp : Ast.AstSyntax.expression list
+val xv_bloc : Ast.AstSyntax.bloc
+val menhir_end_marker : int

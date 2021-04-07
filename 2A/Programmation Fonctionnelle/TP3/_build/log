@@ -1,0 +1,139 @@
+# dune runtest
+# OCAMLPARAM: unset
+# Workspace root: "/mnt/c/Users/thoma/OneDrive/Desktop/N7/2a/programmation
+# fonctionnelle/TP3"
+$ /usr/bin/nproc > /tmp/duneacca30.output 2> /dev/null
+# Auto-detected concurrency: 8
+# disable binary cache
+$ /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/bin/ocamlc.opt -config > /tmp/dune66a4e9.output
+# Dune context:
+#  { name = "default"
+#  ; kind = "default"
+#  ; profile = Dyn
+#  ; merlin = true
+#  ; for_host = None
+#  ; fdo_target_exe = None
+#  ; build_dir = "default"
+#  ; toplevel_path =
+#      Some
+#        External
+#          "/home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/toplevel"
+#  ; ocaml_bin = External "/home/tsadurni/.opam/ocaml-base-compiler.4.07.1/bin"
+#  ; ocaml =
+#      Ok External "/home/tsadurni/.opam/ocaml-base-compiler.4.07.1/bin/ocaml"
+#  ; ocamlc =
+#      External
+#        "/home/tsadurni/.opam/ocaml-base-compiler.4.07.1/bin/ocamlc.opt"
+#  ; ocamlopt =
+#      Ok
+#        External
+#          "/home/tsadurni/.opam/ocaml-base-compiler.4.07.1/bin/ocamlopt.opt"
+#  ; ocamldep =
+#      Ok
+#        External
+#          "/home/tsadurni/.opam/ocaml-base-compiler.4.07.1/bin/ocamldep.opt"
+#  ; ocamlmklib =
+#      Ok
+#        External
+#          "/home/tsadurni/.opam/ocaml-base-compiler.4.07.1/bin/ocamlmklib.opt"
+#  ; env =
+#      map
+#        { "INSIDE_DUNE" :
+#            "/mnt/c/Users/thoma/OneDrive/Desktop/N7/2a/programmation fonctionnelle/TP3/_build/default"
+#        ; "OCAMLFIND_IGNORE_DUPS_IN" :
+#            "/mnt/c/Users/thoma/OneDrive/Desktop/N7/2a/programmation fonctionnelle/TP3/_build/install/default/lib"
+#        ; "OCAMLPATH" :
+#            "/mnt/c/Users/thoma/OneDrive/Desktop/N7/2a/programmation fonctionnelle/TP3/_build/install/default/lib"
+#        ; "OCAMLTOP_INCLUDE_PATH" :
+#            "/mnt/c/Users/thoma/OneDrive/Desktop/N7/2a/programmation fonctionnelle/TP3/_build/install/default/lib/toplevel"
+#        ; "OCAML_COLOR" : "always"
+#        ; "OPAMCOLOR" : "always"
+#        }
+#  ; findlib_path =
+#      [ External "/home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib" ]
+#  ; arch_sixtyfour = true
+#  ; natdynlink_supported = true
+#  ; supports_shared_libraries = true
+#  ; ocaml_config =
+#      { version = "4.07.1"
+#      ; standard_library_default =
+#          "/home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/ocaml"
+#      ; standard_library =
+#          "/home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/ocaml"
+#      ; standard_runtime =
+#          "/home/tsadurni/.opam/ocaml-base-compiler.4.07.1/bin/ocamlrun"
+#      ; ccomp_type = "cc"
+#      ; c_compiler = "gcc"
+#      ; ocamlc_cflags =
+#          [ "-O2"; "-fno-strict-aliasing"; "-fwrapv"; "-fcommon"; "-fPIC" ]
+#      ; ocamlc_cppflags = [ "-D_FILE_OFFSET_BITS=64"; "-D_REENTRANT" ]
+#      ; ocamlopt_cflags =
+#          [ "-O2"; "-fno-strict-aliasing"; "-fwrapv"; "-fcommon" ]
+#      ; ocamlopt_cppflags = [ "-D_FILE_OFFSET_BITS=64"; "-D_REENTRANT" ]
+#      ; bytecomp_c_compiler =
+#          [ "gcc"
+#          ; "-O2"
+#          ; "-fno-strict-aliasing"
+#          ; "-fwrapv"
+#          ; "-fcommon"
+#          ; "-fPIC"
+#          ; "-D_FILE_OFFSET_BITS=64"
+#          ; "-D_REENTRANT"
+#          ]
+#      ; bytecomp_c_libraries = [ "-lm"; "-ldl"; "-lpthread" ]
+#      ; native_c_compiler =
+#          [ "gcc"
+#          ; "-O2"
+#          ; "-fno-strict-aliasing"
+#          ; "-fwrapv"
+#          ; "-fcommon"
+#          ; "-D_FILE_OFFSET_BITS=64"
+#          ; "-D_REENTRANT"
+#          ]
+#      ; native_c_libraries = [ "-lm"; "-ldl" ]
+#      ; cc_profile = [ "-pg" ]
+#      ; architecture = "amd64"
+#      ; model = "default"
+#      ; int_size = 63
+#      ; word_size = 64
+#      ; system = "linux"
+#      ; asm = [ "as" ]
+#      ; asm_cfi_supported = true
+#      ; with_frame_pointers = false
+#      ; ext_exe = ""
+#      ; ext_obj = ".o"
+#      ; ext_asm = ".s"
+#      ; ext_lib = ".a"
+#      ; ext_dll = ".so"
+#      ; os_type = "Unix"
+#      ; default_executable_name = "a.out"
+#      ; systhread_supported = true
+#      ; host = "x86_64-unknown-linux-gnu"
+#      ; target = "x86_64-unknown-linux-gnu"
+#      ; profiling = true
+#      ; flambda = false
+#      ; spacetime = false
+#      ; safe_string = false
+#      ; exec_magic_number = "Caml1999X023"
+#      ; cmi_magic_number = "Caml1999I024"
+#      ; cmo_magic_number = "Caml1999O023"
+#      ; cma_magic_number = "Caml1999A023"
+#      ; cmx_magic_number = "Caml1999Y023"
+#      ; cmxa_magic_number = "Caml1999Z023"
+#      ; ast_impl_magic_number = "Caml1999M023"
+#      ; ast_intf_magic_number = "Caml1999N023"
+#      ; cmxs_magic_number = "Caml1999D023"
+#      ; cmt_magic_number = "Caml1999T024"
+#      ; natdynlink_supported = true
+#      ; supports_shared_libraries = true
+#      ; windows_unicode = false
+#      }
+#  }
+$ (cd _build/default && /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/bin/ocamldep.opt -modules -impl sourceEtu/.tp3.inline-tests/inline_test_runner_tp3.ml-gen) > _build/default/sourceEtu/.tp3.inline-tests/.tp3.inline-tests.eobjs/inline_test_runner_tp3.ml-gen.d
+$ (cd _build/default && /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/bin/ocamlopt.opt -g -o .ppx/bfcab61e6a21ecf6d2f80029fc1ef484/ppx.exe -w -24 -I /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/base -I /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/base/base_internalhash_types -I /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/base/caml -I /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/base/shadow_stdlib -I /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/ocaml-compiler-libs/common -I /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/ocaml-compiler-libs/shadow -I /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/ocaml-migrate-parsetree -I /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/ocaml/compiler-libs -I /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/ppx_derivers -I /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/ppx_inline_test -I /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/ppx_inline_test/libname -I /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/ppxlib -I /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/ppxlib/ast -I /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/ppxlib/print_diff -I /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/ppxlib/traverse_builtins -I /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/result -I /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/sexplib0 -I /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/stdio /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/base/base_internalhash_types/base_internalhash_types.cmxa /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/base/caml/caml.cmxa /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/sexplib0/sexplib0.cmxa /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/base/shadow_stdlib/shadow_stdlib.cmxa /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/base/base.cmxa /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/ocaml/compiler-libs/ocamlcommon.cmxa /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/ocaml-compiler-libs/common/ocaml_common.cmxa /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/ocaml-compiler-libs/shadow/ocaml_shadow.cmxa /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/result/result.cmxa /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/ppx_derivers/ppx_derivers.cmxa /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/ocaml-migrate-parsetree/migrate_parsetree.cmxa /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/ppxlib/ast/ppxlib_ast.cmxa /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/stdio/stdio.cmxa /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/ppxlib/print_diff/ppxlib_print_diff.cmxa /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/ppxlib/traverse_builtins/ppxlib_traverse_builtins.cmxa /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/ppxlib/ppxlib.cmxa /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/ppx_inline_test/libname/ppx_inline_test_libname.cmxa /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/ppx_inline_test/ppx_inline_test.cmxa .ppx/bfcab61e6a21ecf6d2f80029fc1ef484/_ppx.ml)
+$ (cd _build/default && .ppx/bfcab61e6a21ecf6d2f80029fc1ef484/ppx.exe --cookie 'library-name="tp3"' -o sourceEtu/tp3.pp.ml --impl sourceEtu/tp3.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
+> File "sourceEtu/tp3.ml", line 132, characters 0-2:
+> Warning 2: this is not the end of a comment.
+> File "sourceEtu/tp3.ml", line 132, characters 1-2:
+> Error: Syntax error
+[1]

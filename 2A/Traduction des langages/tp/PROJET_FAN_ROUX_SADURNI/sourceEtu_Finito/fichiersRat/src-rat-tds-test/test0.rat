@@ -1,0 +1,13 @@
+int f (int a){
+  if(a=3){
+    rat a = [3/2];
+    print a;
+  }else{
+    print a;
+  }
+  return 0;
+}
+
+main{
+  print (call f (1));
+}

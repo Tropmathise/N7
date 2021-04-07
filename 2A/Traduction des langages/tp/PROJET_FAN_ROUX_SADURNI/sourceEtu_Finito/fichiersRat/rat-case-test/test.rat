@@ -1,0 +1,15 @@
+int getInt(int m) {
+    int e = 0;
+    switch (((m+1)=1)) {
+        case true : e=1;break;
+        case false : e=2;break;
+    }
+    return e;
+}
+
+test{
+    int m = 0;
+    int m2 = 7;
+    print (call getInt (m));
+    print (call getInt (m2));
+}

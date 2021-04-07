@@ -1,0 +1,41 @@
+(** @canonical Rat.Ast *)
+module Ast = Rat__Ast
+
+(** @canonical Rat.Code *)
+module Code = Rat__Code
+
+(** @canonical Rat.Compilateur *)
+module Compilateur = Rat__Compilateur
+
+(** @canonical Rat.Exceptions *)
+module Exceptions = Rat__Exceptions
+
+(** @canonical Rat.Lexer *)
+module Lexer = Rat__Lexer
+
+(** @canonical Rat.Parser *)
+module Parser = Rat__Parser
+
+(** @canonical Rat.Passe *)
+module Passe = Rat__Passe
+
+(** @canonical Rat.PasseTdsRat *)
+module PasseTdsRat = Rat__PasseTdsRat
+
+(** @canonical Rat.Tds *)
+module Tds = Rat__Tds
+
+(** @canonical Rat.TestPlacement *)
+module TestPlacement = Rat__TestPlacement
+
+(** @canonical Rat.TestTDS *)
+module TestTDS = Rat__TestTDS
+
+(** @canonical Rat.TestTam *)
+module TestTam = Rat__TestTam
+
+(** @canonical Rat.TestType *)
+module TestType = Rat__TestType
+
+(** @canonical Rat.Type *)
+module Type = Rat__Type

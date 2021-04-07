@@ -1,0 +1,16 @@
+exemple2{
+  int x = 5;
+  switch (x) {
+    case 1 : print 42;
+    case 2: print 78;
+            break;
+    case 3 : int y = 3;
+             print y;
+             break;
+    case 4 : int z = 3;
+             print (z+x);
+             break;
+    case 5 : print 20;
+    default : print 96;
+  }
+}

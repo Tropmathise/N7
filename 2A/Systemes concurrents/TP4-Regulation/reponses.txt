@@ -1,0 +1,10 @@
+Max d'un tableau
+
+1. Le schema de parallelisation le plus naturel simple à implanter, mais le plus efficace reste me fork/join car 
+il y a une division des problemes.
+J'ai mis bcp de temps à comprendre et à avoir un code qui semble correcte. J'ai voulu tester avec les donnees presentes dans l'archive 
+mais sans succes. Donc j'ai crée un tableau avec GCVT, et il semblerait que pool fixe soit largement plus rapide. 
+
+Tri d'un tableau
+Le schéma Fork/Join est idéalement et principalement destiné aux calculs intensifs, il est forcement plus efficace ici
+

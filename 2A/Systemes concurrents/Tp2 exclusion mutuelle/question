@@ -1,0 +1,24 @@
+Exclusion Mutuelle
+
+2. L'ordre des deux affectations de la méthode entrer() est important. 
+On se retrouve parfois avec deux processus SC en même temps si on inverse les deux
+lignes
+
+3. 
+Il y a deux fichiers rajoutés : CompareAndSwap.java et TestAndSet.java. 
+Avec CompareAndSwap, on verifie la valeur attendu et on chnage si la valeur
+courante est la valeur attendue, alors que dans le TestAndSet, on renvoie 
+l'ancienne valeur et il n'y a pas réellement de test. 
+
+Dans la version avec le protocole de Peterson on a deux variables différentes, le tour 
+et la demande, il garantit la vivacité individuelle. 
+Le protocole TestAndSet, lui, ne se fait pas en concurrence avec autre chose.
+
+Schema poducteurs consommateurs
+
+4. Cf code fourni 
+
+
+Temps passé : 
+3h sur l'exclusion mutuelle 
+1h sur le schéma producteur/consommateur

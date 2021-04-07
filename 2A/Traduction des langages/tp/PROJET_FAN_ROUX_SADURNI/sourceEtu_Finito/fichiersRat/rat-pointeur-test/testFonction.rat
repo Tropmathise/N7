@@ -1,0 +1,13 @@
+int printDate (int d1 int m1) {
+    print (d1);
+    print (m1);
+    return 0;
+}
+
+prog {
+    int* d1 = (new int);
+    int* m1 = (new int);
+    (*d1) = 15;
+    (*m1) = 17;
+    int err = call printDate ((*d1) (*m1));
+}

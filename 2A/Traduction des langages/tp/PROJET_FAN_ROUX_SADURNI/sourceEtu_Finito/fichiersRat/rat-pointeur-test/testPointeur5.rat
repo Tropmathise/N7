@@ -1,0 +1,14 @@
+test{
+  int* p = (new int);
+  int** pp = &p;
+  int x = 5;
+  p = &x;
+  int y = (*p);
+  (*p) = 18;
+  rat* pr = (new rat);
+  rat r = [6/7];
+  pr = &r;
+  rat** ppr = &pr;
+  print (*(*ppr));
+  print (*(*pp));
+}

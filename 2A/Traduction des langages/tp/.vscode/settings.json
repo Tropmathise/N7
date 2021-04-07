@@ -1,0 +1,6 @@
+{
+    "git.ignoreLimitWarning": true,
+    "ocaml.sandbox": {
+        "kind": "global"
+    }
+}

@@ -1,0 +1,5 @@
+main{
+  rat *px = (new rat);
+  rat x = [11/2];
+  px = &x;
+}

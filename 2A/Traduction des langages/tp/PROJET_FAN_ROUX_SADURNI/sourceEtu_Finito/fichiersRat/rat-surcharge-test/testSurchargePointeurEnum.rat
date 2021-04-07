@@ -1,0 +1,30 @@
+enum Carotte {Mure, Pasmure};
+
+int f (int* i1 int* i2) {
+  return 1;
+}
+int f (Carotte* r1 Carotte* r2) { 
+  return 2; 
+}
+
+int g (Carotte a) {
+  return 3;
+}
+
+main{
+  int* a = (new int);
+  int* b = (new int);
+  (*a) = 11;
+  (*b) = 156;
+  Carotte* ra = (new Carotte);
+  Carotte* rb = (new Carotte);
+  (*ra) = Mure;
+  (*rb) = Pasmure;
+  int i = call f (a b) ;
+  print i ;
+  i = call f (ra rb);
+  print i ;
+  i = call g((*ra));
+  print i;
+}
+

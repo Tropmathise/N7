@@ -1,0 +1,10 @@
+# dune runtest
+# OCAMLPARAM: unset
+$ /usr/bin/nproc > /tmp/dune491c75.output 2> /dev/null
+$ /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/bin/ocamlc.opt -config > /tmp/dunea4aa3b.output
+$ (cd _build/default && .ppx/5ccac8911c4cff291e9b1f2cc80dcb66/ppx.exe --cookie 'library-name="tp2"' -o tp2.pp.ml --impl tp2.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
+> File "tp2.ml", line 161, characters 11-12:
+> Error: Syntax error: ')' expected
+> File "tp2.ml", line 161, characters 4-5:
+> Error: This '(' might be unmatched
+[1]

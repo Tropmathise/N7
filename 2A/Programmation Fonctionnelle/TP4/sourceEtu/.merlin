@@ -1,0 +1,19 @@
+EXCLUDE_QUERY_DIR
+B /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/base
+B /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/base/base_internalhash_types
+B /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/base/caml
+B /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/base/shadow_stdlib
+B /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/ppx_inline_test/config
+B /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/ppx_inline_test/runtime-lib
+B /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/sexplib0
+B _build/default/.appli_chaines.eobjs/byte
+B _build/default/.tp.objs/byte
+S /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/base
+S /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/base/base_internalhash_types
+S /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/base/caml
+S /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/base/shadow_stdlib
+S /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/ppx_inline_test/config
+S /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/ppx_inline_test/runtime-lib
+S /home/tsadurni/.opam/ocaml-base-compiler.4.07.1/lib/sexplib0
+S .
+FLG -w -40 -open Tp -w -40

@@ -1,0 +1,8 @@
+(** @canonical Tp2.Lexer *)
+module Lexer = Tp2__Lexer
+
+(** @canonical Tp2.Parser *)
+module Parser = Tp2__Parser
+
+(** @canonical Tp2.Tp2 *)
+module Tp2 = Tp2
