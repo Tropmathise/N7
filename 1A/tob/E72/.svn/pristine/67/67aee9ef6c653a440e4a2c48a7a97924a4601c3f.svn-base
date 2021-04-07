@@ -1,0 +1,53 @@
+/** La case sur lequel un joueur tombe
+ * @author Thomas
+ * @version 1.0
+ */
+
+package monopoly;
+
+public class Case {
+
+    /* Les attributs d'une case */
+
+    protected Integer id;
+    protected TypeCase type;
+    protected String nom;
+
+    /** Constructeur de la case */
+    public Case(Integer id, TypeCase type, String nom) {
+        this.id = id;
+        this.type = type;
+        this.nom = nom;
+    }
+
+    /** Obtenir l'id de la case
+     * @return id de la case
+     */
+    public Integer getId() {
+        return this.id;
+    }
+
+    /** Obtenir le nom de la case
+	 * @return nom de la case
+	 */
+	public String getNom() {
+		return this.nom;
+    }
+
+    /** Definir l'id de la case 
+     * @param id id de la case
+    */
+    public void setId(Integer id){
+        assert (id>=0);
+        this.id = id;
+    }
+
+    /** Definir le nom de la case 
+     * @param nom
+    */
+    public void setNom(String nom) {
+        assert (nom != null);
+        this.nom = nom;
+    }
+
+}

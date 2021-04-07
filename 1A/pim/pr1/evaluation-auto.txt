@@ -1,0 +1,30 @@
+% Validation de http://cregut.svn.enseeiht.fr/2019/1sn/pim/tps/tsadurni/pr1
+% Run on 2019-10-13 21:31:12.870719
+
+# Respect des fichiers fournis
+
+* Fichier alea.adb non modifié... ok
+* Fichier alea.ads non modifié... ok
+* Fichier exemple_alea.adb non modifié... ok
+* Fichier multiplications.adb modifié... ERREUR
+* Fichier LISEZ-MOI.txt modifié... ok
+* Running gnatclean... ok
+* Compilation de multiplications.adb... ok
+
+  | x86_64-linux-gnu-gcc-8 -c -gnatwa -gnata -g multiplications.adb
+  | multiplications.adb:6:09: warning: no entities of "Ada.Text_IO" are referenced
+  | multiplications.adb:6:29: warning: use clause for package "Text_IO" has no effect
+  | multiplications.adb:7:09: warning: no entities of "Ada.Integer_Text_IO" are referenced
+  | multiplications.adb:7:29: warning: use clause for package "Integer_Text_IO" has no effect
+  | multiplications.adb:8:09: warning: no entities of "Ada.Calendar" are referenced
+  | multiplications.adb:8:29: warning: use clause for package "Calendar" has no effect
+  | multiplications.adb:9:06: warning: unit "Alea" is not referenced
+  | x86_64-linux-gnu-gcc-8 -c -gnatwa -gnata -g alea.adb
+  | x86_64-linux-gnu-gnatbind-8 -x multiplications.ali
+  | x86_64-linux-gnu-gnatlink-8 multiplications.ali -g
+
+* ./multiplications < "5 1 2 3 4 1 6 7 8 9 1 n"... ok
+
+  | 
+
+* Running gnatclean... ok

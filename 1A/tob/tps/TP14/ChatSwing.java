@@ -1,0 +1,51 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class ChatSwing extends JPanel {
+
+    private VueChat modele;
+    final JFrame fenetre;
+    final private JLabel nomPseudo = new JLabel();
+    final private JTextField message = new JTextField(30);
+    final private JButton ok = new JButton("OK");
+    final private JButton fermer = new JButton("Fermer");
+    final private VueChatSimple textchat = new VueChat();
+    private final ActionListener actionQuitter = new ActionQuitter();
+
+    public ChatSwing(VueChat modele) {
+        this.modele=modele;
+        this.fenetre = new JFrame("Nom du chateur");
+        this.fenetre.setLocation(100, 200);
+        this.fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Container contenu = new JPanel(new BorderLayout(1));
+        Container contenufenetre = this.fenetre.getContentPane();
+        contenufenetre.add(this.fermer, BorderLayout.NORTH);
+        contenufenetre.add(this.textchat, BorderLayout.CENTER);
+        contenufenetre.add(contenu, BorderLayout.SOUTH);
+        contenu.add(this.nomPseudo, BorderLayout.WEST);
+        contenu.add(this.message, BorderLayout.CENTER);
+        contenu.add(this.ok, BorderLayout.EAST);
+        fermer.addActionListener(this.actionQuitter);
+        this.fenetre.pack();
+        this.fenetre.setVisible(true);
+
+    }
+
+
+    public class ActionQuitter implements ActionListener {
+        public void actionPerformed(ActionEvent evt) {
+          System.out.println("Quitter");
+    }
+
+
+    public class ActionTrace extends MouseAdapter {
+
+        public void mouseCliked(MouseEvent ev) {
+            System.out.println("Appui sur "
+                + ((JButton) ev.getSource()).getText());
+        }
+    }
+
+
+

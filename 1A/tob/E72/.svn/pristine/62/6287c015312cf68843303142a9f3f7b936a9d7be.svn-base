@@ -1,0 +1,23 @@
+package monopoly.cases;
+
+import monopoly.JoueurMonopoly;
+import monopoly.TypeCase;
+
+/** Case départ
+ * @author Thomas
+ */
+
+public class Depart extends Case {
+
+    public Depart() {
+        super(0,TypeCase.DEPART,"Depart",0);
+    }
+
+    public void actioncase(JoueurMonopoly joueur, Plateau plateau) {
+        joueur.ajouterArgent(200);
+        println(joueur.getNom() + "est passé par la case départ, il reçoit 200€");
+        
+    }
+
+
+}

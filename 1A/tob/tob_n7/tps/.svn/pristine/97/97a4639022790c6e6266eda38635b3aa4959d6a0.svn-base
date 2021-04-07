@@ -1,0 +1,58 @@
+import org.junit.*;
+import static org.junit.Assert.*;
+import java.awt.Color;
+
+/** Programme de test de la classe Cercle.
+  * @author	Thomas Sadurni
+  */
+
+public class CercleTest {
+
+	// précision pour les comparaisons réelle
+	public final static double EPSILON = 0.001;
+
+	// Les points du sujet
+	private Point A, B, C, D, E;
+
+	// Les cercles du sujet
+	private Cercle C1, C2;
+
+	@Before public void setUp() {
+		// Construire les points
+		A = new Point(1, 2);
+		B = new Point(2, 1);
+		C = new Point(4, 1);
+		D = new Point(8, 1);
+		E = new Point(8, 4);
+
+		// Construire les cercles
+		C1 = new Cercle(A, 2.5);
+		C2 = new Cercle(new Point(6, 1), 2);
+		C2.setCouleur(Color.yellow);
+	}
+	
+	@Test //test E12 : prenons les points C et D comme test
+	public void testE12() {
+		Cercle C3 = new Cercle(C,D);
+		assertEquals("E12", new Point(6,1), C3.getCentre());
+		assertEquals("E12", 2, C3.getRayon(), EPSILON);
+		assertEquals("E12", 4, C3.getDiametre(), EPSILON);
+		assertTrue("E12", C3.contient(C));
+		assertTrue("E12", C3.contient(D));
+		assertFalse("E12", C3.contient(E));
+		System.out.println("Tous les tests passent, la condition E12 est bien vérifiée");		
+	}
+
+	@Test //test E13 : prenons les points C et D comme test
+	public void testE13() {
+		Cercle C4 = new Cercle(C,D,Color.yellow);
+		assertEquals("E13", Color.yellow, C4.getCouleur());
+		assertEquals("E13", new Point(6,1), C4.getCentre());
+		assertEquals("E13", 2, C4.getRayon(), EPSILON);
+		assertEquals("E13", 4, C4.getDiametre(), EPSILON);
+		assertTrue("E13", C4.contient(C));
+		assertTrue("E13", C4.contient(D));
+		assertFalse("E13", C4.contient(E));
+		System.out.println("Tous les tests passent, la condition E13 est bien vérifiée");
+	}	
+}

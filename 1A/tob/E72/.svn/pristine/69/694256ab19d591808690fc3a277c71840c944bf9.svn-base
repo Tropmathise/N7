@@ -1,0 +1,26 @@
+import java.util.Random;
+
+/** Les des permettent au joueur de savoir de combien de case il va
+ * se dépacer. 
+ * @author E72
+ * @version 1.0
+ */
+public class Des {
+
+    /* Premier Des */ 
+    private int des1;
+
+    /* Deuxieme Des */
+    private int des2;
+
+    /* Nombre aléatoire */
+    private Random alea = new Random();
+
+    /** Obtenir l'entier des deux dès */
+    public int getDes() {
+        this.des1 = 1+this.alea.nextInt(6);
+        this.des2 = 1+this.alea.nextInt(6);
+        return (this.des1 + this.des2);
+    }
+
+}

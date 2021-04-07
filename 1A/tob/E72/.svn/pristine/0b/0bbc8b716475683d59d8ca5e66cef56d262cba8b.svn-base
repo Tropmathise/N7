@@ -1,0 +1,33 @@
+package monopoly.divers;
+
+/** Le type des différentes cartes.
+ * @author Theo
+ */
+
+public enum TypeCarte {
+    PAYER,
+    RECEVOIR,
+    MOUVEMENT,
+    TELEPORTATION,
+    //CASE,
+    //STOCKAGE,
+    UNKNOWN;
+
+    public static TypeCarte fromString(String str) {
+        switch(str) {
+            case "PAYER":
+                return TypeCarte.PAYER;
+            case "RECEVOIR":
+                return TypeCarte.RECEVOIR;
+            case "MOUVEMENT":
+                return TypeCarte.RECEVOIR;
+            case "TELEPORTATION":
+                return TypeCarte.TELEPORTATION;
+            /*case "CASE":
+                return TypeCarte.CASE;*/
+            default:
+                System.out.println("Type de case inconnu.");
+                return TypeCarte.UNKNOWN;
+        }
+    }
+}

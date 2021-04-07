@@ -1,0 +1,19 @@
+On créé un script qui va supprimer l'ancienne commande et qui va executer la nouvelle commande avec les bons parametres.
+
+#! /bin/sh
+
+par=""
+while [ -n "$*" ]
+do
+  if [ "$1" = "-t" ]; then
+     par="$par -x"
+  elif [ "$1" = "-T" ]; then
+     shift # elimination de l'argument de -T
+  elif [ "$1" != "-e" ]; then
+     par="$par $1"
+   fi
+   shift
+done
+
+# appel a la commande avec $par comme parametres
+echo $par

@@ -1,0 +1,21 @@
+//Cartes caisse de communauté.
+// format: "id@TYPE@valeur@message"
+0@RECEVOIR@100@La vente de votre stock vous rapporte 100€.
+1@RECEVOIR@50@Recevez votre interêt sur l'emprunt : 50€.
+2@RECEVOIR@50@Vous avez gagné le 2eme prix de beauté. Vous recevez 50€.
+3@RECEVOIR@200@Recevez votre revenu annuel de 200€.
+4@RECEVOIR@50@Les Contributions vous remboursent la somme de 50€.
+5@RECEVOIR@200@Vous héritez de 200€.
+6@RECEVOIR@C'est votre anniversaire, la banque vous donne 50€.
+7@RECEVOIR@100@Erreur de la banque en votre faveur. Recevez 100€.
+8@PAYER@100@Vous avez perdu 100€ aux jeux.
+9@PAYER@50@Payez votre Police d'Assurance s'élevant à 50€.
+10@PAYER@30@Payer la note du médecin de 30€.
+11@PAYER@100@Payez l'hôpital, 100€.
+12@PAYER@50@Payez une amende de 50€.
+13@TELEPORTATION@0@Placez-vous sur la case "Départ". Touchez la récompense.
+14@TELEPORTATION@0@Allez en prison, sans passer par la case Départ.
+15@TELEPORTATION@1@Retournez à "Belleville".
+
+
+

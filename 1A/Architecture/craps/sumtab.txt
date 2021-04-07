@@ -1,0 +1,40 @@
+N = 3
+        add %r0,0x100,%r1
+        clr %r2
+        clr %r4
+
+loop :  ld [%r1 + %r2], %r3
+        add %r3,%r4,%r4
+        inc %r2
+        cmp %r2,N
+        bne loop
+        
+stop :  ba stop
+
+.org 0x100
+.word 5,10,12
+
+/////////////////////////////////////
+
+// write your program here
+set tab, %r1
+set N, %r4
+ld [%r4], %r4
+clr %r2
+clr %r3
+
+bcl : subcc %r2, %r4, %r0
+be finbcl
+ld [%r1 + %r2], %r5
+add %r3, %r5, %r3
+add %r2, 1, %r2
+ba bcl
+
+finbcl : set S, %r1
+st %r3, [%r1]
+
+fin : ba fin 
+
+tab : .word 15,25,3,5,4,7,54,64,1,0
+N : .word 10
+S : .word 0

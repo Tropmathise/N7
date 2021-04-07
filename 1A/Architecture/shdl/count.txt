@@ -1,0 +1,13 @@
+module count2(rst, h: s[1..0])
+T[0]=1
+T[1]=s[0]
+s[1..0] := /T[1..0]*s[1..0]+T[1..0]*/s[1..0] on /h, reset when rst
+end module
+
+module count4Z(clk,rst,en,sclr:s[3..0])
+T[0]=1
+T[1]=s[0]
+T[2]=s[1]*s[0]
+T[3]=s[2]*s[1]*s[0]
+s[3..0]:=(/T[3..0]*s[3..0]+T[3..0]*/s[3..0])*/sclr +"0000"*sclr on clk, reset when rst, enabled when en
+end module

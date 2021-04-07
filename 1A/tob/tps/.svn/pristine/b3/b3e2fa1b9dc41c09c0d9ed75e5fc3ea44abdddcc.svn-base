@@ -1,0 +1,49 @@
+package allumettes;
+
+/** Un joueur est défini par son nom et par sa Strategie. 
+  * @author Thomas SADURNI
+  * @version 1.0
+  */
+
+public class Joueur {
+
+    /** Nom du joueur. */
+    private String nom;
+
+    /** Stratégie du joueur. */
+    private Strategie strategie;
+
+    /** Prise d'allumettes */
+    protected int prise;
+
+    /** Initialisation du joeur.
+      * @param nomjoueur nom du joueur
+      * @param strategiejoueur stratégie du joueur
+      */
+    public Joueur (String nomjoueur, Strategie strategiejoueur) {
+        assert (nomjoueur != null);
+        this.nom = nomjoueur;
+        this.strategie = strategiejoueur;
+    }
+
+    /** Obtenir le nom du joueur. 
+     * @return nom du joueur.
+     */
+    public String getNom() {
+        return this.nom;
+    }
+
+    /** Obtenir le nombre d'allumettes que le joueur veut prendre.
+      * @return nombre d'allumettes
+      */
+    public int getPrise() {
+        return this.prise;
+    }
+
+    /** Obtenir la strategie du joueur.
+      * @return strategie du joueur * 
+      */
+    public Strategie getStrategie() {
+        return this.strategie;
+    }
+}

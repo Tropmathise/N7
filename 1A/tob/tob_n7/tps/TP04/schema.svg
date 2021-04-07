@@ -1,0 +1,15 @@
+<?xml version='1.0'?>
+<!-- Car l'axe des Y est inversé en SVG les y sont transformés en 10 - y
+     Toutes les coordonnées sont * 10
+-->
+<svg xmlns='http://www.w3.org/2000/svg' version="11" width="600" height="400">
+	<title>SVG</title>
+	<desc>description</desc>
+	<circle cx="110" cy="140" r="2" fill="rgb(0,255,0)"/>
+	<circle cx="140" cy="70" r="2" fill="rgb(0,255,0)"/>
+	<circle cx="190" cy="120" r="2" fill="rgb(0,255,0)"/>
+	<line x1="110" y1="140" x2="140" y2="70" stroke="rgb(0,255,0)"/>
+	<line x1="140" y1="70" x2="190" y2="120" stroke="rgb(0,255,0)"/>
+	<line x1="190" y1="120" x2="110" y2="140" stroke="rgb(0,255,0)"/>
+	<circle cx="106" cy="80" r="2" fill="rgb(0,255,0)"/>
+</svg>

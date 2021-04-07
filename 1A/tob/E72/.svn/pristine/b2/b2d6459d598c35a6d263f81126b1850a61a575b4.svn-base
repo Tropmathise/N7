@@ -1,0 +1,48 @@
+/** La case sur lequel un joueur tombe
+ * @author E72
+ * @version 1.0
+ */
+
+public abstract class Case {
+
+    /* Le nom de la case */
+    private String nom;
+    private int prix;
+
+    /** Constructeur de la case */
+    public Case(String nom, int prix) {
+        this.nom = nom;
+        this.prix = prix;
+    }
+
+    /** Obtenir le nom de la case
+	 * @return nom de la case
+	 */
+	public String getNom() {
+		return this.nom;
+    }
+
+    /** Obtenir le prix de la case
+	 * @return prix
+	 */
+	public int getPrix() {
+		return this.prix;
+    }
+
+    /** Definir le nom de la case 
+     * @param nom
+    */
+    public void setNom(String nom) {
+        assert (nom != null);
+        this.nom = nom;
+    }
+
+    /** Definir le prix de la case
+     * @param prix
+     */
+    public void setPrix(int prix) {
+        assert (prix > 0);
+        this.prix=prix;
+    }
+
+}

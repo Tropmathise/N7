@@ -1,0 +1,155 @@
+import java.awt.Color;
+
+/** Un cercle est une courbe plane fermée constituée des
+ * points situés à égale distance d’un point nommé centre. 
+ * La valeur de cette distance est appelée rayon du cercle. 
+ * On appelle diamètre la distance entre deux points
+ * diamétralement opposés. La valeur du diamètre est donc 
+ * le double de la valeur du rayon.
+@author Thomas SADURNI 
+*/
+
+public class Cercle {
+    private Point C;
+    private double r;
+    private Color couleur;
+	public final double PI = Math.PI;
+
+    /** Construire un cercle bleu à partir de son centre et de son rayon. (E11)
+     * @param C centre du centre 
+     * @param r rayon du cercle
+     */
+    public Cercle(Point vC, double vr) {
+        System.out.println("Constructeur Cercle(" + vC + ", " + vr + ")");
+        this.C = vC;
+        this.r = vr;
+        this.couleur = Color.blue;
+    }
+
+    /** Construire un cercle bleu à partir de deux points diamétralement opposés. (E12)
+     * @param P1 premier point
+     * @param P2 deuxieme point
+     */
+    public Cercle(Point P1, Point P2) {
+        System.out.println("Constructeur Cerlce(" + P1 + ", " + P2 +")");
+        this.couleur = Color.blue;
+        this.C.setX((P1.getX()+P2.getX())/2);
+        this.C.setY((P1.getY()+P2.getY())/2);
+        this.r = P1.distance(P2)/2;
+    }
+    
+    /** Construire un cercle à partir de deux points diametralement opposés et de sa couleur. (E13)
+     * @param P1 premier point
+     * @param P2 premier point
+     * @param vcouleur Couleur 
+     */
+    public Cercle(Point P1, Point P2, Color vcouleur) {
+        System.out.println("Constructeur Cerlce(" + P1 + ", " + P2 + ", " + vcouleur + ")");
+		Cercle C = new Cercle(P1,P2);
+        this.couleur = vcouleur;    
+    }  
+
+    /** Translater le cercle. (E1)
+     * @param dx déplacement du centre suivant l'axe des X.
+     * @param dy déplacement du centre suivant l'axe des Y.
+     */
+    public void translater(double dx, double dy) {
+        this.C.translater(dx,dy);
+    }
+
+    /** Obtenir le centre du cercle. (E2)
+     * @return coordonnée du centre
+     */
+    public Point getCentre() {
+        return this.C;
+    }
+    
+    /** Obtenir le rayon du cercle. (E3)
+     * @return rayon du cerle
+     */
+    public double getRayon() {
+        return this.r;
+    }
+    
+    /** Obtenir le diamètre du cercle. (E4)
+     * @return diamètre du cercle
+     */
+    public double getDiametre() {
+        return 2*this.r;
+    }
+
+    /** Savoir si un point est à l'intérieur du cercle. (E5)
+     * @param point A
+     * @return booleen
+     */
+    public boolean contient(Point A) {
+        if (this.C.distance(A) <= this.r) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    
+	/** Obtenir le périmetre du cercle. (E6)
+	 * @return périmètre du cercle
+	 */
+	public double perimetre() {
+		return 2*PI*this.r;
+	}
+
+	/** Obtenir l'aire du cercle. (E6)
+	 * @return périmètre du cercle
+	 */
+	public double aire() {
+		return PI*this.r*this.r;
+	}
+
+    
+    /** Obtenir la couleur du cercle. (E9)
+     * @return couleur du cercle
+     */
+    public Color getCouleur() {
+        return this.couleur;
+    }
+
+    /** Changer la couleur du cercle. (E10)
+     * @param nouvelleCouleur nouvelle couleur
+     */
+    public void setCouleur(Color nouvelleCouleur) {
+        this.couleur = nouvelleCouleur;
+    }
+	
+	/** Création de la méthode de classe pour créer un cercle
+	 *  à partir de deux points : le centre P1 et un deuxime
+	 *  qui définirera sa circonférence (les deux points
+	 *  forment un rayon du cercle).
+	 * @param Point P1 centre du cercle
+	 * @param Point P2 point qui définit sa circonférence
+	 */
+	public static void creerCercle(Point P1, Point P2) {
+		Cercle C3 = new Cercle(P1, P1.distance(P2));
+		C3.setCouleur(Color.blue);
+	}
+	
+    /** Afficher le cercle. (E15)
+	 */ 
+	public String toString() {
+		return "C" + this.r + "@" + this.C;
+	}
+    
+    /** Changer le rayon d'un cercle. (E16)
+     * @param nouveauRayon nouveau rayon
+     */ 
+    public void setRayon(double nouveauRayon) {
+        this.r = nouveauRayon;
+    }
+
+    /** Changer le diametre d'un cercle. (E17)
+     * @param nouveauDiametre nouveau diametre
+     */
+    public void setDiametre(double nouveauDiametre) { 
+        this.r = nouveauDiametre/2;
+    }
+}
+

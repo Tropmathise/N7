@@ -1,0 +1,4 @@
+Début de la vérification...
+[ERROR] Cercle.java:132: Balise Javadoc @return manquante. [JavadocMethod]
+[ERROR] Cercle.java:140: Balise Javadoc @return manquante. [JavadocMethod]
+Vérification terminée.

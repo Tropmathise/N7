@@ -1,0 +1,35 @@
+package monopoly.swing;
+
+import monopoly.divers.*;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+
+public class CaseSwing extends JButton {
+
+    private static final long serialVersionUID = 1L;
+
+    private Case c; // La case qui est modélisée
+
+    public CaseSwing(Case c) {
+        super();
+        this.c = c;
+        java.net.URL imageURL = Partie.class.getResource("res/" + c.getFichierIcone());
+
+        if (imageURL != null) {
+        	ImageIcon image = new ImageIcon(imageURL);
+        	this.setIcon(image);
+        }
+        else {
+            System.out.printf("L'image \"%s\" n'a pas été trouvée pour la case %s\n", imageURL, c.getNom());
+        }
+    }
+
+    public Integer getId() {
+        return this.c.getId();
+    }
+
+    public Case getCase() {
+        return this.c;
+    }
+}

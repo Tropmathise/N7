@@ -1,0 +1,33 @@
+// import java.io.IOException;
+// import monopoly.*;
+/** Partie de Monopoly
+ * @author Thomas
+ */
+
+//import monopoly.*;
+
+public class Partie {
+    // private static final Integer nbjoueurs = 4;
+    //private Plateau plateau;
+    private boolean pause = false;
+
+    public void joueur() {
+        if (!this.pause) {
+            // TODO gérer les tours
+        }
+    }
+
+    public void demarrerPartie() {
+
+    }
+
+    public void pausePartie() {
+        this.pause=true;
+    }
+
+    public void reprendrePartie() {
+        this.pause= false;
+    }
+
+
+}

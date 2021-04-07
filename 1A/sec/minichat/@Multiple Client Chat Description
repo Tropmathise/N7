@@ -1,0 +1,12 @@
+It is an simple implementation of simple client server chat system where once client are connected to server,
+then they can communicate with each other.
+
+The client first needs to connect with the server and can then issue two commands -
+  1. GET - This command fetches the list of client's that are currently connected to server.
+  2. SEND (client number) (message) - SEND followed by client number which can be be used to send the meassage
+                                      to particular to that particular client number.
+                                      (please issue the complete send command in one go).
+                            
+To run these program first run ChatServer.c and then run multiple instatnces of ChatServer.c .
+
+Currently these programs works on same machine.

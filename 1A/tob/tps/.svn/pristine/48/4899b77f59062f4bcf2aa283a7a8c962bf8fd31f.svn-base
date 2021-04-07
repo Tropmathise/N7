@@ -1,0 +1,48 @@
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.Iterator;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class Chat extends Observable implements Iterable<Message> {
+
+	private List<Message> messages;
+
+	public Chat() {
+		this.messages = new ArrayList<Message>();
+	}
+
+	public void ajouter(Message m) {
+		this.messages.add(m);
+		setChanged();
+		this.notifyObservers(m);
+	}
+
+	public Iterator<Message> iterator() {
+		return this.messages.iterator();
+	}
+}
+	public class VueChatSimple implements Observer {
+
+		@Override
+		public void update(Observable Chat, Object message) {
+			Chat.addObserver(this);
+			System.out.println(message.toString());
+		}
+	}
+
+	public class VueChat extends JPanel {
+
+		final JFrame fenetre;
+		final private JLabel nomPseudo = new JLabel();
+		final private JTextField message = new JTextField(30);
+		final private JButton ok = new JButton("OK");
+		final private JButton fermer = new JButton("Fermer");
+	
+		public VueChat(
+	}
+}

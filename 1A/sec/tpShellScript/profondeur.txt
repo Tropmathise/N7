@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# Profondeur d'un arbre
+# Version recursive en utilisant le code de retour
+
+cd ${1-.}
+pmax=0
+for f in *; do
+  if [ -d $f ]; then 
+       cd $f
+       $HOME/syst-op/profb
+       p=$?
+       if [ $p -gt $pmax ]; then
+          pmax=$p
+       fi
+       cd ..
+  fi
+done
+exit `expr $pmax + 1`

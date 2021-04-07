@@ -1,0 +1,142 @@
+SHDL : Simple Harware Description Language
+Introduction
+SHDL is a language for describing digital circuits in a simple and modular way. It is not a programming language; rather it allows for the description of the various equipotentials which compose a circuit and their combinatorial or sequential relationships. Once a design has been described correctly in SHDL, it can be 'powered up' and ran by simulation or synthesis in a real FPGA circuit.
+
+Here is an example of a combinatorial module description; it performs a 1-bit addition:
+
+module fulladder(a, b, cin : s, cout)
+   x = /a*b + a*/b
+   s = /x*cin + x*/cin
+   cout = /x*a + x*cin
+end module
+Here is an example of a ripple counter. It uses sequential assignment := and vectors [1:0].
+
+module clock2(rst, h : s[1:0])
+   s[0] := /s[0] on /h, reset when rst
+   s[1] := /s[1] on /s[0], reset when rst
+end module
+Modules can be reused, and vectors can be splitted:
+
+module clock4(rst, h : s[3:0])
+   clock2(rst, h : s[1:0])
+   clock2(rst, s[1] : s[3:2])
+end module
+Equipotentials: scalars and vectors
+A scalar represents a single digital equipotential; it is denoted by an identifier <signal_name>, for example cout.
+
+A vector represents an ordered set of equipotentials; it is denoted by <signal_name>[<start>:<end>], for example a[3:0]. Indexes must be in decreasing order. Vectors can be composed using the '&' operator, for example:
+
+c3 & c2 & data[3] & c1 & data[2:0]
+Modules
+A module may include instances of other submodules. Circularities in the modules hierarchy is not allowed, since a modular design will eventually always be flattened out in a finite set of combinatorial and sequential assignments. As in recursive and modular programming languages, modularity is essential for simplifying construction and for re-usability ; unlike them, self-reference and circularity is not allowed.
+
+Module definition
+/* module with 3 inputs a,b,c 
+   and one output s */
+module xor3(a, b, c : s)
+   s = a*/b*/c + /a*b*/c + /a*/b*c + a*b*c // combinatorial equation
+end module
+module zero4(a[3:0] : Z)
+   Z = /a[3]*/a[2]*/a[1]*/a[0]
+end module
+The sign ':' in the parameters list is optional; the input/output status of a parameter is determined automatically during syntactic & semantic analysis
+
+Module instanciation
+module xor6(a, b, c, d, e, f, s)
+   xor3(a, b, c, s1) // instance #1 of module xor3
+   xor3(d, e, f, s2) // instance #2 of module xor3
+   s = s1*/s2 + /s1*s2 // s = xor(s1, s2)
+end module
+module adder4(a[3:0], b[3:0], cin : s[3:0], cout)
+   adder2(a[1:0], b[1:0], cin : s[1:0], c2)
+   adder2(a[3:2], b[3:2], c2 : s[3:2], cout)
+end module
+Combinatorial assignments
+'=' indicates a combinatorial assignment
+
+Scalar combinatorial assignments
+// sum of terms
+x = y*z + u*v*w
+Vector combinatorial assignments
+// here, x[7] = y[7]*z[7] + u[7]*v[7]*w[7], x[6] = y[6]*z[6] + u[6]*v[6]*w[6], :.
+x[7:0] = y[7:0]*z[7:0] + u[7:0]*v[7:0]*w[7:0]
+
+// *** arity error ***
+x[7:0] = y[7:0] + z[3:0]
+
+// 'and' terms may contain scalars:  x[7] = u * y[7] * v * z[7], x[6] = u * y[6] * v * z[6],:.
+x[7:0] = u * y[7:0] * v * z[7:0]
+
+// a combinatorial expression between parenthesis is an anonymous equipotential
+y = x * (y + z)
+
+// binary constants can be used, as long as they have the proper length
+x[3:0] = "1010"
+s = 1
+
+// the '&' operator allows for the concatenation of vector pieces and scalars
+message[6:0] = c3 & c2 & data[3] & c1 & data[2:0]
+s[3:0] = "10" & a[1:0]
+Sequential assigments
+':=' indicates a sequential assignment; it creates a memory point
+
+// s[3:0] memorizes and takes the value of d[3:0] on the rising edge on clk, it is synchronous on clk
+// rst is an asynchronous reset: s[3:0] is set to "0000" as soon as rst=1, independently of clk
+s[3:0] := d[3:0] on clk, reset when rst
+
+// any combinatorial expression is possible on the right side of ':='
+x := y * (z + t) on h, reset when rst
+
+// change occurs on the falling edge of clk, and reset when and while go=0
+s[3:0] := d[3:0] on /clk, reset when /go
+
+// the 'enabled' specification is optional
+// here, s[3:0] changes only on the rising edge of clk AND if en=1 at that instant
+s[3:0] := /t[3:0]*s[3:0] + t[3:0]*/s[3:0] on clk, reset when rst, enabled when en
+
+// initial state of memory point can be 1:
+q := d on h, set on init
+Built-in modules
+Their name starts with a '$' sign.
+
+ROM
+The following built-in module implements a ROM of 2^p words of n bits:
+
+$rom(address[p:0] : dataOut[n:0])
+dataOut[n:0] asynchronously presents the content of the ROM slot of address address[p:0]
+RAM
+The following built-in module implements a RAM of 2^p words of n bits:
+
+$ram_aread_swrite(clock, write, address[p:0], dataIn[n:0] : dataOut[n:0])
+dataOut[n:0] asynchronously presents the contents of the RAM slot of address address[p:0], whatever the value of write or clock
+writing in a RAM slot occurs synchronously, if write = 1, on the rising edge of clock. The contents of the RAM location of address address[p:0] is then replaced by dataIn[n:0]
+Memory initialization
+The initial contents of RAM & ROM instances can be set with a data file, which may be used both for simulation and real FPGA synthesis. To get the list and indexes of memory instances in a design, run :
+
+shdl check <module_name> [-t <team_name>]
+Here is an example of a file for 2 memory instances (RAM or ROM), the first 8x3, the second 16x8. All or a subset of memory slots may be defined.
+
+[
+   {
+      "000": "110",
+      "001": "100"
+   },
+   {
+      "0000": "01010101",
+      "1000": "11001100"
+   }
+]
+Test Vectors
+They are text files, where each line is a set or a check operation. Here is an example for module adder4:
+
+// 3 + 3 = 6
+set a[3..0] 0011
+set b[3..0] 0011
+set cin 0
+check s[3..0] 0110
+check cout 0
+
+// with a carry
+set cin 1
+check s[3..0] 0111
+check cout 0

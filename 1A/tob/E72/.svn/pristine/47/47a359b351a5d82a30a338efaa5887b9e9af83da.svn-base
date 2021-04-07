@@ -1,0 +1,98 @@
+/** Un joueur est défini par les caractéristiques suivantes :
+ * - son nom
+ * - son identifiant
+ * - sa position sur le plateau
+ *
+ * ---------CLASSE A SUPPRIMER------
+ *
+ * @author E72
+ * @version 1.0
+ */
+
+package monopoly;
+
+public abstract class Joueur {
+    private String nom;
+    private Integer id;
+    private Case position;
+    private Integer solde;
+    //private Proprietes[] proprietes;
+
+    /** Définition du joueur
+     * @param nom son nom
+     * @param id son identifiant 
+    */
+    public Joueur (String nom, Integer id) {
+        this.nom = nom;
+        this.id = id;
+        //this.position = new Case("Départ");
+        this.solde = 0;
+    }
+
+    /** Obtenir le nom du joueur
+     * @return son nom
+     */
+    public String getNom() {
+        return this.nom;
+    }
+
+    /** Obtenir l'id du joueur 
+     * @return son id
+     */
+    public Integer getId() {
+        return this.id;
+    }
+
+    /** Obtenir la position du joueur
+     * @return sa position
+     */
+    public Case getPosition() {
+        return this.position;
+    }
+
+    /** Obtenir le solde du joueur
+     * @return son solde
+     */
+    public Integer getSolde() {
+    	return this.solde;
+    }
+
+    /** Définir le nom du joueur
+     * @param String son nom
+     */
+    public void setNom(String nom){
+        assert (nom != null);
+        this.nom = nom;
+    }
+
+    /** Définir l'id du joueur
+     * @param Integer son id
+     */
+    public void setId(Integer id) {
+        assert (id > 0);
+        this.id = id;
+    }
+
+    /** Définir la position du joueur
+     * @param Integer sa position
+     */
+    public void setPosition(Case position) {
+        this.position = position;
+    }
+    
+    public void addSolde(Integer gain) {
+    	assert (gain >= 0);
+    	this.solde = this.solde + gain;
+    }
+
+    public void subSolde(Integer perte) throws ImpayableException{
+    	assert (perte >= 0);
+    	if (perte > this.solde) {
+    		throw new ImpayableException();
+    	}
+    	else {
+    		this.solde = this.solde - perte;
+    	}
+    }
+}
+

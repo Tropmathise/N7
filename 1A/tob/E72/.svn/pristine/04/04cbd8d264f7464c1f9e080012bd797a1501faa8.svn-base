@@ -1,0 +1,34 @@
+/** Les cartes du jeu 
+ * @author Thomas SADURNI
+ * @version 1.0
+*/
+
+public abstract class Carte {
+
+    private String nom;
+    private String effet;
+
+    /** constructeur de la carte avec son nom et son effet
+     * @param nom son nom
+     * @param effet son effet
+     */
+    public Carte(String nom, String effet) {
+        this.nom = nom;
+        this.effet = effet;
+    }
+
+    /** Obtenir le nom de la carte 
+     * @return nom
+     */
+    public String getNom() {
+        return this.nom;
+    }
+
+    /** Obtenir l'effet de la carte
+     * @return effet
+     */
+    public String getEffet() {
+        return this.effet;
+    }
+
+}

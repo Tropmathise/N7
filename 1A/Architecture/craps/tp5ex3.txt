@@ -1,0 +1,66 @@
+// write your program here
+SW = 0x90000000
+LD = 0xB0000000
+BUFF = 0x300
+ba init 
+ba IT
+init:
+set BUFF, %r1
+set LD, %r5
+clr %r3 //param
+clr %r4 //return
+set 0x200, %sp
+set LD, %r11
+ba main
+
+ajoutermot : push %r28
+             call taille
+             pop %r28
+             add %r4, %r0,%r2
+             inc %r2
+             st %r3, [%r1+%r2]
+             st %r2, [%r1 + %r0]
+             reti
+             
+supprimermot : push %r28
+               call taille
+               pop %r28
+               add %r4, %r0, %r2
+               dec %r2
+               ld [%r1+%r2], %r4
+               st %r2, [%r1+%r0]
+               reti
+               
+taille :  ld [%r1+%r0], %r4
+          reti
+          
+IT : push %r4
+     push %r3
+     push %r2
+     push %r1
+     ld [%r5+%r0], %r3
+     push %r28
+     call ajoutermot
+     pop %r28
+     pop %r1
+     pop %r2
+     pop %r3
+     pop %r4
+     reti
+     
+main : clr %r3
+       set 0x100, %r15
+       ld [%r1+%r0], %r2
+       
+loop : orcc %r2, %r0, %r2
+       bz stop
+       ld [%r1+%r2],%r4
+       add %r3, %r4, %r3
+       dec %r2
+       ba loop
+
+stop : deccc %r15
+       st  %r3, [%r11+%r0]
+       bnz stop
+       
+       ba main

@@ -1,0 +1,8 @@
+1. find . -name ".o" -print
+2. find . -name ".o" -print | wc -l
+3. find . -name ".core" -size +0 -exec rm "{}" ";"
+4. find . -type f -print | cat | wc -c
+5. find . -type f -exec cat "{}" \; | grep "test" | wc -l //fonctionne pas
+8. cat fichier.txt | tr " " "\n" | grep "b" | wc -l
+10. cat fichier.txt | tr -c "\n" "1" | sort -nr | head -1 | wc -m
+

@@ -1,0 +1,23 @@
+module byte2dec(e[7..0], rst,clk,load,s[11..0])
+  dix[7..0]="00001010"
+  cent[7..0]="01101000"
+  init := init*/load+termine on clk, reset when rst
+  centaines := init*load +(sup+eq)*centaines on clk, reset when rst
+  dizaines:= /sup*/eq*centaines+(sup+eq)*dizaines on clk, reset when rst
+  termine:= dizaines*/sup*/eq on clk, reset when rst
+  en_vc=init*load+centaines*(sup+eq)+dizaines*(sup+eq)
+  m_vc=centaines*(sup+eq)+dizaines*(sup+eq)
+  m_add=centaines*(sup+eq)
+  m_cmp=centaines*(sup+eq)+init*load
+  raz= init*load
+  en_10=dizaines*(sup+eq)
+  en_100=centaines*(sup+eq)
+valeur_courante[7..0]:=e[7..0]*/m_vc+s_add[7..0]*m_vc+valeur_courante[7..0] on clk, reset when rst, enabled when en_vc
+  ucmp8(valeur_courante[7..0],en_cmp[7..0]: sup, eq)
+  en_cmp[7..0]=dix[7..0]*/m_cmp+cent[7..0]*m_cmp
+  B[7..0]=/m_add*/dix[7..0]+m_add*/cent[7..0]
+  adder8(valeur_courante[7..0], B[7..0],1: s_add[7..0], cout)
+  count4Z(clk,rst, en_10,raz:s[7..4])
+  count4Z(clk, rst, en_100,raz: s[11..8])
+  s[3..0]=valeur_courante[3..0]
+end module

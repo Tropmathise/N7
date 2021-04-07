@@ -1,0 +1,163 @@
+% Validation de http://cregut.svn.enseeiht.fr/2019/1sn/pim/tps/tsadurni/pr2
+% Run on 2019-12-11 10:45:43.497084
+
+# Respect des fichiers fournis
+
+* Fichier alea.adb non modifié... ok
+* Fichier alea.ads non modifié... ok
+* Fichier exemple_alea.adb non modifié... ok
+* Fichier ensembles_tableau.ads modifié... ok
+* Fichier ensembles_tableau.adb modifié... ok
+* Fichier scenario_tableau.adb modifié... ok
+* Fichier nombre_moyen_tirages_tableau.adb modifié... ok
+* Fichier test_ensembles_tableau.adb modifié... ok
+* Fichier ensembles_chainage.ads modifié... ok
+* Fichier ensembles_chainage.adb modifié... ok
+* Fichier scenario_chainage.adb modifié... ok
+* Fichier nombre_moyen_tirages_chainage.adb modifié... ok
+* Fichier test_ensembles_chainage.adb modifié... ok
+* Running gnatclean... ok
+* Compilation de scenario_tableau.adb... ok
+
+  | x86_64-linux-gnu-gcc-8 -c -gnatwa -gnata -g scenario_tableau.adb
+  | scenario_tableau.adb:5:11: warning: file name does not match unit name, should be "test_ensembles_sujet_tableau.adb"
+  | scenario_tableau.adb:122:15: warning: "Ens1" modified by call, but value might not be referenced
+  | x86_64-linux-gnu-gcc-8 -c -gnatwa -gnata -g ensembles_tableau.adb
+  | x86_64-linux-gnu-gnatbind-8 -x scenario_tableau.ali
+  | x86_64-linux-gnu-gnatlink-8 scenario_tableau.ali -g
+
+* ./scenario_tableau < ""... ok
+
+  | {}
+  | 
+  | {5, }
+  | 
+  | {5, 28, 10, }
+  | 
+  | {5, 28, 10, 7, }
+  | 
+  | {5, 28, 7, }
+  | 
+  | {5, 28, }
+  | 
+  | {28, }
+  | 
+
+* valgrind ./scenario_tableau < ""... ok
+
+  | {}
+  | 
+  | {5, }
+  | 
+  | {5, 28, 10, }
+  | 
+  | {5, 28, 10, 7, }
+  | 
+  | {5, 28, 7, }
+  | 
+  | {5, 28, }
+  | 
+  | {28, }
+  | 
+
+* Compilation de nombre_moyen_tirages_tableau.adb... ERREUR
+
+  | x86_64-linux-gnu-gcc-8 -c -gnatwa -gnata -g nombre_moyen_tirages_tableau.adb
+  | nombre_moyen_tirages_tableau.adb:1:06: warning: unit "Ensembles_Tableau" is never instantiated
+  | nombre_moyen_tirages_tableau.adb:4:25: warning: use clause for package "Float_Text_IO" has no effect
+  | nombre_moyen_tirages_tableau.adb:6:11: warning: file name does not match unit name, should be "nombre_moyen_tirage_tableau.adb"
+  | nombre_moyen_tirages_tableau.adb:17:17: "Ensembles_Chainage" is undefined
+  | nombre_moyen_tirages_tableau.adb:18:09: "Ensembles_Tableau_entier" is undefined
+  | nombre_moyen_tirages_tableau.adb:20:16: "T_Ensemble" is not visible
+  | nombre_moyen_tirages_tableau.adb:20:16: non-visible declaration at ensembles_tableau.ads:8
+  | nombre_moyen_tirages_tableau.adb:24:09: "Initialiser" is not visible
+  | nombre_moyen_tirages_tableau.adb:24:09: non-visible declaration at ensembles_tableau.ads:18
+  | nombre_moyen_tirages_tableau.adb:26:15: "Taille" is not visible
+  | nombre_moyen_tirages_tableau.adb:26:15: non-visible declaration at ensembles_tableau.ads:56
+  | nombre_moyen_tirages_tableau.adb:28:13: "Ajouter" is not visible
+  | nombre_moyen_tirages_tableau.adb:28:13: non-visible declaration at ensembles_tableau.ads:79
+  | nombre_moyen_tirages_tableau.adb:31:20: warning: redundant conversion, "moyenne" is of type "Float"
+  | nombre_moyen_tirages_tableau.adb:32:09: "Detruire" is not visible
+  | nombre_moyen_tirages_tableau.adb:32:09: non-visible declaration at ensembles_tableau.ads:29
+  | gnatmake: "nombre_moyen_tirages_tableau.adb" compilation error
+
+* Compilation de test_ensembles_tableau.adb... ok
+
+  | x86_64-linux-gnu-gcc-8 -c -gnatwa -gnata -g test_ensembles_tableau.adb
+  | test_ensembles_tableau.adb:16:15: warning: procedure "Afficher" is not referenced
+  | x86_64-linux-gnu-gnatbind-8 -x test_ensembles_tableau.ali
+  | x86_64-linux-gnu-gnatlink-8 test_ensembles_tableau.ali -g
+
+* ./test_ensembles_tableau < ""... ok
+
+  | 
+
+* valgrind ./test_ensembles_tableau < ""... ok
+
+  | 
+
+* Compilation de scenario_chainage.adb... ok
+
+  | x86_64-linux-gnu-gcc-8 -c -gnatwa -gnata -g scenario_chainage.adb
+  | scenario_chainage.adb:5:11: warning: file name does not match unit name, should be "test_ensembles_sujet_chainage.adb"
+  | x86_64-linux-gnu-gcc-8 -c -gnatwa -gnata -g ensembles_chainage.adb
+  | x86_64-linux-gnu-gnatbind-8 -x scenario_chainage.ali
+  | x86_64-linux-gnu-gnatlink-8 scenario_chainage.ali -g
+
+* ./scenario_chainage < ""... ok
+
+  | 
+  | {5, 
+  | {10, 28, 5, 
+  | {7, 10, 28, 5, 
+  | {7, 28, 5, 
+  | {28, 5, 
+  | {28, 
+
+* valgrind ./scenario_chainage < ""... ok
+
+  | 
+  | {5, 
+  | {10, 28, 5, 
+  | {7, 10, 28, 5, 
+  | {7, 28, 5, 
+  | {28, 5, 
+  | {28, 
+
+* Compilation de nombre_moyen_tirages_chainage.adb... ok
+
+  | x86_64-linux-gnu-gcc-8 -c -gnatwa -gnata -g nombre_moyen_tirages_chainage.adb
+  | nombre_moyen_tirages_chainage.adb:4:09: warning: no entities of "Ada.Float_Text_IO" are referenced
+  | nombre_moyen_tirages_chainage.adb:4:25: warning: use clause for package "Float_Text_IO" has no effect
+  | nombre_moyen_tirages_chainage.adb:6:11: warning: file name does not match unit name, should be "nombre_moyen_tirage_chainage.adb"
+  | nombre_moyen_tirages_chainage.adb:32:20: warning: redundant conversion, "moyenne" is of type "Float"
+  | x86_64-linux-gnu-gcc-8 -c -gnatwa -gnata -g alea.adb
+  | x86_64-linux-gnu-gnatbind-8 -x nombre_moyen_tirages_chainage.ali
+  | x86_64-linux-gnu-gnatlink-8 nombre_moyen_tirages_chainage.ali -g
+
+* ./nombre_moyen_tirages_chainage < "10 50 50 10 10 50 50 10"... ok
+
+  |  3.49500E+01
+
+* valgrind ./nombre_moyen_tirages_chainage < "10 50 50 10 10 50 50 10"... ok
+
+  |  3.23400E+01
+
+* Compilation de test_ensembles_chainage.adb... ok
+
+  | x86_64-linux-gnu-gcc-8 -c -gnatwa -gnata -g test_ensembles_chainage.adb
+  | test_ensembles_chainage.adb:6:10: warning: type "T_Pointeur_Integer" is not referenced
+  | test_ensembles_chainage.adb:7:10: warning: type "T_Pointeur_Character" is not referenced
+  | test_ensembles_chainage.adb:19:15: warning: procedure "Afficher" is not referenced
+  | x86_64-linux-gnu-gnatbind-8 -x test_ensembles_chainage.ali
+  | x86_64-linux-gnu-gnatlink-8 test_ensembles_chainage.ali -g
+
+* ./test_ensembles_chainage < ""... ok
+
+  | 
+
+* valgrind ./test_ensembles_chainage < ""... ok
+
+  | 
+
+* Running gnatclean... ok

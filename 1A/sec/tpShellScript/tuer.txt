@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# Ne peut pas tuer ps, grep ou tr.
+
+if [ $# -lt 1 ]
+then echo "$0 <pattern>"; exit
+fi
+
+nb=0
+atuer=''
+for ligne in `ps -e | grep "$1" | grep -v grep | tr -s " " "!"`
+do
+    atuer="$atuer "`expr $ligne : '!\([^!]*\)!'`
+    nb=`expr $nb + 1`
+done
+if [ $nb -eq 0 ]
+then
+   echo "pattern not found."
+elif [ $nb -gt 1 ]
+then
+   echo "Multiple possible processes:$atuer"
+else
+   echo "Killing $atuer"
+   #kill -9 $atuer
+fi

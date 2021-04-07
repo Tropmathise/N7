@@ -1,0 +1,47 @@
+% Evaluation du projet "tables de multiplication"
+% PIM 2019-2020
+%
+
+# Total (20 pt) : 8.5
+
+# Compilation (-5 pt) : 
+
+
+# Raffinage (6 pt) : 3
+
+* La décomposition d'une étape complexe ne respecte pas son objectif
+    | Ne fait pas ce qui est attendu
+    | Ou fait plus que ce qui est attendu
+* Raffinage trop gros : il manque des actions complexes !
+    | Une étape fait apparaître trop d'instructions ou structures de contrôle
+    | et devrait donc faire apparaître des actions complexes à leur place
+* Les raffinages ne sont pas respectés dans le programme
+    | les sous-programmes correspondent à des étapes complexes des raffinages
+    | les étapes complexes qui ne sont pas devenues des SP sont des commentaires
+
+# Code (6 pt) : 2.5
+
+* Mauvaise aération du code / Mauvaise indentation du code
+* Il faut utiliser des constantes nommées et pas des constantes littérales
+    | Les seules consantes littérales autorisées sont -1, 0 et 1.
+* Structure de contrôle inadaptée
+    | Si vs Selon, Répéter vs TantQue vs Pour
+* Mauvaise utilisation des commentaires
+    | on doit avoir des commentaires de raffinages (normalement avant et
+    | alignés avec les instructions qu'ils décrivent)
+    | les autres commentaires doivent être informatifs (en général à la fin
+    | d'une ligne) : déclaration d'une variable.
+
+# Fonctionnel (5 pt) : 1 
+
+* Poser 10 questions
+* Respecter l'énoncé pour formuler la question (multiplication)
+* Calculer Temps_Max, Somme_Temps.
+* Afficher la bonne mention
+* Afficher la table à réviser : plus long et au moins 1 s. au dessus de la moyenne.
+
+# Questions (LISEZ-MOI.txt et questionnaire) (3 pt) : 2 
+
+* Pas d'information pertinente sur les tests faits.
+* La table à réviser en fonction des fréquences d'erreurs : non convainquant
+

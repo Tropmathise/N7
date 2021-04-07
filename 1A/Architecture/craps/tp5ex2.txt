@@ -1,0 +1,15 @@
+// write your program here
+        LD = 0xB0000000
+        ba start 
+        ld [%r0 + 0x100], %r3
+        push %r3
+        inc %r3
+        st %r3, [%r0 + 0x100]
+        pop %r3
+        reti
+start:  st %r0, [%r0 +0x100]
+        set LD, %r1
+        setq 0x100, %r29
+loop:   ld [%r0+0x100], %r2
+        st %r2, [%r1]
+        ba loop

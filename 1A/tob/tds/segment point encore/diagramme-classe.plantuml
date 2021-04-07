@@ -1,0 +1,117 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class Segment {
+	- majLg: MajLongueur
+	--
+	+ detruire()
+	__constructeurs__
+	+ Segment(e1: Point, e2: Point)
+}
+
+class MajLongueur implements Observateur {
+	+ maj(ptTranslaté: Point, dx: double, dy: double)
+}
+
+note bottom of MajLongueur
+	maj(ptTranslaté: Point, dx: double, dy: double)
+		longueur = extrémité1.distance(extrémité2)
+end note
+
+Segment +--> MajLongueur
+
+interface Observateur {
+	+ maj(ptTranslaté: Point, dx: double, dy: double)
+}
+
+class Point {
+	--
+	+translater(dx: double, dy: double)
+	+inscrire(obs: Observateur)
+	+supprimer(obs: Observateur)
+	__constructeurs__
+	+Point(x: double, y: double)
+}
+Segment  o-right-> "2\n-extrémité1,\n-extrémité2" Point: "                                     "
+
+Point o-up-> "*" Observateur
+
+class Cercle {
+	- rayon: double
+	--
+	__constructeurs__
+	+ Cercle(centre: Point, circ: Point)
+}
+
+Cercle  o-left-> "1\n-centre" Point: "                             "
+Cercle  o-left-> "1\n-circ"   Point: "                             "
+
+class ObservateurCirconference implements Observateur {
+	+ maj(ptTranslaté: Point, dx: double, dy: double)
+}
+
+note bottom of ObservateurCirconference
+	maj(ptTranslaté, dx, dy):
+		rayon = centre.distance(circ)
+end note
+
+Cercle +--> ObservateurCirconference
+
+class ObservateurCentre implements Observateur {
+	+ maj(ptTranslaté: Point, dx: double, dy: double)
+}
+
+note bottom of ObservateurCentre
+	maj(ptTranslaté, dx, dy):
+		circ.translater(dx, dy)
+end note
+
+Cercle +--> ObservateurCentre
+note CERCLE_CONSTRUCTEUR_POSNOTE of Cercle
+	Cercle(centre, circ):
+		this.centre = centre
+		this.circ = circ
+		this.rayon = this.centre.distance(this.circ)
+		this.circ.inscrire(new ObservateurCirconference())
+		this.centre.inscrire(new ObservateurCentre())
+end note
+
+note bottom of Segment
+	detruire():
+		this.extrémité1.supprimer(majLg)
+		this.extrémité2.supprimer(majLg)
+
+	Segment(e1, e2):
+		this.majLg = new MajLongueur()
+		this.extrémité1 = e1
+		this.extrémité2 = e2
+		longueur = extrémité1.distance(extrémité2)
+		this.extrémité1.inscrire(majLg)
+		this.extrémité2.inscrire(majLg)
+end note
+
+note top of Point
+	class Point:
+		private List<Observateur> observateurs
+end note
+
+note bottom of Point
+	translater(dx, dy):
+		x += dx
+		y += dy
+		for (Observateur obs : observateurs):
+			obs.maj(this, dx, dy)
+
+	inscrire(obs):
+		observateurs.add(obs)
+
+	supprimer(obs):
+		observateurs.remove(obs)
+
+	Point(x, y):
+		this.x = x
+		this.y = y
+		this.observateurs = new ArrayList<>()
+end note
+@enduml
+' vim: sw=4 ts=4:

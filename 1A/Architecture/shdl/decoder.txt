@@ -1,0 +1,47 @@
+module dec7segH(x[3..0] : seg[6..0])
+decoder4to16(x[3..0] : s[15..0])
+seg[0]=s[0]+s[2]+s[3]+s[5]+s[6]+s[7]+s[8]+s[9]+s[10]+s[12]+s[14]+s[15]
+seg[1]=s[0]+s[1]+s[2]+s[3]+s[4]+s[7]+s[8]+s[9]+s[10]+s[13]
+seg[2]=s[0]+s[1]+s[3]+s[4]+s[5]+s[6]+s[7]+s[8]+s[9]+s[10]+s[11]+s[13]
+seg[3]=s[0]+s[2]+s[3]+s[5]+s[6]+s[8]+s[9]+s[11]+s[12]+s[13]+s[14]
+seg[4]=s[0]+s[2]+s[6]+s[8]+s[10]+s[11]+s[12]+s[13]+s[14]+s[15]
+seg[5]=s[0]+s[4]+s[5]+s[6]+s[8]+s[9]+s[10]+s[11]+s[12]+s[14]+s[15]
+seg[6]=s[2]+s[3]+s[4]+s[5]+s[6]+s[8]+s[9]+s[10]+s[11]+s[13]+s[14]+s[15]
+end module
+
+module decoder2to4(e[1..0] : s[3..0])
+	s[0]=/e[0]*/e[1]
+   s[1]=e[0]*/e[1]
+   s[2]=/e[0]*e[1]
+   s[3]=e[0]*e[1]
+end module
+
+module decoder3to8(e[2..0] : s[7..0])
+	decoder2to4(e[1..0] : x[3..0])
+   s[3..0]=/e[2]*x[3..0]
+   s[7..4]=e[2]*x[3..0]
+end module
+
+module decoder4to16(e[3..0] : s[15..0])
+	decoder3to8(e[2..0] : x[7..0])
+   s[7..0]=/e[3]*x[7..0]
+   s[15..8]=e[3]*x[7..0]
+end module
+
+module decoder5to32(e[4..0] : s[31..0])
+	decoder4to16(e[3..0] : x[15..0])
+   s[15..0]=/e[4]*x[15..0]
+   s[31..16]=e[4]*x[15..0]
+end module
+
+module decoder6to64(e[5..0] : s[63..0])
+	decoder5to32(e[4..0] : x[31..0])
+   s[31..0]=/e[5]*x[31..0]
+   s[63..32]=e[5]*x[31..0]
+end module
+
+module test_dec7segH(sw[3..0] : an[7..0], ssg[6..0])
+dec7segH(sw[3..0] : seg[6..0])
+ssg[6..0] = /seg[6..0]
+an[7..0] = "11111110"
+end module

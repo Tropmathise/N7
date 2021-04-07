@@ -1,0 +1,14 @@
+package allumettes;
+import java.util.Random;
+
+public class StrategieNaive implements Strategie{
+    public StrategieNaive() {
+    }
+
+    @Override
+    public int getPrise() {
+        Random alea = new Random();
+        return 1 + alea.nextInt(2);
+    }
+}
+

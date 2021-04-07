@@ -1,0 +1,137 @@
+import java.util.ArrayList;
+
+public class JoueurMonopoly extends Joueur{
+
+    private int argent;
+    private int tourDePlateau;
+    private int tourEnPrison;
+    private boolean estEnPrison;
+    private boolean aPerdu;
+    private int nbGaresPossedees;
+    private int nbServicesPossedes;
+    private ArrayList<Case> terrains;
+    /** remplir si idées */
+
+    /* Constructeur du Joueur de Monopoly */
+    public JoueurMonopoly(String nom, int id, int argent){
+        super(nom, id);
+        this.argent=argent;
+    }
+
+    /** Obtenir l'argent du joueur
+     * @return argent 
+     */
+    public int getArgent() {
+        return this.argent;
+    }
+
+    /** Ajouter de l'argent au joueur
+     * @param montant argent ajouté
+     */
+    public void ajouterArgent(int montant) {
+        assert (montant > 0);
+        this.argent=this.argent+montant;
+    }
+
+    /** Retirer de l'argent au joueur
+     * @param debit argent débité
+     */
+    public void retirerArgent(int debit) {
+        assert (debit >0);
+        this.argent = this.argent - debit;
+        if (this.argent<=0) {
+            this.aPerdu=true;
+        }
+    }
+
+    /** Savoir si le joueur a perdu ou non
+    * @return Banqueroute 
+    */ 
+    public boolean getAPerdu(){
+        return this.aPerdu;
+    }
+
+    /** Le joueur est banqueroute */
+    public void setAPerdu(){
+        this.aPerdu= true;
+        /* effacer les terrains*/
+        /* supprimer son joueur */
+    }
+
+    /** Obtenir les terrains du joueur
+     * @return terrains
+     */
+    public ArrayList<Case> getTerrains() {
+        return this.terrains;
+    }
+
+    /** Ajouter un terrain a la liste du joueur
+     * @param nvTerrain
+     */
+    public void ajouterTerrain(Case terrain) {
+        this.terrains.add(terrain);
+    }
+
+    /** Obtenir le nombre de passage en prison
+     * au bout de 3 le joueur a perdu
+     */
+    public int getToursEnPrison() {
+        return tourEnPrison;
+    }
+
+    /** Definir le nombre de tour en prison
+     * @param nbToursPrison nombre de tour en prison
+     */
+    public void setTourEnPrison(int nbToursPrison) {
+        this.tourEnPrison = nbToursPrison;
+    }
+
+    /** Savoir si le joueur est en prison
+     * @return boolean estEnPrison
+     */
+    public boolean getEstEnPrison() {
+        return this.estEnPrison;
+    }
+
+    /** Mettre le joueur en prison
+     * @param allerEnPrison
+     */
+    public void setEstEnPrison(boolean allerEnPrison) {
+        this.estEnPrison = allerEnPrison;
+    }
+
+    /** Savoir le nombre de gares possédé
+     * @return nombre de gare en possession
+     */
+    public int getNbGares() {
+        return this.nbGaresPossedees;
+    }
+
+    /** Defnir le nombre de gare en possession
+     * @param nbgares le nombre de gares en possession
+     */
+    public void setNbGares(int nbgares) {
+        this.nbGaresPossedees= nbgares;
+    }
+        
+    /** Savoir le nombre de services possédé
+     * @return nombre de services en possession
+     */
+    public int getNbServices() {
+        return this.nbServicesPossedes;
+    }
+
+    /** Defnir le nombre de services en possession
+     * @param nbservices le nombre de services en possession
+     */
+    public void setNbServices(int nbservices) {
+        this.nbServicesPossedes= nbservices;
+    }
+
+
+
+
+
+
+}
+

@@ -1,0 +1,58 @@
+Script question 2 :
+
+reponse="a"
+until [ "${reponse:0:1}" = "n" ] || [ "${reponse:0:1}" = "o" ]
+do
+	read -p "Etes-vous satisfait? (o/n) " reponse
+done
+
+Script question 4 :
+
+function arbre {
+   if [ $1 = "-d" ]; then
+      local dir=${2:-.} espace=$3 f
+      for f in "$dir"/*; do
+         [ -e "$f" ] || continue
+         if [ -d "$f" ]; then
+            printf '%sDossier: %q\n' "$espace" "${f##*/}"
+            arbre "-d" "$f" "${espace}    "
+         fi
+      done
+   else 
+      local dir=${1:-.} espace=$2 f
+      for f in "$dir"/*; do
+         [ -e "$f" ] || continue
+         if [ -d "$f" ]; then
+            printf '%sDossier: %q\n' "$espace" "${f##*/}"
+            arbre "$f" "${espace}    "
+         else
+            printf '%sFichier: %q\n' "$espace" "${f##*/}"
+         fi
+      done
+   fi
+}
+
+Question 6 :
+
+On créé un script qui va supprimer l'ancienne commande et qui va executer la 
+nouvelle commande avec les bons parametres.
+
+Script question 7 :
+
+function inv {
+    chaine=$*
+    len=${#chaine}
+    newchaine=""
+    echo $len
+    if [ -z $chaine ]
+    then 
+        echo "Il faut rentrer une chaine non vide."
+    else
+        for ((i=$len-1; i>=0; i--))
+        do
+            newchaine="$newchaine${chaine:$i:1}"
+        done
+        echo "$newchaine"
+    fi
+}
+

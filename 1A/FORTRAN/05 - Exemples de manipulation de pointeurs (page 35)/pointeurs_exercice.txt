@@ -1,0 +1,31 @@
+integer, pointer :: p,q,r
+integer, target  :: i,j,k
+
+i = 12
+j =  3
+k =  7
+p => i
+q => j
+r => k
+q = p*3
+k = j
+q = 9
+r = q + p
+q => k 
+k = q + k
+p => 3*q
+p => 3*i
+j => 9
+
+
+
+
+
+
+
+
+
+Interdit :
+" p => 3*q "  (=> "when the target is an expression it must deliver a pointer result")
+" p => 3*i "  ( idem )
+" j => 9   "

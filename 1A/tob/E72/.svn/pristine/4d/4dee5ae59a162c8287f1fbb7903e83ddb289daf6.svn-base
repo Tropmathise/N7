@@ -1,0 +1,79 @@
+package monopoly.divers;
+
+/**
+ * Fonctions utiles lors d'un tour
+ * @author Thibault
+ *
+ */
+public class Tour {
+
+	// ----- Atributs
+	
+	private JoueurMonopoly joueurActif; // Le joueur qui joue le tour
+	/** Nombre de double réalisé par le joueur actif */
+	private int nombreDouble;
+	/** Présence d'un double au dernier lancé */
+	private boolean doubleDes;
+	
+	/**
+	 * Constructeur du type Tour
+	 * @param joueurActif le joueur qui joue le tour
+	 */
+	public Tour(JoueurMonopoly joueurActif) {
+		this.joueurActif = joueurActif;
+		this.nombreDouble = 0;
+		this.doubleDes = false;
+	}
+
+	/*
+	 * Renvoie la somme des dés lancés (entre 1 et 12)
+	 */
+	private int lancerDes() {
+		Des des = new Des(0,0);
+		// Réaliser un nouveau lancer
+		//doubleDes = false;
+		des.lancerDes();
+		/*// Vérifier la présence d'un double */
+		if (des.getDe1() == des.getDe2()) {
+			this.nombreDouble++;
+			this.doubleDes = true;
+		}
+		if (nombreDouble == 3) {
+			// TODO go prison
+		}
+		return des.getDe1() + des.getDe2();
+		
+	}
+
+	/**
+	 * Déplacer le joueur au début du tour
+	 * @param SommeDes la somme des dés obtenus
+	 */
+	private void deplacerJoueur(int SommeDes) {
+		joueurActif.setPosition(Plateau.cases[(joueurActif.getPosition().id + SommeDes) % Plateau.nbCases]);
+	}
+
+	public void acheterPropriete(Carte carte) throws ImpayableException, ProprieteDejaPossedeeException {
+		if (joueurActif.getSolde() < carte.getValeur()) {
+			throw new ImpayableException("Vous n'avez pas assez d'argent pour acheter cette propriété");
+		}
+		// Si un autre joueur possède la case, cette fonction n'est pas disponible, pas besoin de traiter cette exception
+		// (on pourrait le faire plus haut).
+	}
+	
+	/** Réaliser le tour de jeu du joueur actif. Prends en compte
+	 * les doubles faits, les cases sur lesquelles il s'arrête.
+	 */
+	public void realiserTour() {
+		do {
+			doubleDes = false;
+			// Lancer les dés
+			int valeur = this.lancerDes();
+			// Déplacer le joueur
+			UtilsTour.avancerDe(this.joueurActif, valeur);
+			// R�soudre l'effet de la case
+			
+		} while (doubleDes);
+		
+	}
+}

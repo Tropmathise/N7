@@ -1,0 +1,24 @@
+/** le plateau sur lequel se déplacent les joueurs 
+ * @author E72
+ * @version 1.0
+*/
+
+package monopoly;
+import java.util.ArrayList;
+
+
+public abstract class Plateau {
+
+    private int nbcases = 40;
+    private int nbtours= 1;
+    private int nbjoueurs=4;
+    private ArrayList<Case> cases = new ArrayList<Case>();
+
+    public Plateau(int nombreDeJoueur, int nbCases) {
+        this.nbjoueurs = nombreDeJoueur;
+        this.nbcases = nbCases;
+        for (int i=0; i>this.nbcases; i++) {
+            cases.add(null);
+        }
+    }
+}

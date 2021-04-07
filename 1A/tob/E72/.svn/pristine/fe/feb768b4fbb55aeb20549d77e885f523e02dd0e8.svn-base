@@ -1,0 +1,55 @@
+/** Les cartes du jeu 
+ * @author E72
+ * @version 1.0
+*/
+
+public abstract class Carte {
+
+    private String nom;
+    private TypeCarte type;
+    private Integer valeur;
+    private String message;
+
+    /** constructeur de la carte avec son nom et son effet
+     * @param nom son nom
+     * @param type son type
+     * @param valeur sa valeur
+     * @param message son message
+     */
+    public Carte(String nom, TypeCarte type, Integer valeur, String message) {
+        this.nom = nom;
+        this.type = type;
+        this.valeur = valeur;
+        this.message = message;
+    }
+
+    /** Obtenir le nom de la carte 
+     * @return nom
+     */
+    public String getNom() {
+        return this.nom;
+    }
+
+    /** Obtenir le type de la carte 
+     * @return type
+     */
+    public TypeCarte getType() {
+        return this.type;
+    }
+
+    /** Obtenir la valeur de la carte 
+     * @return valeur
+     */
+    public Integer getValeur() {
+        return this.valeur;
+    }
+
+    /** Obtenir le message de la carte 
+     * @return message
+     */
+    public String getMessage() {
+        return this.message;
+    }
+
+
+}

@@ -1,0 +1,14 @@
+@echo off
+echo.
+echo ------------ COMPILATION ------------
+echo.
+javac -sourcepath monopoly .\monopoly\divers\Partie.java
+echo.
+echo ---------- CREATION DU JAR ----------
+echo.
+jar cvfm monopoly.jar .\MANIFEST.MF .
+echo.
+echo ------------- LANCEMENT -------------
+echo.
+java -jar .\monopoly.jar
+@echo on

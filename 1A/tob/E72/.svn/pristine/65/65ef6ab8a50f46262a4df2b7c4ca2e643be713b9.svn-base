@@ -1,0 +1,60 @@
+
+public class JoueurMonopoly extends Joueur{
+
+    private int argent;
+    private int tourDePlateau;
+    private int tourEnPrison;
+    private boolean estEnPrison;
+    private boolean aPerdu;
+    private int nbGaresPossedees;
+    private int nbServicesPossedes;
+    /** remplir si idées */
+
+    /* Constructeur du Joueur de Monopoly */
+    public JoueurMonopoly(String nom, int id, int argent){
+        super(nom, id);
+        this.argent=argent;
+    }
+
+    /** Obtenir l'argent du joueur
+     * @return argent 
+     */
+    public int getArgent() {
+        return this.argent;
+    }
+
+    /** Ajouter de l'argent au joueur
+     * @param montant argent ajouté
+     */
+    public void ajouterArgent(int montant) {
+        assert (montant > 0);
+        this.argent=this.argent+montant;
+    }
+
+    /** Retirer de l'argent au joueur
+     * @param debit argent débité
+     */
+    public void retirerArgent(int debit) {
+        assert (debit >0);
+        this.argent = this.argent - debit;
+        if (this.argent<=0) {
+            this.aPerdu=true;
+        }
+    }
+
+    /** Savoir si le joueur a perdu ou non
+    * @return Banqueroute 
+    */ 
+    public boolean getAPerdu(){
+        return this.aPerdu;
+    }
+
+    /** Le joueur est banqueroute */
+    public void setAPerdu(){
+        this.aPerdu= true;
+        /* effacer les terrains*/
+        /* supprimer son joueur */
+    }
+
+}
+

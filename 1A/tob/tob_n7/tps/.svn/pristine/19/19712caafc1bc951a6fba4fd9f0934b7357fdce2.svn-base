@@ -1,0 +1,6 @@
+CercleTest.java:70: error: cannot find symbol
+		Cercle C4 = new creerCercle(D, E);
+		                ^
+  symbol:   class creerCercle
+  location: class CercleTest
+1 error

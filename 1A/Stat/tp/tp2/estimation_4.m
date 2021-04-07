@@ -1,0 +1,11 @@
+function [cos_theta_estime,sin_theta_estime,rho_estime] = estimation_4(x_donnees_bruitees,y_donnees_bruitees)
+x_moyenne=mean(x_donnees_bruitees);
+y_moyenne=mean(y_donnees_bruitees);
+x_new=x_donnees_bruitees-x_moyenne;
+y_new=y_donnees_bruitees-y_moyenne;
+C=[x_new; y_new]';
+[V,D]=eig(C'*C);
+[m,ind]=min(diag(D));
+sin_theta_estime=V(ind,2);
+cos_theta_estime=V(ind,1);
+rho_estime=x_moyenne*cos_theta_estime+y_moyenne*sin_theta_estime;

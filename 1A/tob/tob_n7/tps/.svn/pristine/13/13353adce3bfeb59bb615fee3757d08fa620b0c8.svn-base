@@ -1,0 +1,76 @@
+CercleTest.java:36: error: cannot find symbol
+		C3 = new Cercle(C,D);
+		^
+  symbol:   variable C3
+  location: class CercleTest
+CercleTest.java:37: error: cannot find symbol
+		assertEquals("E12", new Point(6,1), C3.getCentre());
+		                                    ^
+  symbol:   variable C3
+  location: class CercleTest
+CercleTest.java:38: error: cannot find symbol
+		assertEquals("E12", 2, C3.getRayon(), EPSILON);
+		                       ^
+  symbol:   variable C3
+  location: class CercleTest
+CercleTest.java:39: error: cannot find symbol
+		assertEquals("E12", 4, C3.getDiametre(), EPSILON);
+		                       ^
+  symbol:   variable C3
+  location: class CercleTest
+CercleTest.java:40: error: cannot find symbol
+		assertTrue("E12", C3.contient(C));
+		                  ^
+  symbol:   variable C3
+  location: class CercleTest
+CercleTest.java:41: error: cannot find symbol
+		assertTrue("E12", C3.contient(D));
+		                  ^
+  symbol:   variable C3
+  location: class CercleTest
+CercleTest.java:42: error: cannot find symbol
+		assertFalse("E12", C3.contient(E));
+		                   ^
+  symbol:   variable C3
+  location: class CercleTest
+CercleTest.java:48: error: cannot find symbol
+		C4 = new Cercle(C,D,Color.yellow);
+		^
+  symbol:   variable C4
+  location: class CercleTest
+CercleTest.java:49: error: cannot find symbol
+		assertEquals("E13", Color.yellow, C4.getCouleur());
+		                                  ^
+  symbol:   variable C4
+  location: class CercleTest
+CercleTest.java:50: error: cannot find symbol
+		assertEquals("E13", new Point(6,1), C4.getCentre());
+		                                    ^
+  symbol:   variable C4
+  location: class CercleTest
+CercleTest.java:51: error: cannot find symbol
+		assertEquals("E13", 2, C4.getRayon(), EPSILON);
+		                       ^
+  symbol:   variable C4
+  location: class CercleTest
+CercleTest.java:52: error: cannot find symbol
+		assertEquals("E13", 4, C4.getDiametre(), EPSILON);
+		                       ^
+  symbol:   variable C4
+  location: class CercleTest
+CercleTest.java:53: error: cannot find symbol
+		assertTrue("E13", C4.contient(C));
+		                  ^
+  symbol:   variable C4
+  location: class CercleTest
+CercleTest.java:54: error: cannot find symbol
+		assertTrue("E13", C4.contient(D));
+		                  ^
+  symbol:   variable C4
+  location: class CercleTest
+CercleTest.java:55: error: cannot find symbol
+		assertFalse("E13", C4.contient(E));
+		                   ^
+  symbol:   variable C4
+  location: class CercleTest
+15 errors

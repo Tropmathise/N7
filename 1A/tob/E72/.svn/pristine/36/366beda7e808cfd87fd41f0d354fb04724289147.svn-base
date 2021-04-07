@@ -1,0 +1,38 @@
+package monopoly.cases;
+import monopoly.*;
+
+public class Gare extends Case {
+
+    private Integer prix;
+    private Integer[] loyer = {25, 50, 100, 200};
+
+    public Gare(Integer id, TypeCase type, String nom, Integer prix, Integer nbjoueur, Integer prixMaison) {
+        super(id, type, nom, nbjoueur);
+        this.prix = prix;
+        
+    }
+
+    /** Obtenir le prix de la case
+	 * @return prix
+	 */
+	public Integer getPrix() {
+		return this.prix;
+    }
+
+    /** Obtenir la valeur d'hypotheque de la case
+     * @return hypotheque
+     */
+    public Integer getHypotheque() {
+        return prix/2;
+    }
+
+    /** Definir le prix de la case
+     * @param prix
+     */
+    public void setPrix(Integer prix) {
+        assert (prix > 0);
+        this.prix = prix;
+    }
+
+
+}

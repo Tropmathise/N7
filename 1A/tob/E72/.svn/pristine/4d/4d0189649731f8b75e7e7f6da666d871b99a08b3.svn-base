@@ -1,0 +1,13 @@
+/** La case sur lequel un joueur tombe
+ * @author E72
+ * @version 1.0
+ */
+
+public abstract class Case {
+
+    /* Le nom de la case */
+    private String nom;
+
+    
+
+}

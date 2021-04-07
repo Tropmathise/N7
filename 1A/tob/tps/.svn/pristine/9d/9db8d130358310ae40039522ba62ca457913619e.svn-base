@@ -1,0 +1,32 @@
+package allumettes;
+import java.util.Scanner;
+
+/** La strategie huamine consiste à faire jouer un humain.
+  * @author Thomas SADURNI
+  * @version 1.2
+  */
+public class StrategieHumaine implements Strategie{
+
+    public StrategieHumaine(){
+    }
+
+    @Override
+    public int getPrise(Jeu jeu) {
+        assert(jeu != null);
+        int n = jeu.getNombreAllumettes();
+        assert(n>0);
+        Scanner scanner = new Scanner(System.in);
+        int nb = 111;
+        while (nb==111){
+            System.out.print("Combien prenez-vous d'allumettes ? ");
+            try {
+                nb = scanner.nextInt();
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Attention, prenez un entier entre 1 et " + NouveauJeu.PRISE_MAX + ".");
+            }
+        }
+        return nb; 
+    }
+
+}

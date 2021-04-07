@@ -1,0 +1,18 @@
+/* Un troisième exemple de processus hiérarchique avec des ressources */
+process ABC {
+   resource R amount 5
+   activity A {
+      activity A1 {
+         activity A11
+      }   
+         requires 1 R
+      activity A2
+         requires 2 R
+         starts if A1 finished
+   }
+      requires 2 R
+   activity B
+   activity C requires 3 R
+      starts if A started
+      finishes if B finished
+}

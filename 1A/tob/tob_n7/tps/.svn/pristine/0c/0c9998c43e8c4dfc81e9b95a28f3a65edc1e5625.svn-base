@@ -1,0 +1,16 @@
+package allumettes;
+
+/** La strategie experte consiste à faire gagner l'ordinateur
+  * quand il le peut.
+  * @author Thomas SADURNI
+  * @version 1.0 
+  */
+public class StrategieExperte implements Strategie{
+    public StrategieExperte() {
+    }
+
+    @Override
+    public int getPrise(Jeu jeu) {
+        
+    }
+}

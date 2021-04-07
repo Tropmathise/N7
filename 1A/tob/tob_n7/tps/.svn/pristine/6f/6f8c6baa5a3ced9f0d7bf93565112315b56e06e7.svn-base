@@ -1,0 +1,12 @@
+package allumettes;
+
+public class StrategieRapide implements Strategie {
+
+    public class StrategieRapide{
+    }
+
+    @Override
+    public int getPrise(){
+        
+    }
+}

@@ -1,0 +1,18 @@
+//Cases du plateau
+//format: id@TYPE@nom@prix@constructions@joueurs@prix_maison@loyers
+0@EFFET@Départ@@@@@
+1@PROPRIETE@Boulevard de Belleville@60@0@0@50@2,10,30,90,160,450
+2@CDC@Caisse de Communauté@@@0@@
+3@PROPRIETE@Rue Lecourbe@60@0@50@20,60,180,320,450
+4@PAIEMENT@Impots sur le revenu@200@@@@
+5@GARE@Gare Montparnasse@200@@@@
+6@PROPRIETE@Rue de Vaugirard@100@0@50@30,90,270,400,550
+7@CHANCE@Chance@@@@@
+8@PROPRIETE@Rue de Courcelles@100@0@50@30,90,270,400,550
+9@PROPRIETE@Avenue de la république@120@0@50@40,100,300,450,600
+10@PRISON@Prison@@@@@
+11
+12
+13
+14
+15

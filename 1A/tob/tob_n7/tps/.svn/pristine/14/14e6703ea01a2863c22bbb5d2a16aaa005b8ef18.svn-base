@@ -1,0 +1,19 @@
+package allumettes;
+import allumettes.Jeu;
+
+public class StrategieRapide implements Strategie {
+
+    public class StrategieRapide{
+    }
+
+    @Override
+    public int getPrise(Jeu jeu){
+        if (jeu.getNombreAllumettes()<2){
+            return 1;
+        }
+        else if (jeu.getNombreAllumettes()<3){
+            return 2;
+        }
+        return 3;
+    }
+}

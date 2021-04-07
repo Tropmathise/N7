@@ -1,0 +1,43 @@
+package monopoly.cases;
+
+import monopoly.Case;
+import monopoly.JoueurMonopoly;
+import monopoly.TypeCase;
+
+public class CaseAchetable extends Case {
+
+    private Integer prix;
+    private JoueurMonopoly proprietaire;
+
+    public CaseAchetable(Integer id, TypeCase type, String nom, Integer prix) {
+        super(id, type, nom);
+        this.prix = prix;
+    }
+
+    /** Obtenir le prix de la case
+	 * @return prix
+	 */
+    public Integer getPrix() {
+        return this.prix;
+    }
+
+    /** Obtenir la valeur d'hypotheque de la case
+     * @return hypotheque
+     */
+    public Integer getHypotheque() {
+        return prix/2;
+    }
+
+    public String getNomProp() {
+        return "Propriétaire : " + this.proprietaire.getNom();
+    }
+
+    public JoueurMonopoly getProp() {
+        return this.proprietaire;
+    }
+
+    public void setProp(JoueurMonopoly j) {
+        this.proprietaire = j;
+    }
+    
+}

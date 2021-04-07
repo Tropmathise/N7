@@ -1,0 +1,9 @@
+/** Carte : Sortie de Prison */
+
+public class CarteSortieDePrison extends Carte {
+
+    public CarteSortieDePrison(String nom, TypeCarte type, int valeur, String message) {
+        super(nom, type, valeur, message);
+    }
+
+}

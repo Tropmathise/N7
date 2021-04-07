@@ -1,0 +1,5 @@
+module fulladder(a, b, cin : s, cout)
+	axorb=/a*b + a*/b
+   s=/axorb*cin + axorb*/cin
+   cout=axorb*cin + /axorb*a
+end module

@@ -1,0 +1,125 @@
+\documentclass[frenchb]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{a4wide}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{color}
+\usepackage{babel}
+
+\begin{document}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=5cm]{inp_n7.png}
+\end{figure}
+
+\title{\vspace{4cm} \textbf{Titre du rapport}}
+\author{Nom des auteurs\\ }
+\date{\vspace{7cm} Département Sciences du Numérique - Première année \\
+2019-2020 }
+
+\maketitle
+
+\newpage
+\tableofcontents
+\listoffigures
+
+\newpage
+\section{Introduction}
+L'objectif de ce projet était de ...
+
+\section{Construction du signal MF-TDMA à décoder}
+La figure \ref{fig : MF_TDMA_recu} présente la trame MF-TDMA à étudier, implanter puis décoder.
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=15cm]{MF_TDMA_recu.png}
+    \caption{Construction du signal MF-TDMA à décoder \label{fig : MF_TDMA_recu}}
+ \end{figure}
+
+
+    \subsection{Paramètres}
+    La trame MF-TDMA est composée de $2$ porteuses, $f_{p_1}=0$ kHz et $f_{p_2}=46$ kHz, contenant chacune $5$ timeslots de durées $T=40$ ms. La fréquence d'échantillonnage est fixée à $128$ kHz. Les deux utilisateurs vont accéder au système en utilisant la trame de la manière suivante :
+        \begin{itemize}
+            \item L'utilisateur n° $1$ exploite le $2^{ème}$ timeslot de la porteuse n° $1$ ($f_{p_1}$).
+            \item L'utilisateur n° $2$ exploite le $5^{ème}$ timeslot de la porteuse n° $2$ ($f_{p_2}$).
+        \end{itemize}
+
+    Le canal de transmission considéré sera à bruit additif blanc et Gaussien (canal AWGN : Additive White Gaussian Noise). La puissance du bruit à ajouter devra être déduite du rapport signal sur bruit (SNR : Signal to Noise Ratio) souhaité donné en dB.
+
+    \subsection{Etude théorique}
+    Le signal MF-TDMA non bruité peut s'écrire de la manière suivante :
+        $$
+        x(t)=m_1(t) \cos\left(2 \pi f_1 t + \phi_1\right) + m_2(t) \cos\left(2 \pi f_2 t + \phi_2\right)
+        $$
+        \subsubsection{Calcul de la densité spectrale de puissance} \label{Calcul_DSP}
+            A compléter
+        \subsubsection{Expression de la puissance du bruit à ajouter}
+            A compléter
+ \newpage
+    \subsection{Implantation}
+        \subsubsection{Modulation bande base}
+        Bla bla bla...
+            \begin{enumerate}
+                \item Calcul de $N_s$
+                \item Tracés des signaux $m_1(t)$ et $m_2(t)$
+                \item Estimation et tracé des densités spectrales de puissance des signaux $m_1(t)$ et $m_2(t)$. Concernant l'estimation on donnera notament l'estimateur utilisé.
+            \end{enumerate}
+
+        \subsubsection{Construction du signal MF-TDMA}
+        Bla bla bla...
+            \begin{enumerate}
+                \item Tracé des signaux à envoyer sur porteuse pour chaque utilisateur.
+                \item Tracé du signal MF-TDMA. Le tracé observé est-il conforme à ce qui est attendu ? Explications.
+                \item Estimation puis tracé de la densité spectrale de puissance du signal MF-TDMA. Le tracé observé est-il conforme à l'expression théorique obtenue précédemment ? Explications. Pour faire un appel à section : on retrouve bien le résultat obtenu dans la partie théorique (paragraphe \ref{Calcul_DSP}). En effet ...
+            \end{enumerate}
+
+\section{Mise en place du récepteur MF-TDMA}
+La figure \ref{fig : recepteur} présente le récepteur à implanter pour retrouver, à partir du signal MF-TDMA bruité, les messages binaires envoyés par les deux utilisateurs.
+ \begin{figure}[ht!]
+    \centering
+    \includegraphics[width=15cm]{recepteur.png}
+    \caption{Récepteur MF-TDMA à implanter \label{fig : recepteur}}
+ \end{figure}
+
+    \subsection{Démultiplexage des porteuses}
+        Le démutiplexage des porteuses se fait par filtrage : à partir du signal MF-TDMA reçu, un filtre passe-bas permet de récupérer le signal porté par le cosinus à la fréquence $f_{p_1}$ (provenant de l'utilisateur $1$), tandis qu'un filtre passe-haut permet de récupérer le signal porté par le cosinus à la fréquence $f_{p_2}$ (provenant de l'utilisateur $2$).
+
+        \subsubsection{Synthèse du filtre passe-bas}
+            Bla bla bla ...
+            \begin{enumerate}
+                \item Rappel de la réponse impulsionnelle idéale du filtre passe-bas à implanter (calcul effectué dans le TP$2$).
+                \item Explications implémentation.
+                \item Tracé de la réponse impulsionnelle et de la réponse en fréquence du filtre implanté.
+                \item Tracé de la densité spectrale de puissance du signal MF-TDMA reçu et du module de la réponse en fréquences du filtre implanté. Le filtre implanté vous parait-il réaliser la fonction souhaitée ? Explications.
+            \end{enumerate}
+
+        \subsubsection{Synthèse du filtre passe-haut}
+            Bla bla bla ...
+            \begin{enumerate}
+                \item Calcul de la réponse impulsionnelle idéale du filtre passe-haut à implanter.
+                \item Explications implémentation.
+                \item Tracé de la réponse impulsionnelle et de la réponse en fréquence du filtre implanté.
+                \item Tracé de la densité spectrale de puissance du signal MF-TDMA reçu et du module de la réponse en fréquences du filtre implanté. Le filtre implanté vous parait-il réaliser la fonction souhaitée ? Explications.
+            \end{enumerate}
+
+        \subsubsection{Filtrage} \label{filtrage}
+            Bla bla bla ... Tracés des signaux après filtrage.
+
+    \subsection{Retour en bande de base}
+        Bla bla bla ...
+
+    \subsection{Détection du slot utile}
+        Pour chaque utilisateur, afin de procèder à la détection du slot utile, on divise la trame après retour en bande da base en tranches de durée $T=40$ ms. Afin de détecter le slot utile, on utilise un détecteur d'énergie ... Bla bla bla...
+
+    \subsection{Démodulation bande de base}
+        Pour chaque utilisateur, à partir du message retrouvé dans le slot utile, on réalise une démodulation bande de base qui permet de retrouver les messages binaires envoyés. On utilise ensuite la fonction \emph{bin2str.m} fournie afin de retrouver les messages texte ... Bla bla bla...
+
+\section{Conclusion}
+A compléter
+
+\section{Références}
+A compléter
+
+\end{document} 

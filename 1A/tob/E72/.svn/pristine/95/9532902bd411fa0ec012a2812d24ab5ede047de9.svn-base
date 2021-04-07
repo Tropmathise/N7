@@ -1,0 +1,17 @@
+
+public class Partie {
+    private static final int nbChance = 10;
+    private static final Integer nbCdC = 10;
+
+    public static void main(String[] args) {
+
+    }
+
+
+    // private static Carte[] initChance() {
+    //     for(int i = 1; i < nbChance; i++) {
+
+    //     }
+    // }
+
+}

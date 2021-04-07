@@ -1,0 +1,17 @@
+JFLAGS = -g
+JC = javac
+.SUFFIXES: .java .class
+.java.class:
+	$(JC) $(JFLAGS) $*.java
+
+CLASSES = \
+	monopoly/divers/Partie.java
+
+default: classes
+
+classes: $(CLASSES:.java=.class)
+
+clean:
+	$(RM) /monopoly/divers/*.class
+	$(RM) /monopoly/res/*.class
+	$(RM) /monopoly/cases/*.class

@@ -1,0 +1,194 @@
+Nom    : Sadurni	
+Prénom : Thomas
+Groupe : N
+--------------------------------------------------------------------------------
+
+
+Consigne : Dans ce fichier, il faut répondre à la place des "..." et sur les
+lignes qui les suivent.  Le texte déjà écrit doit être conservé !
+
+=====[ Temps passé ]============================================================
+
+Ces informations de temps sont demandées à titre indicatif et ne sont pas
+prises en compte dans la notation du projet.
+
+Toutes les durées sont à saisir en heures.  Par exemple, si vous avez passé
+1h45, il faudra indiquer 1.75.  Si vous avez passé 2h30, il faudra indiquer
+2.5.
+
+Temps total passé sur ce mini-projet (en h) : 4.5
+Temps passé sur les raffinages (en h) : 2.5
+
+=====[ Raffinages ]=============================================================
+
+-- Ne donner que les niveaux de raffinages qui sont informatifs.   Il est
+-- généralement inutile de donner le dernier niveau de raffinage s'il ne
+-- contient pas d'étapes non élémentaires.
+
+
+R0 : Réviser une table de mutliplication entre 1 et 10. Une serie de 10 multiplications est faire avec la table à réviser entrée au clavier, les différentes multiplicaitons arriveront de façon aléatoire. Chaque test se verra suivi d'un commentaire en fonction du nombre d'erreur, de la table de multiplication conseillée de reviser en fonciton du temps de réponse, et enfin d'une volonté de continuer la révision ou non.
+
+
+Exemples : On ne donnera pas d'exemples d'utilisation
+
+
+R1 : Raffinage de R0
+Répéter :
+	E1: Saisir la table de multiplication entre 1 et 10 'n' à réviser. n: out Entier
+	E2: Compléter la série des 10 multiplications de n. 
+	E3: Afficher le nombre d'erreur total et les commentaires appropriés. 
+	E4: Afficher la table de multiplication conseillée de réviser en fonction du temps de réponse.
+	E5: Demander l'arrêt ou non de la révision. 
+Jusqu'à ce que l'utilisateur décide d'arrêter de réviser
+
+
+
+
+
+R2 : 
+- Comment E1: "Saisir la table de multiplication entre 1 et 10 'n' à réviser".
+Répéter 
+	Ecrire ("Table à réviser", n)
+	Lire n
+	Si n<0 ou n>10 : 
+		Ecrire ("Veuillez saisir un nombre entre 1 et 10")
+	Sinon
+		Rien
+Jusqu'à n compris entre 1 et 10
+
+- Comment E2: "Compléter la série des 10 multiplications de n."
+m <= 1
+error <= 0
+correct <= 1
+
+Pour m de 1 à 10 Faire
+	Afficher ("M",m)
+	random(1,10) <- rn    rn: out Entier 
+	Debut: Time
+	Ecrire ("n * ?",résulat)   résultat: out Entier
+	Lire (résultat)
+	Fin: Time
+	Calculer le temps de calcul et comparer à la moyenne
+	Si résultat=n*rn
+		Ecrire ("Bravo!")
+		correct<=correct +1
+	Sinon 
+		Ecrire ("Mauvaise Réponse.")
+		error<=error+1	
+	m=m+1
+	Nouvelle Ligne
+FinPour
+
+
+
+- Comment E3: "Afficher le nombre d'erreur et les commentaires appropriés"
+Lire error
+Lire correct
+Si error=0
+	Afficher ("Aucune erreur. Excellent")
+SinonSi error=1
+	Afficher ("Une seule erreur, très bien")
+SinonSi error=10 
+	Afficher ("Tout est faux, volontaire?")
+SinonSi correct<=5
+	Afficher ("Seulement ",correct,"bonnes réponses, il faut apprendre la table de ",n,".")
+SinonSi 
+	Afficher (error, "erreurs. Il faut encore travailler la table de ",n)
+FinSi
+
+
+- Comment E4: "Afficher la table de multiplication conseillée de réviser en fonction du temps de réponse."
+Si maxtemps > tempsmoyen+1
+	Afficher ("Des difficultés sur la table de", conseildetable,".", maxtemps,"secondes contre ",moyenne,"en moyenne. Il faudrait la réviser")
+Sinon
+	Afficher ("Des temps très rapides, avec une moyenne de ",tempsmoyen,"secondes. Bravo!")
+FinSi
+
+
+- Comment E5: "Demander l'arrêt ou non de la révision."
+Ecrire ("On continue? o=oui, autre chose que o sera considéré comme un arrêt de la révision",q) 
+	Si q=o
+		Continuer <= Vrai
+	Sinon
+		Continuer <= False 
+FinRépéter
+
+
+
+
+R3 : 
+Comment "Calculer le temps de calcul et comparer à la moyenne"
+
+maxtemps <= 0
+tempsmoyen <= 0
+temps <= Fin - Debut
+	Si temps > maxtemps
+		maxtemps <= temps 
+		conseildetable <= rn
+	Sinon 
+		Rien 
+tempsmoyen <= tempsmoyen + temps/10
+	
+
+
+
+=====[ Test ]===================================================================
+
+* Expliquer rapidement comment vous avez testé votre programme.
+
+Avec GPS.
+
+
+=====[ Difficultés ]============================================================
+
+* Indiquer les difficultés rencontrées
+
+Nouveau language à apprendre et légèrement différent de Python, avec de nouvelles commandes inconnues auparavant.
+
+
+=====[ Questions ]==============================================================
+
+Pour les questions suivantes, il ne s'agit pas de modifier le programme écrit
+mais d'expliquer comment il faudrait le modifier pour prendre en compte les
+évolutions envisagées.
+
+
+* Au lieu de poser 10 questions, on veut en poser 15. Comment faire ?
+
+On introduit une variable nb qui demande le nombre de multiplications voulues avant le démarrage.
+On modifie alors le for jusqu'à nb et non 10
+
+
+* On veut afficher "Bien" si l'utilisateur n'a commis que 2 ou 3 erreurs.
+  Comment modifier le programme ?
+
+On rajoute un else if pour les deux conditions.
+SinonSi error = 2 or error = 3
+    Afficher ("Bien.")
+FinSi
+
+* On veut donner la possibilité à l'utilisateur d'abandonner le programmes en
+  tapant 0 quand on lui demande le résultat d'une multiplication. Quelles
+  modifications faut-il alors faire au programme ? 
+
+On ajoute une condition de sortie après la demande du resultat de la multiplication.
+on change la boucle for en boucle while
+sortir quand resultat = 0  --On arrete la boucle while pour mettre fin au programme
+Afficher ("vous avez choisi de quitter le programme, au revoir")
+FinTantQue
+
+* À la fin d'une série de questions, on veut proposer à l'utilisateur de
+  réviser la table pour laquelle l'utilisateur a commis le plus d'erreurs.
+  Par exemple, s'il se trompe pour 3 * 5, on compte une erreur pour 3 et
+  une erreur pour 5.  Comment faire ?
+
+Pour chaque nombre aléatoire généré, on declare une nouvelle variable s'il n'a pas déjà été généré et on l'incrémente si la réponse à été fausse. La variable la plus haute correspondra à la table à conseiller de réviser.
+
+
+=====[ Remarques diverses ]=====================================================
+
+Cette rubrique est libre (et ne sera pas prise en compte dans la notation).
+
+...
+
+--------------------------------------------------------------------------------

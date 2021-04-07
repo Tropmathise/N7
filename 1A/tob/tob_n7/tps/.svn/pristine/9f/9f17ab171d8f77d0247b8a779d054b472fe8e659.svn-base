@@ -1,0 +1,36 @@
+package allumettes;
+
+/** Un arbitre, comme son nom l'indique, arbitre la partie.
+  * Il affiche le nombre d'allumettes restantes et vérifie
+  * que les joueurs respectent les règles du jeu. Enfin, il
+  * affiche le résultat en fin de partie.
+  * @author Thomas SADURNI
+  * @version 1.0
+  */
+
+public class Arbitre {
+
+    /** Joueur 1 de la partie. */
+    private Joueur joueur1;
+
+    /** Joueur 2 de la partie. */
+    private Joueur joueur2;
+
+    /** Constucteur Arbitre. */
+    public Arbitre(Joueur j1, Joueur j2) {
+        assert(j1 != null);
+        assert(j2 != null);
+        this.joueur1=j1;
+        this.joueur2=j2;
+    }
+
+    public void arbitrer(Jeu jeu) {
+        
+    }
+
+
+    
+
+
+
+}

@@ -1,0 +1,52 @@
+// write your program here
+          T  = 0x100
+          SW = 0x90000000
+          LD = 0xB0000000
+          M  = 0b1
+          set T,  %r6
+          set SW, %r1
+          set LD, %r2
+          set M, %r7
+          st %r0, [%r6]
+          clr %r3
+loop:     ld [%r1], %r4
+          and %r7, %r4, %r4
+          cmp %r3, %r4  //compare 0 et sw[0]
+          bge nochange
+          ld [%r6], %r5
+          inc %r5
+          st %r5, [%r2]
+          st %r5, [%r6]
+nochange: add %r4, %r0, %r3
+          ba loop
+
+
+          ////////////////////////////////
+
+LD = 0xB0000000
+SW = 0x90000000
+INC = 0x100
+
+set SW, %r2  //switches
+set LD, %r3  //LED
+set INC, %r1 //compteur
+clr %r5 // valeur de 0x100
+clr %r6 // old'sw[0]
+loop :      ld [%r2+%r0], %r4
+            ld [%r1+%r0], %r5
+            andcc %r4, 0x00000001, %r4 // sw[0]
+            bne compteur
+            add %r0, 1, %r6 // sw[0] vaut 0 au temps precedent
+            ba loop
+            
+compteur :  cmp %r4, 1
+            bne loop
+            cmp %r6, 1
+            bne loop
+            add %r5, 1, %r5
+            clr %r6
+            st %r5, [%r3+%r0]
+            st %r5, [%r1+%r0]
+            ba loop
+.org 0x100
+.word 0

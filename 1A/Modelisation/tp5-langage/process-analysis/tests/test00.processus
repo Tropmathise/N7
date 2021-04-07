@@ -1,0 +1,8 @@
+/* Un premier exemple de processus */
+process ABC {
+   activity A 
+   activity B
+   activity C 
+      starts if A started
+      finishes if B finished
+}

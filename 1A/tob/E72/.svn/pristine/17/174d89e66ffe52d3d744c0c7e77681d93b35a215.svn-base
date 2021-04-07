@@ -1,0 +1,266 @@
+package monopoly.divers;
+import java.util.ArrayList;
+import java.util.Random;
+
+/** La classe principale du joueur de Monopoly
+ * @author Thomas
+ */
+
+public class JoueurMonopoly {
+
+    private String nom;
+    private Integer id;
+    private int solde;
+    private Case position = Plateau.cases[0];
+    private int nbTourDePlateau = 0;
+    private int nbTourEnPrison = 0;
+    private boolean estEnPrison = false;
+    private boolean aPerdu = false;
+    private boolean aCarteSortiePrison = false;
+    private int nbGaresPossedees = 0;
+    private int nbServicesPossedes = 0;
+    private ArrayList<Case> terrains;
+    private int nombreDouble=0;
+    
+    /** remplir si idées */
+
+    /* Constructeur du Joueur de Monopoly */
+    public JoueurMonopoly(String nom, int id, int argent){
+	    this.nom = nom;
+        this.id = id;
+        this.solde=argent;
+    }
+
+    /** Obtenir le nom du joueur
+     * @return son nom
+     */
+    public String getNom() {
+        return this.nom;
+    }
+
+    /** Obtenir l'id du joueur 
+     * @return son id
+     */
+    public Integer getId() {
+        return this.id;
+   }
+
+    /** Obtenir l'argent du joueur
+     * @return argent 
+     */
+    public int getSolde() {
+        return this.solde;
+    }
+
+    /** Obtenir la position du joueur
+     * @return sa position
+     */
+    public Case getPosition() {
+        return this.position;
+    }
+
+    public void setNom(String nom){
+        assert (nom != null);
+        this.nom = nom;
+    }
+
+     /** Définir l'id du joueur
+     * @param Integer son id
+     */
+    public void setId(Integer id) {
+        assert (id > 0);
+        this.id = id;
+    }
+
+    /** Définir le solde du joueur
+     * @param Integer son solde
+     */
+    public void setSolde(int solde){
+        assert (solde > 0);
+        this.solde =solde;
+    }
+
+    /** Ajouter de l'argent au joueur
+     * @param montant argent ajouté
+     */
+    public void ajouterArgent(int montant) {
+        assert (montant > 0);
+        this.solde=this.solde+montant;
+    }
+
+    /** Retirer de l'argent au joueur
+     * @param debit argent débité
+     */
+    public void retirerArgent(int debit) throws ImpayableException {
+        assert (debit >0);
+        this.solde = this.solde - debit;
+        if (this.solde<=0) {
+            this.aPerdu=true;
+            throw new ImpayableException();
+        }
+    }
+
+    /** Définir la position du joueur
+     * @param Integer sa position
+     */
+    public void setPosition(Case position) {
+        this.position = position;
+    }
+
+    /** Savoir si le joueur a perdu ou non
+    * @return Banqueroute 
+    */ 
+    public boolean getAPerdu(){
+        return this.aPerdu;
+    }
+
+    /** Le joueur est banqueroute */
+    public void setAPerdu(){
+        this.aPerdu= true;
+        /* effacer les terrains*/
+        /* supprimer son joueur */
+    }
+
+    /** Obtenir les terrains du joueur
+     * @return terrains
+     */
+    public ArrayList<Case> getTerrains() {
+        return this.terrains;
+    }
+
+    /** Ajouter un terrain a la liste du joueur
+     * @param nvTerrain
+     */
+    public void ajouterTerrain(Case terrain) {
+        this.terrains.add(terrain);
+    }
+
+    /** Obtenir le nombre de passage en prison
+     * au bout de 3 le joueur a perdu
+     */
+    public int getToursEnPrison() {
+        return nbTourEnPrison;
+    }
+
+    /** Definir le nombre de tour en prison
+     * @param nbToursPrison nombre de tour en prison
+     */
+    public void setTourEnPrison(int nbToursPrison) {
+        assert (nbToursPrison >= 0);
+        this.nbTourEnPrison = nbToursPrison;
+    }
+
+    /** Savoir si le joueur est en prison
+     * @return boolean estEnPrison
+     */
+    public boolean getEstEnPrison() {
+        return this.estEnPrison;
+    }
+
+    /** Mettre le joueur en prison
+     * @param allerEnPrison
+     */
+    public void setEstEnPrison(boolean allerEnPrison) {
+        this.estEnPrison = allerEnPrison;
+    }
+
+    /** Savoir le nombre de gares possédé
+     * @return nombre de gare en possession
+     */
+    public int getNbGares() {
+        return this.nbGaresPossedees;
+    }
+
+    /** Defnir le nombre de gare en possession
+     * @param nbgares le nombre de gares en possession
+     */
+    public void setNbGares(int nbgares) {
+        assert (nbgares >= 0);
+        this.nbGaresPossedees= nbgares;
+    }
+        
+    /** Savoir le nombre de services possédé
+     * @return nombre de services en possession
+     */
+    public int getNbServices() {
+        return this.nbServicesPossedes;
+    }
+
+    /** Defnir le nombre de services en possession
+     * @param nbservices le nombre de services en possession
+     */
+    public void setNbServices(int nbservices) {
+        assert (nbservices >= 0);
+        this.nbServicesPossedes= nbservices;
+    }
+
+    /** Obtenir le nombre de tours de plateau
+     * @return nombre de tours de plateau
+     */
+    public int getNbToursPlateau() {
+        return this.nbTourDePlateau;
+    }
+
+    /** Obtenir le nombre de double qu'a fait un joueur
+     * @return nombre de double
+     */
+    public int getnbDouble(){
+        return this.nombreDouble;
+    }
+
+    /** Definir le nombre de double d'un joueur
+     * @param nbdouble nombre de double
+     */
+    public void setnbDouble(int nbdouble) {
+        this.nombreDouble = nbdouble;
+    }
+
+    /** Definir le nombre de tours de plateau
+     * @param nbTourPlateau nombre de tours de plateau
+     */
+    public void setNbTourDePlateau(int nbTourDePlateau) {
+        assert (nbTourDePlateau >= 0);
+        this.nbTourDePlateau = nbTourDePlateau;
+    }
+
+    /** Savoir si le joueur a une cart de sortie de prison
+     * @return possede ou pas la carte sortie de prison
+     */
+    public boolean getCarteSortieDePrison() {
+        return this.aCarteSortiePrison;
+    }
+
+    /** Definir si le joueur a une carte sortie de prison
+     * @param carte booleen
+     */
+    public void setCarteSortieDePrison(boolean carte) {
+        this.aCarteSortiePrison = carte;
+    }
+
+    /** Le joueur tire une carte chance ou communaute, puis la remet en bas de la pile
+     * @param cartes Carte[]
+     * @return carte_tiree 
+     */
+    public Carte tirerUneCarte(Carte[] cartes){
+	Random alea = new Random();
+	return cartes[alea.nextInt(cartes.length)];
+    }
+    
+    /** Savoir si un joueur possède une propriété.
+     * @param case la case qui nous interesse
+     * @return un booleen : le joueur possède la case.
+     */
+    public Boolean estProprietaireDe(Case c) {
+        Boolean resultat = false;
+        for (int i = 0; i < this.terrains.size(); i++) {
+            resultat = this.terrains.get(i).equals(c) || resultat;
+        }
+        return resultat;
+    }
+
+
+
+
+
+}
+

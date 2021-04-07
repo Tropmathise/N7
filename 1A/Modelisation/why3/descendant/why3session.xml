@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
+"http://why3.lri.fr/why3session.dtd">
+<why3session shape_version="5">
+<prover id="0" name="Coq" version="8.9.1" timelimit="0" steplimit="0" memlimit="0"/>
+<file>
+<path name=".."/>
+<path name="descendant.mlw"/>
+<theory name="FactorielleDescendant">
+ <goal name="VC factorielle_descendant" expl="VC for factorielle_descendant">
+ <transf name="split_vc" >
+  <goal name="VC factorielle_descendant.0" expl="loop invariant init">
+  <proof prover="0" obsolete="true" edited="descendant_FactorielleDescendant_VC_factorielle_descendant_2.v"><result status="valid" time="0.32"/></proof>
+  </goal>
+  <goal name="VC factorielle_descendant.1" expl="loop variant decrease">
+  <proof prover="0" obsolete="true" edited="descendant_FactorielleDescendant_VC_factorielle_descendant_3.v"><result status="valid" time="0.30"/></proof>
+  </goal>
+  <goal name="VC factorielle_descendant.2" expl="loop invariant preservation">
+  <proof prover="0" obsolete="true" edited="descendant_FactorielleDescendant_VC_factorielle_descendant_4.v"><result status="valid" time="0.32"/></proof>
+  </goal>
+  <goal name="VC factorielle_descendant.3" expl="postcondition">
+  <proof prover="0" obsolete="true" edited="descendant_FactorielleDescendant_VC_factorielle_descendant_5.v"><result status="unknown" time="0.00" steps="0"/></proof>
+  </goal>
+ </transf>
+ </goal>
+</theory>
+</file>
+</why3session>

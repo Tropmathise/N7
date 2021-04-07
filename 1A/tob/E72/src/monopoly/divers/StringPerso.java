@@ -1,0 +1,11 @@
+package monopoly.divers;
+/* Classe pour éviter les problèmes d'accent */ 
+
+import java.nio.charset.StandardCharsets;
+
+public class StringPerso {
+    public static String creer(String str) {
+        return new String(str.getBytes(), StandardCharsets.UTF_8);
+    }
+}
+

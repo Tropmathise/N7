@@ -1,0 +1,70 @@
+/** Un joueur est défini par les caractéristiques suivantes :
+ * - son nom
+ * - son identifiant
+ * - sa position sur le plateau
+ * 
+ * @author E72
+ * @version 1.0
+ */
+
+public abstract class Joueur {
+    private String nom;
+    private int id;
+    private int position;
+
+    /** Définition du joueur
+     * @param nom son nom
+     * @param id son identifiant 
+    */
+    public Joueur (String nom, int id) {
+        setNom(nom);
+        setId(id);
+    }
+
+    /** Obtenir le nom du joueur
+     * @return son nom
+     */
+    public String getNom() {
+        return this.nom;
+    }
+
+    /** Obtenir l'id du joueur 
+     * @return son id
+     */
+    public int getId() {
+        return this.id;
+    }
+
+    /** Obtenir la position du joueur
+     * @return sa position
+     */
+    public int getPosition() {
+        return this.position;
+    }
+
+    /** Définir le nom du joueur
+     * @param String son nom
+     */
+    public void setNom(String nom){
+        assert (nom != null);
+        this.nom = nom;
+    }
+
+    /** Définir l'id du joueur
+     * @param int son id
+     */
+    public void setId(int id) {
+        assert (id > 0);
+        this.id = id;
+    }
+
+    /** Définir la position du joueur
+     * @param int sa position
+     */
+    public void setPosition(int position) {
+        assert (position > 0);
+        this.position = position;
+    }
+
+}
+

@@ -1,0 +1,7 @@
+public enum TypeCarte {
+    PAYER,
+    RECEVOIR,
+    MOUVEMENT,
+    TELEPORTATION,
+    CASE;
+}

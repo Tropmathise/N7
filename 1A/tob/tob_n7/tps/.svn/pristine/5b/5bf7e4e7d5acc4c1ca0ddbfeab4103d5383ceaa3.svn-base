@@ -1,0 +1,11 @@
+package allumettes;
+
+public class StrategieExperte implements Strategie{
+    public StrategieExperte() {
+    }
+
+    @Override
+    public int getPrise() {
+        
+    }
+}

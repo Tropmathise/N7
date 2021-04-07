@@ -1,0 +1,4 @@
+Afficher le minimum et le maximum d'une série d'entier lue au clavier
+Saisir l'entier qui sera considéré comme le min, de meme pour le max
+Tant que 0 n'est pas saisi, coparer l'entier entré avec min et max et modifier min max si necessaire
+

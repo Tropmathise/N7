@@ -1,0 +1,11 @@
+/* Un deuxième exemple de processus avec des ressources */
+process ABC {
+   resource R amount 5
+   activity A 
+      requires 2 R
+   activity B
+   activity C 
+      requires 3 R
+      starts if A started
+      finishes if B finished
+}

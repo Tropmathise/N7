@@ -1,0 +1,43 @@
+module ual(a[31..0], b[31..0], cmd[5..0] : s[31..0], enN, enZ, enVC, N, Z, V, C)
+   
+	// décodage de la commande
+	decoder6to64(cmd[5..0], dcmd[63..0])
+
+	// add-sub
+	addsub32(a[31..0], b[31..0], cmd[2], saddsub[31..0], V, C)
+	s[31..0] = saddsub[31..0] output enabled when dcmd[16] + dcmd[0] + dcmd[20] + dcmd[4]
+		
+	// and
+	s[31..0] = a[31..0] * b[31..0] output enabled when dcmd[1] + dcmd[17]
+
+	// or
+	s[31..0] = a[31..0] + b[31..0] output enabled when dcmd[2] + dcmd[18]
+
+	// xor
+	s[31..0] = a[31..0]*/b[31..0] + /a[31..0]*b[31..0] output enabled when dcmd[3] + dcmd[19]
+
+	// signext25
+	s[31..0] = a[24]*"1111111" & a[24..0] output enabled when dcmd[33]
+
+	// signext13
+	s[31..0] = a[12]*"1111111111111111111" & a[12..0] output enabled when dcmd[32]
+
+	// sethi
+	s[31..0] = a[23..0] & "00000000" output enabled when dcmd[35]
+   
+   // nopb
+	s[31..0] = b[31..0] output enabled when dcmd[40]
+	
+	// N
+	N = s[31]
+	
+	// Z
+	Z = /s[31]*/s[30]*/s[29]*/s[28]*/s[27]*/s[26]*/s[25]*/s[24]*
+   		/s[23]*/s[22]*/s[21]*/s[20]*/s[19]*/s[18]*/s[17]*/s[16]*
+         /s[15]*/s[14]*/s[13]*/s[12]*/s[11]*/s[10]*/s[9]*/s[8]*
+         /s[7]*/s[6]*/s[5]*/s[4]*/s[3]*/s[2]*/s[1]*/s[0]
+
+	enN = dcmd[16]+dcmd[20]+dcmd[17]+dcmd[18]+dcmd[19]
+	enZ = enN
+	enVC = dcmd[16]+dcmd[20]
+end module

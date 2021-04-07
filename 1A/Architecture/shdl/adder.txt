@@ -1,0 +1,33 @@
+module fulladder(a, b, cin : s, cout)
+   x = /a*b + a*/b
+   s = /x*cin + x*/cin
+   cout = /x*a + x*cin
+end module
+
+module fulladderX(sw[2..0] : ld[1..0])
+	fulladder(sw[2], sw[1], sw[0] : ld[1], ld[0])
+end module
+
+module adder4(a[3..0], b[3..0], cin : s[3..0], cout)
+	fulladder(a[0], b[0],cin: s[0], c0)
+   fulladder(a[1], b[1],c0: s[1], c1)
+   fulladder(a[2], b[2],c1: s[2], c2)
+   fulladder(a[3], b[3],c2: s[3], cout)
+end module
+
+module adder8(a[7..0], b[7..0], cin : s[7..0], cout)
+	adder4(a[3..0], b[3..0], cin : s[3..0], c1)
+   adder4(a[7..4], b[7..4], c1 : s[7..4], cout)
+end module
+
+module adder16(a[15..0], b[15..0], cin : s[15..0], cout)
+	adder8(a[7..0], b[7..0], cin : s[7..0], c0)
+   adder8(a[15..8], b[15..8], c0 : s[15..8], cout)
+end module
+
+module addsub32(a[31..0], b[31..0], addsub: s[31..0],V,C)
+	x[31..0]=addsub*/b[31..0] + /addsub*b[31..0]
+	adder32(a[31..0], x[31..00], addsub : s[31..0], cout)
+   C=cout*/addsub+addsub*/cout
+   V=/a[31]*/b[31]*/addsub*s[31] + a[31]*b[31]*/addsub*/s[31] + /a[31]*b[31]*addsub*s[31] + a[31]*/b[31]*addsub*/s[31]
+end module

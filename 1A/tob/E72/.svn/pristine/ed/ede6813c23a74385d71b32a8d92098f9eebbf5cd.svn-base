@@ -1,0 +1,23 @@
+package monopoly;
+
+import javax.swing.JButton;
+
+public class CaseSwing extends JButton {
+
+    private static final long serialVersionUID = 1L;
+
+    private Case c; // La case qui est modélisée
+
+    public CaseSwing(Case c) {
+        super();
+        this.c = c;
+    }
+
+    public Integer getId() {
+        return this.c.getId();
+    }
+
+    public Case getCase() {
+        return this.c;
+    }
+}

@@ -1,0 +1,10 @@
+Compilation d'un programme fortran (1 seul fichier) avec bibliothèque
+mathématique
+
+
+F90
+gfortran -o nom_executable code_source.f90 -lm
+
+dans ce code, on utilise la fonction dsqrt fournie par la bibliothèque libm.a
+
+gfortran -o format format.f90 -lm

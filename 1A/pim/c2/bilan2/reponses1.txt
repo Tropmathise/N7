@@ -1,0 +1,24 @@
+Dans ce fichier `reponses1.txt`, 
+
+
+[Question 1.1] Indiquer 
+- comment obtenir le ou les exécutables par compilation séparée.
+gcc -Wall -o nomexecutalable fichier.c 
+
+- les dépendances entre les fichiers qui constituent l’application.
+exemple et text depende de file.c, il faut implanter file.c pour pouvoir les executer
+
+- le rôle de la règle `.PHONY` dans Makefile.
+.PHONY vise une cible particuliere, peut importe si un fichier u nom de la commande est present, la commande sera executée.
+
+[Question 1.4] Indiquer
+- Quel est le sous-programme non-visible des autres modules et défini dans le module File.
+le sous programme cellule n'est pas visible des autres modules.
+
+- Que se passe-t-il si on enlève le mot-clé static à la compilation ?  
+ 
+
+- Que se passe-t-il si on enlève le mot-clé static à l'exécution ?  
+
+
+- Quel est le risque de ne pas le mettre ?

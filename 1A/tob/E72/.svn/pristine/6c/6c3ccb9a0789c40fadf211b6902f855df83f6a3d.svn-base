@@ -1,0 +1,73 @@
+package monopoly.swing;
+/* Classe pour annoncer les actions et les effets d'un joueur ou du menu. */
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.event.*;
+import java.awt.Container;
+import java.awt.GridLayout;
+import java.awt.BorderLayout;
+import java.io.*;
+
+import monopoly.divers.StringPerso;
+
+public class Annonce extends JFrame implements ActionListener {
+
+    private static final long serialVersionUID = 1L;
+
+    private final JButton boutonok = new JButton("OK");
+    private JLabel message;
+
+    public static ArrayList<Annonce> listeAnnonces = new ArrayList<Annonce>();
+
+    public Annonce(String message) {
+        super();
+        this.message = new JLabel(StringPerso.creer(message));
+        this.setTitle("Annonce");
+        this.setSize(400, 150);
+        this.setLocationRelativeTo(null);
+        this.isAlwaysOnTop();
+        this.boutonok.setBounds(161, 15, 60, 40);
+        this.message.setBounds(45, 62, 290, 25);
+        this.boutonok.addActionListener(this);
+        this.boutonok.setVisible(true);
+        this.message.setVisible(true);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(null);
+        panel.add(this.boutonok);
+        panel.add(this.message);
+
+        this.setContentPane(panel);
+
+        if (Annonce.listeAnnonces.size() >= 1 ) {
+            this.setVisible(false);
+        }
+        else {
+            this.setVisible(true);
+        }
+        Annonce.listeAnnonces.add(this);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object source = e.getSource();
+        if (source == boutonok) {
+            this.dispose();
+        }
+    }
+
+    @Override
+    public void dispose() {
+        Annonce.listeAnnonces.remove(this);
+        if (Annonce.listeAnnonces.size() != 0) {
+            Annonce.listeAnnonces.get(0).setVisible(true);
+        }
+        super.dispose();
+    }
+}

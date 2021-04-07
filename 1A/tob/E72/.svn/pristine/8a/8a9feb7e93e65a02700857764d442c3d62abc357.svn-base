@@ -1,0 +1,16 @@
+package monopoly.cases;
+import monopoly.*;
+
+/** Case compagnie
+ * @author Theo
+ */
+
+public class Compagnie extends CaseAchetable {
+
+    private JoueurMonopoly proprietaire;
+
+    public Compagnie(Integer id, TypeCase type, String nom, Integer prix) {
+        super(id, type, nom, prix);
+
+    }
+}

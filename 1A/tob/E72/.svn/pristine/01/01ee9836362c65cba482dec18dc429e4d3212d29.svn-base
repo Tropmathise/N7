@@ -1,0 +1,86 @@
+/** le plateau sur lequel se déplacent les joueurs 
+ * @author Thomas
+ * @version 1.0
+*/
+
+package monopoly;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import monopoly.cases.Gare;
+import monopoly.cases.Propriete;
+
+
+public abstract class Plateau {
+
+    public static final Integer nbCartes = 16;
+    public static final Integer nbCases = 40;
+    private static final Integer nbLoyers = 6;
+    private int nbtours = 0;
+    private Carte[] cartesChances;
+    private Carte[] cartesCdC;
+    protected Case[] cases;
+
+    
+
+    public Plateau(int nombreDeJoueur, int nbCases) {
+        this.cartesChances = initCartes("/res/CartesChance.txt");
+        this.cartesCdC = initCartes("/res/CartesCdC.txt");
+        // this.cases = initCases("/res/Cases.txt");
+        }
+
+
+
+    private static Carte[] initCartes(String fichier) {
+        Carte[] cartes = new Carte[nbCartes];
+        try {
+            String[] donnees = Fichier.Lecture(fichier, nbCartes);
+            for(int i = 0; i < nbCartes; i++) {
+                String[] donneeCarte = donnees[i].split("@");
+                cartes[i] = new Carte(Integer.parseInt(donneeCarte[0]), TypeCarte.fromString(donneeCarte[1]), Integer.parseInt(donneeCarte[2]), donneeCarte[3]);
+            }
+        }
+        catch(IOException e) {
+            System.out.println("Partie.java IOException. " + e.getMessage());
+        }
+        catch(NumberFormatException e) {
+            System.out.println("Partie.java FORMAT. " + e.getMessage());
+        }
+        return cartes;
+    }
+
+    private static Case[] initCases(String fichier) {
+        Case[] cases = new Case[nbCases];
+        try {
+            String[] donnees = Fichier.Lecture(fichier, nbCases);
+            for(int i = 0; i < nbCases; i++) {
+                String[] donneeCase = donnees[i].split("@");
+                String[] loyerstr = donneeCase[5].split(",");
+                Integer[] loyer = new Integer[nbLoyers];
+                for (int j = 0; j < nbLoyers; j++) {
+                    loyer[j] = Integer.parseInt(loyerstr[j]);
+                }
+                switch (donneeCase[1]) {
+                    case "PROPRIETE":
+                        cases[i] = new Propriete(Integer.parseInt(donneeCase[0]), TypeCase.fromString(donneeCase[1]),
+                        donneeCase[2], Integer.parseInt(donneeCase[3]), Integer.parseInt(donneeCase[4]), loyer);
+                        break;
+                    case "GARE":
+                        cases[i] = new Gare(Integer.parseInt(donneeCase[0]), TypeCase.fromString(donneeCase[1]), donneeCase[2], Integer.parseInt(donneeCase[3]));
+                        break;
+                    default:
+                        System.out.println("Le type de case est inconnu");
+                }
+                
+            }
+        }
+        catch(IOException e) {
+            System.out.println("Partie.java IOException. " + e.getMessage());
+        }
+        catch(NumberFormatException e) {
+            System.out.println("Partie.java FORMAT. " + e.getMessage());
+        }
+        return cases;
+    }
+}

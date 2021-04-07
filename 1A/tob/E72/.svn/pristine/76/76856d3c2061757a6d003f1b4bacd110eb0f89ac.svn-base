@@ -1,0 +1,90 @@
+package monopoly.divers;
+
+/* Classe Swing du Menu : Jouer ou Quitter */
+import java.awt.event.ActionListener;
+
+import javax.swing.*;
+
+public class Menu extends JFrame implements ActionListener {
+
+    private static final long serialVersionUID = 1L;
+    
+    // Boutons
+    private JButton boutonJouer = new JButton(); // Jouer
+    private JButton boutonQuitter = new JButton(); // Quitter
+    private JButton boutonParametres = new JButton(); // Paramètres
+    
+
+    public Menu() {
+        super();
+        this.setTitle("Monopoly : Menu principal");
+        this.setSize(1000, 500);
+        this.setLocationRelativeTo(null);
+        this.setContentPane(panelMenu());
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+
+    private JPanel panelMenu() {
+
+        // Positions et tailles des boutons
+        boutonJouer.setBounds(350,75,300,100); // Au milieu haut
+        boutonQuitter.setBounds(350, 225, 300, 100);
+        boutonParametres.setBounds(800, 425, 150, 25); // En bas à droite
+
+        // On ajoute les listeners sur les boutons pour gérer les effets
+        boutonJouer.addActionListener(this);
+        boutonQuitter.addActionListener(this);
+        boutonParametres.addActionListener(this);
+
+        // Images sur les boutons
+        // TODO changer les simples textes en belles images.
+        boutonJouer.setText(StringPerso.creer("Jouer"));
+        boutonQuitter.setText(StringPerso.creer("Quitter"));
+        boutonParametres.setText(StringPerso.creer("Paramètres"));
+
+        // Panel de la fenêtre
+        JPanel panel = new JPanel();
+
+        // Layout du panel (null pour placer les boutons où on veut
+        panel.setLayout(null);
+
+        // Ajout des boutons au panel
+        panel.add(boutonJouer);
+        panel.add(boutonQuitter);
+        panel.add(boutonParametres);
+
+        
+        // Le panel est complet
+        return panel;
+    }
+
+    private void CreerJoueur(JTextField text, Integer numero) {
+        if (!text.getText().equals("Nom du joueur " + numero)) {
+            System.out.println(text.getText());
+            JoueurMonopoly j = new JoueurMonopoly(StringPerso.creer(text.getText()), numero, Partie.argentDepart);
+            Partie.joueurs.add(j);
+        }
+    }
+
+
+    public void actionPerformed(java.awt.event.ActionEvent e) {
+        Object bouton = e.getSource();
+        if (bouton == boutonJouer) {
+
+            CreerJoueur(Partie.parametres.joueur1, 1);
+            CreerJoueur(Partie.parametres.joueur2, 2);
+            CreerJoueur(Partie.parametres.joueur3, 3);
+            CreerJoueur(Partie.parametres.joueur4, 4);
+            Partie.plateau = new PlateauSwing(Partie.joueurs);
+            Partie.plateau.setVisible(true);
+            this.setVisible(false);
+        }
+        else if (bouton == boutonQuitter) {
+            System.exit(0);
+        }
+        else if (bouton == boutonParametres) {
+            Partie.parametres.setVisible(true);
+        }
+	}
+}

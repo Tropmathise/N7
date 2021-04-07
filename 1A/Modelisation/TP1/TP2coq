@@ -1,0 +1,38 @@
+(* Ouverture d’une section *)
+Section CalculPredicats.
+(* Définition de 2 domaines pour les prédicats *)
+Variable A B : Type.
+
+Theorem Thm_8 : forall (phi psi : A -> Prop),
+(forall x1 : A, (phi x1) /\ (psi x1))
+-> (forall x2 : A, (phi x2)) /\ (forall x3 : A, (psi x3)).
+intros phi psi H1.
+split.
+intro.
+apply (H1 x2).
+intro.
+apply (H1 x3).
+Qed.
+
+
+(* Formule du second ordre : Quantification du prédicat phi *)
+Theorem Thm_9 : forall (phi : A -> B -> Prop),
+(exists x : A, forall y : B, (phi x y))
+-> forall y : B, exists x : A, (phi x y).
+intros phi H1.
+intro y.
+destruct H1.
+exists x.
+apply H.
+Qed.
+
+
+(* Formule du second ordre : Quantification des prédicats phi et psi *)
+Theorem Thm_10 : forall (phi psi : A -> Prop),
+(exists x : A, (phi x) -> (psi x))
+-> (forall x : A, (phi x)) -> exists x : A, (psi x).
+intros phi psi H1 H2.
+destruct H1.
+exists x.
+
+End CalculPredicats 

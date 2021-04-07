@@ -1,0 +1,82 @@
+package monopoly.divers;
+
+/** Les cartes du jeu 
+ * @author Thomas
+ * @version 1.0
+*/
+
+public class Carte {
+
+    private Integer id;
+    private TypeCarte type;
+    private Integer valeur;
+    private String message;
+
+    /** constructeur de la carte avec son nom et son effet
+     * @param id son id
+     * @param type son type
+     * @param valeur sa valeur
+     * @param message son message
+     */
+    public Carte(Integer id, TypeCarte type, Integer valeur, String message) {
+        this.id = id;
+        this.type = type;
+        this.valeur = valeur;
+        this.message = message;
+    }
+
+    /** Obtenir l'id de la carte 
+     * @return id
+     */
+    public Integer getId() {
+        return this.id;
+    }
+
+    /** Obtenir le type de la carte 
+     * @return type
+     */
+    public TypeCarte getType() {
+        return this.type;
+    }
+
+    /** Obtenir la valeur de la carte 
+     * @return valeur
+     */
+    public Integer getValeur() {
+        return this.valeur;
+    }
+
+    /** Obtenir le message de la carte 
+     * @return message
+     */
+    public String getMessage() {
+        return this.message;
+    }
+
+    /** Obtenir l'effet que génère la carte sur le joueur la tirant.
+     */
+    public void getEffet(JoueurMonopoly joueur) throws ImpayableException {
+        switch (this.type) {
+            case PAYER:
+                // Ajouter #valeur argent au joueur
+            	joueur.ajouterArgent(this.valeur);
+                break;
+            case RECEVOIR:
+                //Retirer #valeur argent au joueur
+            	joueur.ajouterArgent(this.valeur);
+                break;
+            case MOUVEMENT:
+                // Bouger le joueur de #valeur cases en avant
+            	// joueur.setPosition(Partie.)
+                break;
+            case TELEPORTATION:
+                // Bouger le joueur sur la case
+            	// joueur.setPosition(plateau.cases[this.valeur]);
+                break;
+            /*case CASE:
+                break;*/
+            default:
+                System.out.println("Erreur : Type de carte inconnu (Carte.java)");
+        }
+    }
+}

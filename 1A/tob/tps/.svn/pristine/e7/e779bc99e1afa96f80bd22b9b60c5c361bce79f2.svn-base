@@ -1,0 +1,4 @@
+allumettes/Arbitre.java:2: error: package org.junit does not exist
+import static org.junit.Assert.*;
+                       ^
+1 error

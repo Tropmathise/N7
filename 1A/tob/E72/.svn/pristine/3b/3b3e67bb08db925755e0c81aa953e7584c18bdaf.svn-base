@@ -1,0 +1,49 @@
+/** Les des permettent au joueur de savoir de combien de case il va
+ * se dépacer. 
+ * @author E72
+ * @version 1.0
+ */
+
+package monopoly;
+import java.util.Random;
+
+public class Des {
+
+    /* Premier Dé */ 
+    private int de1;
+
+    /* Deuxieme Dé */
+    private int de2;
+    
+    /* Constructeur du type Des
+     * Il faut lancer les dés avec la procédure lancerDes pour avoir des dés aléatoires
+     */
+    public Des(int de1, int de2) {
+    	this.de1 = de1;
+    	this.de2 = de2;
+    }
+    
+    /**
+     * lance les dés pour qu'ils deviennent des nombres aléatoires entre 1 et 6
+     */
+    public void lancerDes() {
+    	Random alea = new Random();
+    	this.de1 = 1 + alea.nextInt(6);
+    	this.de2 = 1 + alea.nextInt(6);
+    }
+    
+    /*
+     * Renvoie le dé numéro 1
+     */
+    public int getDe1() {
+    	return this.de1;
+    }
+    
+    /*
+     * Renvoie le dé numéro 2
+     */
+    public int getDe2() {
+    	return this.de2;
+    }
+    
+}

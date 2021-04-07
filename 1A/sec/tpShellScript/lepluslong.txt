@@ -1,0 +1,19 @@
+function prof() 
+{ 
+ cd $1 
+# pwd 
+ max=0 
+ for f in * 
+ do 
+   if [ -d $f ] 
+   then 
+#     echo "descente dans "$f ; 
+     prof $f ; res=$? 
+     if [ $res -gt $max ] ; then max=$res ; fi 
+   fi 
+done 
+return `expr $max + 1 ` 
+} 
+#echo ">>"debut 
+if [ $# -eq 0 ] ; then prof . ; else prof $1  ; fi 
+echo profondeur=$?

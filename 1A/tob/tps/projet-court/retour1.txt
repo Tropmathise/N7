@@ -1,0 +1,14 @@
+Les Q# font référence aux questions posées dans le fichier LISEZ-MOI.txt.
+Les pénalités '+' sont évaluées manuellement (enseignant de TP).
+Les pénalités '+' peuvent donner lieu à des pénalités définitives en V1 (si le travail est jugé insuffisant).
+
++ C3 : Qualité du source de l'application : 1 pt
+    - structuration/commentaires (en particulier pour traitement des arguments de la ligne de commande)
+    - redondance (en particulier pour traitement des arguments de la ligne de commande)
+    - tu peux faire une fonction pour créer les joueurs à partir des args pour éviter des répétitions dans le main
+
+- C16 : Tests unitaires incomplets de la stratégie rapide
+	+ mal écrits (pas de JUnit, @Test, etc)
+
++ C20 : Méthodes non courtes : 2 pt
+

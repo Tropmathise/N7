@@ -1,0 +1,19 @@
+1. Les données sur lesquelles on a appliqué l'ACP dans le TP1 sont les 3 vecteurs de couleur RVB. Le tableau de données X correspond la matrice des données. Chaque colonne contient les données de chaque canal de couleur centrées.
+Chaque image etant de 264*400, les données sont de 3*264*400 donc de 3*105600 (=316800).
+
+2. Cf code Matlab
+
+3. Cf code Matlab + 
+
+
+
+
+8. HHt(Hx)=lbda(Hx).Memes valeurs propres et on peut avoir les vecteurs propres en multipliant soit par H soit par Ht.
+
+9. Cf code Matlab
+
+10. Il est plus utile et moins coûteux d'utiliser la méthode de la puissance itérée que la fonction eig. En effet, il est possible avec cette méthode de s'arrêter après avoir trouvé les premières plus grandes valeurs propres, seulement celles dont nous avons besoin pour réaliser l'ACP. Alors que la fonction eig va calculer toutes les valeurs propres, même celles qui ne nous seront pas utiles. 
+
+11. Il faut d'abord comparer les dimensions de A (n et p), si p>n, il est préférable d'utiliser la methode sur AAt puisqu'elle est carrée de taille n, sinon, il faudrait utilisé la methode sur AtA, carrée de taille p
+
+

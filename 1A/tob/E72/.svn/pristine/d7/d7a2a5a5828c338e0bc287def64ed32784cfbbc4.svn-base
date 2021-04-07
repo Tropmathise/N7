@@ -1,0 +1,27 @@
+package monopoly.cases;
+
+import java.util.ArrayList;
+
+import monopoly.*;
+
+public class Gare extends CaseAchetable {
+
+    private Integer[] loyer = {25, 50, 100, 200};
+
+    public Gare(Integer id, TypeCase type, String nom, Integer prix) {
+        super(id, type, nom, prix);
+    }
+
+    /** Obtenir le loyer de la case.
+     * @return loyer
+     */
+    public Integer getLoyer(ArrayList<JoueurMonopoly> listeJoueurs) {
+        for (int i = 0; i < listeJoueurs.size(); i++) {
+            JoueurMonopoly joueur = listeJoueurs.get(i);
+            if (joueur.estProprietaireDe(this)) {
+                return this.loyer[joueur.getNbGares() - 1];
+            }
+        }
+        return 0;
+    }
+}

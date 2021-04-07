@@ -1,0 +1,29 @@
+#!/bin/sh
+# lister a toujours 2 paramÃ¨tres :
+# $1 indique l'option de listage -f (tout) ou -d (rÃ©pertoires seuls)
+# $2 indique le prÃ©fixe de dÃ©calage
+
+lister(){
+for f in *
+do
+  [ $1 = -f -o \(  $1 = -d -a -d "$f" \) ] && echo $2$f
+  if [ -d "$f" ]
+  then cd "$f" ; lister $1 $2... ; cd ..
+  fi
+done
+}
+
+# paramÃ¨tres par dÃ©faut
+#set -x
+opt=-f
+rac=.
+# analyse des paramÃ¨tres
+# principe : tester un Ã  un et s'il en reste afficher l'usage
+[ "$1" = -d ] && opt=-d && shift
+[ "$1" ] && [ -d "$1" ] && rac=$1 && shift
+[ "$1" ] && echo "usage : arbre [-d] [<nom de repertoire>]" && exit 1
+# aller Ã  la racine
+cd $rac
+# appeler lister sur le rÃ©pertoire racine
+echo $opt
+lister $opt ""

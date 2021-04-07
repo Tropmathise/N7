@@ -1,0 +1,21 @@
+package monopoly.cases;
+import monopoly.*;
+
+/** Case compagnie
+ * @author Theo
+ */
+
+public class Compagnie extends Case {
+
+    private Integer montant = 150;
+
+    public Compagnie(Integer id, String nom) {
+        super(id,TypeCase.DEPART,nom);
+    }
+
+    public Integer getMontant() {
+        return this.montant;
+    }
+
+
+}

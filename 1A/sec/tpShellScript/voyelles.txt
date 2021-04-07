@@ -1,0 +1,13 @@
+#!/bin/sh
+
+if [ $# -eq 0 ]
+then echo "Usage: $0 <list of words>"; exit
+fi
+
+mot=`echo $* | tr '[A-Z]' '[a-z]'`
+for v in a e i o u y
+do if [ `expr "$mot" : ".*$v"` -ne 0 ]
+   then echo $v "\c"
+   fi
+done
+echo

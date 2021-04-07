@@ -1,0 +1,33 @@
+package allumettes;
+import java.util.Scanner;
+
+/** La strategie huamine consiste à faire jouer un humain.
+  * @author Thomas SADURNI
+  * @version 1.0 
+  */
+public class StrategieHumaine implements Strategie{
+
+    /** Nombre d'allumettes demandé */
+    private Scanner scanner;
+
+    public StrategieHumaine(){
+    }
+
+    @Override
+    public int getPrise(Jeu jeu) {
+        assert(jeu != null);
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Combien voulez-vous retirer d'allumettes?");
+        try {
+            int nb = scanner.nextInt();
+        }
+        catch {
+            
+        }
+
+
+
+
+    }
+
+}

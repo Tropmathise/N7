@@ -1,0 +1,10 @@
+/** La case sur lequel un joueur tombe
+ * @author Thomas SADURNI
+ * @version 1.0
+ */
+
+public abstract class Case {
+
+    
+
+}

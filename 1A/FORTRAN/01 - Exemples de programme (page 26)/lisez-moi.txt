@@ -1,0 +1,21 @@
+Compilation d'un programme fortran (1 seul fichier)
+
+F77
+gfortran -o nom_executable code_source.f
+
+F90
+gfortran -o nom_executable code_source.f90
+
+par exemple pour les codes de ce répertoire
+
+le nombre d'or en F77
+gfortran -o nombre_dor nombre_dor.f
+
+le nombre d'or en F90
+gfortran -o nombre_dor nombre_dor.f90
+
+le tri bulle simple
+gfortran -o tri_bulle_simple tri_bulle_simple.f90
+
+le tri bulle oprimisé
+gfortran -o  tri_bulle tri_bulle.f90

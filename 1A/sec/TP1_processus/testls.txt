@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <sys/wait.h> /* wait */
+
+int main(int argc, char *argv[]) {
+    pid_t pidFils, IdFils;
+    char* nomFichier;
+    int codeTerme;
+
+    if (argc > 0) {
+    nomFichier = argv[1];
+    }
+
+    pidFils=fork();
+
+    if(pidFils < 0) { // Erreur
+        exit(1); 
+    }
+    else if(pidFils == 0)
+    {
+        execlp("ls", "ls", "-l", nomFichier, NULL);
+    }
+    else
+    {
+	IdFils=wait(&codeTerme);
+    }
+    exit(EXIT_SUCCESS);
+}

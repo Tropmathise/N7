@@ -1,0 +1,6 @@
+Début de la vérification...
+[ERROR] Cercle.java:29:9: Il manque une espace après 'assert'. [WhitespaceAround]
+[ERROR] Cercle.java:41:9: Il manque une espace après 'assert'. [WhitespaceAround]
+[ERROR] Cercle.java:42:9: Il manque une espace après 'assert'. [WhitespaceAround]
+[ERROR] Cercle.java:154:9: Il manque une espace après 'assert'. [WhitespaceAround]
+Vérification terminée.

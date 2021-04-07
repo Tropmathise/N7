@@ -1,0 +1,10 @@
+// write your program here
+
+        LD  =  0xB0000000
+        SW  =  0x90000000
+        set LD, %r1
+        set SW, %r2
+loop :  ld [%r2 + %r0], %r3
+        umulcc %r3, %r3, %r3
+        st %r3, [%r1 + %r0]
+        ba loop

@@ -1,0 +1,18 @@
+//Listes des cartes chances :
+//format: "id@TYPE@valeur@message"
+0@PAYER@40@Vous êtes imposé pour les réparations de voirie en raison de : 40€ par maison et 115€ par hôtel. 
+1@RECEVOIR@150@Votre immeuble et votre prêt rapporte. Vous devez toucher 150€.
+2@RECEVOIR@100@Vous avez gagné le prix des mots croisés. Recevez 100€.
+3@PAYER@150@Payez pour frais de scolarité 150€.
+4@RECEVOIR@50@La Banque vous verse un dividende de 50€.
+5@MOUVEMENT@11@Avancez au boulevard de la Vilette. Si vous passez par la case Départ, recevez 200€.
+6@PAYER@20@Amende pour ivresse : 20€.
+7@RECEVOIR@50@Cadeau de votre banquier.
+8@TELEPORTATION@10@Allez en prison. Avancez tout droit en prison. Ne passez pas par la case Départ. Ne recevez pas 200€
+9@MOUVEMENT@-3@Reculez de trois cases.
+10@PAYER@15@Amende pour excès de vitesse : 15€.
+11@TELEPORTATION@24@Rendez-vous à l'Avenue Henri-Martin. Si vous passez par la case Départ, recevez 200€.
+12@TELEPORTATION@15@Allez à la gare de Lyon. Si vous passez par la case Départ, recevez 200€.
+13@PAYER@25@Faites des réparations dans votre maison. Versez 25€.
+14@TELEPORTATION@39@Rendez-vous Rue de la Paix.
+15@TELEPORTATION@0@Avancez jusqu'à la case Départ.

@@ -1,0 +1,14 @@
+Début de la vérification...
+[ERROR] Cercle.java:19:8: Balise Javadoc @param inutilisée pour 'C'. [JavadocMethod]
+[ERROR] Cercle.java:20:8: Balise Javadoc @param inutilisée pour 'r'. [JavadocMethod]
+[ERROR] Cercle.java:22:25: Balise Javadoc @param manquante pour 'vC'. [JavadocMethod]
+[ERROR] Cercle.java:22:36: Balise Javadoc @param manquante pour 'vr'. [JavadocMethod]
+[ERROR] Cercle.java:83:8: Balise Javadoc @param inutilisée pour 'point'. [JavadocMethod]
+[ERROR] Cercle.java:86:35: Balise Javadoc @param manquante pour 'A'. [JavadocMethod]
+[ERROR] Cercle.java:127:12: Balise Javadoc @param inutilisée pour 'Point'. [JavadocMethod]
+[ERROR] Cercle.java:128:12: Balise Javadoc @param inutilisée pour 'Point'. [JavadocMethod]
+[ERROR] Cercle.java:130: Balise Javadoc @return manquante. [JavadocMethod]
+[ERROR] Cercle.java:130:48: Balise Javadoc @param manquante pour 'P1'. [JavadocMethod]
+[ERROR] Cercle.java:130:58: Balise Javadoc @param manquante pour 'P2'. [JavadocMethod]
+[ERROR] Cercle.java:138: Balise Javadoc @return manquante. [JavadocMethod]
+Vérification terminée.

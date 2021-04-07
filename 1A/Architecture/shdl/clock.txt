@@ -1,0 +1,38 @@
+module clock2(rst, h: s[1..0])
+s[0] := /s[0] on /h, reset when rst
+s[1] := /s[1] on /s[0], reset when rst
+end module
+
+module clock4(rst, h : s[3:0])
+   clock2(rst, h : s[1:0])
+   clock2(rst, s[1] : s[3:2])
+end module
+
+module clock28(rst, h: s[27..0])
+clock4(rst,h : s[3:0])
+clock4(rst,s[3] : s[7:4])
+clock4(rst,s[7] : s[11:8])
+clock4(rst,s[11] : s[15:12])
+clock4(rst,s[15] : s[19:16])
+clock4(rst,s[19] : s[23:20])
+clock4(rst,s[23] : s[27:24])
+end module
+
+module clock4(rst, clk : s[3..0])
+
+	ts = 1 ;
+	s[3] := /ts*s[3] + ts*/s[3] ;
+	s[2] := /ts*s[2] + ts*/s[2] ;
+	s[1] := /ts*s[1] + ts*/s[1] ;
+	s[0] := /ts*s[0] + ts*/s[0] ;
+	
+	s[3].clk = /s[2] ;
+	s[3].rst = rst ;
+	s[2].clk = /s[1] ;
+	s[2].rst = rst ;
+	s[1].clk = /s[0] ;
+	s[1].rst = rst ;
+	s[0].clk = /clk ;
+	s[0].rst = rst ;
+		
+end module

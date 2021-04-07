@@ -1,0 +1,87 @@
+Date de l'évaluation : samedi 25 janvier 2020, 17:05:19 (UTC+0100)
+
+Compilation de Cercle.java : OK.
+
+Types d'erreurs checkstyle : 21	(voir evaluation1/Cercle.checkstyle)
+
+Résultat de recherche de similitudes sur Cercle.java dans evaluation1/Cercle.sim
+
+JavaDoc automatique de Cercle : 	(voir evaluation1/Cercle.javadoc)
+
+Un constructeur devrait appeler l'autre.
+
+Test SujetCercleTest : Tests run: 14,  Failures: 1	(voir evaluation1/SujetCercleTest.log)
+    1) testerE18(SujetCercleTest)
+        AssertionError: E18 : erreur si translation du centre (x) expected:<1.0> but was:<11.0>
+
+Test SujetCercleTest : Tests run: 14,  Failures: 1	(voir evaluation1/SujetCercleTest.log)
+    1) testerE18(SujetCercleTest)
+        AssertionError: E18 : erreur si translation du centre (x) expected:<1.0> but was:<11.0>
+
+Test RobustesseCercleTest : Tests run: 20,  Failures: 19	(voir evaluation1/RobustesseCercleTest.log)
+    1) testerE10a(RobustesseCercleTest)
+        AssertionError: Expected exception: AssertionError
+    2) testerE11a(RobustesseCercleTest)
+        AssertionError: Expected exception: AssertionError
+    3) testerE11b(RobustesseCercleTest)
+        AssertionError: Expected exception: AssertionError
+    4) testerE11c(RobustesseCercleTest)
+        AssertionError: Expected exception: AssertionError
+    5) testerE12a(RobustesseCercleTest)
+        Exception: Unexpected exception, expected<AssertionError> but was<NullPointerException>
+    6) testerE12b(RobustesseCercleTest)
+        Exception: Unexpected exception, expected<AssertionError> but was<NullPointerException>
+    7) testerE12c(RobustesseCercleTest)
+        Exception: Unexpected exception, expected<AssertionError> but was<NullPointerException>
+    8) testerE13a(RobustesseCercleTest)
+        Exception: Unexpected exception, expected<AssertionError> but was<NullPointerException>
+    9) testerE13b(RobustesseCercleTest)
+        Exception: Unexpected exception, expected<AssertionError> but was<NullPointerException>
+    10) testerE13c(RobustesseCercleTest)
+        Exception: Unexpected exception, expected<AssertionError> but was<NullPointerException>
+    11) testerE13d(RobustesseCercleTest)
+        Exception: Unexpected exception, expected<AssertionError> but was<NullPointerException>
+    12) testerE14a(RobustesseCercleTest)
+        Exception: Unexpected exception, expected<AssertionError> but was<NoSuchMethodError>
+    13) testerE14b(RobustesseCercleTest)
+        Exception: Unexpected exception, expected<AssertionError> but was<NoSuchMethodError>
+    14) testerE14c(RobustesseCercleTest)
+        Exception: Unexpected exception, expected<AssertionError> but was<NoSuchMethodError>
+    15) testerE16a(RobustesseCercleTest)
+        AssertionError: Expected exception: AssertionError
+    16) testerE16b(RobustesseCercleTest)
+        AssertionError: Expected exception: AssertionError
+    17) testerE17a(RobustesseCercleTest)
+        AssertionError: Expected exception: AssertionError
+    18) testerE17b(RobustesseCercleTest)
+        AssertionError: Expected exception: AssertionError
+    19) testerE5a(RobustesseCercleTest)
+        Exception: Unexpected exception, expected<AssertionError> but was<NullPointerException>
+
+Test FormeCercleTest : Tests run: 12,  Failures: 6	(voir evaluation1/FormeCercleTest.log)
+    1) testerC12(FormeCercleTest)
+        AssertionError: PI : doit être une constante de *classe* !
+    2) testerE6(FormeCercleTest)
+        NoClassDefFoundError: Mesurable2D
+    3) testerNombreAttributs(FormeCercleTest)
+        AssertionError: Trop d'attributs d'instance : 4 au lieu de 3 !
+    4) testAttributsNomsPeuSignificatifs(FormeCercleTest)
+        AssertionError: C3: Nom pas assez significatif pour l'attribut C
+    5) testerE6bis(FormeCercleTest)
+        AssertionError: Cercle doit directement réaliser Mesurable2D !
+    6) testAttributsNomsAssezLongs(FormeCercleTest)
+        AssertionError: C3: Nom trop court pour l'attribut C
+
+Test Forme2CercleTest : Tests run: 9,  Failures: 3	(voir evaluation1/Forme2CercleTest.log)
+    1) testConstructeurPointPointSetX(Forme2CercleTest)
+        NullPointerException
+    2) testConstructeurPointPointDistance(Forme2CercleTest)
+        NullPointerException
+    3) testCreerCercleDistance(Forme2CercleTest)
+        NoSuchMethodError: 'Cercle Cercle.creerCercle(Point, Point)'
+
+
+ComplementsCercleTest : non modifiée (ok)
+
+Pas de mise à jour de CercleTest.java sur le SVN !
+CercleTest.java ne compile pas !!!

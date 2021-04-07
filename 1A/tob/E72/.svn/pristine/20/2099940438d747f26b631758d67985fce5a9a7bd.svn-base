@@ -1,0 +1,155 @@
+package monopoly;
+
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class PlateauSwing extends JFrame implements MouseListener {
+
+    private static final long serialVersionUID = 1L;
+
+    public static final Integer tailleCase = 40;
+
+    // Infos sur une case
+    private JLabel nom = initNom();
+    private JLabel type = initType();
+    // JLabel prix = new JLabel();
+
+    private CaseSwing[] cases = initCases();
+
+    public PlateauSwing() {
+        super();
+        this.setVisible(false);
+        this.setTitle("Monopoly : Plateau");
+        this.setSize(1000, 500);
+        this.setLocationRelativeTo(null);
+        this.setContentPane(panelPlateau());
+    }
+
+    private JLabel initNom() {
+        JLabel nom = new JLabel();
+        nom.setBounds(PlateauSwing.tailleCase + 10, PlateauSwing.tailleCase + 10, 9 * PlateauSwing.tailleCase - 20, 25);
+        return nom;
+    }
+
+    private JLabel initType() {
+        JLabel type = new JLabel();
+        type.setBounds(PlateauSwing.tailleCase + 10, PlateauSwing.tailleCase + 35, 9 * PlateauSwing.tailleCase - 20, 25);
+        return type;
+    }
+
+    private void initInfos(Case c) {
+        nom.setVisible(false);
+        type.setVisible(false);
+        nom.setText("Nom de la case : " + c.getNom());
+        type.setText("Type de la case : " + c.getType().toString());
+    }
+
+    private void affichageInfos(Boolean afficher) {
+        nom.setVisible(afficher);
+        type.setVisible(afficher);
+    } 
+
+    private JPanel panelPlateau() {
+
+        // Panel de la fenetre
+        JPanel panel = new JPanel();
+
+        // Layout du panel (null pour placer les boutons où on veut
+        panel.setLayout(null);
+
+        for (int i = 0; i < Plateau.nbCases; i++) {
+
+            // On ajoute le listener sur la case pour gérer les effets
+            cases[i].addMouseListener(this);
+
+            // Position et taille de la case
+            cases[i].setBounds(idToX(i), idToY(i), PlateauSwing.tailleCase, PlateauSwing.tailleCase);
+
+            // Images sur la case
+            // TODO changer les simples textes en belles images.
+
+            // Ajout de la case au panel
+            panel.add(cases[i]);
+
+        }
+
+        // On ajoute les infos des cartes
+        panel.add(nom);
+        panel.add(type);
+
+        // Le panel est complet
+        return panel;
+    }
+
+    private CaseSwing[] initCases() {
+        CaseSwing[] tab = new CaseSwing[Plateau.nbCases];
+        for (int i = 0; i < Plateau.nbCases; i++) {
+            tab[i] = new CaseSwing(Plateau.getCases()[i]);
+        }
+        return tab;
+    }
+
+    private Integer idToX(Integer id) {
+        assert (id >= 0);
+        assert (id <= 39);
+        if (id <= 9) {
+            return (10 - id) * PlateauSwing.tailleCase;
+        } else if (id >= 10 && id <= 20) {
+            return 0;
+        } else if (id >= 21 && id <= 29) {
+            return (id % 10) * PlateauSwing.tailleCase;
+        } else {
+            return 10 * PlateauSwing.tailleCase;
+        }
+    }
+
+    private Integer idToY(Integer id) {
+        assert (id >= 0);
+        assert (id <= 39);
+        if (id <= 10) {
+            return 10 * PlateauSwing.tailleCase;
+        } else if (id >= 11 && id <= 19) {
+            return (20 - id) * PlateauSwing.tailleCase;
+        } else if (id >= 20 && id <= 29) {
+            return 0;
+        } else {
+            return (id % 10) * PlateauSwing.tailleCase;
+        }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        CaseSwing source = (CaseSwing) e.getSource();
+        System.out.println("Entré dans " + source.getId());
+        initInfos(source.getCase());
+        affichageInfos(true);
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        CaseSwing source = (CaseSwing) e.getSource();
+        System.out.println("Sortie de " + source.getId());
+        initInfos(source.getCase());
+        affichageInfos(false);
+    }
+}

@@ -1,0 +1,8 @@
+Début de la vérification...
+[ERROR] Jeu.java:17: La ligne excède 90 caractères (trouvé 92). [LineLength]
+[ERROR] Arbitre.java:2: L'utilisation des import.* est prohibé - java.util.*. [AvoidStarImport]
+[ERROR] Arbitre.java:22:23: La variable 'confiant' devrait être privée et avoir des accesseurs. [VisibilityModifier]
+[ERROR] Partie.java:78:41: '13' devrait être défini comme une constante. [MagicNumber]
+[ERROR] StrategieHumaine.java:23:18: '111' devrait être défini comme une constante. [MagicNumber]
+[ERROR] StrategieHumaine.java:25:22: '111' devrait être défini comme une constante. [MagicNumber]
+Vérification terminée.

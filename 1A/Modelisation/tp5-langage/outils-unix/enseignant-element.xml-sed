@@ -1,0 +1,8 @@
+<enseignant>
+     <identite>
+          <prenom>Marc</prenom>
+          <nom>Pantel</nom>
+     </identite>
+     <discipline>Traduction des langages</discipline>
+     <discipline>Sémantique formelle</discipline>
+</enseignant>

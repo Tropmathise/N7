@@ -1,0 +1,25 @@
+module ucmp1(a,b, sup, eq)
+sup=a*/b
+eq=a*b + /a*/b
+end module
+
+module ucmp2(a[1..0],b[1..0],sup,eq)
+ucmp1(a[0],b[0],supun,equn)
+ucmp1(a[1],b[1],supdeux,eqdeux)
+sup=supdeux + eqdeux*supun
+eq=equn*eqdeux
+end module
+
+module ucmp4(a[3..0],b[3..0],sup,eq)
+ucmp2(a[1..0],b[1..0],supun,equn)
+ucmp2(a[3..2],b[3..2],supdeux,eqdeux)
+sup=supdeux + eqdeux*supun
+eq=equn*eqdeux
+end module
+
+module ucmp8(a[7..0],b[7..0],sup,eq)
+ucmp4(a[3..0],b[3..0],supun,equn)
+ucmp4(a[7..4],b[7..4],supdeux,eqdeux)
+sup=supdeux + eqdeux*supun
+eq=equn*eqdeux
+end module

@@ -1,0 +1,1 @@
+ps l | grep -v grep | grep ./pf > .tempres197350

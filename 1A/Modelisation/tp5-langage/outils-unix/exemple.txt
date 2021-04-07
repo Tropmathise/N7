@@ -1,0 +1,23 @@
+Suite de chiffres : 0123456789
+Entier naturel : 0
+Entier naturel : 123
+Entier relatif : +123
+Entier relatif : -123
+Décimal : 0.123
+Décimal : -0.123
+Décimal : 0.123e10
+Décimal : 0.123E10
+Décimal : -0.123e10
+Décimal : -0.123E10
+Décimal : 0.123e-10
+Décimal : 0.123E-10
+Décimal : -0.123e-10
+Décimal : -0.123e-10
+Rationnel : 1/2
+Rationnel : -1/2
+Complexe : 1/2i
+Complexe : -1/2i
+Complexe : 2/3+1/2i
+Complexe : 2/3+1/2i
+Complexe : -2/3-1/2i
+Complexe : -2/3-1/2i

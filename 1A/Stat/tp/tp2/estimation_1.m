@@ -1,0 +1,10 @@
+function [a_estime,b_estime] = estimation_1(x_donnees_bruitees,y_donnees_bruitees,psi_tests)
+x_moyenne=mean(x_donnees_bruitees);
+y_moyenne=mean(y_donnees_bruitees);
+x_new=x_donnees_bruitees-x_moyenne;
+y_new=y_donnees_bruitees-y_moyenne;
+diff=(y_new-tan(psi_tests).*x_new).^2;
+somme=sum(diff');
+[m,ind]=min(somme);
+a_estime=tan(psi_tests(ind));
+b_estime=mean(y_donnees_bruitees)- a_estime*mean(x_donnees_bruitees);

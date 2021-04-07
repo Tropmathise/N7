@@ -1,0 +1,905 @@
+%!PS-Adobe-3.0
+%%Creator: graphviz version 2.40.1 (20161225.0304)
+%%Title: G
+%%Pages: (atend)
+%%BoundingBox: (atend)
+%%EndComments
+save
+%%BeginProlog
+/DotDict 200 dict def
+DotDict begin
+
+/setupLatin1 {
+mark
+/EncodingVector 256 array def
+ EncodingVector 0
+
+ISOLatin1Encoding 0 255 getinterval putinterval
+EncodingVector 45 /hyphen put
+
+% Set up ISO Latin 1 character encoding
+/starnetISO {
+        dup dup findfont dup length dict begin
+        { 1 index /FID ne { def }{ pop pop } ifelse
+        } forall
+        /Encoding EncodingVector def
+        currentdict end definefont
+} def
+/Times-Roman starnetISO def
+/Times-Italic starnetISO def
+/Times-Bold starnetISO def
+/Times-BoldItalic starnetISO def
+/Helvetica starnetISO def
+/Helvetica-Oblique starnetISO def
+/Helvetica-Bold starnetISO def
+/Helvetica-BoldOblique starnetISO def
+/Courier starnetISO def
+/Courier-Oblique starnetISO def
+/Courier-Bold starnetISO def
+/Courier-BoldOblique starnetISO def
+cleartomark
+} bind def
+
+%%BeginResource: procset graphviz 0 0
+/coord-font-family /Times-Roman def
+/default-font-family /Times-Roman def
+/coordfont coord-font-family findfont 8 scalefont def
+
+/InvScaleFactor 1.0 def
+/set_scale {
+       dup 1 exch div /InvScaleFactor exch def
+       scale
+} bind def
+
+% styles
+/solid { [] 0 setdash } bind def
+/dashed { [9 InvScaleFactor mul dup ] 0 setdash } bind def
+/dotted { [1 InvScaleFactor mul 6 InvScaleFactor mul] 0 setdash } bind def
+/invis {/fill {newpath} def /stroke {newpath} def /show {pop newpath} def} bind def
+/bold { 2 setlinewidth } bind def
+/filled { } bind def
+/unfilled { } bind def
+/rounded { } bind def
+/diagonals { } bind def
+/tapered { } bind def
+
+% hooks for setting color 
+/nodecolor { sethsbcolor } bind def
+/edgecolor { sethsbcolor } bind def
+/graphcolor { sethsbcolor } bind def
+/nopcolor {pop pop pop} bind def
+
+/beginpage {	% i j npages
+	/npages exch def
+	/j exch def
+	/i exch def
+	/str 10 string def
+	npages 1 gt {
+		gsave
+			coordfont setfont
+			0 0 moveto
+			(\() show i str cvs show (,) show j str cvs show (\)) show
+		grestore
+	} if
+} bind def
+
+/set_font {
+	findfont exch
+	scalefont setfont
+} def
+
+% draw text fitted to its expected width
+/alignedtext {			% width text
+	/text exch def
+	/width exch def
+	gsave
+		width 0 gt {
+			[] 0 setdash
+			text stringwidth pop width exch sub text length div 0 text ashow
+		} if
+	grestore
+} def
+
+/boxprim {				% xcorner ycorner xsize ysize
+		4 2 roll
+		moveto
+		2 copy
+		exch 0 rlineto
+		0 exch rlineto
+		pop neg 0 rlineto
+		closepath
+} bind def
+
+/ellipse_path {
+	/ry exch def
+	/rx exch def
+	/y exch def
+	/x exch def
+	matrix currentmatrix
+	newpath
+	x y translate
+	rx ry scale
+	0 0 1 0 360 arc
+	setmatrix
+} bind def
+
+/endpage { showpage } bind def
+/showpage { } def
+
+/layercolorseq
+	[	% layer color sequence - darkest to lightest
+		[0 0 0]
+		[.2 .8 .8]
+		[.4 .8 .8]
+		[.6 .8 .8]
+		[.8 .8 .8]
+	]
+def
+
+/layerlen layercolorseq length def
+
+/setlayer {/maxlayer exch def /curlayer exch def
+	layercolorseq curlayer 1 sub layerlen mod get
+	aload pop sethsbcolor
+	/nodecolor {nopcolor} def
+	/edgecolor {nopcolor} def
+	/graphcolor {nopcolor} def
+} bind def
+
+/onlayer { curlayer ne {invis} if } def
+
+/onlayers {
+	/myupper exch def
+	/mylower exch def
+	curlayer mylower lt
+	curlayer myupper gt
+	or
+	{invis} if
+} def
+
+/curlayer 0 def
+
+%%EndResource
+%%EndProlog
+%%BeginSetup
+14 default-font-family set_font
+% /arrowlength 10 def
+% /arrowwidth 5 def
+
+% make sure pdfmark is harmless for PS-interpreters other than Distiller
+/pdfmark where {pop} {userdict /pdfmark /cleartomark load put} ifelse
+% make '<<' and '>>' safe on PS Level 1 devices
+/languagelevel where {pop languagelevel}{1} ifelse
+2 lt {
+    userdict (<<) cvn ([) cvn load put
+    userdict (>>) cvn ([) cvn load put
+} if
+
+%%EndSetup
+setupLatin1
+%%Page: 1 1
+%%PageBoundingBox: 36 36 770 842
+%%PageOrientation: Portrait
+0 0 1 beginpage
+gsave
+36 36 734 806 boxprim clip newpath
+1 1 set_scale 0 rotate 40 40 translate
+% c0
+gsave
+[ /Rect [ 233 115 463 193 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI (null) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+solid
+0 0 0 nodecolor
+newpath 241 157 moveto
+241 189 lineto
+455 189 lineto
+455 157 lineto
+closepath stroke
+0 0 0 nodecolor
+10 /Helvetica set_font
+320.5 177 moveto 55 ( «interface» ) alignedtext
+0 0 0 nodecolor
+10 /Helvetica set_font
+318 164 moveto 60 ( Observateur ) alignedtext
+1 setlinewidth
+solid
+0 0 0 nodecolor
+newpath 241 138 moveto
+241 157 lineto
+455 157 lineto
+455 138 lineto
+closepath stroke
+0 0 0 nodecolor
+10 /Helvetica set_font
+245 145 moveto 7 (  ) alignedtext
+1 setlinewidth
+solid
+0 0 0 nodecolor
+newpath 241 119 moveto
+241 138 lineto
+455 138 lineto
+455 119 lineto
+closepath stroke
+0 0 0 nodecolor
+10 /Helvetica-Oblique set_font
+245 126 moveto 206 ( + maj\(source : Point, dx : double, dy : double\) ) alignedtext
+grestore
+% c2
+gsave
+[ /Rect [ 0 0 230 78 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI (null) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+solid
+0 0 0 nodecolor
+newpath 8 55 moveto
+8 74 lineto
+222 74 lineto
+222 55 lineto
+closepath stroke
+0 0 0 nodecolor
+10 /Helvetica set_font
+84 62 moveto 62 ( MajLongueur ) alignedtext
+1 setlinewidth
+solid
+0 0 0 nodecolor
+newpath 8 36 moveto
+8 55 lineto
+222 55 lineto
+222 36 lineto
+closepath stroke
+0 0 0 nodecolor
+10 /Helvetica set_font
+12 43 moveto 7 (  ) alignedtext
+1 setlinewidth
+solid
+0 0 0 nodecolor
+newpath 8 4 moveto
+8 36 lineto
+222 36 lineto
+222 4 lineto
+closepath stroke
+0 0 0 nodecolor
+10 /Helvetica set_font
+12 24 moveto 74 ( - MajLongueur\(\) ) alignedtext
+0 0 0 nodecolor
+10 /Helvetica set_font
+12 11 moveto 206 ( + maj\(source : Point, dx : double, dy : double\) ) alignedtext
+grestore
+% c0->c2
+gsave
+1 setlinewidth
+dashed
+0 0 0 edgecolor
+newpath 267.5866 114.311 moveto
+241.1102 101.2432 211.8747 86.8137 186.139 74.1115 curveto
+stroke
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 266.3099 117.5839 moveto
+276.8263 118.8713 lineto
+269.4081 111.3068 lineto
+closepath stroke
+grestore
+% c5
+gsave
+[ /Rect [ 248 0 478 78 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI (null) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+solid
+0 0 0 nodecolor
+newpath 256 55 moveto
+256 74 lineto
+470 74 lineto
+470 55 lineto
+closepath stroke
+0 0 0 nodecolor
+10 /Helvetica set_font
+338 62 moveto 50 ( Translater ) alignedtext
+1 setlinewidth
+solid
+0 0 0 nodecolor
+newpath 256 36 moveto
+256 55 lineto
+470 55 lineto
+470 36 lineto
+closepath stroke
+0 0 0 nodecolor
+10 /Helvetica set_font
+260 43 moveto 7 (  ) alignedtext
+1 setlinewidth
+solid
+0 0 0 nodecolor
+newpath 256 4 moveto
+256 36 lineto
+470 36 lineto
+470 4 lineto
+closepath stroke
+0 0 0 nodecolor
+10 /Helvetica set_font
+260 24 moveto 62 ( - Translater\(\) ) alignedtext
+0 0 0 nodecolor
+10 /Helvetica set_font
+260 11 moveto 206 ( + maj\(source : Point, dx : double, dy : double\) ) alignedtext
+grestore
+% c0->c5
+gsave
+1 setlinewidth
+dashed
+0 0 0 edgecolor
+newpath 353.9172 108.635 moveto
+355.4055 97.2246 356.9809 85.1462 358.3944 74.3098 curveto
+stroke
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 350.4049 108.5026 moveto
+352.582 118.8713 lineto
+357.3461 109.408 lineto
+closepath stroke
+grestore
+% c6
+gsave
+[ /Rect [ 496 0 726 78 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI (null) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+solid
+0 0 0 nodecolor
+newpath 504 55 moveto
+504 74 lineto
+718 74 lineto
+718 55 lineto
+closepath stroke
+0 0 0 nodecolor
+10 /Helvetica set_font
+568.5 62 moveto 85 ( Redimmensionner ) alignedtext
+1 setlinewidth
+solid
+0 0 0 nodecolor
+newpath 504 36 moveto
+504 55 lineto
+718 55 lineto
+718 36 lineto
+closepath stroke
+0 0 0 nodecolor
+10 /Helvetica set_font
+508 43 moveto 7 (  ) alignedtext
+1 setlinewidth
+solid
+0 0 0 nodecolor
+newpath 504 4 moveto
+504 36 lineto
+718 36 lineto
+718 4 lineto
+closepath stroke
+0 0 0 nodecolor
+10 /Helvetica set_font
+508 24 moveto 97 ( - Redimmensionner\(\) ) alignedtext
+0 0 0 nodecolor
+10 /Helvetica set_font
+508 11 moveto 206 ( + maj\(source : Point, dx : double, dy : double\) ) alignedtext
+grestore
+% c0->c6
+gsave
+1 setlinewidth
+dashed
+0 0 0 edgecolor
+newpath 437.5942 114.8238 moveto
+467.7872 101.6216 501.2716 86.9801 530.7014 74.1115 curveto
+stroke
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 436.0979 111.6581 moveto
+428.3377 118.8713 lineto
+438.9024 118.0717 lineto
+closepath stroke
+grestore
+% c1
+gsave
+[ /Rect [ 113.5 616 304.5 772 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI (null) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+solid
+0 0 0 nodecolor
+newpath 122 749 moveto
+122 768 lineto
+297 768 lineto
+297 749 lineto
+closepath stroke
+0 0 0 nodecolor
+10 /Helvetica set_font
+186.5 756 moveto 46 ( Segment ) alignedtext
+1 setlinewidth
+solid
+0 0 0 nodecolor
+newpath 122 704 moveto
+122 749 lineto
+297 749 lineto
+297 704 lineto
+closepath stroke
+0 0 0 nodecolor
+10 /Helvetica set_font
+126 737 moveto 90 ( - extremite1 : Point ) alignedtext
+0 0 0 nodecolor
+10 /Helvetica set_font
+126 724 moveto 90 ( - extremite2 : Point ) alignedtext
+0 0 0 nodecolor
+10 /Helvetica set_font
+126 711 moveto 87 ( - longueur : double ) alignedtext
+1 setlinewidth
+solid
+0 0 0 nodecolor
+newpath 122 620 moveto
+122 704 lineto
+297 704 lineto
+297 620 lineto
+closepath stroke
+0 0 0 nodecolor
+10 /Helvetica set_font
+126 692 moveto 167 ( + Segment\(ext1 : Point, ext2 : Point\) ) alignedtext
+0 0 0 nodecolor
+10 /Helvetica set_font
+126 679 moveto 112 ( + getLongueur\(\) : double ) alignedtext
+0 0 0 nodecolor
+10 /Helvetica set_font
+126 666 moveto 164 ( + translater\(dx : double, dy : double\) ) alignedtext
+0 0 0 nodecolor
+10 /Helvetica set_font
+126 653 moveto 54 ( + afficher\(\) ) alignedtext
+0 0 0 nodecolor
+10 /Helvetica set_font
+126 640 moveto 74 ( - majLongueur\(\) ) alignedtext
+0 0 0 nodecolor
+10 /Helvetica set_font
+126 627 moveto 54 ( + detruire\(\) ) alignedtext
+grestore
+% c1->c2
+gsave
+1 setlinewidth
+dashed
+0 0 0 edgecolor
+newpath 174.1968 619.7914 moveto
+157.0484 576.619 140 520.5975 140 468.5 curveto
+140 468.5 140 468.5 140 154 curveto
+140 130.453 134.9333 104.8002 129.3618 83.7099 curveto
+stroke
+0 0 0 edgecolor
+newpath 126.6948 74.0594 moveto
+133.696 82.4994 lineto
+128.0267 78.8787 lineto
+129.3586 83.6981 lineto
+129.3586 83.6981 lineto
+129.3586 83.6981 lineto
+128.0267 78.8787 lineto
+125.0212 84.8968 lineto
+126.6948 74.0594 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 126.6948 74.0594 moveto
+133.696 82.4994 lineto
+128.0267 78.8787 lineto
+129.3586 83.6981 lineto
+129.3586 83.6981 lineto
+129.3586 83.6981 lineto
+128.0267 78.8787 lineto
+125.0212 84.8968 lineto
+126.6948 74.0594 lineto
+closepath stroke
+0 0 0 edgecolor
+10 /Helvetica set_font
+140 286 moveto 56 («instantiate») alignedtext
+grestore
+% c3
+gsave
+[ /Rect [ 248 384 436 553 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI (null) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+solid
+0 0 0 nodecolor
+newpath 256 529.5 moveto
+256 548.5 lineto
+428 548.5 lineto
+428 529.5 lineto
+closepath stroke
+0 0 0 nodecolor
+10 /Helvetica set_font
+327.5 536.5 moveto 29 ( Point ) alignedtext
+1 setlinewidth
+solid
+0 0 0 nodecolor
+newpath 256 497.5 moveto
+256 529.5 lineto
+428 529.5 lineto
+428 497.5 lineto
+closepath stroke
+0 0 0 nodecolor
+10 /Helvetica set_font
+260 517.5 moveto 55 ( - x : double ) alignedtext
+0 0 0 nodecolor
+10 /Helvetica set_font
+260 504.5 moveto 55 ( - y : double ) alignedtext
+1 setlinewidth
+solid
+0 0 0 nodecolor
+newpath 256 387.5 moveto
+256 497.5 lineto
+428 497.5 lineto
+428 387.5 lineto
+closepath stroke
+0 0 0 nodecolor
+10 /Helvetica set_font
+260 485.5 moveto 136 ( + Point\(x : double, y : double\) ) alignedtext
+0 0 0 nodecolor
+10 /Helvetica set_font
+260 472.5 moveto 79 ( + getX\(\) : double ) alignedtext
+0 0 0 nodecolor
+10 /Helvetica set_font
+260 459.5 moveto 79 ( + getY\(\) : double ) alignedtext
+0 0 0 nodecolor
+10 /Helvetica set_font
+260 446.5 moveto 149 ( + distance\(autre : Point\) : double ) alignedtext
+0 0 0 nodecolor
+10 /Helvetica set_font
+260 433.5 moveto 164 ( + translater\(dx : double, dy : double\) ) alignedtext
+0 0 0 nodecolor
+10 /Helvetica set_font
+260 420.5 moveto 54 ( + afficher\(\) ) alignedtext
+0 0 0 nodecolor
+10 /Helvetica set_font
+260 407.5 moveto 121 ( + inscrire\(s : Observateur\) ) alignedtext
+0 0 0 nodecolor
+10 /Helvetica set_font
+260 394.5 moveto 121 ( + annuler\(s : Observateur\) ) alignedtext
+grestore
+% c1->c3
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 258.9111 609.3763 moveto
+270.5148 589.7023 282.8384 568.8079 294.342 549.3036 curveto
+stroke
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 258.8297 609.5144 moveto
+259.2269 616.7146 lineto
+252.7334 619.8505 lineto
+252.3362 612.6504 lineto
+closepath stroke
+0 0 0 edgecolor
+10 /Helvetica set_font
+242.342 563.3036 moveto 6 (2) alignedtext
+0 0 0 edgecolor
+10 /Helvetica set_font
+196.342 552.3036 moveto 98 (extrémité1, extrémité2) alignedtext
+0 0 0 edgecolor
+10 /Helvetica set_font
+248.7334 611.8505 moveto 4 (*) alignedtext
+grestore
+% c7
+gsave
+[ /Rect [ 227 230 457 347 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI (null) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+solid
+0 0 0 nodecolor
+newpath 235 310.5 moveto
+235 342.5 lineto
+449 342.5 lineto
+449 310.5 lineto
+closepath stroke
+0 0 0 nodecolor
+10 /Helvetica set_font
+313.5 330.5 moveto 57 ( «container» ) alignedtext
+0 0 0 nodecolor
+10 /Helvetica set_font
+293.5 317.5 moveto 97 ( GroupeObservateurs ) alignedtext
+1 setlinewidth
+solid
+0 0 0 nodecolor
+newpath 235 291.5 moveto
+235 310.5 lineto
+449 310.5 lineto
+449 291.5 lineto
+closepath stroke
+0 0 0 nodecolor
+10 /Helvetica set_font
+239 298.5 moveto 159 ( - observateurs : List<Observateur> ) alignedtext
+1 setlinewidth
+solid
+0 0 0 nodecolor
+newpath 235 233.5 moveto
+235 291.5 lineto
+449 291.5 lineto
+449 233.5 lineto
+closepath stroke
+0 0 0 nodecolor
+10 /Helvetica set_font
+239 279.5 moveto 112 ( + GroupeObservateurs\(\) ) alignedtext
+0 0 0 nodecolor
+10 /Helvetica set_font
+239 266.5 moveto 206 ( + maj\(source : Point, dx : double, dy : double\) ) alignedtext
+0 0 0 nodecolor
+10 /Helvetica set_font
+239 253.5 moveto 177 ( + ajouter\(unObservateur : Observateur\) ) alignedtext
+0 0 0 nodecolor
+10 /Helvetica set_font
+239 240.5 moveto 190 ( + supprimer\(unObservateur : Observateur\) ) alignedtext
+grestore
+% c3->c7
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 342 375.8486 moveto
+342 364.6615 342 353.529 342 343.1435 curveto
+stroke
+0 0 0 edgecolor
+newpath 342.0001 375.9765 moveto
+346 381.9766 lineto
+342 387.9765 lineto
+338 381.9765 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 342.0001 375.9765 moveto
+346 381.9766 lineto
+342 387.9765 lineto
+338 381.9765 lineto
+closepath stroke
+0 0 0 edgecolor
+10 /Helvetica set_font
+277 346.1435 moveto 65 (1 observateurs) alignedtext
+0 0 0 edgecolor
+10 /Helvetica set_font
+336 379.9765 moveto 6 (1) alignedtext
+grestore
+% c4
+gsave
+[ /Rect [ 378.5 590 607.5 798 ]
+  /Border [ 0 0 0 ]
+  /Action << /Subtype /URI /URI (null) >>
+  /Subtype /Link
+/ANN pdfmark
+1 setlinewidth
+solid
+0 0 0 nodecolor
+newpath 387 775 moveto
+387 794 lineto
+600 794 lineto
+600 775 lineto
+closepath stroke
+0 0 0 nodecolor
+10 /Helvetica set_font
+476 782 moveto 35 ( Cercle ) alignedtext
+1 setlinewidth
+solid
+0 0 0 nodecolor
+newpath 387 704 moveto
+387 775 lineto
+600 775 lineto
+600 704 lineto
+closepath stroke
+0 0 0 nodecolor
+10 /Helvetica set_font
+391 763 moveto 71 ( - centre : Point ) alignedtext
+0 0 0 nodecolor
+10 /Helvetica set_font
+391 750 moveto 74 ( - rayon : double ) alignedtext
+0 0 0 nodecolor
+10 /Helvetica set_font
+391 737 moveto 103 ( - circonference : Point ) alignedtext
+0 0 0 nodecolor
+10 /Helvetica set_font
+391 724 moveto 169 ( - translaterObservateur : Observateur ) alignedtext
+0 0 0 nodecolor
+10 /Helvetica set_font
+391 711 moveto 194 ( - redimensionnerObservateur : Observateur ) alignedtext
+1 setlinewidth
+solid
+0 0 0 nodecolor
+newpath 387 594 moveto
+387 704 lineto
+600 704 lineto
+600 594 lineto
+closepath stroke
+0 0 0 nodecolor
+10 /Helvetica set_font
+391 692 moveto 205 ( + Cercle\(centre : Point, circonference : Point\) ) alignedtext
+0 0 0 nodecolor
+10 /Helvetica set_font
+391 679 moveto 54 ( + detruire\(\) ) alignedtext
+0 0 0 nodecolor
+10 /Helvetica set_font
+391 666 moveto 101 ( + getRayon\(\) : double ) alignedtext
+0 0 0 nodecolor
+10 /Helvetica set_font
+391 653 moveto 54 ( + afficher\(\) ) alignedtext
+0 0 0 nodecolor
+10 /Helvetica set_font
+391 640 moveto 164 ( + translater\(dx : double, dy : double\) ) alignedtext
+0 0 0 nodecolor
+10 /Helvetica set_font
+391 627 moveto 115 ( + getPerimetre\(\) : double ) alignedtext
+0 0 0 nodecolor
+10 /Helvetica set_font
+391 614 moveto 106 ( + getSurface\(\) : double ) alignedtext
+0 0 0 nodecolor
+10 /Helvetica set_font
+391 601 moveto 63 ( - majRayon\(\) ) alignedtext
+grestore
+% c4->c3
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 419.0684 583.5922 moveto
+411.2901 571.9762 403.4895 560.3271 395.9972 549.1383 curveto
+stroke
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 419.213 583.8082 moveto
+425.8751 586.5681 lineto
+425.8898 593.7792 lineto
+419.2278 591.0193 lineto
+closepath stroke
+0 0 0 edgecolor
+10 /Helvetica set_font
+438.9972 563.1383 moveto 6 (2) alignedtext
+0 0 0 edgecolor
+10 /Helvetica set_font
+395.9972 552.1383 moveto 92 (centre, circonférence) alignedtext
+0 0 0 edgecolor
+10 /Helvetica set_font
+421.8898 585.7792 moveto 4 (*) alignedtext
+grestore
+% c4->c5
+gsave
+1 setlinewidth
+dashed
+0 0 0 edgecolor
+newpath 493 593.8126 moveto
+493 554.7128 493 509.5089 493 468.5 curveto
+493 468.5 493 468.5 493 154 curveto
+493 123.0031 472.0098 98.3486 446.8981 79.9443 curveto
+stroke
+0 0 0 edgecolor
+newpath 438.6215 74.1883 moveto
+449.4007 76.2035 lineto
+442.7265 77.0431 lineto
+446.8314 79.8979 lineto
+446.8314 79.8979 lineto
+446.8314 79.8979 lineto
+442.7265 77.0431 lineto
+444.2621 83.5923 lineto
+438.6215 74.1883 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 438.6215 74.1883 moveto
+449.4007 76.2035 lineto
+442.7265 77.0431 lineto
+446.8314 79.8979 lineto
+446.8314 79.8979 lineto
+446.8314 79.8979 lineto
+442.7265 77.0431 lineto
+444.2621 83.5923 lineto
+438.6215 74.1883 lineto
+closepath stroke
+0 0 0 edgecolor
+10 /Helvetica set_font
+493 286 moveto 56 («instantiate») alignedtext
+grestore
+% c4->c6
+gsave
+1 setlinewidth
+dashed
+0 0 0 edgecolor
+newpath 562.0119 593.7937 moveto
+581.737 556.1985 598 512.0092 598 468.5 curveto
+598 468.5 598 468.5 598 154 curveto
+598 130.8623 600.6305 105.2708 603.525 84.1149 curveto
+stroke
+0 0 0 edgecolor
+newpath 604.9567 74.1158 moveto
+607.9938 84.6527 lineto
+604.2479 79.0653 lineto
+603.5392 84.0148 lineto
+603.5392 84.0148 lineto
+603.5392 84.0148 lineto
+604.2479 79.0653 lineto
+599.0846 83.377 lineto
+604.9567 74.1158 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 604.9567 74.1158 moveto
+607.9938 84.6527 lineto
+604.2479 79.0653 lineto
+603.5392 84.0148 lineto
+603.5392 84.0148 lineto
+603.5392 84.0148 lineto
+604.2479 79.0653 lineto
+599.0846 83.377 lineto
+604.9567 74.1158 lineto
+closepath stroke
+0 0 0 edgecolor
+10 /Helvetica set_font
+598 286 moveto 56 («instantiate») alignedtext
+grestore
+% c7->c0
+gsave
+1 setlinewidth
+0 0 0 edgecolor
+newpath 344.4404 233.7937 moveto
+344.9469 222.4401 345.4755 210.5919 345.9655 199.6063 curveto
+stroke
+0 0 0 edgecolor
+newpath 346.4216 189.3823 moveto
+350.4714 199.5729 lineto
+346.1987 194.3773 lineto
+345.9759 199.3723 lineto
+345.9759 199.3723 lineto
+345.9759 199.3723 lineto
+346.1987 194.3773 lineto
+341.4803 199.1717 lineto
+346.4216 189.3823 lineto
+closepath fill
+1 setlinewidth
+solid
+0 0 0 edgecolor
+newpath 346.4216 189.3823 moveto
+350.4714 199.5729 lineto
+346.1987 194.3773 lineto
+345.9759 199.3723 lineto
+345.9759 199.3723 lineto
+345.9759 199.3723 lineto
+346.1987 194.3773 lineto
+341.4803 199.1717 lineto
+346.4216 189.3823 lineto
+closepath stroke
+0 0 0 edgecolor
+10 /Helvetica set_font
+346.4216 192.3823 moveto 4 (*) alignedtext
+0 0 0 edgecolor
+10 /Helvetica set_font
+340.4404 225.7937 moveto 4 (*) alignedtext
+grestore
+endpage
+showpage
+grestore
+%%PageTrailer
+%%EndPage: 1
+%%Trailer
+%%Pages: 1
+%%BoundingBox: 36 36 770 842
+end
+restore
+%%EOF

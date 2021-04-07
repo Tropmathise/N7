@@ -1,0 +1,103 @@
+/** La case sur lequel un joueur tombe
+ * @author E72
+ * @version 1.0
+ */
+
+public class Case {
+
+    /* Les attributs d'une case */
+
+    private int id;  
+    private TypeCarte typeCarte;
+    private String nom;
+    private int prix;
+    private int construction;
+    private JoueurMonopoly joueur;
+    private int[] loyer = new int[5];
+
+    /** Constructeur de la case */
+    public Case(int id, TypeCarte type, String nom, int prix) {
+        this.id = id;
+        this.typeCarte = type;
+        this.nom = nom;
+        this.prix = prix;
+    }
+
+    /** Obtenir l'id de la case
+     * @return id de la case
+     */
+    public int getId() {
+        return this.id;
+    }
+
+    /** Obtenir le nom de la case
+	 * @return nom de la case
+	 */
+	public String getNom() {
+		return this.nom;
+    }
+
+    /** Obtenir le prix de la case
+	 * @return prix
+	 */
+	public int getPrix() {
+		return this.prix;
+    }
+
+    /** Obtenir les construction d'une case
+     * @return construction 
+     */
+    public int getConstruction() {
+        return this.construction;
+    }
+
+    /** Obtenir le loyer de la case
+     * @return loyer
+     */
+    public int getLoyer() {
+        construction = this.getConstruction();
+        return this.loyer[construction];
+    }
+
+    public JoueurMonopoly getJoueur() {
+        return this.joueur;
+    }
+    
+
+    /** Definir l'id de la case 
+     * @param id id de la case
+    */
+    public void setId(int id){
+        assert (id>=0);
+        this.id = id;
+    }
+
+    /** Definir le nom de la case 
+     * @param nom
+    */
+    public void setNom(String nom) {
+        assert (nom != null);
+        this.nom = nom;
+    }
+
+    /** Definir le prix de la case
+     * @param prix
+     */
+    public void setPrix(int prix) {
+        assert (prix > 0);
+        this.prix=prix;
+    }
+
+    /** Definir les construction d'une case :
+     * 0 loyer nu
+     * 1 : 1 maison
+     * 2 : 2 maison
+     * ...
+     * 5 : hotel
+     * @param constr
+     */
+    public void setConstruction(int constr){
+        this.construction = constr;
+    }
+
+}

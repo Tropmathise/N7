@@ -1,0 +1,32 @@
+// write your program here
+N    =    7
+
+add %r0,0x100,%r1 //adresse de base du tableau
+add %r0,N-1,%r2 //iterateur premiere boucle
+clr %r3 //iterateur deuxieme boucle
+
+loop1:
+        add %r2,-1,%r7 //r7 = r2 - 1
+        clr %r3
+        loop2:
+                add %r3,1,%r8 //r8 = r3+1
+                ld [%r1+%r3],%r4 //echange des 2 registres
+                ld [%r1+%r8],%r5
+                cmp %r4,%r5
+                ble FinSi
+                st %r4,[%r1+%r8]
+                st %r5,[%r1+%r3]
+                
+                FinSi: 
+                inc %r3
+                
+                cmp %r3,%r7
+                ble loop2
+        add %r2,-1,%r2
+        cmp %r2,1
+        bg loop1
+        
+stop:   ba stop
+
+.org 0x100
+.word 6,-11,4,-75,-46,2,250

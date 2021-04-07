@@ -1,0 +1,1 @@
+ps l | grep -v grep | grep .tempsh197350 > .tempres197350

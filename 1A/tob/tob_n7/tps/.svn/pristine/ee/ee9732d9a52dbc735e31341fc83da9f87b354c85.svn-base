@@ -1,0 +1,17 @@
+File Cercle.java: 412 tokens, 133 lines
+Total input: 1 file (1 new, 0 old), 412 tokens
+
+Cercle.java: line 29-33 [58]
+Cercle.java: line 42-46
+<         this.couleur = Color.blue;
+<         this.C.setX((P1.getX()+P2.getX())/2);
+<         this.C.setY((P1.getY()+P2.getY())/2);
+<         this.r = P1.distance(P2)/2;
+<     }
+---
+>         this.couleur = vcouleur;
+>         this.C.setX((P1.getX()+P2.getX())/2);
+>         this.C.setY((P1.getY()+P2.getY())/2);
+>         this.r = P1.distance(P2)/2;      
+>     }  
+

@@ -1,0 +1,66 @@
+package monopoly.divers;
+
+import monopoly.cases.*;
+
+/* Classe de fonctions utiles à la Classe Tour */
+
+public class UtilsTour {
+    
+
+    /* Faire avancer le joueur */
+    public void avancerDe(JoueurMonopoly joueur, Integer valeur) {
+        System.out.println();
+        System.out.println(joueur.getNom() + " veut se déplacer de " + valeur + " case(s).");
+        assert(valeur > 0 && valeur <= Des.max);
+        if (valeur + joueur.getPosition().id >= Plateau.nbCases) {
+            System.out.println(joueur.getNom() + " passe par la case départ, il reçoit " + Partie.argentTour + " euros.");
+            joueur.ajouterArgent(Partie.argentTour);
+        }
+        Case caseArrivee = Plateau.cases[ (joueur.getPosition().id + valeur) % Plateau.nbCases ];
+        joueur.setPosition(caseArrivee);
+        System.out.println(joueur.getNom() + " s'est déplacé jusqu'à " + caseArrivee.getNom() + ".");
+    }
+
+    /* Acheter une propriété */
+    public void acheterPropriete(JoueurMonopoly joueur, Case c) throws ImpayableException {
+        System.out.println();
+        System.out.println(joueur.getNom() + " veut acheter " + c.getNom() + ".");
+        assert(c instanceof CaseAchetable);
+        if (joueur.getSolde() < ((CaseAchetable) c).getPrix()) {
+            System.out.println(joueur.getNom() + " n'a pas assez d'argent pour acheter " + c.getNom() + ".");
+            throw new ImpayableException();
+        }
+        else {
+            try {
+                JoueurMonopoly prop = ((CaseAchetable) c).getProp();
+                System.out.println(c.getNom() + " est déjà possédée par " + prop.getNom() + ".");
+            }
+            catch (NullPointerException e) {
+                joueur.retirerArgent(((CaseAchetable) c).getPrix());
+                joueur.ajouterTerrain(c);
+                ((CaseAchetable) c).setProp(joueur);
+                System.out.println(joueur.getNom() + " est le propriétaire de " + c.getNom() + ".");
+            }
+        }
+    }
+
+    /* R�soudre l'effet d'une case */
+    public void resoudreEffetCase(JoueurMonopoly joueur, Case c) throws ImpayableException {
+    	switch (c.getType()) {
+    	case PAIEMENT : joueur.retirerArgent(100);
+    		break;
+    	case CHANCE : ;
+    		break;
+    	case CDC : ;
+    		break;
+    	case PARC : joueur.ajouterArgent(Plateau.getTasArgent());
+    		Plateau.setTasArgent(0);
+    		break;
+    	case DEPART : joueur.ajouterArgent(Partie.argentTour);
+    		break;
+    	case GOPRISON : joueur.setPosition(Plateau.cases[10]);
+    		default : ;
+    	}
+    }
+    
+}

@@ -1,0 +1,93 @@
+% Mini-projet  : Ensemble
+% NOM & Prénom : SADURNI Thomas
+% Groupe       : N
+
+
+**Consigne :** Dans ce fichier, il faut répondre à la place des "..." et sur
+les lignes qui les suivent.  Le texte déjà écrit doit être conservé !
+
+**Remarque :** Ce fichier utiliser la syntaxe Markdown.  On peut en engendrer
+une version pdf en faisant :
+
+	pandoc LISEZ-MOI.txt -o LISEZ-MOI.pdf
+
+
+# Temps passé sur le projet
+
+Ces informations de temps sont demandées à titre indicatif et ne sont pas
+prises en compte dans la notation du projet.
+
+Toutes les durées sont à saisir en heures.  Par exemple, si vous avez passé
+1h45, il faudra indiquer 1.75.  Si vous avez passé 2h30, il faudra indiquer
+2.5.
+
+* Temps passé sur la version Tableau    (en h) : 4.00
+* Temps passé sur la version Chainage   (en h) : 4.00
+* Temps passé à compléter LISEZ-MOI.txt (en h) : ...
+
+
+# Questions
+
+**Question 1 :**
+Quels sous-programmes avez-vous définis dans les corps des modules sans les
+spécifier dans la spécification ?  Expliquez pourquoi.
+
+**Réponse :**
+Aucun, sinon on ne peut pas les utiliser.
+
+
+**Question 2 :**
+Y a-t-il des sous-programmes dont les contrats (préconditions ou
+postconditions) changent entre Ensembles_Tableau et Ensembles_Chaine ?
+Lesquels ?
+
+**Réponse :**
+Oui, les sous programmes qui utilisaieent la procedure est_plein dans tableaux n'est pas nécéssaire dans chainage car l'ensemble ne peut pas etre plein.
+
+
+**Question 3 :**
+Le type Ensemble doit être déclaré comme très privé dans Ensembles_Chaine.
+Expliquez pourquoi il est important ici de définir le type Ensemble comme
+très privé (et pas seulement privé).  On commecera par rappeler la
+différence entre "private" (privé) et "limited private" (très privé).
+
+**Réponse :**
+Différence entre private et limited private : donne plus de controle au programmeur sur le l'utilisateur avec une variable d'un type. Il n'y a plus la possibilité de comparer ou d'affecter des valeurs dans le cadre de "limited private". Cela permet donc d'avoir le controle total du type ensemble, sur l'utilisateur.
+
+
+**Question 4 :**
+Même pour Ensemble_Tableau, le type doit être très privé.  Pourquoi ?
+
+**Réponse :**
+Avoir le controle total du type sur l'utilisateur, et limiter ses actions et empechant une utilisation non controlée.
+
+
+**Question 5 :**
+Dans Ensemble_Tableau, est-il possible d'implanter le sous-programme qui
+supprime un élément en temps constant concernant le nombre d'affectations
+des éléments de l'ensemble (et linéaire sur le nombre de comparaison) ? Si
+oui, comment ?
+
+**Réponse :**
+Oui. Faire appel aux tableaux dynamiques car l'acces à un élément dans un tableau dynamique est fait en temps constant. On evalue les bornes du tableau au cours de l'execution de supprimer.
+
+
+**Question 6 :**
+Est-ce que les deux implantations envisagées des ensembles (Tableau ou
+Chainage) sont efficaces ?
+
+**Réponse :**
+Elles sont efficaces lorsqu'on veut des elements et y avoir accès rapidement. Mais on doit aussi connaitre la capacité du tableau...
+
+
+
+# Difficultés
+
+Voici les difficultés rencontrées et les solutions apportées.
+
+La procedurre appliquer sur tous compliquée à comprendre. Et les poiteurs avant les .all.suivant .all.element encore pas tout à fait clair...
+
+
+# Remarques diverses
+
+...

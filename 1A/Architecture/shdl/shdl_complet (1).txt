@@ -1,0 +1,504 @@
+/////COMMUTATION
+
+// tâche 0 = comptage sur ld[3..0] ; tâche 1 = comptage sur ld[7..4]
+// A chaque appui sur IT, changement de tâche 
+
+LD      =  0xb0000000
+STACK0  =  0x100
+STACK1  =  0x200
+
+        ba    start
+  
+        .org 1
+  
+IT:       cmp %r4,0 
+          beq ChangementPourUN
+          bne ChangementPourZERO
+          
+ChangementPourUN:  
+                   inc %r4
+                   setq STACK0, %sp
+                   st %r1, [%sp + %r0]
+                   setq STACK1, %sp
+                   ld [%sp + %r0], %r1
+                   ba loop1
+                   
+ChangementPourZERO: clr %r4
+                    setq STACK1,%sp
+                    st %r1, [%sp + %r0]
+                    setq STACK0, %sp
+                    ld [%sp + %r0], %r1
+                    ba loop0
+
+
+start:    //initialisation contexte tâche 1
+          setq STACK1, %sp
+          st %r0, [%sp + %r0]
+          // démarrage sur la tâche 0
+          setq STACK0, %sp 
+          clr %r4       
+          ba  prog0
+          
+// tâche 0
+
+prog0:    set LD, %r3
+          clr %r1
+loop0:    inc %r1
+          sll   %r1, 8, %r2
+          st    %r2, [%r3]
+          ba    loop0
+// tâche 1
+prog1:    set   LD, %r3
+          clr   %r1
+loop1:    inc   %r1
+          st    %r1, [%r3]
+          ba    loop1
+tasknum: .word 0          // numéro de la tâche courante (0 ou 1) 
+tabsp:   .word 0, 0       // table des pointeurs de pile
+
+
+
+
+
+
+
+///////BUFFER ENTREE
+
+
+
+
+LD        = 0xB0000000
+SW        = 0x90000000
+B         = 0x100
+
+
+            ba start
+IT:         push %r7
+            call ajouter         
+            pop %r7
+            reti
+            
+start:      set B,%r1
+            setq 0x200,%sp
+            set SW,%r9
+            clr %r15
+            set LD, %r16
+            
+loop:       inc %r15
+            cmp %r15, 25
+            be initsomme
+            ba loop
+            
+initsomme:  clr %r15
+            cmp %r2,%r0
+            beq loop
+            add %r2,%r0,%r18
+            dec %r18
+            clr %r20
+
+sommeloop:  ld [%r1 + %r18], %r19
+            add %r19,%r20,%r20            
+            cmp %r18,%r0
+            dec %r18
+            beq afficher
+            bne sommeloop
+            
+afficher:   st %r20, [%r16 + %r0]
+            
+            ba loop
+
+//%r2 nombres de mots dans le buffer
+
+ajouter:     ld [%r9 + %r0],%r5
+             st %r5,[%r1+%r2]
+             inc %r2
+             ret
+         
+retirer:     add %r0,1,%r3
+             add %r1,0,%r4
+retirerloop: ld [%r1+%r3],%r4
+             inc %r3
+             inc %r4
+             cmp %r3,%r2
+             bne retirerloop
+             ret
+
+
+
+
+
+
+////// COMPTE IT
+
+
+
+LD        = 0xB0000000
+M         = 0x100
+ba start
+IT:         push %r3
+            ld [%r0 + %r1],%r3
+            inc %r3
+            st %r3,[%r0 +%r1]
+            pop %r3
+            reti
+start:     set M,%r1
+           set LD,%r2
+           st  %r0,[%r1+%r0]
+           setq 0x100, %sp
+  
+loop:       ld [%r0 + %r1], %r4
+            st %r4,[%r2+%r0]
+            ba loop
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/////////ERATHOSTENE TABLEAU
+
+
+
+N      =     10
+T      =     0x100
+Elim   =     0x110
+             .org 0
+             add %r0,T,%r1
+             
+// Tri du tableau (Tri à bulles)    
+
+             add %r0,N, %r2    
+                        
+loopi:       clr %r5          
+             dec %r2
+             cmp %r2,0
+             bne loopj
+             beq einit
+
+loopj:       add %r1,%r5,%r3 
+             add %r3,1,%r4
+             ld [%r3+%r0],%r8
+             ld [%r4+%r0],%r9
+             cmp %r8,%r9
+             inc %r5
+             
+             bg appelpermut
+             
+             cmp %r5,%r2
+             bne loopj
+             beq loopi
+appelpermut: call permutation
+             cmp %r5,%r2
+             bne loopj
+             beq loopi
+    
+permutation: st %r8,[%r4+%r0]
+             st %r9,[%r3+%r0]        
+             ret
+             
+             
+             
+             
+             
+             
+             
+// Crible d'érathostène
+// r2 = i
+// r3 pointe sur le tableau elim
+// r4 = j
+// r5 = x
+// r6 = Elim[i]
+// r7 = T[j]
+// r8 = Elim[j]
+// r9 = T[i]
+
+
+einit:      clr %r3
+            add %r0,Elim,%r3
+            clr %r2
+            clr %r4
+            clr %r5
+            clr %r5
+            clr %r6
+            clr %r7
+            clr %r8
+            clr %r9
+            add %r0,1,%r10
+             
+eloopi:      
+             cmp %r2,(N-1)
+             beq stop
+             ld [%r3+%r2],%r6             
+             cmp %r6,0
+             beq sielim
+             inc %r2
+             bne eloopi
+             
+             
+      
+sielim:      ld [%r1+%r2],%r5
+             add %r2,1,%r4
+    
+             
+eloopj:      cmp %r4,N
+             beq endloopj
+             
+             ld [%r1+%r4],%r7
+             cmp %r5,%r7
+             bl etantque
+             inc %r4
+             cmp %r5,%r7
+             beq sitegal
+             bne eloopj
+             
+etantque:    ld [%r1+%r2],%r9
+             add %r5,%r9,%r5
+             ba eloopj
+             
+ 
+sitegal:     add %r3,%r4,%r8
+             st %r10,[%r8 + -1]
+             ba eloopj
+
+endloopj:    inc %r2
+             ba eloopi
+             
+             
+             
+stop: ba stop  
+             .org 0x100
+             .word 20,13,15,3,12,23,16,7,4,37
+             .org 0x110
+             .word 0,0,0,0,0,0,0,0,0,0
+
+
+
+
+
+
+/////////EVALUATION POLONAISE INV
+
+
+
+T      =     0x100
+F      =     0x110
+A      =     0x111
+
+// r1 = addresse du tableau
+// r2 = compteur
+// r3 = addresse de Expr(i)
+// r4 = op1
+// r5 = op2
+// r6 = resultat (op1 op2) et resultat final
+// r7 = Expr(i)
+// r8 = code de l'addition
+// r9 = code du mot fin
+             
+             .org 0
+             add %r0,0x200,%sp
+             add %r0,T,%r1
+             add %r0,F,%r9
+             ld [%r0+%r9],%r9
+             add %r0,A,%r8
+             ld [%r0+%r8],%r8
+             clr %r2
+             
+             
+tantque: add %r1,%r2,%r3
+         ld [%r0+%r3],%r7
+         cmp %r7,%r9
+         beq resultat
+         
+         
+si:      cmp %r7,%r0
+         bl sinon
+         push %r7
+         ba fintantque
+         
+sinon:   pop %r5
+         pop %r4
+         
+         cmp %r7,%r8
+         bne soustraction
+         add %r4,%r5,%r6
+         push %r6
+         ba fintantque
+       
+soustraction:  sub %r4,%r5,%r6
+               push %r6
+               
+               
+               
+fintantque: inc %r2
+            ba tantque           
+             
+resultat: pop %r6
+
+stop: ba stop  
+             
+             
+             .org 0x100
+             .word 15,7,4,2147483650,2147483649,2,2147483650, 2147483648 //15 7 4 - + 2 - fin
+             .org 0x110
+             .word 2147483648
+             .org 0x111
+             .word 2147483649
+
+
+
+
+
+
+//////////RECHERCHE MAX
+
+
+
+
+
+N    =    5
+T    =    0x100
+    .org 0
+    add %r0,T,%r1
+    clr %r2
+    ld [%r1+%r0], %r3
+loop: ld [%r1 + %r2], %r4
+      cmp %r3,%r4
+      ble max
+      inc %r2
+      cmp %r2,N
+      bne loop
+max: add %r4,%r0,%r3
+     inc %r2
+     cmp %r2,N
+     bne loop
+stop: ba stop
+
+    .org 0x100
+    .word 5,7,2,10,15
+
+
+
+
+
+//////////SCRUTE ENTREE
+
+
+
+
+LD        = 0xB0000000
+SW        = 0x90000000
+M         = 0x100
+set M,%r4
+set LD,%r1
+set SW,%r2
+set 0,%r5
+loop : ld [%r2 + %r0],%r3
+       and %r3,1,%r6
+       cmp %r6,0
+       bne comp
+       add %r6,%r0,%r7  
+       ba loop
+comp:  cmp %r7,%r6
+           
+       bne incr
+       add %r6,%r0,%r7  
+       ba loop
+       
+incr:  inc %r5
+       st %r5,[%r0+M]
+       add %r6,%r0,%r7  
+       st %r5, [%r1 + %r0]
+       ba loop
+
+
+
+
+
+//////// SOMME TABLEAU
+
+
+
+
+
+
+N      =    3
+T      =    0x100
+
+      .org 0
+      add    %r0,T,%r1
+      clr    %r2
+      clr    %r3
+loop: ld  [%r1+%r2],%r4
+      add %r3,%r4,%r3
+      inc %r2
+      cmp %r2,N
+      bne loop
+stop: ba stop
+
+      .org  0x100
+      .word 10, -1, 23
+
+
+
+
+
+
+
+//////// TRI A BULLE
+
+
+
+
+N      =     10
+T      =     0x100
+             .org 0
+             add %r0,T,%r1
+             add %r0,N, %r2    //i
+                          
+// r3 adresse de T[j]
+// r4 adresse de T[j+1]
+// r8 = T[j]
+// r9 = T[j+1]
+loopi:       clr %r5          //j
+             dec %r2
+             cmp %r2,0
+             bne loopj
+             beq stop
+
+loopj:       add %r1,%r5,%r3 
+             add %r3,1,%r4
+             ld [%r3+%r0],%r8
+             ld [%r4+%r0],%r9
+             cmp %r8,%r9
+             inc %r5
+             
+             bg appelpermut
+             
+             cmp %r5,%r2
+             bne loopj
+             beq loopi
+appelpermut: call permutation
+             cmp %r5,%r2
+             bne loopj
+             beq loopi
+    
+permutation: st %r8,[%r4+%r0]
+             st %r9,[%r3+%r0]        
+             ret
+             
+             
+             
+             
+             
+    stop: ba stop     
+    .org 0x100
+    .word 5,7,2,8,9,4,1,3,4,5

@@ -1,0 +1,337 @@
+package monopoly.swing;
+
+import monopoly.divers.*;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JTabbedPane;
+
+public class PlateauSwing extends JFrame implements MouseListener, ActionListener {
+
+    private static final long serialVersionUID = 1L;
+
+    private ArrayList<JoueurMonopoly> joueurs;
+    private Integer nbjoueurs;
+
+    public static final Integer tailleCase = 40;
+
+    // Variables de jeu
+    private Integer idJoueurEnCours;
+    private Boolean rejouer;
+
+    // Bouton et labels pour gérer le jeu
+    private JLabel imagede1 = new JLabel();
+    private JLabel imagede2 = new JLabel();
+    private JButton lancerDe = new JButton(StringPerso.creer("Lancer les dés"));
+    private JButton finTour = new JButton(StringPerso.creer("Fin du tour"));
+    private JButton acheterCase = new JButton(StringPerso.creer("Acheter la propriété"));
+
+    // Infos sur une case
+    private JLabel nom = initNom();
+    private JLabel type = initType();
+    private JLabel proprietaire = initProp();
+    // JLabel prix = new JLabel();
+
+    // Les cases du plateau
+    private CaseSwing[] cases = initCases();
+
+    // Les pions des joueurs
+    private JLabel[] pions;
+
+    // Les onglets joueurs
+    private JTabbedPane onglets;
+
+    // Panel des joueurs (sous les onglets)
+    private InfosJoueur[] panneaux;
+
+    public PlateauSwing(ArrayList<JoueurMonopoly> joueurs) {
+        super();
+        this.rejouer = false;
+        this.idJoueurEnCours = 0;
+        this.joueurs = joueurs;
+        this.nbjoueurs = joueurs.size();
+        this.panneaux = new InfosJoueur[this.nbjoueurs];
+        this.pions = initPions();
+        initPanneaux();
+        this.onglets = initOnglets();
+        this.setContentPane(panelPlateau());
+        this.setVisible(false);
+        this.setTitle("Monopoly : Plateau");
+        this.setSize(1000, 500);
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }
+
+    public void actualiserSwing() {
+        for (int i = 0; i < this.nbjoueurs; i++) {
+            this.panneaux[i].actualiserInfos();
+            this.pions[i].setBounds(this.cases[this.joueurs.get(i).getPosition().getId()].getBounds());
+        }
+    }
+
+    private JLabel[] initPions() {
+        JLabel[] res = new JLabel[this.nbjoueurs];
+        for (int i = 0; i < this.nbjoueurs; i++) {
+            res[i] = initImage("res/" + this.joueurs.get(i).getCouleur() + ".png");
+            res[i].setVisible(true);
+            res[i].setOpaque(false);
+            res[i].setBorder(null);
+            res[i].setBounds(this.cases[this.joueurs.get(i).getPosition().getId()].getBounds());
+        }
+        return res;
+    }
+
+    public static JLabel initImage(String chemin) {
+
+        ImageIcon image = new ImageIcon();
+        java.net.URL imageURL = Partie.class.getResource(chemin);
+
+        if (imageURL != null) {
+            image = null;
+            image = new ImageIcon(imageURL);
+        } else {
+            System.out.println(StringPerso.creer("L'image " + chemin + " n'a pas été trouvée."));
+        }
+        return new JLabel(image);
+    }
+
+    private JLabel initNom() {
+        JLabel nom = new JLabel();
+        nom.setBounds(PlateauSwing.tailleCase + 10, PlateauSwing.tailleCase + 10, 9 * PlateauSwing.tailleCase - 20, 25);
+        return nom;
+    }
+
+    private JLabel initType() {
+        JLabel type = new JLabel();
+        type.setBounds(PlateauSwing.tailleCase + 10, PlateauSwing.tailleCase + 35, 9 * PlateauSwing.tailleCase - 20,
+                25);
+        return type;
+    }
+
+    private JLabel initProp() {
+        JLabel prop = new JLabel();
+        prop.setBounds(PlateauSwing.tailleCase + 10, PlateauSwing.tailleCase + 60, 9 * PlateauSwing.tailleCase - 20,
+                25);
+        return prop;
+    }
+
+    private void initInfosCase(Case c) {
+        TypeCase typecase = c.getType();
+        nom.setVisible(false);
+        type.setVisible(false);
+        proprietaire.setVisible(false);
+        nom.setText("Nom de la case : " + StringPerso.creer(c.getNom()));
+        type.setText("Type de la case : " + typecase.toString());
+
+        try {
+            proprietaire.setText(c.getNomProp());
+        } catch (java.lang.NullPointerException e) {
+            proprietaire.setText(StringPerso.creer("Cette propriété est disponible"));
+        }
+    }
+
+    private void initPanneaux() {
+        for (int i = 0; i < this.nbjoueurs; i++) {
+            this.panneaux[i] = new InfosJoueur(this.joueurs.get(i));
+        }
+    }
+
+    private JTabbedPane initOnglets() {
+        JTabbedPane res = new JTabbedPane();
+        res.setBounds(tailleCase * 11, 0, 1000 - tailleCase * 11, 500);
+        res.setVisible(true);
+        for (int i = 0; i < this.nbjoueurs; i++) {
+            res.addTab(this.joueurs.get(i).getNom(), this.panneaux[i]);
+        }
+        return res;
+    }
+
+    private void affichageInfosCase(Boolean afficher) {
+        nom.setVisible(afficher);
+        type.setVisible(afficher);
+        proprietaire.setVisible(afficher);
+    }
+
+    private JLayeredPane panelPlateau() {
+
+        // Panel de la fenetre
+        JLayeredPane panel = new JLayeredPane();
+
+        // Layout du panel (null pour placer les boutons où on veut
+        panel.setLayout(null);
+
+        for (int i = 0; i < Plateau.nbCases; i++) {
+
+            // On ajoute le listener sur la case pour gérer les effets
+            cases[i].addMouseListener(this);
+
+            // Ajout de la case au panel
+            panel.add(cases[i], JLayeredPane.DEFAULT_LAYER);
+
+        }
+
+        // On ajoute les infos des cartes
+        panel.add(nom, JLayeredPane.DEFAULT_LAYER);
+        panel.add(type, JLayeredPane.DEFAULT_LAYER);
+        panel.add(proprietaire, JLayeredPane.DEFAULT_LAYER);
+        panel.add(onglets, JLayeredPane.DEFAULT_LAYER);
+        for (int i = 0; i < this.nbjoueurs; i++) {
+            panel.add(this.pions[i], JLayeredPane.POPUP_LAYER);
+        }
+
+        // Positions
+        this.imagede1.setBounds(4*tailleCase, 5*tailleCase, 40, 40);
+        this.imagede2.setBounds(6*tailleCase,5*tailleCase,40,40);
+        this.lancerDe.setBounds(tailleCase + 100, 7*tailleCase - 15, 150, 40);
+        this.finTour.setBounds(tailleCase + 100, 9*tailleCase - 15, 150, 40);
+        this.acheterCase.setBounds(tailleCase+100, 8*tailleCase - 15, 150, 40);
+
+        // Propriétés
+        //this.imd1.setVisible(true);
+        //this.imd2.setVisible(true);
+        //this.de1.setVisible(false);
+        //this.de2.setVisible(false);
+        this.lancerDe.setVisible(true);
+        this.finTour.setVisible(false);
+        this.acheterCase.setVisible(false);
+        this.lancerDe.addActionListener(this);
+        this.finTour.addActionListener(this);
+        this.acheterCase.addActionListener(this);
+
+        // Ajout
+        panel.add(this.imagede1, JLayeredPane.POPUP_LAYER);
+        panel.add(this.imagede2, JLayeredPane.POPUP_LAYER);
+        panel.add(this.lancerDe, JLayeredPane.POPUP_LAYER);
+        panel.add(this.finTour, JLayeredPane.POPUP_LAYER);
+        panel.add(this.acheterCase, JLayeredPane.POPUP_LAYER);
+
+        // Le panel est complet
+        return panel;
+    }
+
+    private CaseSwing[] initCases() {
+        CaseSwing[] tab = new CaseSwing[Plateau.nbCases];
+        for (int i = 0; i < Plateau.nbCases; i++) {
+            tab[i] = new CaseSwing(Plateau.cases[i]);
+        }
+        return tab;
+    }
+
+    private void reinitialiserTour() {
+        new Annonce("Au tour de " + this.joueurs.get(this.idJoueurEnCours).getNom() + " de jouer.");
+        lancerDe.setVisible(true);
+        finTour.setVisible(false);
+        acheterCase.setVisible(false);
+        // de1.setVisible(false);
+        // de2.setVisible(false);
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        CaseSwing source = (CaseSwing) e.getSource();
+        // System.out.println("Entré dans " + source.getId());
+        initInfosCase(source.getCase());
+        affichageInfosCase(true);
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        CaseSwing source = (CaseSwing) e.getSource();
+        // System.out.println("Sortie de " + source.getId());
+        initInfosCase(source.getCase());
+        affichageInfosCase(false);
+    }
+
+    @Override
+    public void dispose() {
+        Partie.menu.setVisible(true);
+        super.dispose();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Object source = e.getSource();
+        if (source == lancerDe) {
+            // rejouer = false
+            this.rejouer = false;
+            // Lancer les dés
+            Des des = new Des();
+            Integer valeurDe1 = des.getDe1();
+            Integer valeurDe2 = des.getDe2();
+            imagede1.setIcon(PlateauSwing.initImage("res/Face_"+valeurDe1+".png").getIcon());
+            imagede2.setIcon(PlateauSwing.initImage("res/Face_"+valeurDe2+".png").getIcon());
+            //de1.setVisible(true);
+            //de2.setVisible(true);
+            // Si double alors rejouer = true et joueur.nbdoubles++
+            if (valeurDe1 == valeurDe2) {
+                new Annonce("Double. Attention de ne pas en faire 3 !");
+                this.rejouer = true;
+                joueurs.get(this.idJoueurEnCours).incrementerNbDouble();
+                if (joueurs.get(this.idJoueurEnCours).getnbDouble() >= 3) {
+                    joueurs.get(this.idJoueurEnCours).setPosition(Plateau.cases[10]);
+                    joueurs.get(this.idJoueurEnCours).setEstEnPrison(true);
+                    actualiserSwing();
+                    new Annonce("3ème double... Vous allez en prison.");
+                }
+                else {
+                    new Annonce(this.joueurs.get(this.idJoueurEnCours).getNom()+ " avance de " + valeurDe1 + " cases.");
+                    UtilsTour.avancerDe(joueurs.get(this.idJoueurEnCours), valeurDe1 = valeurDe2);
+                    acheterCase.setVisible(true);
+                    actualiserSwing();
+                    reinitialiserTour();
+                }
+            }
+            else {
+                lancerDe.setVisible(false);
+                joueurs.get(this.idJoueurEnCours).setnbDouble(0);
+                int sommeDes = valeurDe1 + valeurDe2;
+                new Annonce(this.joueurs.get(this.idJoueurEnCours).getNom()+ " avance de " + sommeDes + " cases.");
+                UtilsTour.avancerDe(joueurs.get(this.idJoueurEnCours), valeurDe1 + valeurDe2);
+                acheterCase.setVisible(true);
+                finTour.setVisible(true);
+                actualiserSwing(); 
+            }
+        }
+        
+        else if (source == acheterCase){
+            this.rejouer=false;
+            try{
+                UtilsTour.acheterPropriete(joueurs.get(this.idJoueurEnCours), joueurs.get(this.idJoueurEnCours).getPosition());
+                //new Annonce(this.joueurs.get(this.idJoueurEnCours).getNom()+ " a acheté " +  this.joueurs.get(this.idJoueurEnCours).getPosition().getNom());
+            }
+            catch (ImpayableException exception){
+                new Annonce("Vous n'avez pas assez d'argent pour l'acheter");
+            }
+            actualiserSwing();
+        }
+        else if (source == finTour) {
+            actualiserSwing();
+            this.idJoueurEnCours = (this.idJoueurEnCours + 1) % this.nbjoueurs;
+            reinitialiserTour();
+        }
+    }
+}

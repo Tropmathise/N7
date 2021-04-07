@@ -1,0 +1,10 @@
+// import java.io.IOException;
+// import monopoly.*;
+
+public class Partie {
+    // private static final Integer nbjoueurs = 4;
+
+    public static void main(String[] args) {
+
+    }
+}

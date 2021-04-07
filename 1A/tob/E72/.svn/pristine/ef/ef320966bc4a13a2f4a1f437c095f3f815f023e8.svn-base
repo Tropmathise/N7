@@ -1,0 +1,13 @@
+/** le plateau sur lequel se déplacent les joueurs 
+ * @author E72
+ * @version 1.0
+*/
+
+
+public abstract class Plateau {
+
+    private int nbcases = 40;
+    private int nbtours= 1;
+    private int nbjoueurs=4;
+
+}

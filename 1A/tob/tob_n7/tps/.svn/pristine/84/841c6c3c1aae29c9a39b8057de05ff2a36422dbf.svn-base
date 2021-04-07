@@ -1,0 +1,12 @@
+Début de la vérification...
+[ERROR] Cercle.java:12: La première ligne de la Javadoc doit se terminer avec un point. [JavadocStyle]
+[ERROR] Cercle.java:15: La première ligne de la Javadoc doit se terminer avec un point. [JavadocStyle]
+[ERROR] Cercle.java:18: La première ligne de la Javadoc doit se terminer avec un point. [JavadocStyle]
+[ERROR] Cercle.java:21: La première ligne de la Javadoc doit se terminer avec un point. [JavadocStyle]
+[ERROR] Cercle.java:25: Line has trailing spaces. [RegexpSingleline]
+[ERROR] Cercle.java:57: Line has trailing spaces. [RegexpSingleline]
+[ERROR] Cercle.java:74: Line has trailing spaces. [RegexpSingleline]
+[ERROR] Cercle.java:81: Line has trailing spaces. [RegexpSingleline]
+[ERROR] Cercle.java:132: Balise Javadoc @return manquante. [JavadocMethod]
+[ERROR] Cercle.java:140: Balise Javadoc @return manquante. [JavadocMethod]
+Vérification terminée.

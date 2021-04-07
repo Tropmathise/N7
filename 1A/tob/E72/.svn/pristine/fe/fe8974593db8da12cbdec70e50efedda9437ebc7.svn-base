@@ -1,0 +1,27 @@
+package monopoly.cases;
+import monopoly.*;
+
+/** Case compagnie
+ * @author Theo
+ */
+
+public class Compagnie extends CaseAchetable {
+
+    private JoueurMonopoly proprietaire;
+
+    public Compagnie(Integer id, String nom, Integer prix) {
+        super(id,TypeCase.DEPART,nom,prix);
+
+    }
+
+
+    public void setProp(JoueurMonopoly j) {
+        this.proprietaire = j;
+    }
+
+    public String getProp() {
+        return "Propriétaire : " + this.proprietaire.getNom();
+    }
+
+
+}

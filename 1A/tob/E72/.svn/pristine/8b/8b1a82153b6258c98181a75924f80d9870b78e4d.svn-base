@@ -1,0 +1,76 @@
+package monopoly;
+
+/**
+ * Fonctions utiles lors d'un tour
+ * @author Thibault
+ *
+ */
+public class Tour {
+
+	// ----- Atributs
+	
+	private JoueurMonopoly joueurActif; // Le joueur qui joue le tour
+	private Plateau plateau; // Le plateau sur lequel le joueur joue
+	/** Nombre de double réalisé par le joueur actif */
+	private int nombreDouble;
+	/** Présence d'un double au dernier lancé */
+	private boolean doubleDes;
+	
+	/**
+	 * Constructeur du type Tour
+	 * @param joueurActif le joueur qui joue le tour
+	 */
+	public Tour(JoueurMonopoly joueurActif) {
+		this.joueurActif = joueurActif;
+		this.nombreDouble = 0;
+		this.doubleDes = false;
+	}
+
+	/*
+	 * Renvoie la somme des dés lancés (entre 1 et 12)
+	 */
+	public int lancerDes() {
+		Des des = new Des(0,0);
+		// Réaliser un nouveau lancer
+		//doubleDes = false;
+		des.lancerDes();
+		/*// Vérifier la présence d'un double
+		if (des.getDe1() == des.getDe2()) {
+			nombreDouble++;
+			doubleDes = true;
+		}*/
+		return des.getDe1() + des.getDe2();
+		
+	}
+
+	/**
+	 * Déplacer le joueur au début du tour
+	 * @param SommeDes la somme des dés obtenus
+	 */
+	public void deplacerJoueur(int SommeDes) {
+		joueurActif.setPosition(plateau.cases[(joueurActif.getPosition().id+SommeDes)%40]);
+	}
+
+	public void acheterPropriete(Carte carte) throws ImpayableException, ProprieteDejaPossedeeException {
+		if (joueurActif.getSolde() < carte.getValeur()) {
+			throw new ImpayableException("Vous n'avez pas assez d'argent pour acheter cette propriété");
+		}
+		if (false) {
+			// Si la propriété est déjà possédée
+			throw new ProprieteDejaPossedeeException("Cette propriété est déja possédée");
+		}
+	}
+	
+	/** Réaliser le tour de jeu du joueur actif. Prends en compte
+	 * les doubles faits, les cases sur lesquelles il s'arrête.
+	 */
+	public void realiserTour() {
+		do {
+			// Lancer les dés
+			// Déplacer le joueur
+			// ? Vérifier si un tour du plateau a été fait ?
+			// Action de la case
+		} while (doubleDes);
+		
+	}
+}

@@ -1,0 +1,50 @@
+Date de l'évaluation : mardi 24 mars 2020, 17:33:32 (UTC+0100)
+
+Nombre de similitudes (voir evaluation1/sim_java.txt) : 9
+Les similitudes indiquent généralement du code à restructurer.
+
+Erreurs checkstyle (différentes/types) : 56/14	(voir evaluation1//checkstyle.log)
+
+Utilisation de 'Scanner' : ok
+	./allumettes/StrategieHumaine.java:    protected Scanner scanner;
+	./allumettes/StrategieHumaine.java:        this.scanner = new Scanner(System.in);
+
+Utilisation de 'split' : ok mais un seul split devrait suffir !  Code à restructurer...
+	./allumettes/Partie.java:				joueur_strategie1=args[0].split("@");
+	./allumettes/Partie.java:				joueur_strategie2=args[1].split("@");
+	./allumettes/Partie.java:				joueur_strategie1=args[1].split("@");
+	./allumettes/Partie.java:				joueur_strategie2=args[2].split("@");
+
+Utilisation de 'Random' : ok
+	./allumettes/StrategieNaive.java:import java.util.Random;
+	./allumettes/StrategieNaive.java:    protected Random alea;
+	./allumettes/StrategieNaive.java:        this.alea = new Random();
+	./allumettes/StrategieExperte.java:import java.util.Random;
+	./allumettes/StrategieExperte.java:    protected Random alea;
+	./allumettes/StrategieExperte.java:        this.alea = new Random();
+
+Utilisation de '3' : la constante Jeu.PRISE_MAX doit être utilisée
+	./allumettes/StrategieNaive.java:  * entre 1 et 3.
+	./allumettes/StrategieHumaine.java:  * @version 1.3
+
+Utilisation de 'System.exit' : ok
+
+Compilation de Partie.java : OK.
+Compilation de Arbitre.java : OK.
+Compilation de StrategieRapideTest.java : OK.
+Test exemplePresqueSujet : ok
+Test exempleTricheurSujet : ok
+Test exempleConfiantTricheurSujet : ok
+Test exempleRobustesse : ok
+Test exempleRapideRapide : ok
+Test exempleTricheurExpert : ok
+
+On recommence avec les classes/interfaces fournies : Jeu ConfigurationException CoupInvalideException
+Compilation de Partie.java : OK.
+Compilation de Arbitre.java : OK.
+
+Vérification du respect du diagramme de classe...
+Test FormeTest : OK (2 tests)	(voir evaluation1/FormeTest.log)
+
+Compilation de StrategieRapideTest.java : OK.
+Test allumettes.StrategieRapideTest : OK (1 test)	(voir evaluation1/allumettes.StrategieRapideTest.log)

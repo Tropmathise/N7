@@ -1,0 +1,12 @@
+package monopoly.divers;
+
+/** Carte : Sortie de Prison */
+
+
+public class CarteSortieDePrison extends Carte {
+
+    public CarteSortieDePrison(Integer id, TypeCarte type, int valeur, String message) {
+        super(id, type, valeur, message);
+    }
+
+}

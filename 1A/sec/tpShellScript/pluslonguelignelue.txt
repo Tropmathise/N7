@@ -1,0 +1,17 @@
+#!/bin/sh
+
+if [ $# -ne 0 ]; then
+    echo "$0 sans argument"
+    exit 1
+fi
+    
+l=0
+p=''
+while read x; do
+   y=`echo "$x" | wc -c`
+   if [ $y -gt $l ]; then
+       p="$x"
+       l=$y
+   fi
+done
+echo $p

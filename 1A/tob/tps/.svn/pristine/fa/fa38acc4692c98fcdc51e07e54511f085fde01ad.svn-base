@@ -1,0 +1,235 @@
+File ./allumettes/ConfigurationException.java: 21 tokens, 16 lines
+File ./allumettes/Jeu.java: 23 tokens, 21 lines
+File ./allumettes/Arbitre.java: 558 tokens, 114 lines (not NL-terminated)
+File ./allumettes/Strategie.java: 13 tokens, 25 lines (not NL-terminated)
+File ./allumettes/StrategieTricheur.java: 85 tokens, 33 lines
+File ./allumettes/OperationInterditeException.java: 19 tokens, 15 lines
+File ./allumettes/ProcurationJeu.java: 63 tokens, 25 lines
+File ./allumettes/Partie.java: 321 tokens, 75 lines
+File ./allumettes/CoupInvalideException.java: 51 tokens, 27 lines
+File ./allumettes/NouveauJeu.java: 101 tokens, 43 lines
+File ./allumettes/Joueur.java: 269 tokens, 98 lines
+File ./allumettes/StrategieNaive.java: 82 tokens, 30 lines
+File ./allumettes/StrategieExperte.java: 120 tokens, 36 lines (not NL-terminated)
+File ./allumettes/StrategieHumaine.java: 116 tokens, 37 lines
+File ./allumettes/StrategieRapide.java: 58 tokens, 23 lines (not NL-terminated)
+Total input: 15 files (15 new, 0 old), 1900 tokens
+
+./allumettes/Arbitre.java: line 51-60 [62]
+./allumettes/Arbitre.java: line 62-71
+<                     nb = joueur_actuel.getPrise(jeu);
+<                     if (nb>1) {
+<                         System.out.println(joueur_actuel.getNom() + " prend " + nb + " allumettes.");
+<                     }
+<                     else {
+<                         System.out.println(joueur_actuel.getNom() + " prend " + nb + " allumette."); 
+<                     }
+<                     System.out.println();
+<                     jeu.retirer(nb);
+<                 }
+---
+>                     nb = joueur_actuel.getPrise(new ProcurationJeu(jeu));
+>                     if (nb>1) {
+>                         System.out.println(joueur_actuel.getNom() + " prend " + nb + " allumettes.");
+>                     }
+>                     else {
+>                         System.out.println(joueur_actuel.getNom() + " prend " + nb + " allumette."); 
+>                     }
+>                     System.out.println();
+>                     jeu.retirer(nb);
+>                 }
+
+./allumettes/StrategieNaive.java: line 1-26 [60]
+./allumettes/StrategieExperte.java: line 1-27
+< package allumettes;
+< import java.util.Random;
+< 
+< /** La strategie naive consiste à tirer un nombre aléatoire
+<   * entre 1 et PRISEMAX.
+<   * @author Thomas SADURNI
+<   * @version 1.2
+<   */
+< 
+< public class StrategieNaive implements Strategie {
+< 
+<     /** Le nombre aléatoire */
+<     private Random alea;
+< 
+<     public StrategieNaive() {
+<         this.alea = new Random();
+<     }
+< 
+<     /** Retourne le nombre d'allumettes
+<       * @param jeu Jeu
+<       */
+<     @Override
+<     public int getPrise(Jeu jeu) {
+<         assert(jeu != null);
+<         assert(jeu.getNombreAllumettes() > 0);
+<         int n = jeu.getNombreAllumettes();
+---
+> package allumettes;
+> import java.util.Random;
+> 
+> /** La strategie experte consiste à faire gagner l'ordinateur
+>   * quand il le peut.
+>   * @author Thomas SADURNI
+>   * @version 1.4
+>   */
+> public class StrategieExperte implements Strategie {
+> 
+>     /** Un nombre aléatoire */
+>     private Random alea;
+> 
+>     public StrategieExperte() 
+>     {
+>         this.alea = new Random();
+>     }
+> 
+>     /** Retourne le nombre d'allumettes
+>       * @param jeu Jeu
+>       * @return nombre d'allumettes
+>       */
+>     @Override
+>     public int getPrise(Jeu jeu) {
+>       assert (jeu != null);
+>       assert (jeu.getNombreAllumettes() > 0);
+>       int n = jeu.getNombreAllumettes();
+
+./allumettes/Joueur.java: line 61-65 [50]
+./allumettes/Joueur.java: line 65-69
+<       if (strat.equals("rapide")) {
+<           return new StrategieRapide();
+<       } else if (strat.equals("naif") || strat.equals("naive")) {
+<           return new StrategieNaive();
+<       } else if (strat.equals("expert") || strat.equals("experte")) {
+---
+>       } else if (strat.equals("expert") || strat.equals("experte")) {
+>           return new StrategieExperte();
+>       } else if (strat.equals("humain") || strat.equals("humaine")) {
+>           return new StrategieHumaine();
+>       } else if (strat.equals("tricheur") || strat.equals("tricheuse")) {
+
+./allumettes/StrategieTricheur.java: line 1-22 [41]
+./allumettes/StrategieRapide.java: line 1-19
+< package allumettes;
+< 
+< /** La stratégie tricheur consiste a prendre toutes les 
+<   * allumettes sauf 2, prendre la dernière et dire qu'il
+<   * en a pris une seule.
+<   * @author Thomas SADURNI
+<   * @version 1.0
+<   */
+< 
+<   public class StrategieTricheur implements Strategie {
+<       
+<     /** Constructeur de la classe stratégie du tricheur. */
+<     public StrategieTricheur() {
+<     }
+< 
+<     /** Retourne le nombre d'allumettes.
+<       * @param jeu Jeu
+<       */
+<     @Override
+<     public int getPrise(Jeu jeu) {
+<         assert (jeu != null);
+<         assert (jeu.getNombreAllumettes() > 0);
+---
+> package allumettes;
+> 
+> /** La strategie rapide consiste prendre le maximum 
+>   * d'allumettes possible.
+>   * @author Thomas SADURNI
+>   * @version 1.2
+>   */
+> public class StrategieRapide implements Strategie {
+> 
+>     public StrategieRapide() {
+>     }
+> 
+>     /** Retourne le nombre d'allumettes
+>       * @param jeu Jeu
+>       */
+>     @Override
+>     public int getPrise(Jeu jeu) {
+>         assert (jeu != null);
+>         assert (jeu.getNombreAllumettes() > 0);
+
+./allumettes/Arbitre.java: line 22-29 [34]
+./allumettes/Joueur.java: line 14-24
+<     protected boolean confiant;
+< 
+<     /** Constucteur Arbitre. */
+<     public Arbitre(Joueur j1, Joueur j2) {
+<         assert(j1 != null);
+<         assert(j2 != null);
+<         this.joueur1=j1;
+<         this.joueur2=j2;
+---
+>     private Strategie strategie;
+> 
+>     /** Initialisation du joeur.
+>       * @param nomjoueur nom du joueur
+>       * @param strategiejoueur stratégie du joueur
+>       */
+>     public Joueur(String nomjoueur, Strategie strategiejoueur) {
+>         assert (nomjoueur != null);
+>         assert (strategiejoueur != null);
+>         this.nom = nomjoueur;
+>         this.strategie = strategiejoueur;
+
+./allumettes/StrategieExperte.java: line 17-26 [28]
+./allumettes/StrategieRapide.java: line 11-19
+<     }
+< 
+<     /** Retourne le nombre d'allumettes
+<       * @param jeu Jeu
+<       * @return nombre d'allumettes
+<       */
+<     @Override
+<     public int getPrise(Jeu jeu) {
+<       assert (jeu != null);
+<       assert (jeu.getNombreAllumettes() > 0);
+---
+>     }
+> 
+>     /** Retourne le nombre d'allumettes
+>       * @param jeu Jeu
+>       */
+>     @Override
+>     public int getPrise(Jeu jeu) {
+>         assert (jeu != null);
+>         assert (jeu.getNombreAllumettes() > 0);
+
+./allumettes/Joueur.java: line 65-67 [25]
+./allumettes/Joueur.java: line 67-69
+<       } else if (strat.equals("expert") || strat.equals("experte")) {
+<           return new StrategieExperte();
+<       } else if (strat.equals("humain") || strat.equals("humaine")) {
+---
+>       } else if (strat.equals("humain") || strat.equals("humaine")) {
+>           return new StrategieHumaine();
+>       } else if (strat.equals("tricheur") || strat.equals("tricheuse")) {
+
+./allumettes/Joueur.java: line 37-39 [25]
+./allumettes/StrategieNaive.java: line 23-25
+<     public int getPrise(Jeu jeu) {
+<         assert (jeu != null);
+<         assert (jeu.getNombreAllumettes() > 0);
+---
+>     public int getPrise(Jeu jeu) {
+>         assert(jeu != null);
+>         assert(jeu.getNombreAllumettes() > 0);
+
+./allumettes/Partie.java: line 20-23 [24]
+./allumettes/Partie.java: line 23-26
+< 			if (args.length == 2){
+< 				joueurStrategie1 = args[0].split("@");
+< 				joueurStrategie2 = args[1].split("@");
+< 			} else {
+---
+> 			} else {
+> 				joueurStrategie1 = args[1].split("@");
+> 				joueurStrategie2 = args[2].split("@");
+> 			}
+

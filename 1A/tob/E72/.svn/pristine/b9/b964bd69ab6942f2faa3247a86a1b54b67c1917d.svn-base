@@ -1,0 +1,5 @@
+package monopoly.cases;
+
+public class CasePaiement extends Case {
+	
+}

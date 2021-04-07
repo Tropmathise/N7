@@ -1,0 +1,23 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Main<TP12_dcd09f44>",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "TP12_dcd09f44", 
+            "args": "/home/tsadurni/Documents/Annee_1/tob/tps/TP12/PrixCarburants_annuel_2017.xml"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch) - Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        }
+ 
+    ]
+}

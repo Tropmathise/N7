@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<!-- saved from url=(0079)http://mauran.perso.enseeiht.fr/pages/cours/Corrections/shell1/filtres-sol.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Commandes avancées</title>
+  
+</head>
+
+<body>
+<h1 align="center">Commandes avancées</h1>
+<ol type="1">
+  <li>Afficher le nom de tous les fichiers dans la sous-arborescence du
+    répertoire courant possédant le suffixe <tt>.o</tt>. 
+    <pre><font color="blue"><br>        find . -name '*.o' -type f -print<br></font></pre>
+    <br>
+    <br>
+  </li>
+  <li>Compter le nombre de fichiers avec l'extension <tt>.o</tt> présents dans
+    la sous-arborescence du répertoire courant. 
+    <pre><font color="blue"><br>        find . -name '*.o' -type f -print | wc -l<br></font></pre>
+    <br>
+    <br>
+  </li>
+  <li>Supprimer tous les fichiers <tt>core</tt> non vides présents dans la
+    sous-arborescence du répertoire courant. 
+    <pre><font color="blue"><br>        find . -name core -type f -size +0 -exec rm -f {} \;<br></font></pre>
+    <font color="blue">L'option <tt>-type f</tt></font><font color="blue">contraint la destruction aux <em>fichiers</em> (pas de
+    tentative de destruction d'un répertoire par exemple) ; L'option <tt>-size
+    +0</tt></font><font color="blue">impose que le fichier soit non vide.
+    </font><br>
+    <br>
+  </li>
+  <li>Calculer la somme du nombre de caractères présents dans tous les
+    fichiers ordinaires de l'arborescence issue du répertoire courant. 
+    <pre><font color="blue"><br>        find . -type f -exec cat {} \; | wc -c<br>        wc -c `find . -type f -print` | tail -1     <br></font></pre>
+    <font color="blue">La première solution concatène tous les fichiers de
+    l'arborescence, et compte le nombre de caractères de cette
+    concaténation.<br>
+    La deuxième solution construit l'ensemble des noms de fichiers de
+    l'arborescence (<tt>find ... -print</tt></font><font color="blue">) et
+    applique <tt>wc</tt></font><font color="blue">sur cette liste de noms ;
+    <tt>wc&nbsp;-c</tt></font><font color="blue">affiche le nombre de caractères
+    de chaque fichier, et finit par une ligne récapitulative contenant la
+    somme des caractères ; seule cette ligne nous intéresse, et elle est
+    conservée grâce au <tt>tail</tt></font><font color="blue">. </font><br>
+    <br>
+  </li>
+  <li>Compter le nombre de lignes où apparaît une chaîne dans tous les
+    fichiers du répertoire courant. 
+    <pre><font color="blue"><br>         grep chaine * | wc -l<br></font></pre>
+    <br>
+    <br>
+  </li>
+  <li>Compter le nombre de lignes contenant <tt>bash</tt> parmi les 20
+    premières lignes du fichier <tt>/etc/passwd</tt>
+    <pre><font color="blue"><br>        head -20 /etc/passwd | grep bash | wc -l<br></font></pre>
+    <br>
+    <br>
+  </li>
+  <li>Lister les caractéristiques du troisième objet (objet = fichier ou
+    répertoire) du répertoire courant dans l'ordre chronologique de
+    modification. 
+    <pre><font color="blue"><br>        ls -lt | head -4 | tail -1<br></font></pre>
+    <br>
+    <br>
+  </li>
+  <li>Compter le nombre de voyelles dans un fichier donné. 
+    <pre><font color="blue"><br>        tr -cd 'AEIOUYaeiouy' &lt; $1 | wc -c<br></font></pre>
+    <font color="blue">La commande <tt>tr</tt></font><font color="blue">recopie
+    son entrée standard en détruisant (option <tt>-d</tt></font><font color="blue">) les caractères dans le complémentaire (option
+    <tt>-c</tt></font><font color="blue">) de l'ensemble spécifiée en
+    paramètre. Dans notre cas, il ne reste donc que les voyelles qu'il suffit
+    de compter. </font><br>
+    <br>
+  </li>
+  <li>Compter le nombre d'occurrences d'une chaîne (sans espace) dans un
+    fichier. On ne compte qu'une occurrence du mot recherché par mot du
+    fichier (<tt>ba</tt> dans ``<tt>baba babababa ba</tt>'' apparaît trois
+    fois), et il peut se trouver plusieurs occurrences du mot recherché sur
+    une même ligne. Le délimiteur entre les mots du fichier est l'espace. 
+    <pre><font color="blue"><br>        tr ' ' '\012' &lt; $1 | grep "$2" | wc -l<br></font></pre>
+    <font color="blue">Telle qu'utilisée, la commande <tt>tr</tt></font><font color="blue">remplace chaque espace par un passage à la ligne
+    (<tt>\012</tt></font><font color="blue">). Chaque ligne contient donc un
+    seul mot, et il suffit d'appliquer <tt>grep</tt></font><font color="blue">qui extrait les lignes (donc les mots) intéressants.<br>
+    Noter l'utilisation des quotes <tt>"$2"</tt></font><font color="blue">pour
+    éviter que des jokers de grep (comme l'étoile) présents dans la chaîne
+    à rechercher ne soient interprétés comme des meta-caractères du shell.
+    </font><br>
+    <br>
+  </li>
+  <li>Lister pour tous les répertoires contenus dans le répertoire courant
+    les informations suivantes : nom du propriétaire, nom du répertoire, date
+    de dernière modification. 
+    <pre><font color="blue"><br>        ls -l | grep '^d' | tr -s ' ' ' ' | cut -d " " -f3,5-7,8<br></font></pre>
+    <font color="blue">Sous Solaris, les répertoires sont listés par
+    <tt>ls</tt></font><font color="blue">avec un <tt>d</tt></font><font color="blue">en premier caractère (avant les permissions. Les fichier
+    réguliers ont un tiret, les liens symboliques un <tt>l</tt></font><font color="blue">). L'appel à <tt>grep</tt></font><font color="blue">permet de
+    ne garder que ces lignes.<br>
+    L'utilisation de <tt>tr</tt></font><font color="blue">avec l'option -s
+    (<em>squeeze</em>) permet de remplacer un nombre quelquconque d'occurrences
+    consécutives d'un caractère (ici l'espace) par un autre caractère (ici
+    toujours un espace).<br>
+    La commande <tt>cut</tt></font><font color="blue">considère chaque ligne
+    comme une suite de champs séparés par un caractère délimiteur (ici
+    spécifié comme un espace par l'option <tt>-d " "</tt></font><font color="blue">), et on extrait les champs (<em>fields</em>, option
+    <tt>-f</tt></font><font color="blue">) qui nous intéressent. </font><br>
+    <br>
+  </li>
+  <li>Calculer la longueur de la plus longue ligne d'un fichier donné. 
+    <pre><font color="blue"><br>        sed -e 's/./X/g' $1 | sort | tail -1 | wc -c<br></font></pre>
+    <font color="blue">La commande <tt>sed</tt></font><font color="blue">est un
+    « éditeur de flux », qui permet de transformer le texte lu sur l'entrée
+    standard (ou depuis un fichier) par ajout, insertion ou modification comme
+    un éditeur. Ici, nous substituons chaque caractère de chaque ligne par un
+    <tt>X</tt></font><font color="blue">(<tt>.</tt></font><font color="blue">signifie un caractère quelconque sauf fin de ligne, le
+    modifieur <tt>g</tt></font><font color="blue">impose la répétition autant
+    que possible de la substitution). Une autre possibilité, en lisant
+    attentivement le manuel de <tt>tr</tt></font><font color="blue">, serait :
+    <tt>tr -c '\012' '[X*]' &lt;$1 | ...</tt></font><font color="blue"><br>
+    La commande <tt>sort</tt></font><font color="blue">trie les lignes par
+    ordre alphabétique. Ici, elles contiennent toutes que des
+    <tt>X</tt></font><font color="blue">, et seule la longueur des lignes les
+    distingue. La plus longue ligne se retrouve à la fin.<br>
+    Il ne reste donc plus qu'à l'isoler (<tt>tail</tt></font><font color="blue">) pour compter combien elle contient de caractères
+    (<tt>wc</tt></font><font color="blue">). </font></li>
+</ol>
+
+
+</body></html>
