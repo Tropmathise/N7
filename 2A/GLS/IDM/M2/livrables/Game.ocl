@@ -1,0 +1,34 @@
+import 'Game.ecore'
+
+package game
+
+context Game
+inv nomNonNul:
+	self.name <> null
+
+context Explorateur
+inv inventaireNonSurcharge :
+	let tailleTotale =
+	(self.inventaire -> iterate(p: PackObjets; sum: Integer = 0 | sum + (p.objet.taille)*p.quantite))
+	in tailleTotale <= self.tailleInventaire
+
+inv nomNonNul:
+	self.name <> null
+
+context Lieu
+inv nomNonNul:
+	self.name <> null
+	
+context Objet
+inv nomNonNul:
+	self.name <> null
+
+context Connaissance
+inv nomNonNul:
+	self.name <> null
+
+context Choix
+inv nomNonNul:
+	self.name <> null
+
+endpackage

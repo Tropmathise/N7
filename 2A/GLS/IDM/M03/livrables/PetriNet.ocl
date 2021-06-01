@@ -1,0 +1,27 @@
+import 'PetriNet.ecore'
+
+package petrinet
+
+context PetriNet
+inv hasName('Empty name :' + self.nom):
+	self.nom <> ''
+
+context PetriElement 
+inv hasName('Empty name :' + self.nom):
+	self.nom <> ''
+inv uniqNames('Not uniq name: ' + self.nom): self.PetriNet.Elements
+	-> select(element | element.oclIsKindOf(PetriElement))
+	-> collect(element | element.oclAsType(PetriElement))
+	-> forAll(pe | self = pe or self.nom <> pe.nom)
+
+context Place
+inv positiveToken('The number of tokens must be positive:'):
+	self.nbJetons >= 0
+	
+context Arc
+inv arcWeight('The weight of the arc is not positive:'):
+	self.poids >= 1
+inv goodLink('The links between predecessor and sucessor are incorrect'):
+	(self.predecesseur.oclIsTypeOf(Place) implies self.successeur.oclIsTypeOf(Transition)) and (self.predecesseur.oclIsTypeOf(Transition) implies self.successeur.oclIsTypeOf(Place))
+
+endpackage

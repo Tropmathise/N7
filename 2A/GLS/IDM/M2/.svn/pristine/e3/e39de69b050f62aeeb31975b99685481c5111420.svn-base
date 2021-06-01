@@ -1,0 +1,7 @@
+op finished = succes \/ echec;
+
+[] (finished => dead);
+[] (dead => finished);
+
+- <> succes;
+- <> echec;

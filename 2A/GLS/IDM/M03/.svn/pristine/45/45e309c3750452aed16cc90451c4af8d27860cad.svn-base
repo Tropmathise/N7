@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PetriNet:PetriNet
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:PetriNet="http://PetriNet"
+    xsi:schemaLocation="http://PetriNet PetriNet.ecore">
+  <places nom="test"/>
+  <places nom="test"/>
+</PetriNet:PetriNet>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\thoma\Desktop\N7\2A\Rendu\tp3-2021.0.0-rc1\build\CMakeFiles\8639c7699a43984783ce7885f91a6244\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{9772E599-9E55-3F18-AF30-3CBC1549C299}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

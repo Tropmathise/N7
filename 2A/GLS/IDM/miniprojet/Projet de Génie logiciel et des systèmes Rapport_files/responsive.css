@@ -1,0 +1,254 @@
+/* Targetting Webkit browsers only. FF will show the dropdown arrow with so much padding. */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	select .tinynav {
+		padding-right:18px
+	}
+}
+@media(max-width:1200px) {
+h3.landingpage {line-height: 25px;font-size: 18px;}
+h1.landingpage {margin-left:10px;margin-top: 0px;font-size: 40px;line-height: 50px;}
+}
+@media screen and (min-width:600px) and (max-width:1200px) {
+	#c-slide .slide1-1 {
+		margin-top:-205px;
+	}
+	#c-slide .item {
+		height:auto;
+		padding:30px 0px 90px;
+		height:390px;
+		text-align:center;
+	}
+	.carouselText1 {margin-top: 20px;}
+	.slide1-3{top:100px;}
+	.slide1-2{right:150px;}
+	
+}
+
+.boxportfolio4{width:22%}
+
+
+@media(max-width:992px) {
+.boxportfolio1, .boxportfolio2, .boxportfolio3, .boxportfolio4 {width:auto;}
+.bgarea-semitransparent {
+text-align: center;
+}
+.landingpage-button {text-align: center;display: inline-block;}
+.pageheader-default {margin-top: 130px;}
+h1.landingpage {margin-left:10px;font-size: 28px;line-height: 25px;}
+h3.landingpage {line-height: 25px;font-size: 18px;}
+	iframe {
+		max-width:100%;
+	}
+	#nav {
+		display:none;
+	}
+	.toparea {
+		position:absolute;
+		top:0;
+		width:100%;
+		z-index:1;
+	}
+	.toparea .social-icons {
+		display:none;
+	}
+	body {
+		color:#000;
+	}
+	.boxcontainer h1 a, .boxcontainer p{font-size:10px;}
+}
+@media screen and (min-width:600px) and (max-width:992px) {
+	#c-slide {
+		margin-top:127px;
+	}
+	.tinynav {
+			margin-bottom:0;
+		float:right;
+		font-weight:500;
+		height:40px;
+		padding:3px;
+		margin-top:0px;
+		-webkit-border-radius:4px;
+		-moz-border-radius:4px;
+		border-radius:4px;
+		-webkit-box-shadow:0 3px 0 #ccc,0 -1px #fff inset;
+		-moz-box-shadow:0 3px 0 #ccc,0 -1px #fff inset;
+		box-shadow:0 3px 0 #ccc,0 -1px #fff inset;
+		background:#f54828;
+		color:#fff;
+		font-size:14px;
+		border:none;
+		outline:none;
+		display:inline;
+		-webkit-appearance:none;
+		-moz-appearance:none;
+		appearance:none;
+		cursor:pointer;
+		-webkit-padding-start:20px;
+		-webkit-border-radius:0px;
+		-moz-border-radius:0px;
+		border-radius:0px;
+	}
+	.footer h1 {
+		margin-top:20px;
+	}
+	.navbar {
+		padding-left:15px;
+		padding-right:15px;
+	}
+	#c-slide .item {
+		height:auto;
+		padding:30px 0px 90px;
+		min-height:380px;
+		text-align:center;
+	}
+}
+@media screen and (min-width:601px) and (max-width:767px) {
+	.tinynav {
+		margin-top:-40px;
+	}
+}
+@media screen and (max-width:600px) {
+.landingpage-button strong {margin-left: 0;font-size: 14px;}
+.landingpage-button i {display:none;}
+.landingpage-button {width: 180px;text-align: center;display: inline-block;}
+.landingpage-button span {width: 0;margin-left: 0;top: 0;}
+	.footer {
+		background:#222;
+	}
+	.home-portfolio .carousel-indicators {
+		bottom: 20px;
+	}
+		.notransition {
+		-o-transition-property:none !important;
+		-moz-transition-property:none !important;
+		-ms-transition-property:none !important;
+		-webkit-transition-property:none !important;
+		transition-property:none !important;
+		/*CSS transforms*/
+		-o-transform:none !important;
+		-moz-transform:none !important;
+		-ms-transform:none !important;
+		-webkit-transform:none !important;
+		transform:none !important;
+		/*CSS animations*/
+		-webkit-animation:none !important;
+		-moz-animation:none !important;
+		-o-animation:none !important;
+		-ms-animation:none !important;
+		animation:none !important;
+		opacity:1!important;
+	}
+	html {
+		opacity:1!important;
+	}
+	#carousel-featuredwork .item {
+	height: auto;
+	}
+	.tinynav {
+		position:absolute;
+		top:0;
+		width:100%;
+		clear:both;
+		float:none;
+		margin-top:0;
+		margin-bottom:0;
+		font-weight:500;
+		height:40px;
+		padding:3px;
+		margin:0;
+		-webkit-box-shadow:0 3px 0 #ccc,0 -1px #fff inset;
+		-moz-box-shadow:0 3px 0 #ccc,0 -1px #fff inset;
+		box-shadow:0 3px 0 #ccc,0 -1px #fff inset;
+		background:#f54828;
+		color:#fff;
+		font-size:14px;
+		border:none;
+		outline:none;
+		display:block;
+		-webkit-appearance:none;
+		-moz-appearance:none;
+		appearance:none;
+		cursor:pointer;
+		-webkit-padding-start:20px;
+		-webkit-border-radius:0px;
+		-moz-border-radius:0px;
+		border-radius:0px;
+	}
+	.navbar>.container .navbar-brand {
+		margin-top:50px;
+	}
+	.navbar .container {
+		padding-left:0px;
+	}
+	.navbar-fixed-top {
+		position:absolute;
+	}
+	.navbar-fixed-top {
+		top:0;
+	}
+	#c-slide {
+		margin-top:130px !Important;
+	}
+	.container>.navbar-header,.container>.navbar-collapse {
+		padding-left:15px;
+		margin-bottom:0px;
+	}
+	.toparea {
+		display:none;
+	}
+	.carousel-control.left,.carousel-control.right {
+		margin-top:50%;
+	}
+	.slide1-1 {
+		margin-top:-120px;
+	}
+	.slide1-2 {
+		right:80px;
+		top:20px;
+	}
+	.slide1-3 {
+		top:80px;
+	}
+	.carousel p {
+		line-height:20px;
+	}
+	#back-top {
+		display:none !important;
+	}
+	.intro-note p {
+		padding-left:0;
+		padding-right:0;
+	}
+	.toparea .social-icons {
+		display:none;
+	}
+	#c-slide .item {
+		height:auto;
+		padding:30px 0px 90px;
+		min-height:380px;
+		text-align:center;
+	}
+	#c-slide {
+		margin-top:176px;
+	}
+	#c-slide iframe {
+		max-width:85%;
+		margin-bottom:20px;
+	}
+	.carouselvshadow {
+		display:none;
+	}
+	.footer h1 {
+		margin-top:20px;
+	}
+	.copyright ul.footermenu {
+		margin-top:0px;
+		float:none !Important;
+	}
+	.copyright p {
+		float:none!Important;
+	}
+	.cbp-qtrotator blockquote footer {
+		margin-bottom: 30px;
+	}
+}

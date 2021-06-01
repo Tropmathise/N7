@@ -1,0 +1,96 @@
+.wowmenu.tiny,
+.navbar
+{
+	background: #4582ec !important;
+}
+.navbar-brand
+{
+	color: #fff;
+}
+.navbar-header + .navbar-nav li:first-child
+{
+	margin-left: 30px;
+}
+
+.navbar-nav > li > a
+{
+	color: #fff;
+}
+.navbar-nav > li.active > a,
+.navbar-nav > li > a:hover,
+.navbar-nav > li > a:focus
+{
+	background-color: #f7a946;
+}
+
+.search-nav input
+{
+	border-bottom: 2px solid #fff;
+}
+.search-nav button
+{
+	margin-left: -5px;
+	background-color: #f7a946;
+}
+.search-nav button > i
+{
+	color: #fff;
+}
+
+.btn-default
+{
+	background: #f7a946;
+}
+
+#tinynav1
+{
+	background: #f7a946;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+
+.pageheader-default .semitransparentbg
+{
+	background: rgba(69, 130, 236, 0.8) !important;
+}
+
+.footer
+{
+	padding-top: 0;
+	background: #4582ec;
+}
+.footer a
+{
+	color: #fff !important;
+	text-decoration: none !important;
+}
+.copyright
+{
+	border-top: 1px solid #ddd;
+	background: #4582ec;
+}
+
+.b-upload_dnd
+{
+	color: white !important;
+}
+.b-upload__dnd
+{
+	background: #4582ec url(/img/cloud_upload_white.png) 50% 50px no-repeat !important;
+	background-size: 200px 200px !important;
+}
+
+.browse .row a
+{
+	color: #4582ec !important;
+}
+.browse .breadcrumb
+{
+	background: #4582ec !important;
+}
+.browse .panel
+{
+	border-left-color: #f7a946;
+}
+

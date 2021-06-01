@@ -1,0 +1,325 @@
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var DocViewer = function () {
+	_createClass(DocViewer, null, [{
+		key: 'SIMPLE',
+
+		/** @return {string} */
+		get: function get() {
+			return 'simple';
+		}
+	}, {
+		key: 'CONTINUOUS',
+
+		/** @return {string} */
+		get: function get() {
+			return 'continuous';
+		}
+	}]);
+
+	function DocViewer(container) {
+		var _this = this;
+
+		_classCallCheck(this, DocViewer);
+
+		container = $(container)[0];
+
+		this.linkService = new PDFJS.PDFLinkService();
+		this.printService = null;
+
+		this.viewerContainer = $(container);
+		this.viewer = new PDFJS.PDFViewer({
+			container: container,
+			linkService: this.linkService,
+			removePageBorders: true,
+			renderInteractiveForms: true
+		});
+
+		this.history = new PDFJS.PDFHistory({
+			linkService: this.linkService
+		});
+
+		this.linkService.setViewer(this.viewer);
+		this.linkService.setHistory(this.history);
+
+		this.eventBus = new PDFJS.EventBus();
+
+		this.ad = {
+			simple: false,
+			continuous: false
+		};
+
+		container.addEventListener('pagesinit', function () {
+			_this.viewerInited = true;
+			_this.viewer.currentScaleValue = _this.mode === DocViewer.SIMPLE ? 'page-fit' : 'page-width';
+
+			_this.eventBus.dispatch('init');
+		});
+
+		container.addEventListener('pagesloaded', function () {
+			_this.eventBus.dispatch('complete');
+		});
+
+		// TODO: ChangeEvent
+
+		container.addEventListener('pagechange', function (event) {
+			_this.eventBus.dispatch('page', {
+				value: event.pageNumber
+			});
+		});
+
+		container.addEventListener('scalechange', function () {
+			//console.log('scalechange')
+		});
+
+		container.addEventListener('pagerendered', function (event) {
+			var page = $(event.target);
+
+			var offset = 0;
+			if (_this.mode === DocViewer.SIMPLE) {
+				offset = Math.max(0, Math.floor((_this.viewerContainer.height() - page.height()) / 2));
+			}
+			page.css('padding-top', offset);
+		});
+
+		container.addEventListener('textlayerrendered', function (event) {
+			var text = $(event.target);
+
+			var offset = 0;
+			if (_this.mode === DocViewer.SIMPLE) {
+				offset = Math.max(0, Math.floor((_this.viewerContainer.height() - text.height()) / 2));
+			}
+			text.css('top', offset);
+		});
+
+		window.addEventListener('resize', function () {
+			//noinspection SillyAssignmentJS
+			_this.viewer.currentScaleValue = _this.viewer.currentScaleValue || 'auto';
+			_this.viewer.update();
+		});
+
+		window.addEventListener('unload', function () {
+			_this.close();
+		});
+	}
+
+	DocViewer.prototype.open = function open(url) {
+		var _this2 = this;
+
+		if (this.task) {
+			return this.close().then(function () {
+				return _this2.open(url, mode);
+			});
+		}
+		this.eventBus.dispatch('open');
+
+		try {
+			this.task = PDFJS.getDocument(url);
+		} catch (error) {
+			return this.eventBus.dispatch('error', new PDFJS.MissingPDFException(error.message));
+		}
+
+		this.task.onProgress = function (data) {
+			return _this2.eventBus.dispatch('progress', data);
+		};
+
+		return this.task.promise.then(function (document) {
+			_this2.document = document;
+			_this2.viewer.setDocument(document);
+			_this2.history.initialize(document.fingerprint);
+			_this2.linkService.setDocument(document);
+			_this2.printService = null; // TODO: impl
+		}, function (exception) {
+			return _this2.eventBus.dispatch('error', exception);
+		});
+	};
+
+	DocViewer.prototype.close = function close() {
+		if (!this.task) {
+			return Promise.resolve();
+		}
+		this.eventBus.dispatch('close');
+
+		var promise = this.task.destroy();
+		this.task = null;
+
+		if (this.document) {
+			this.document = null;
+			this.viewer.setDocument(null);
+			this.linkService.setDocument(null, null);
+			this.printService = null;
+		}
+
+		return promise;
+	};
+
+	DocViewer.prototype.on = function on(name, listener) {
+		this.eventBus.on(name, listener);
+	};
+
+	DocViewer.prototype.off = function off(name, listener) {
+		this.eventBus.off(name, listener);
+	};
+
+	_createClass(DocViewer, [{
+		key: 'pages',
+		get: function get() {
+			return this.document.numPages || 0;
+		}
+	}, {
+		key: 'page',
+		get: function get() {
+			return this.viewer.currentPageNumber;
+		},
+		set: function set(value) {
+			if (value > 0 && value <= this.pages) {
+				this.viewer.currentPageNumber = +value;
+			}
+		}
+	}, {
+		key: 'scale',
+		get: function get() {
+			// TODO: implement
+		},
+		set: function set(value) {
+			// TODO: implement
+		}
+	}, {
+		key: 'mode',
+		get: function get() {
+			return this.viewerMode;
+		},
+		set: function set(value) {
+			if (value === this.viewerMode) {
+				return;
+			}
+
+			this.viewerContainer.removeClass(DocViewer.SIMPLE + 'Mode ' + DocViewer.CONTINUOUS + 'Mode');
+
+			if (value === DocViewer.SIMPLE || value === DocViewer.CONTINUOUS) {
+				this.viewerMode = value;
+				this.viewerContainer.addClass(value + 'Mode');
+
+				if (this.viewerInited) {
+					this.viewer.currentScaleValue = this.mode === DocViewer.SIMPLE ? 'page-fit' : 'page-width';
+				}
+
+				this.eventBus.dispatch('mode', value, this.viewerInited);
+			}
+		}
+	}]);
+
+	return DocViewer;
+}();
+
+var viewer = new DocViewer($('.pdfContainer'));
+viewer.on('progress', function (data) {
+	$('.pdfPreload p').text(Math.round(data.loaded / data.total) * 100 || 0);
+});
+viewer.on('error', function (error) {
+	$('.pdfPreload, .pdfContainer').hide();
+	$('.pdfError').show();
+
+	$('.pdfError summary').text(error.name);
+	$('.pdfError p').text(error.message);
+});
+viewer.on('init', function () {
+	$('.pdfPreload').hide();
+	$output();
+
+	var client = $.url('?pub');
+	if (client) {
+		$('.pdfContainer').addClass('ads');
+
+		$('head').append('<script async src="' + '//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"><\/script>');
+
+		var ids = $.url('?ids').split(',');
+		for (var i = 0; i < Math.min(ids.length, viewer.pages) - 1; i++) {
+			$('.pdfViewer .page:eq(' + i + ')').after('<div class="pdfBetween">');
+		}
+		$advert(client, ids);
+	}
+});
+viewer.on('page', function () {
+	$output();
+});
+viewer.on('mode', function (value, inited) {
+	$('.viewerMode i').removeClass().addClass('fa fa-' + (value === DocViewer.SIMPLE ? 'files-o' : 'file-o'));
+
+	var client = $.url('?pub');
+	if (client && inited) {
+		$advert(client, $.url('?ids').split(','));
+	}
+});
+viewer.mode = $.url('?mode') === 'simple' ? DocViewer.SIMPLE : DocViewer.CONTINUOUS;
+viewer.open($.url('?file') || '');
+
+function $input(edit) {
+	var element = $('.pageNumber');
+	$('output', element)[edit ? 'hide' : 'show']();
+	$('input', element)[edit ? 'show' : 'hide']().focus();
+}
+function $output() {
+	var element = $('.pageNumber');
+	$('output', element).html(viewer.page + ' / ' + viewer.pages);
+	$('input', element).val(viewer.page).prop('max', viewer.pages);
+}
+function $resize() {
+	var event = document.createEvent("HTMLEvents");
+	event.initEvent('resize', true, false);
+	window.dispatchEvent(event);
+}
+function $advert(client, ids) {
+	if (!viewer.ad.simple && viewer.mode === DocViewer.SIMPLE) {
+		viewer.ad.simple = true;
+
+		$('.pdfBottom').append($('<ins class="adsbygoogle" style="max-height:90px" data-ad-format="auto" ' + ('data-ad-client="ca-pub-' + client + '" data-ad-slot="' + ids[0] + '"></ins>') + '<script>(adsbygoogle = window.adsbygoogle || []).push({});<\/script>'));
+	}
+
+	if (!viewer.ad.continuous && viewer.mode === DocViewer.CONTINUOUS) {
+		viewer.ad.continuous = true;
+
+		for (var i = 0; i < Math.min(ids.length, viewer.pages) - 1; i++) {
+			$('.pdfBetween:eq(' + i + ')').append($('<ins class="adsbygoogle" style="max-height:90px" data-ad-format="auto" ' + ('data-ad-client="ca-pub-' + client + '" data-ad-slot="' + ids[i + 1] + '"></ins>') + '<script>(adsbygoogle = window.adsbygoogle || []).push({});<\/script>'));
+		}
+	}
+}
+
+$('.prevPage, .pdfControl.left').on('click', function () {
+	viewer.page--;
+});
+$('.nextPage, .pdfControl.right').on('click', function () {
+	viewer.page++;
+});
+
+$('.pageNumber input').on('change blur', function (event) {
+	viewer.page = $(event.currentTarget).val();
+	$(event.currentTarget).val(viewer.page);
+
+	$input(false);
+});
+$('.pageNumber output').on('click', function () {
+	$input(true);
+});
+
+$('.viewerMode').on('click', function () {
+	if (viewer.mode !== DocViewer.SIMPLE) {
+		viewer.mode = DocViewer.SIMPLE;
+		viewer.page = viewer.page;
+	} else {
+		viewer.mode = DocViewer.CONTINUOUS;
+	}
+});
+$('.displayMode').on('click', function () {
+	if ($.fullscreen.isFullScreen()) {
+		return $.fullscreen.exit();
+	}
+	$('body').fullscreen();
+});
+$(document).on('fscreenchange', function (_, value) {
+	$('.displayMode i').removeClass().addClass('fa fa-' + (value ? 'compress' : 'expand'));
+});

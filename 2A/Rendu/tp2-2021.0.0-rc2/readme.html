@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<h1 id="introduction-to-opengl">Introduction to OpenGL</h1>
+<ul>
+<li>Building</li>
+<li><a href="#windows">Windows</a></li>
+<li><a href="#linux">Linux</a></li>
+<li><a href="#macos">MacOs</a></li>
+</ul>
+<hr />
+<h2 id="windows">Windows</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<p>Not necessary if you already did the previous tp, but to recall: * download and install the latest version of CMake</p>
+<ul>
+<li><p>download here: https://github.com/Kitware/CMake/releases/download/v3.17.1/cmake-3.17.1-win64-x64.msi</p></li>
+<li><p>!!! When installing make sure that the checkbox &quot;ne pas ajouter cmake au PATH&quot; is NOT checked</p></li>
+<li><p>if you don't have it already, download and install MS Visual Studio Community Edition (free for students): https://visualstudio.microsoft.com/downloads/</p>
+<ul>
+<li><p>install instructions here: https://docs.microsoft.com/en-us/cpp/build/vscpp-step-0-installation?view=vs-2019</p></li>
+<li><p>!!! install the &quot;Desktop development with C++&quot;</p></li>
+<li><p>If you have VS already installed, you can go in <strong>Tools</strong> --&gt; <strong>Get Tools and Features...</strong> to install &quot;Desktop development with C++&quot; if it is missing.</p></li>
+</ul></li>
+</ul>
+<h3 id="create-the-visual-studio-solution.">Create the Visual Studio Solution.</h3>
+<p>This step enables you to create the project file to load inside VS:</p>
+<ul>
+<li><p>unzip the code inside a folder. <em>Avoid to place the code in folders with spaces and accented characters</em>.</p></li>
+<li><p>open a Terminal and go to the directory containing the code.</p></li>
+<li><p>execute:</p></li>
+<li><p><code>md build</code></p></li>
+<li><p><code>cd build</code></p></li>
+<li><p><code>cmake -G &quot;Visual Studio 16 2019&quot; -A x64 -DCMAKE_BUILD_TYPE:STRING=Release ..</code></p></li>
+<li><p><code>dir</code></p></li>
+</ul>
+<blockquote>
+<p>if you had a different version of VS installed (not the latest) you may need to adapt the string <code>Visual Studio 16 2019</code> to your version: e.g. Visual Studio 15 2017, Visual Studio 14 2015, Visual Studio 12 2013</p>
+</blockquote>
+<ul>
+<li>if everything went well you should find a file named <code>tp2.sln</code> inside the directory.</li>
+</ul>
+<h3 id="compile-build-execute">Compile, build, execute</h3>
+<ul>
+<li><p>open <code>tp1.sln</code> inside VS either by double clicking on it or opening from inside VS</p></li>
+<li><p>build the solution (<strong>Build Solution</strong> from the <strong>Build menu</strong>)</p></li>
+<li><p>from the tp directory copy <code>freeglut\bin\x64\freeglut.dll</code> in <code>build\Release</code></p></li>
+<li><p>execute the code:</p></li>
+<li><p>Select the project you want to run (e.g. <code>robot</code>), right click on it and select <strong>Set as Startup Project</strong></p></li>
+<li><p>On the menu bar, choose <strong>Debug</strong> --&gt; <strong>Start without debugging</strong>.)</p></li>
+</ul>
+<p>(see https://docs.microsoft.com/en-us/cpp/build/vscpp-step-2-build?view=vs-2019 for how to build, execute, etc)</p>
+<h3 id="editing-the-code">Editing the code</h3>
+<p>Edit the code according to the assignments that are given, rebuild the solution and execute.</p>
+<blockquote>
+<p>!!! You need to run the cmake line only <strong>once</strong></p>
+</blockquote>
+<blockquote>
+<p>!!! You need to copy the dll file only <strong>once</strong>.</p>
+</blockquote>
+<hr />
+<h2 id="linux">Linux</h2>
+<h3 id="prerequisites-1">Prerequisites</h3>
+<p><strong>Not necessary if you already did the previous tp.</strong></p>
+<p>In order to develop with OpenGL some system packages are required (unless you are using the N7 machines):</p>
+<pre><code>sudo apt-get install libglu1-mesa-dev freeglut3-dev build-essential mesa-common-dev libxi-dev libxmu-dev automake</code></pre>
+<p>To build this code we use the CMake build system. You can install CMake from the system package manager but you need a recent version &gt;= 3.10. Check the version that is provided by your linux distribution and if it is suitable usually you need to</p>
+<pre><code>```
+sudo apt-get install cmake
+```
+
+otherwise you can install the binaries from here: https://github.com/Kitware/CMake/releases/download/v3.17.1/cmake-3.17.1-Linux-x86_64.sh
+
+To install:
+```
+wget https://github.com/Kitware/CMake/releases/download/v3.17.1/cmake-3.17.1-Linux-x86_64.sh
+chmod +x cmake-3.17.1-Linux-x86_64.sh
+sudo cmake-3.17.1-Linux-x86_64.sh --prefix=/usr/local/ --skip-license
+```</code></pre>
+<h3 id="build">Build</h3>
+<p>To compile and build the code you do</p>
+<p><code>mkdir build &amp;&amp; cd build  cmake ..  make robot</code></p>
+<p>Also,</p>
+<pre><code>make all</code></pre>
+<p>builds everything, and</p>
+<pre><code>make clean</code></pre>
+<p>cleans everything.</p>
+<p>Execute the code:</p>
+<pre><code>./robot</code></pre>
+<h3 id="editing-the-code-1">Editing the code</h3>
+<p>Edit the code as required and then</p>
+<pre><code>make robot</code></pre>
+<blockquote>
+<p>!!! the cmake line has to be run only <strong>once</strong></p>
+</blockquote>
+<hr />
+<h2 id="macos">macOS</h2>
+<h3 id="prerequisites-2">Prerequisites</h3>
+<p>In order to develop with OpenGL check if</p>
+<pre><code>ls  /System/Library/Frameworks/</code></pre>
+<p>contains OpenGL and GLUT frameworks. If not you need to install XCode from the <code>Mac App Store</code>, see here for more details https://developer.apple.com/support/xcode/</p>
+<p>Install the latest version of CMake by downloading https://github.com/Kitware/CMake/releases/download/v3.17.1/cmake-3.17.1-Darwin-x86_64.dmg</p>
+<h3 id="build-1">Build</h3>
+<p>Same as Linux.</p>
+<h3 id="editing-the-code-2">Editing the code</h3>
+<p>Same as Linux.</p>
+</body>
+</html>

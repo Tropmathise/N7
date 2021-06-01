@@ -1,0 +1,19 @@
+
+# object filename:
+data/monkey2.off
+# camera position:
+-1.0 3.0 4.0
+# camera looks at:
+0.0 0.0 0.0
+# camera's y vector:
+0.0 -1.0 0.0
+# focal length (pixels):
+2000
+# w and h (pixels):
+800 600
+# ambient (white) light intensity Ia
+1.0
+# point light : 3D coordinates and ligth intensity (x, y, z, Id)
+0.0 0.0 8.0 0.8
+# object material parameters (Ka, Kd, Ks, s)
+0.5 0.5 0.5 3.0

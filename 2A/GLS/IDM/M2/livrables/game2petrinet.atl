@@ -1,0 +1,403 @@
+module game2petrinet;
+create OUT: petrinet from  IN: game;
+
+-- renvoie le jeu
+helper
+def: getGame(): game!Game =
+	game!Game.allInstances()
+		->asSequence()->first();
+
+
+-- Récupérer une étiquette de nommage
+helper 
+def: countConditions: Integer = 0;
+helper 
+def: countConjonctions: Integer = 0;
+helper 
+def: countLitteraux: Integer = 0;
+
+
+-- Traduire un jeu en un PetriNet de même nom
+rule Game2PetriNet {
+	from g: game!Game
+	to pn: petrinet!PetriNet (name<- g.name)
+}
+
+
+-- renvoie le maximum d'occurences de l'objet que l'inventaire peut contenir
+helper context game!Objet
+def: getMaxNumber(): Integer =
+	thisModule.getGame().explorateur.tailleInventaire.div(self.taille);
+-- renvoie le nombre initials d'occurences de l'objet dans l'invenaire
+helper context game!Objet
+def: getInitialNumber(): Integer =
+	let po:game!PackObjet = thisModule.getGame().explorateur.inventaire -> select(po | po.objet = self)
+		-> asSequence() -> first() in
+	if (po.oclIsUndefined()) then 0 else po.quantite endif;
+
+-- transforme un objet en deux places : une contient le nb d'objets ob dans l'inventaire, l'autre nb_max_objet_ob - le nb d'objets ob dans l'inventaire
+rule Objet2PetriNet {
+	from ob: game!Objet
+	to p_reel: petrinet!Place(
+		name <- ob.name+'_reel',
+		tokens <- ob.getInitialNumber(),
+		net <- thisModule.getGame()
+		),
+	p_inverse: petrinet!Place(
+		name <- ob.name+'_inverse',
+		tokens <- ob.getMaxNumber() - ob.getInitialNumber(),
+		net <- thisModule.getGame()
+		)
+}
+
+-- Traduire un Lieu en une place de PetriNet 
+rule Lieu2PetriNet {
+	from l: game!Lieu
+	to place : petrinet!Place(
+		name <- l.name,
+		tokens <- 1,
+		net <- thisModule.getGame()
+		)
+}
+
+--Traduire un chemin sans conditions en PetriNet
+rule Chemin2PetriNet {
+	from c: game!Chemin ((c.conditionVisibilite.oclIsUndefined()) and (c.ouvert.oclIsUndefined()))
+	to 
+		tr: petrinet!Transition(
+			name <- c.name,
+			net <- thisModule.getGame()
+			),
+		arc1: petrinet!Arc(
+			weight <- 1,
+			predecessor <- c.lieu1,
+			successor <- tr,
+			net <- thisModule.getGame()
+			),
+		arc2: petrinet!Arc(
+			weight <- 1,
+			predecessor <- tr,
+			successor <- c.lieu2,
+			net <- thisModule.getGame()
+			)
+}
+
+-- Traduire une Interaction en éléments de PetriNet
+rule Interaction2Petri {
+	from i: game!Interaction
+	to p_debut:petrinet!Place(
+		name <- i.getPersonne().name + i.getPersonne().getLieu().name + '_debut',
+		tokens <- 0,
+		net <- thisModule.getGame()),
+	p_fin:petrinet!Place(
+		name <- i.getPersonne().name + i.getPersonne().getLieu().name + '_fin',
+		tokens <- 0,
+		net <- thisModule.getGame()),
+	t_test: petrinet!Transition(
+		name <- i.getPersonne().name + i.getPersonne().getLieu().name + '_test',
+		net <- thisModule.getGame()),
+	a1: petrinet!Arc(
+		weight <- 1,
+		predecessor <- i.getPersonne().getLieu(),
+		successor <- t_test,
+		net <- thisModule.getGame()),
+	a2: petrinet!Arc(
+		weight <- 1,
+		predecessor <- t_test,
+		successor <- thisModule.resolveTemp(i.getPersonne().conditionVisibilite, 'p_depart'),
+		net <- thisModule.getGame()),
+	t_test_vrai: petrinet!Transition(
+		name <- i.getPersonne().name + i.getPersonne().getLieu().name + '_test_vrai',
+		net <- thisModule.getGame()),
+	a1v: petrinet!Arc(
+		weight <- 1,
+		predecessor <- thisModule.resolveTemp(i.getPersonne().conditionVisibilite, 'p_vrai'),
+		successor <- t_test_vrai,
+		net <- thisModule.getGame()),
+	a2v: petrinet!Arc(
+		weight <- 1,
+		predecessor <- t_test_vrai,
+		successor <- p_debut,
+		net <- thisModule.getGame()),
+	t_test_faux: petrinet!Transition(
+		name <- i.getPersonne().name + i.getPersonne().getLieu().name + '_test_faux',
+		net <- thisModule.getGame()),
+	a1f: petrinet!Arc(
+		weight <- 1,
+		predecessor <- i.thisModule.resolveTemp(i.getPersonne().conditionVisibilite, 'p_faux'),
+		successor <- t_test_faux,
+		net <- thisModule.getGame()),
+	a2f: petrinet!Arc(
+		weight <- 1,
+		predecessor <- t_test_faux,
+		successor <- i.getPersonne().getLieu(),
+		net <- thisModule.getGame()),
+	t_fin: petrinet!Transition(
+		name <- i.getPersonne().name + i.getPersonne().getLieu().name + '_tfin',
+		net <- thisModule.getGame()),
+	a1fi: petrinet!Arc(
+		weight <- 1,
+		predecessor <- p_fin,
+		successor <- t_fin,
+		net <- thisModule.getGame()),
+	a2fi: petrinet!Arc(
+		weight <- 1,
+		predecessor <- t_fin,
+		successor <- i.getPersonne().getLieu(),
+		net <- thisModule.getGame())
+		
+}
+
+
+helper context game!EntiteLieu
+def: getLieu(): game!Lieu =
+	game!Lieu.allInstances()
+		->select(l|l.entiteLieu.includes(self))
+		->asSequence()->first();
+
+rule PackObjet2PetriNet {
+	from pack: game!PackObjets
+	to p: petrinet!Place(
+		name <- pack.objet.name+'_'+pack.getLieu().name,
+		tokens <- pack.quantite,
+		net <- thisModule.getGame()
+		)
+}
+
+
+-- renvoie 1 si la connaissance est possédée au départ, 0 sinon
+helper context game!Connaissance
+def: getInitialConnaissance(): Integer =
+	let c:game!Connaissance = thisModule.getGame().explorateur.connaissances -> select(c | c = self)
+		-> asSequence() -> first() in
+	if (c.oclIsUndefined()) then 0 else 1 endif;
+
+-- Traduit une Connaissance en éléments de PetriNet
+rule Connaissance2PetriNet {
+	from c: game!Connaissance
+	to p_reel: petrinet!Place(
+		name <- c.name+'_reel',
+		tokens <- c.getInitialConnaissance(),
+		net <- thisModule.getGame()
+		),
+	p_inverse: petrinet!Place(
+		name <- c.name+'_inverse',
+		tokens <- 1 - c.getInitialConnaissance(),
+		net <- thisModule.getGame()
+		)
+}
+
+
+
+-- Traduire une Condition en éléments de PetriNet
+rule Condition2PetriNet {
+	from c: game!Condition
+	to p_depart: petrinet!Place(
+		name <- 'condition_'+thisModule.countConditions.toString(),
+		tokens <- 0,
+		net <- thisModule.getGame()
+		),
+	p_vrai: petrinet!Place(
+		name <- 'condition_'+thisModule.countConditions.toString()+'_reussite',
+		tokens <- 0,
+		net <- thisModule.getGame()
+		),
+	p_faux: petrinet!Place(
+		name <- 'condition_'+thisModule.countConditions.toString()+'_echec',
+		tokens <- 0,
+		net <- thisModule.getGame()
+		),
+	t_faux: petrinet!Transition(
+		name <- 'condition_'+thisModule.countConditions.toString()+'_fausse',
+		net <- thisModule.getGame()),
+	a1: petrinet!Arc(
+		weight <- 1,
+		predecessor <- thisModule.resolveTemp(c.conjonctions.last(), 'p_inverse'),
+		successor <- t_faux,
+		net <- thisModule.getGame()),
+	a2: petrinet!Arc(
+		weight <- 1,
+		predecessor <- t_faux,
+		successor <- p_faux,
+		net <- thisModule.getGame())
+	do {thisModule.countConditions <- thisModule.countConditions + 1;}	
+}
+
+
+
+-- Obtenir la condition qui contient cette conjonction.
+helper context game!Conjonction
+def: getCondition(): game!Condition =
+	game!Condition.allInstances()
+		->select(c | c.conjonctions->includes(self))
+		->asSequence()->first();
+
+-- Traduire une Conjonction en éléments de PetriNet
+rule Conjonction2PetriNet {
+	from c: game!Conjonction
+	to t: petrinet!Transition(
+		name <- 'conjonction_'+thisModule.countConjonctions.toString(),
+		net <- thisModule.getGame()
+		),
+	p_inverse: petrinet!Place(
+		name <- 'inverse_conjonction_'+thisModule.countConjonctions.toString(),
+		net <- thisModule.getGame(),
+		tokens <- 0),
+	a_debut: petrinet!Arc(
+		weight <- 1,
+		predecessor <- thisModule.resolveTemp(c.getCondition(), 'p_depart'),
+		successor <- t,
+		net <- thisModule.getGame()),
+	a_fin : petrinet!Arc(
+		weight <- 1,
+		predecessor <- t,
+		successor <- thisModule.resolveTemp(c.getCondition(), 'p_vrai'),
+		net <- thisModule.getGame()),
+	t_retour_debut: petrinet!Transition(
+		name <- 'retour_condition_'+thisModule.countConjonctions.toString(),
+		net <- thisModule.getGame()),
+	a1_retour: petrinet!Arc(
+		weight <- 1,
+		predecessor <- p_inverse,
+		successor <- t_retour_debut,
+		net <- thisModule.getGame()),
+	a2_retour: petrinet!Arc(
+		weight <- 1,
+		predecessor <- t_retour_debut,
+		successor <- thisModule.resolveTemp(c.getCondition(), 'p_depart'),
+		net <- thisModule.getGame())
+	do { thisModule.countConjonctions <- thisModule.countConjonctions + 1;}
+} 
+
+
+
+-- Obtenir la Conjonction qui contient ce Litteral.
+helper context game!Litteral
+def: getConjonction(): game!Conjonction =
+	game!Conjonction.allInstances()
+		->select(c | c.litteraux->includes(self))
+		->asSequence()->first();
+
+helper context game!Conjonction
+def: getPrecedent(): petrinet!Place =
+	let i:Integer = self.getCondition().conjonctions.indexOf(self) in
+	if i = 1 then thisModule.resolveTemp(self.getCondition(), 'p_depart') 
+	else thisModule.resolveTemp(self.getCondition().conjonctions.at(i-1), 'p_inverse') endif;
+
+-- Traduire un Litteral en éléments de PetriNet
+rule LitteralNonEq2PetriNet {
+	from l: game!Litteral ((l.operateur <> '=') or (l.quantite = 0))
+	to l1: petrinet!readArc(
+		net <- thisModule.getGame()),
+	t_inverse: petrinet!Transition(
+		name <- 'litteral_'+thisModule.countLitteraux.toString()+'_inverse',
+		net <- thisModule.getGame()),
+	a1: petrinet!Arc(
+		weight <- 1,
+		predecessor <- l.getConjonction().getPrecedent(),
+		successor <- t_inverse,
+		net <- thisModule.getGame()),
+	a2: petrinet!Arc(
+		weight <- 1,
+		predecessor <- t_inverse,
+		successor <- thisModule.resolveTemp(l.getConjonction(), 'p_inverse'),
+		net <- thisModule.getGame()),
+	a3: petrinet!readArc(
+		successor <- t_inverse,
+		net <- thisModule.getGame())
+	do {
+		thisModule.countLitteraux <- thisModule.countLitteraux + 1;
+		
+		if (l.objet.oclIsUndefined()){
+			l1.weight <- 1;
+			l1.successor <- thisModule.resolveTemp(l.getConjonction(), 't');
+			
+			a3.weight <- 1;
+			
+			if (l.bool = true){
+				l1.predecessor <- thisModule.resolveTemp(l.connaissance, 'p_reel');
+				a3.predecessor <- thisModule.resolveTemp(l.connaissance, 'p_inverse');
+			} else {
+				l1.predecessor <- thisModule.resolveTemp(l.connaissance, 'p_inverse');
+				a3.predecessor <- thisModule.resolveTemp(l.connaissance, 'p_reel');
+			}
+			
+		} else if (l.operateur = '<') {
+			l1.weight <- l.objet.getMaxNumber() - l.quantite + 1;
+			l1.predecessor <- thisModule.resolveTemp(l.objet, 'p_inverse');
+			l1.successor <- thisModule.resolveTemp(l.getConjonction(), 't');
+			
+			a3.weight <- l.quantite;
+			a3.predecessor <- thisModule.resolveTemp(l.objet, 'p_reel');
+		
+		} else if (l.operateur = '>') {
+			l1.weight <- l.quantite + 1;
+			l1.predecessor <- thisModule.resolveTemp(l.objet, 'p_reel');
+			l1.successor <- thisModule.resolveTemp(l.getConjonction(), 't');
+			
+			a3.weight <- l.objet.getMaxNumber() - l.quantite;
+			a3.predecessor <- thisModule.resolveTemp(l.objet, 'p_inverse');
+		
+		} else if (l.quantite = 0){
+			l1.weight <- l.objet.getMaxNumber();
+			l1.predecessor <- thisModule.resolveTemp(l.objet, 'p_inverse');
+			l1.successor <- thisModule.resolveTemp(l.getConjonction(), 't');
+			
+			a3.weight <- 1;
+			a3.predecessor <- thisModule.resolveTemp(l.objet, 'p_reel');
+		}
+	}
+}
+
+
+-- Traduire un Litteral d'égalité non nulle en éléments de PetriNet
+rule Litteral_ObjetEqDifZero2PetriNet {
+	from l: game!Litteral (l.connaissance.oclIsUndefined() and l.operateur = '=' and l.quantite <> 0)
+	to l1: petrinet!readArc(
+		weight <- l.objet.getMaxNumber() - l.quantite,
+		predecessor <- thisModule.resolveTemp(l.objet, 'p_inverse'),
+		successor <- thisModule.resolveTemp(l.getConjonction(), 't'),
+		net <- thisModule.getGame()),
+	l2: petrinet!readArc(
+		weight <- l.quantite,
+		predecessor <- thisModule.resolveTemp(l.objet, 'p_reel'),
+		successor <- thisModule.resolveTemp(l.getConjonction(), 't'),
+		net <- thisModule.getGame()),
+	t_inverse1: petrinet!Transition(
+		name <- 'litteral_'+thisModule.countLitteraux.toString()+'_inverse_1',
+		net <- thisModule.getGame()),
+	t_inverse2: petrinet!Transition(
+		name <- 'litteral_'+thisModule.countLitteraux.toString()+'_inverse_2',
+		net <- thisModule.getGame()),
+	a11: petrinet!Arc(
+		weight <- 1,
+		predecessor <- l.getConjonction().getPrecedent(),
+		successor <- t_inverse1,
+		net <- thisModule.getGame()),
+	a12: petrinet!Arc(
+		weight <- 1,
+		predecessor <- t_inverse1,
+		successor <- thisModule.resolveTemp(l.getConjonction(), 'p_inverse'),
+		net <- thisModule.getGame()),
+	a13: petrinet!readArc(
+		weight <- l.objet.getMaxNumber() - l.quantite + 1,
+		predecessor <- thisModule.resolveTemp(l.objet, 'p_inverse'),
+		successor <- t_inverse1,
+		net <- thisModule.getGame()),
+	a21: petrinet!Arc(
+		weight <- 1,
+		predecessor <- l.getConjonction().getPrecedent(),
+		successor <- t_inverse2,
+		net <- thisModule.getGame()),
+	a22: petrinet!Arc(
+		weight <- 1,
+		predecessor <- t_inverse2,
+		successor <- thisModule.resolveTemp(l.getConjonction(), 'p_inverse'),
+		net <- thisModule.getGame()),
+	a23: petrinet!readArc(
+		weight <- l.quantite + 1,
+		predecessor <- thisModule.resolveTemp(l.objet, 'p_reel'),
+		successor <- t_inverse2,
+		net <- thisModule.getGame())
+	do { thisModule.countLitteraux <- thisModule.countLitteraux + 1;}
+}

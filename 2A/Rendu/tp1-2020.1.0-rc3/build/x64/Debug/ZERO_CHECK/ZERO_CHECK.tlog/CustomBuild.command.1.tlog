@@ -1,0 +1,10 @@
+^C:\USERS\THOMA\DESKTOP\N7\2A\RENDU\TP1-2020.1.0-RC3\BUILD\CMAKEFILES\027AEFCA615DFDE24C76AD926A740EFE\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/thoma/Desktop/N7/2A/Rendu/tp1-2020.1.0-rc3 -BC:/Users/thoma/Desktop/N7/2A/Rendu/tp1-2020.1.0-rc3/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/thoma/Desktop/N7/2A/Rendu/tp1-2020.1.0-rc3/build/tp1.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

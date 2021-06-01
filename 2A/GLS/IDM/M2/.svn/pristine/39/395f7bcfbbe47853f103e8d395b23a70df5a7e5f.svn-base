@@ -1,0 +1,303 @@
+Game Mini_Rpg {
+	explorateur joueur {
+		tailleInventaire 7
+		inventaire {(Corde, 1)}
+	}
+	lieuDepart Armurerie
+	lieuxArrivee (Cimetiere Banquet)
+	gameElements {
+		objet Hache pèse 4 {
+			{("Une hache bien aiguisé pour couper du bois.")}
+		}
+		objet Pioche pèse 4 {
+			{("Une pioche pour briser des roches solides.")}
+		}
+		objet Corde pèse 1 {
+			{("Une corde légèrement élastique.")}
+		}
+		objet Brindille pèse 1 {
+			{("Du petit bois.")}	
+		}
+		objet Pierre pèse 1 {
+			{("Un caillou bien taillé.")}	
+		}
+		objet Lance_Pierre pèse 2 {
+			{("Un lance-pierre de bonne facture, qui saura être précis.")}
+		}
+		objet Plume pèse 1 {
+			{("La plume d'un phoénix, inutile sous sa forme actuelle. Il faut en extraire les propriétés magiques.")}
+		}
+		objet Antidote pèse 1 {
+			{("Un antidote mystérieux.")}
+		}
+		connaissance Tueur_Treant {
+			{("Vous avez tué un tréant, c'est un haut fait !")}
+		}
+		connaissance Tueur_Golem {
+			{("Vous avez tué un golem, c'est un haut fait !")}
+		}
+		connaissance Localisation_Phoenix {
+			{("Le Phoenix passe parfois par la plaine de Valtordu.")}
+		}
+		connaissance Mort{
+			{("Le décès. Pur et irrémédiable.")}
+		}
+		chemin CArmPlaine de Armurerie vers Plaine {
+			{("Un sentier reliant l'armurerie et les plaines de Valtordu.")}
+		}
+		chemin CPlaineHutte de Plaine vers Hutte {
+			{("Un vieux panneau indique 'Orée de la forêt de Schlipak.'")}
+		}
+		chemin CPlaineCimetiere de Plaine vers Cimetiere {
+			{("Un vieux portail donnant sur le cimetiere.'")}
+			visible si ((Mort = true))
+		}
+		chemin CArmurerieBanquet de Armurerie vers Banquet {
+			{("Vous êtes un héros pour avoir défait un monstre. Vous allez pouvoir prendre un repos bien mérité ....")}
+			visible si ((Tueur_Treant = true)) | ((Tueur_Golem = true))
+		}
+		lieu Armurerie {
+			{("Un lieu d'artisanat et de stockage d'armes.")}
+			cheminsPossibles (CArmPlaine CArmurerieBanquet)
+			entites {
+				(Hache, 1)
+				(Pioche, 1)
+				personne Artisan {
+					listeChoixDebut {
+						choixAbsorbe si ((Corde = 0)) | ((Brindille < 2)) 
+						choixDisponible si ((Corde > 0) & (Brindille > 1))
+					}
+					listeChoix {
+						choix choixAbsorbe {
+							{("L'artisan est absorbé par son travail, il ne vous remarque pas.\n Non, même en faisant ces grands signes. Sa concentration est exemplaire.")}
+							choixFin true
+						}
+						choix choixDisponible {
+							{("Bonjour, je recherche des matérieux pour construire une arme de jet. Auriez-vous 1 Corde et 2 Brindilles ?")}
+							listeActions {
+								action {
+									{("Lui remettre les matériaux demandés.")}
+									consommations {(Corde,1) (Brindille,2)}
+									recompenses {(Lance_Pierre,1)}
+									choixSuivant choixFabrique
+								}
+								action {
+									{("Ne pas lui remettre les matériaux.")}
+									choixSuivant choixNonFabrique
+								}
+							}
+						}
+						choix choixFabrique {
+							{("Merci beaucoup, je vous offre ce lance-pierre pour vous dédommager.")}
+							choixFin true
+						}
+						choix choixNonFabrique {
+							{("Ce n'est pas grave, merci quand même.")}
+							choixFin true
+						}
+					}
+				} visible si ((Mort = false))
+			}
+		}
+		lieu Plaine {
+			{
+				("Une vaste plaine, qui semblerait être l'antre de terribles monstres." si ((Localisation_Phoenix = false)))
+				("Une vaste plaine, lieux de combat et de passage de phoénix." si ((Localisation_Phoenix = true)))
+				
+			}
+			cheminsPossibles (CArmPlaine CPlaineHutte CPlaineCimetiere)
+			entites {
+				personne Treant {
+					seulChoixDebut choixRencontreTreant 
+					listeChoix {
+						choix choixRencontreTreant {
+							{("Un tréant se trouve devant vous. Que faire ?")}
+							listeActions {
+								action {
+									{("Le combattre à mains nues.")}
+									recompenses {Mort}
+									choixSuivant choixMainTreant
+								}
+								action {
+									{("Le combattre avec la hache.")} 
+									condition ((Hache > 0))
+									recompenses {Tueur_Treant (Brindille, 2)}
+									choixSuivant choixHacheTreant
+								}
+								action {
+									{("Le combattre avec la pioche.")} 
+									condition ((Pioche > 0))
+									choixSuivant choixPiocheTreant
+								}
+								action {
+									{("Fuir.")}
+									choixSuivant choixFuiteTreant
+								}
+							}
+						}
+						choix choixMainTreant {
+							{("C'était une mauvaise idée. Il vous saisit par les jambes et vous jette sur 112 mètres. Ah oui, c'est vrai, ça a aussi engendré votre décès.")}
+							choixFin true
+						}
+						choix choixHacheTreant {
+							{("Vous découpez le tréant avec facilité et vous récupérer quelques brindilles de son cadavre.")}
+							choixFin true
+						}
+						choix choixPiocheTreant {
+							{("La pioche n'est pas efficace sur le tréant, mais au moins elle vous a protégé de ses coups mortels.")}
+							choixFin true
+						}
+						choix choixFuiteTreant {
+							{("Ce tréant fait quand même plus de 5 mètres, fuir est sans doute une bonne idée si l'on a pas le bon équipement.")}
+							choixFin true	
+						}
+					}
+				} visible si ((Mort = false))
+				personne Golem {
+					seulChoixDebut choixRencontreGolem
+					listeChoix {
+						choix choixRencontreGolem {
+							{("Un golem se trouve devant vous. Que faire ?")}
+							listeActions {
+								action {
+									{("Le combattre à mains nues.")}
+									recompenses {Mort}
+									choixSuivant choixMainGolem
+								}
+								action {
+									{("Le combattre avec la hache.")} 
+									condition ((Hache > 0))
+									choixSuivant choixHacheGolem
+								}
+								action {
+									{("Le combattre avec la pioche.")} 
+									condition ((Pioche > 0))
+									recompenses {Tueur_Golem (Pierre, 1)}
+									choixSuivant choixPiocheGolem
+								}
+								action {
+									{("Fuir.")}
+									choixSuivant choixFuiteGolem
+								}
+							}
+						}
+						choix choixMainGolem {
+							{("C'était une mauvaise idée. Il vous saisit par les jambes et vous jette sur 112 mètres. Ah oui, c'est vrai, ça a aussi engendré votre décès.")}
+							choixFin true
+						}
+						choix choixHacheGolem {
+							{("La hache n'est pas efficace sur le golem, mais au moins elle vous a protégé de ses coups mortels.")}
+							choixFin true
+						}
+						choix choixPiocheGolem {
+							{("Vous pulvérisez le golem avec facilité et vous récupérer quelques pierres de son cadavre.")}
+							choixFin true
+						}
+						choix choixFuiteGolem {
+							{("Ce golem est un cyclope et donc plus fort que ces congénères, fuir est sans doute une bonne idée si l'on a pas le bon équipement.")}
+							choixFin true	
+						}
+					}
+				} visible si ((Mort = false))
+				personne Poenix {
+					seulChoixDebut choixPhoenix
+					listeChoix {
+						choix choixPhoenix {
+							{("Vous voyez un phoénix voler dans le ciel.")}
+							listeActions {
+								action {
+									{("Lui tirer dessus.")} 
+									condition ((Lance_Pierre > 0))
+									consommations {(Pierre,1)}
+									recompenses {(Plume, 1)}
+									choixSuivant choixTirer
+								}
+								action {
+									{("Ne rien faire.")}
+									choixSuivant choixFuitePhoenix
+								}
+							}
+						}
+						choix choixTirer {
+							{("Vous tirer sur le phoenix. Une plume tombe et vous la ramassez.")}
+							choixFin true
+						}
+						choix choixFuitePhoenix {
+							{("Vous repartez.")}
+							choixFin true
+						}
+					}
+				} visible si ((Lance_Pierre > 0) & (Mort = false)) | ((Localisation_Phoenix = true) & (Mort = false))
+			}
+			
+		}
+		lieu Cimetiere {
+			{("Un lieu de reccueillement, pour le repos des défunts.")}
+			cheminsPossibles (CPlaineCimetiere)
+		}
+		lieu Banquet {
+			{
+				("Un lieu de fête, pour les grands héros. Dommage que votre coupe de vin était ... empoisonnée." si ((Antidote = 0)))
+				("Un lieu de fête, pour les grands héros. Dommage que votre coupe de vin était ... empoisonnée.\n Cependant, vous ne succombez pas grâce à l'antidote que vous possédez ! Félicitations !" si ((Antidote > 0)))
+			}
+			cheminsPossibles (CArmurerieBanquet)
+		}
+		lieu Hutte {
+			{("Une hutte de sorcière se trouvant à l'orée de la forêt.")}
+			cheminsPossibles (CPlaineHutte)
+			entites {
+				personne Sorciere {
+					listeChoixDebut {
+						choixPremiereRencontre si ((Localisation_Phoenix = false)) 
+						choixSuiteRencontre si ((Localisation_Phoenix = true)) 
+					}
+					listeChoix {
+						choix choixPremiereRencontre {
+							{("Bonjour mon cher. Il me faudrait une plume de phoenix pour concocter cette antidote mystique.\n On en trouve au niveau de la plaine, pourriez-vous m'en rapportez une ?")}
+							listeActions {
+								action {
+									{("J'en ai déjà sur moi, tenez.")}
+									condition ((Plume > 0))
+									consommations {(Plume,1)}
+									recompenses {(Antidote,1)}
+									choixSuivant choixPlumeDonnee
+									
+								}
+								action {
+									{("Je vais vous en chercher. À plus tard.")}
+									recompenses {Localisation_Phoenix} 
+									choixSuivant choixRecherchePhoenix
+								}
+							}
+						}
+						choix choixSuiteRencontre {
+							{("Rebonjour mon cher. Avez-vous trouvez une plume de phoenix ?")}
+							listeActions {
+								action {
+									{("J'en ai trouvé, tenez.")}
+									condition ((Plume > 0))
+									consommations {(Plume,1)}
+									recompenses {(Antidote,1)}
+									choixSuivant choixPlumeDonnee
+									
+								}
+								action {
+									{("Pas encore, à plus tard.")} 
+									choixSuivant choixRecherchePhoenix
+								}
+							}
+						}
+						choix choixRecherchePhoenix {
+							{("Bonne chance.")}
+							choixFin true
+						}
+						choix choixPlumeDonnee {
+							{("Merci beaucoup. Tenez, une dose d'antidote pour vous remercier.")}
+							choixFin true
+						}
+					}
+				} visible si ((Mort = false))
+			}
+		}
+	}
+}

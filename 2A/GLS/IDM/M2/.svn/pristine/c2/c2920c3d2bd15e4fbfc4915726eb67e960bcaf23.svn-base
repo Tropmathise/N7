@@ -1,0 +1,222 @@
+// Pour thomas
+// grammar game.Game with org.eclipse.xtext.common.Terminals
+// generate game "http://www.Game.game"
+
+grammar idmprojet.game.Game with org.eclipse.xtext.common.Terminals
+
+generate game "http://www.game.idmprojet/Game"
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+Game returns Game:
+	{Game}
+	'Game'
+	name=EString
+	'{'
+		'lieuDepart' lieuDepart = [Lieu]
+		('lieuxArrivee' '(' (lieuxArrivee += [Lieu])+)
+		('gameElements' '{' gameElements+=GameElement ( "," gameElements+=GameElement)* '}' )?
+	'}' ;
+
+/* Entité Lieu 
+ * les entités visibles ou non dans un lieu 
+ */
+EntiteLieu returns EntiteLieu:
+	'visible' visible=EBoolean
+	'conditionVisibilite' conditionVisibilite=Condition 
+	'entite' entite = Personne | Connaissance | PackObjets ;
+
+GameElement returns GameElement:
+	Lieu | Chemin  | Condition | Interaction | Action | Choix | EntiteLieu ;
+
+/* Definition du String */
+EString returns ecore::EString:
+	STRING | ID;
+	
+/* Definition du Booleen */
+EBoolean returns ecore::EBoolean:
+	'true' | 'false';
+
+/* Explorateur :
+ * nom, taille de son inventaire, connaissances
+ * inventaire d'objets, lieu actuel
+ */
+Explorateur returns Explorateur:
+	'explorateur'
+	name=EString
+	'{'
+		'tailleInventaire' tailleInventaire=INT
+		('connaissances' '(' (connaissances+=[Connaissance])+')')?
+		('inventaire' '(' (inventaire+=PackObjets)+')')?
+		'localisation' '(' localisation=[Lieu]
+;
+
+/* Personne 
+ * nom
+ * interaction avec l'explorateur
+ */
+Personne returns Personne:
+	'personne'
+	name=EString
+	'('
+		interaction=Interaction
+	')'
+;
+/* Lieu 
+ * nom
+ * description
+ * Chemins empruntables
+ * Entités presentes
+ */
+Lieu : 
+		'lieu'
+	name = EString 
+	'{'
+		'description' description = Description
+		('cheminsPossibles' '(' (cheminsPossibles+=[Chemin])+')')?
+		(entiteLieu+=EntiteLieu)*
+	'}';
+
+/* Objet
+ * nom
+ * description
+ * taille dans l'inventaire de l'explorateur
+ */
+Objet returns Objet :
+		'objet'
+	name=EString
+	'{'
+		'description' description = Description
+		'taille' taille=INT
+	'}'
+;
+
+/* PackObjet
+ * quantité d'un objet 
+ */
+PackObjets returns PackObjets :
+	'packobjets'
+	'{'
+		objet = [Objet]
+		'quantite' quantite = INT
+	'}'
+;
+
+/* Chemin
+ * nom
+ * descriptions
+ * lieu1 lieu2
+ * conditions de visibilité
+ * condition d'ouverture
+ * action lors du passage
+ */
+Chemin returns Chemin:
+	'chemin'
+	name=EString
+	'{'
+		'description' description = Description
+		'visible' visible=EBoolean
+		'conditionVisibilite' conditionVisibilite=Condition 
+		'lieu1' lieu1 = [Lieu]
+		'lieu2' lieu2 = [Lieu]
+		'ouvert' ouvert = Condition
+		'actionPassage' actionPassage = Action
+	'}'
+;
+
+/* Connaissance
+ * nom
+ * description
+ */
+Connaissance returns Connaissance :
+	'connaissance'
+	name=EString
+	'{'
+		'description' description = Description
+	'}'
+;
+
+/* Condition  
+ * nom
+ */
+Condition returns Condition :
+	'condition'
+	name=EString
+	'(' conjonctions+=Conjonction('|' conjonctions+=Conjonction)* ')'
+;
+
+OperateurComparaison :
+	'<' | '=' | '>'
+;
+
+Conjonction returns Conjonction :
+	'(' litteraux+=Litteral ('&' litteraux+=Litteral)* ')'
+;
+
+Litteral returns Litteral:
+	'('objet = [Objet] operateur = OperateurComparaison quantite = INT')'
+   |'('connaissance = [Connaissance] '=' EBoolean ')'
+;
+
+
+Description returns Description :
+	'description' 
+	'{'
+		('textes' '(' (textes+=[Texte])+')')
+	'}';
+
+Texte returns Texte :
+	'texte'
+	'{'
+		'contenu' contenu = EString
+		'condition' condition = Condition
+	'}' 
+;
+
+/* Recompense 
+ * Connaissance ou Objet
+ * condition d'obtention
+ */
+Recompense returns Recompense :
+	'recompense'
+	'{'
+		connaissanceObtenue = [Connaissance] | objetsObtenus = PackObjets
+		'conditionObtention' conditionObtention = Condition?
+	'}'
+;
+
+/* Action
+ * condition
+ * recompense
+ * consommation d'objets
+ */
+Action returns Action :
+	'{'
+		'condition' condition=Condition
+		('recompenses' '('(recompenses+=[Recompense])+ ')')?
+		('consommations' '('(consommations+=PackObjets)+ ')')?
+	'}';
+	
+/* Interaction
+ * recompense
+ * liste de choix
+ */
+Interaction returns Interaction :
+	'interaction'
+	'{'
+		('recompenses' '(' (recompenses+=[Recompense])+ ')' )?
+		('listeChoix' '(' (listechoix+=[Choix]+))
+	'}'
+;
+
+/* Choix
+ * liste d'actions
+ */
+Choix returns Choix:
+	'choix'
+	'{'
+		(conditions+=Condition)*
+		('listeActions' '(' (listeActions+=[Action]+))
+	'}'
+			
+;

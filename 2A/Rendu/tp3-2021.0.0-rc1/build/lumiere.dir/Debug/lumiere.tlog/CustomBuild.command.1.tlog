@@ -1,0 +1,10 @@
+^C:\USERS\THOMA\DESKTOP\N7\2A\RENDU\TP3-2021.0.0-RC1\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/thoma/Desktop/N7/2A/Rendu/tp3-2021.0.0-rc1 -BC:/Users/thoma/Desktop/N7/2A/Rendu/tp3-2021.0.0-rc1/build --check-stamp-file C:/Users/thoma/Desktop/N7/2A/Rendu/tp3-2021.0.0-rc1/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

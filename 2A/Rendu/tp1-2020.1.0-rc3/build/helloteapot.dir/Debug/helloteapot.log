@@ -1,0 +1,5 @@
+﻿  Building Custom Rule C:/Users/thoma/Desktop/N7/2A/Rendu/tp1-2020.1.0-rc3/CMakeLists.txt
+  helloteapot.cpp
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp1-2020.1.0-rc3\helloteapot.cpp(68,46): warning C4244: 'argument' : conversion de 'double' en 'GLsizei', perte possible de données
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp1-2020.1.0-rc3\helloteapot.cpp(68,41): warning C4244: 'argument' : conversion de 'double' en 'GLsizei', perte possible de données
+  helloteapot.vcxproj -> C:\Users\thoma\Desktop\N7\2A\Rendu\tp1-2020.1.0-rc3\build\Debug\helloteapot.exe

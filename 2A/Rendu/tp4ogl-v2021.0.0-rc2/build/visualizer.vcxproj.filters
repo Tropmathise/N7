@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\thoma\Desktop\N7\2A\Rendu\tp4ogl-v2021.0.0-rc2\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\thoma\Desktop\N7\2A\Rendu\tp4ogl-v2021.0.0-rc2\ObjModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\thoma\Desktop\N7\2A\Rendu\tp4ogl-v2021.0.0-rc2\core.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\thoma\Desktop\N7\2A\Rendu\tp4ogl-v2021.0.0-rc2\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{42AEEDFC-C998-3712-B58E-C6E847EC6148}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

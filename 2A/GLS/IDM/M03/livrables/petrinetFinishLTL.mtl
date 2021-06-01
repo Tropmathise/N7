@@ -1,0 +1,21 @@
+[comment encoding = UTF-8 /]
+[module petrinetFinishLTL('http://petrinet')]
+
+[template public petrinetFinishLTL(aPetriNet : PetriNet)]
+[comment @main/]
+
+[file (aPetriNet.nom + '.ltl', false, 'UTF-8')]
+op finished = [for (pl : Place | aPetriNet.Elements -> getPlaces())] [if (not(aPetriNet.Elements->getPlaces()->first()=pl))]/\ [/if][pl.nom + '_finished'/][/for];
+
+['['/][']'/] (finished => dead);
+['['/][']'/] <> dead;
+['['/][']'/] (dead => finished);
+- <> finished;
+
+[/file]
+[/template]
+[query public getPlaces(elements : OrderedSet(PetriElement)) : OrderedSet(Place) =
+	elements->select( e | e.oclIsTypeOf(Place))
+		->collect( e | e.oclAsType(Place) )
+		->asOrderedSet()
+/]

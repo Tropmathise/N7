@@ -1,0 +1,46 @@
+3. Hello teapot
+
+Exercises
+1. En remplaçant glutWireTeapot par glutSolidTeapot, on observe que ce n'est plus une maquette mais un objet solide. Pour que l'objet soit plus réaliste il manque l'aspect de profondeur de l'objet (3D), les ombres et les lumières.
+2. Plus les paramètres sont petits, moins la sphère est ronde (lisse), et inversement. 
+
+Reshape
+Exercise
+Lorqu'on redimensionne la fenêtre, le rapport hauteur-largeur de l'objet n'est pas conservé. Par exemple, si on étend la fenêtre sur la sphère, elle devient une ellipse. 
+On implante ces lignes :
+    double min = min(width, height);
+    glViewport((width - height) / 2, 0, min, min);
+
+Keyboard
+Dans display() on écrit :
+    if (pressw) {
+        glutWireTeapot(.5);
+    }
+    else {
+        glutSolidTeapot(.5);
+    }
+
+Dans key() on écrit :
+        case 'w':
+            pressw = !pressw;
+            break;
+
+Perspective transformation
+Exercises
+1. Plus le fovy augmente, plus l'objet semble lointain car le champ de vue (field of you) est plus large. 
+2. Quand on augmente zNear, les points affichés de l'objet sont ceux qui se situent à une distance supérieure à une certaine distance de la caméra (autour de 2,1). A 2.5, on observe seulement le fond de la théière.
+
+Viewing transformation
+Exercises
+1. Si on met le "up-vector" à (0,-1,0), on tourne de 180 degre l'axe entre la caméra et le pint du vecteur eye. Ici, on une vue renversée (par le bas) de la théière.
+2. Figure a), on écrit : gluLookAt(0, 2, 0, 0.0, 0.0, 0.0, 1.0, 0.0, 0);
+   Figure b), on écrit : gluLookAt(0, 0, -3, 0.0, 0.0, 0.0, 1.0, 1, 0);
+
+More teapots
+Exercises
+1. Lorsqu'on supprime le second glPopMatrix et qu'on redimensionne la fénètre, les théières se déplacent vers le bas, car comme les matrices se cumulent, sans ce deuxième "Pop", on a les glTranslatef(0,-2,-1) qui se répètent. 
+2. Lorsqu'on déplace gluLookAt(0.0,0.0,5.0,0.0,0.0,-1.0,0.0,1.0,0.0) dans le display, la théière bleue disparait. Le LookAt semble donc avoir les mêmes aspects que les translate. Comme il se trouve désormais après le deuxieme PushMatrix, on ne regarde que les théières rouge et verte qui sont situés au dessus de la pile.
+3. Les théières apparaissent en gros et pas entières sur la fénètre affichée. On place d'abord le lookat et ensuite on LoadIdentity, donc il n'y a pas de reset de la matrice avant le lookAt. 
+
+
+

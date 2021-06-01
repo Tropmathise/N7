@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simplepdl:Process
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:simplepdl="http://simplepdl"
+    xsi:schemaLocation="http://simplepdl SimplePDL.ecore"
+    name="Processus">
+  <processElements/>
+  <processElements
+      xsi:type="simplepdl:Resources"
+      name="testeur"
+      nbOccurence="2"/>
+  <processElements
+      xsi:type="simplepdl:Resources"
+      name="rédacteur"
+      nbOccurence="1"/>
+  <processElements
+      xsi:type="simplepdl:Resources"
+      name="développeur"
+      nbOccurence="2"/>
+  <processElements
+      xsi:type="simplepdl:Resources"
+      name="concepteur"
+      nbOccurence="3"/>
+  <processElements
+      xsi:type="simplepdl:Resources"
+      name="machine"
+      nbOccurence="4"/>
+  <processElements
+      xsi:type="simplepdl:WorkDefinition"
+      name="RédactionTest">
+    <uses quantityNeeded="2"
+        usedResources="//@processElements.5"
+        workdefinition="//@processElements.6"/>
+    <uses quantityNeeded="1"
+        usedResources="//@processElements.1"
+        workdefinition="//@processElements.6"/>
+  </processElements>
+  <processElements
+      xsi:type="simplepdl:WorkDefinition"
+      name="Développement">
+    <uses quantityNeeded="2"
+        usedResources="//@processElements.3"
+        workdefinition="//@processElements.7"/>
+    <uses quantityNeeded="3"
+        usedResources="//@processElements.5"
+        workdefinition="//@processElements.7"/>
+  </processElements>
+  <processElements
+      xsi:type="simplepdl:WorkDefinition"
+      name="RédactionDoc">
+    <uses quantityNeeded="1"
+        usedResources="//@processElements.5"
+        workdefinition="//@processElements.8"/>
+    <uses quantityNeeded="1"
+        usedResources="//@processElements.2"
+        workdefinition="//@processElements.8"/>
+  </processElements>
+  <processElements
+      xsi:type="simplepdl:WorkDefinition"
+      name="Conception">
+    <uses quantityNeeded="2"
+        usedResources="//@processElements.4"
+        workdefinition="//@processElements.9"/>
+    <uses quantityNeeded="2"
+        usedResources="//@processElements.5"
+        workdefinition="//@processElements.9"/>
+  </processElements>
+</simplepdl:Process>

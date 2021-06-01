@@ -1,0 +1,21 @@
+body {background:#f7f7f7;}
+.carousel .item {height:479px;}
+.carousel-indicators {bottom: 57px;}
+.wrapsemibox{
+max-width: 1200px;
+margin: 0px auto;
+background: #fff;
+margin-top: -40px;
+box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+z-index: 1000;
+position: relative;
+margin-bottom: -100px;
+padding-bottom: 40px;
+border-bottom: medium double #ccc;
+padding-top: 0;
+}
+.pageheader-default .semitransparentbg {
+padding-bottom: 75px;}
+.semiboxshadow {display:block;padding-bottom: 40px;}
+.semiboxshadow img{width: 1308px !Important; max-width: 1316px; margin: 0px auto; margin-left: -53px; margin-top: -43px; position: absolute;z-index:0;}
+.footer {padding-top:100px;}

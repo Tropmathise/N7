@@ -1,0 +1,33 @@
+import 'PetriNet.ecore'
+
+package PetriNet
+
+context PetriNet 
+--inv validName('Invalid name: ' + self.nom):
+--	self.nom.matches('[A-Za-z_][A-Za-z0-9_]*')
+inv validPlace('Two different places have same name'):
+	self.places -> forAll(p1,p2:place | p1 <> p2 implies p1.nom <> p2.nom)
+inv validTransition('Two different places have same name'):
+	self.transitions -> forAll(t1,t2:transition | t1 <> t2 implies t1.nom <> t2.nom)
+
+context place
+inv hasName('The name of the place is empty'): 
+	self.nom <> ''
+inv initToken('The initial number of token has to be stricly positive'):
+	place.allInstances() -> exists(p | p.nbJetonsInitial > 0)
+inv positiveToken('The number of tokens must be positive:'):
+	self.nbJetons >= 0
+inv positiveTokenInit('The number of inital tokens must be positive:'):
+	self.nbJetonsInitial >= 0
+
+context transition
+inv hasName('The name of the transition is empty'): 
+	self.nom <> ''
+
+context arc
+inv hasName('The name of the place is empty'): 
+	self.nom <> ''
+inv arcWeight('The weight of the arc is not positive:'):
+	self.poids >= 1
+
+endpackage

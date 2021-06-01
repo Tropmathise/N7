@@ -1,0 +1,13 @@
+/home/tsadurni/Documents/Annee_2/TI/tpTI-v2021.0.3/build/CMakeFiles/rebuild_cache.dir
+/home/tsadurni/Documents/Annee_2/TI/tpTI-v2021.0.3/build/CMakeFiles/edit_cache.dir
+/home/tsadurni/Documents/Annee_2/TI/tpTI-v2021.0.3/build/src/CMakeFiles/rebuild_cache.dir
+/home/tsadurni/Documents/Annee_2/TI/tpTI-v2021.0.3/build/src/CMakeFiles/edit_cache.dir
+/home/tsadurni/Documents/Annee_2/TI/tpTI-v2021.0.3/build/src/tp/CMakeFiles/rebuild_cache.dir
+/home/tsadurni/Documents/Annee_2/TI/tpTI-v2021.0.3/build/src/tp/CMakeFiles/kmeans.dir
+/home/tsadurni/Documents/Annee_2/TI/tpTI-v2021.0.3/build/src/tp/CMakeFiles/edit_cache.dir
+/home/tsadurni/Documents/Annee_2/TI/tpTI-v2021.0.3/build/src/tutorials/CMakeFiles/rebuild_cache.dir
+/home/tsadurni/Documents/Annee_2/TI/tpTI-v2021.0.3/build/src/tutorials/CMakeFiles/edit_cache.dir
+/home/tsadurni/Documents/Annee_2/TI/tpTI-v2021.0.3/build/src/tutorials/CMakeFiles/tutorials.dir
+/home/tsadurni/Documents/Annee_2/TI/tpTI-v2021.0.3/build/src/tutorials/CMakeFiles/display_image.dir
+/home/tsadurni/Documents/Annee_2/TI/tpTI-v2021.0.3/build/src/tutorials/CMakeFiles/mat_the_basic_image_container.dir
+/home/tsadurni/Documents/Annee_2/TI/tpTI-v2021.0.3/build/src/tutorials/CMakeFiles/load_modify_image.dir

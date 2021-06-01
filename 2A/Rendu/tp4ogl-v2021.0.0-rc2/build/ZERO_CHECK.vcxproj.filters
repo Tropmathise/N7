@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\thoma\Desktop\N7\2A\Rendu\tp4ogl-v2021.0.0-rc2\build\CMakeFiles\c800f09e8285ca82363172c7f7d10de8\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{B7B57E03-9964-346B-B08A-8B897B38D036}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

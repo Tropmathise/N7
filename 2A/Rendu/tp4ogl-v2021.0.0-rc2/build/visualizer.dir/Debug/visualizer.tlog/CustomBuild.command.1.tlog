@@ -1,0 +1,10 @@
+^C:\USERS\THOMA\DESKTOP\N7\2A\RENDU\TP4OGL-V2021.0.0-RC2\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/thoma/Desktop/N7/2A/Rendu/tp4ogl-v2021.0.0-rc2 -BC:/Users/thoma/Desktop/N7/2A/Rendu/tp4ogl-v2021.0.0-rc2/build --check-stamp-file C:/Users/thoma/Desktop/N7/2A/Rendu/tp4ogl-v2021.0.0-rc2/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

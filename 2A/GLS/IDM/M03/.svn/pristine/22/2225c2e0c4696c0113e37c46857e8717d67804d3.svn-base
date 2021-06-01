@@ -1,0 +1,25 @@
+[comment encoding = UTF-8 /]
+[module PetriNetToLTL('http://petrinet')]
+
+[template public petrinetFinishLTL(aPetriNet : PetriNet)]
+[comment @main/]
+
+[file (aPetriNet.nom + '.ltl', false, 'UTF-8')]
+op finished = [for (pl : Place | aPetriNet.Elements -> getPlaces())] [if (not(aPetriNet.Elements->getPlaces()->first()=pl))]/\ [/if][pl.nom + '_finished'/][/for];
+op started = [for (pl : Place | aPetriNet.Elements -> getPlaces())] [if (not(aPetriNet.Elements->getPlaces()->first()=pl))]/\ [/if][pl.nom + '_started'/][/for];
+op ready = [for (pl : Place | aPetriNet.Elements -> getPlaces())] [if (not(aPetriNet.Elements->getPlaces()->first()=pl))]/\ [/if][pl.nom + '_ready'/][/for];
+op running = [for (pl : Place | aPetriNet.Elements -> getPlaces())] [if (not(aPetriNet.Elements->getPlaces()->first()=pl))]/\ [/if][pl.nom + '_running'/][/for];
+
+- <> finished;
+['['/][']'/] (finished => - <> ready);
+['['/][']'/] (finished => - <> running);
+['['/][']'/] (started => - <> ready);
+['['/][']'/] (finished => started);
+
+[/file]
+[/template]
+[query public getPlaces(elements : OrderedSet(PetriElement)) : OrderedSet(Place) =
+	elements->select( e | e.oclIsTypeOf(Place))
+		->collect( e | e.oclAsType(Place) )
+		->asOrderedSet()
+/]

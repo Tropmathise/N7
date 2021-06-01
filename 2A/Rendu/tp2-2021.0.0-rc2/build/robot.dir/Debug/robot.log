@@ -1,0 +1,14 @@
+﻿  robot.c
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp2-2021.0.0-rc2\robot.c(32,25): warning C4305: 'initialisation' : troncation de 'double' à 'GLfloat'
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp2-2021.0.0-rc2\robot.c(112,21): warning C4244: 'fonction' : conversion de 'int' en 'GLfloat', perte possible de données
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp2-2021.0.0-rc2\robot.c(119,21): warning C4244: 'fonction' : conversion de 'int' en 'GLfloat', perte possible de données
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp2-2021.0.0-rc2\robot.c(128,20): warning C4305: 'fonction' : troncation de 'double' à 'GLfloat'
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp2-2021.0.0-rc2\robot.c(134,17): warning C4305: 'fonction' : troncation de 'double' à 'GLfloat'
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp2-2021.0.0-rc2\robot.c(134,25): warning C4305: 'fonction' : troncation de 'double' à 'GLfloat'
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp2-2021.0.0-rc2\robot.c(140,17): warning C4305: 'fonction' : troncation de 'double' à 'GLfloat'
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp2-2021.0.0-rc2\robot.c(140,25): warning C4305: 'fonction' : troncation de 'double' à 'GLfloat'
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp2-2021.0.0-rc2\robot.c(170,26): warning C4244: 'fonction' : conversion de 'int' en 'GLfloat', perte possible de données
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp2-2021.0.0-rc2\robot.c(171,26): warning C4244: 'fonction' : conversion de 'int' en 'GLfloat', perte possible de données
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp2-2021.0.0-rc2\robot.c(257,47): warning C4244: '=' : conversion de 'double' en 'GLfloat', perte possible de données
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp2-2021.0.0-rc2\robot.c(262,47): warning C4244: '=' : conversion de 'double' en 'GLfloat', perte possible de données
+  robot.vcxproj -> C:\Users\thoma\Desktop\N7\2A\Rendu\tp2-2021.0.0-rc2\build\Debug\robot.exe

@@ -1,0 +1,466 @@
+.navbar-fixed-top
+{
+    top: 0;
+}
+
+.wowmenu
+{
+    margin-bottom: 0;
+}
+@media screen
+    and (max-width: 767px)
+    and (min-width: 601px)
+{
+    .tinynav {
+        margin-top: -50px;
+    }
+}
+
+.logo-nav
+{
+    font-size: 32px;
+    line-height: 1;
+}
+.logo-nav span
+{
+    color: #000;
+}
+
+.search-nav
+{
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: center;
+}
+.search-nav input
+{
+    margin-bottom: 0;
+    min-width: 300px;
+}
+.search-nav button
+{
+    font-size: 14px;
+    margin-top: -1px;
+}
+
+.pageheader-default
+{
+    margin-top: 0;
+}
+
+.wrapsemibox
+{
+    min-height: 607px;
+}
+
+.carousel .item > img
+{
+    width: 100%;
+}
+
+.list_carousel #carousel-choice
+{
+    display: none;
+}
+.list_carousel .carousel_nav
+{
+    background: #f9f9f9;
+}
+
+.boxcontainer a.nocat
+{
+    border-bottom: none !important;
+}
+
+.footer .list-unstyled li
+{
+    margin-bottom: 15px;
+}
+.footer .list-unstyled a
+{
+    color: #ddd;
+    text-decoration: underline;
+}
+
+.footermap
+{
+    min-height: 100px;
+}
+
+.categories .breadcrumb
+{
+    background-color: transparent;
+    margin-bottom: 0;
+}
+.categories .breadcrumb li
+{
+    font-size: 18px;
+}
+.categories .breadcrumb li > a
+{
+    color: inherit;
+}
+.categories .breadcrumb li > a:hover
+{
+    text-decoration: underline;
+}
+.categories .breadcrumb > .active
+{
+    color: #eee;
+    font-weight: 700;
+}
+.categories .list-inline
+{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.search-results .media
+{
+    text-align: left;
+    border: none;
+    border-top: 3px solid #ededed;
+}
+.search-results .media-object
+{
+    max-width: none !important;
+    margin-top: 10px;
+}
+.search-results .media-heading
+{
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+.search-results .media-snippet
+{
+    padding: 0;
+}
+
+#dnd
+{
+    margin: 50px auto 0;
+}
+
+.abuse-done
+{
+    border-radius: 0;
+    margin-top: 70px;
+}
+
+.auth .bg-danger
+{
+    padding: 5px;
+}
+.auth .social
+{
+    position: static;
+    margin-top: 40px;
+}
+.auth p ~ .social
+{
+    margin-top: 35px;
+}
+.auth .social-remember
+{
+    margin-top: 80px;
+    margin-left: 5px;
+}
+
+.viewer-header
+{
+    margin-top: 10px;
+}
+.viewer-header > .breadcrumb
+{
+    margin-bottom: 0;
+    padding: 0;
+    background-color: inherit;
+}
+.viewer-header > h3
+{
+    margin-top: 0;
+}
+.viewer-header .social,
+.viewer-header .social > .social
+{
+    position: static;
+}
+
+.social-wrapper
+{
+    float: left !important;
+    margin-top: 10px;
+    text-align: right;
+}
+.social
+{
+    position: static !important;
+}
+.toolbox-wrapper
+{
+    float: right !important;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.viewer-footer
+{
+    margin-top: 20px;
+}
+
+.viewer-footer .similar
+{
+    margin-top: 20px;
+}
+.viewer-footer .similar dd
+{
+    margin-top: 10px;
+}
+
+.browse
+{
+    background-color: #fff;
+}
+.browse .breadcrumb
+{
+    margin: 20px auto;
+    background: rgba(245,72,40,0.80);
+}
+.browse .breadcrumb a
+{
+    color: #fff;
+}
+.browse .panel > ul
+{
+    margin-left: 10px;
+}
+
+.download .back
+{
+    display: inline-block;
+    padding-top: 10px;
+}
+.download .media
+{
+    margin-bottom: 20px;
+}
+.download .media-left img
+{
+    margin-bottom: 5px;
+}
+.download .media-left a
+{
+    margin-left: 17px;
+}
+.download .media-body
+{
+    max-width: 250px;
+    text-align: right;
+    font-size: 24px;
+    color: #a09f9f;
+}
+.download .media-body h1
+{
+    color: #337ab7;
+}
+.download .media-body img
+{
+    float: right;
+    width: 150px;
+    cursor: pointer;
+}
+.download .media-body p
+{
+    line-height: 27px;
+}
+.download .recaptcha,
+.download .formats
+{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 15px;
+    background-color: rgba(245, 72, 40, 0.5);
+}
+.download .recaptcha h4
+{
+    margin-bottom: 15px;
+}
+.download .formats h4
+{
+    margin-bottom: 0;
+}
+.download .formats a:first-of-type
+{
+    margin-left: 0;
+}
+.download .formats a:last-of-type
+{
+    margin-right: 0;
+}
+.download .format
+{
+    display: block;
+    margin-top: 15px;
+    padding: 30px 0;
+    text-align: center;
+    background-color: #2371a8;
+    color: #fff;
+}
+@media (min-width: 768px)
+{
+.download .format
+{
+    margin-right: 5px;
+    margin-left: 5px;
+}}
+.download .disabled
+{
+    opacity: .5;
+    cursor: not-allowed;
+}
+.download .disabled a
+{
+    pointer-events: none;
+}
+
+.above-content,
+.below-content
+{
+    height: 90px;
+    margin-top: 1rem;
+}
+.above-content
+{
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+}
+.below-content
+{
+    margin-bottom: 1rem;
+}
+
+.b-upload {
+    white-space: nowrap
+}
+
+.b-upload__name {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    max-width: 150px;
+    vertical-align: middle
+}
+
+.b-upload__size {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    max-width: 150px;
+    vertical-align: middle;
+    color: #666;
+    font-size: 12px
+}
+
+.b-upload .js-files:after {
+    clear: both;
+    content: "";
+    display: block
+}
+
+.b-upload__dnd {
+    padding: 30px;
+    border-radius: 0px;
+    margin-bottom: 4px;
+    background: #ddd url(/img/cloud_upload.png) 50% 50px no-repeat;
+    background-size: 200px 200px;
+    height: 340px;
+    text-align: center
+}
+
+.b-upload__dnd div:nth-of-type(1) {
+    margin-top: 220px;
+    font-size: 24px
+}
+
+.b-upload__dnd div:nth-of-type(2) {
+    font-size: 12px;
+    line-height: 32px
+}
+
+.b-upload__dnd_hover {
+    color: #fff;
+    background-color: #fdcb43
+}
+
+#dnd .js-upload {
+    position: absolute;
+    top: 400px;
+    font-size: 24px;
+    left: 250px;
+    width: 300px;
+    height: 100px
+}
+
+#dnd .progress {
+    top: 32px;
+    left: 20px;
+    right: 20px;
+    bottom: 52px;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #000
+}
+
+#dnd .progress .bar {
+    width: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    background-color: #000
+}
+
+#dnd .size,#dnd .name {
+    font-size: 11px;
+    display: block;
+    text-align: center;
+    line-height: 22px
+}
+
+#dnd .name {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0
+}
+
+#dnd .btn-dnd {
+    cursor: pointer;
+    *zoom:1;*display: inline;
+    position: relative;
+    overflow: hidden;
+    font-size: 20px;
+    vertical-align: middle
+}
+
+#dnd .btn-dnd input {
+    top: -10px;
+    right: -40px;
+    z-index: 2;
+    position: absolute;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    font-size: 50px;
+    cursor: pointer;
+    height: 100%
+}
+
+#dnd .btn-dnd .progress {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.5;
+    position: absolute
+}

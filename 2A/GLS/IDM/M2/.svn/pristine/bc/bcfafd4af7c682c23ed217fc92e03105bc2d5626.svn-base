@@ -1,0 +1,226 @@
+// Pour thomas
+// grammar game.Game with org.eclipse.xtext.common.Terminals
+// generate game "http://www.Game.game"
+
+grammar idmprojet.game.Game with org.eclipse.xtext.common.Terminals
+
+generate game "http://www.game.idmprojet/Game"
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+/* le jeu  */
+Game:
+	'Game'
+	name=EString
+	'{'
+		'explorateur' explorateur=Explorateur
+		'lieuDepart' lieuDepart = [Lieu]
+		('lieuxArrivee' '(' (lieuxArrivee += [Lieu])+')')
+		('gameElements' '{' (gameElements+=GameElement)+ '}' )?
+	'}' ;
+
+/* Entité Lieu 
+ * les entités visibles ou non dans un lieu 
+ */
+EntiteLieu:
+		(Personne | PackObjets | ConnaissanceLieu)
+		('visible si' conditionVisibilite=Condition)?
+;
+
+ConnaissanceLieu:
+	connaissance=[Connaissance]
+;
+
+GameElement:
+	Lieu | Chemin | Objet | Connaissance ;
+
+/* Definition du String */
+EString returns ecore::EString:
+	STRING | ID;
+	
+/* Definition du Booleen */
+EBoolean returns ecore::EBoolean:
+	'true' | 'false';
+
+/* Explorateur :
+ * nom, taille de son inventaire, connaissances
+ * inventaire d'objets, lieu actuel
+ */
+Explorateur:
+	name=EString
+	'{'
+		'tailleInventaire' tailleInventaire=INT
+		('connaissances' '(' (connaissances+=[Connaissance])+')')?
+		('inventaire' '{' (inventaire+=PackObjets)+'}')?
+	'}'
+;
+
+/* Personne 
+ * nom
+ * interaction avec l'explorateur
+ */
+Personne :
+	'personne' name=EString '{' interaction=Interaction '}'
+;
+/* Lieu 
+ * nom
+ * description
+ * Chemins empruntables
+ * Entités presentes
+ */
+Lieu : 
+	'lieu' name = EString 
+	'{'
+		description = Description
+		('cheminsPossibles' '(' (cheminsPossibles+=[Chemin])+')')?
+		('entites' '{'(entiteLieu+=EntiteLieu)+ '}')?
+	'}';
+
+
+/* Objet
+ * nom
+ * description
+ * taille dans l'inventaire de l'explorateur
+ */
+Objet :
+	'objet' name=EString 'pèse' taille=INT
+	'{'
+		description = Description
+		
+	'}'
+;
+
+/* PackObjet
+ * quantité d'un objet 
+ */
+PackObjets :
+	'('
+		objet = [Objet]
+		',' quantite = INT
+	')'
+;
+
+/* Chemin
+ * nom
+ * descriptions
+ * lieu1 lieu2
+ * conditions de visibilité
+ * condition d'ouverture
+ * ouvert
+ * recompenses
+ * consommations
+ */
+Chemin :
+	'chemin' name=EString 'de' lieu1 = [Lieu] 'vers' lieu2 = [Lieu]
+	'{'
+		description = Description
+		('visible si' conditionVisibilite=Condition)?
+		('ouvert' ouvert = Condition)?
+		('recompenses' '{'(recompenses+=Recompense)+ '}')?
+		('consommations' '{'(consommations+=PackObjets)+ '}')?
+	'}'
+;
+
+/* Connaissance
+ * nom
+ * description
+ */
+Connaissance :
+	'connaissance' name=EString
+	'{'
+		description = Description
+	'}'
+;
+
+/* Condition  
+ * nom
+ */
+Condition :
+	(( conjonctions+=Conjonction('|' conjonctions+=Conjonction)*) | {Condition} EBoolean)
+;
+
+OperateurComparaison :
+	'<' | '=' | '>'
+;
+
+Conjonction :
+	'(' litteraux+=Litteral ('&' litteraux+=Litteral)* ')'
+;
+
+Litteral :
+	'('objet = [Objet] operateur = OperateurComparaison quantite = INT')'
+   |'('connaissance = [Connaissance] '=' bool=EBoolean ')'
+;
+
+
+/* Description 
+ * textes 
+ */
+Description :
+	'{'
+		(textes+=Texte)+
+	'}'
+;
+
+/* Texte 
+ * contenue string
+ * condition 
+ */
+Texte :
+	'('
+		contenu = EString
+		('si' condition = Condition)?
+	')' 
+;
+
+/* Recompense 
+ * Connaissance ou Objet
+ * condition d'obtention
+ */
+Recompense :
+		(connaissanceObtenue = [Connaissance] | objetsObtenus = PackObjets)
+		('si' conditionObtention = Condition)?
+;
+
+
+/* Action
+ * condition
+ * recompense
+ * consommation d'objets
+ */
+Action :
+	'action'
+	'{'
+		description = Description
+		('condition' condition=Condition)?
+		('consommations' '{'(consommations+=PackObjets)+ '}')?
+		('recompenses' '{'(recompenses+=Recompense)+ '}')?
+		'choixSuivant' choixSuivant=[Choix]
+	'}';
+	
+
+/* Interaction
+ * recompense
+ * liste de choix
+ */
+Interaction :
+		('recompenses' '{' (recompenses+=Recompense)+ '}' )?
+		(('listeChoixDebut' '{' (listeChoixDebut+=[Choix] 'si' listeConditionsDebut+=Condition)+'}') | 'seulChoixDebut' seulChoixDebut = [Choix])
+		'listeChoix' '{' (listeChoix+=Choix)+'}'
+;
+
+/* Choix
+ * nom
+ * description
+ * choix de fin
+ * liste d'actions
+ */
+Choix :
+	'choix'
+	name=EString
+	'{'
+		description = Description
+		('choixFin' choixFin = Condition)?
+		('listeActions' '{' (listeActions+=Action+)'}')?
+	'}'	
+;

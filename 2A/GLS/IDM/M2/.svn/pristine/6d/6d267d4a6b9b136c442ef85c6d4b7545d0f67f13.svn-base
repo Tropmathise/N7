@@ -1,0 +1,15 @@
+tr mauvaise_reponse [0,w[ tentatives_inventaire sphinx -> choix_de_fin_mauvaise_reponse inverse_tentative_inventaire
+tr fin_2 [0,w[ choix_de_fin_mauvaise_reponse -> enigme
+tr interaction_sphinx [0,w[ enigme tentatives_inventaire?1 inverse_reussite_inventaire?1 -> sphinx
+tr fin_1 [0,w[ choix_de_fin_bonne_reponse -> enigme
+tr bonne_reponse [0,w[ sphinx inverse_reussite_inventaire -> reussite_inventaire choix_de_fin_bonne_reponse
+tr chemin_vers_succes [0,w[ enigme reussite_inventaire?1 -> succes
+tr chemin_vers_echec [0,w[ enigme inverse_tentative_inventaire?3 -> echec
+tr deposer_tentative [0,w[ tentatives_inventaire enigme?1 -> tentatives_enigme inverse_tentative_inventaire
+tr ramasser_tentative [0,w[ tentatives_enigme inverse_tentative_inventaire enigme?1 -> tentatives_inventaire
+pl inverse_tentative_inventaire : {contient nb_max objet - nb_objet dans l'inventaire}
+pl tentatives_inventaire (3)
+pl enigme (1)
+pl inverse_reussite_inventaire : {vaut 1 si pas de reussite dans l'inventaire, 0 sinon} (1)
+net sphinx
+

@@ -1,0 +1,6 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Users\\thoma\\OneDrive\\Desktop\\N7\\2A\\GLS\\PAT\\TP3\\lombok.jar"
+    ]
+}

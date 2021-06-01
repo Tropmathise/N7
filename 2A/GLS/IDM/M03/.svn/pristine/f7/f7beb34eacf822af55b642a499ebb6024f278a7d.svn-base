@@ -1,0 +1,60 @@
+
+net JourneeBanale
+	pl Lever_PRETE (1)
+	pl Lever_WORKING (0)
+	pl Lever_FINI (0)
+	pl Lever_COMMENCE (0)
+	pl PetitDejeuner_PRETE (1)
+	pl PetitDejeuner_WORKING (0)
+	pl PetitDejeuner_FINI (0)
+	pl PetitDejeuner_COMMENCE (0)
+	pl Matin_PRETE (1)
+	pl Matin_WORKING (0)
+	pl Matin_FINI (0)
+	pl Matin_COMMENCE (0)
+	pl TravailMatin_PRETE (1)
+	pl TravailMatin_WORKING (0)
+	pl TravailMatin_FINI (0)
+	pl TravailMatin_COMMENCE (0)
+	pl Dejeuner_PRETE (1)
+	pl Dejeuner_WORKING (0)
+	pl Dejeuner_FINI (0)
+	pl Dejeuner_COMMENCE (0)
+	pl ApresMidi_PRETE (1)
+	pl ApresMidi_WORKING (0)
+	pl ApresMidi_FINI (0)
+	pl ApresMidi_COMMENCE (0)
+	pl TravailAprem_PRETE (1)
+	pl TravailAprem_WORKING (0)
+	pl TravailAprem_FINI (0)
+	pl TravailAprem_COMMENCE (0)
+	pl Diner_PRETE (1)
+	pl Diner_WORKING (0)
+	pl Diner_FINI (0)
+	pl Diner_COMMENCE (0)
+	pl Coucher_PRETE (1)
+	pl Coucher_WORKING (0)
+	pl Coucher_FINI (0)
+	pl Coucher_COMMENCE (0)
+	pl Bol (2)
+	pl Ordinateur (1)
+	pl Assiette (4)
+	tr COMMENCE_Lever Lever_PRETE -> Lever_WORKING Lever_COMMENCE 	 
+	tr FINI_Lever Lever_WORKING -> Lever_FINI 	 
+	tr COMMENCE_PetitDejeuner PetitDejeuner_PRETE Matin_COMMENCE?1 -> PetitDejeuner_WORKING PetitDejeuner_COMMENCE 	 
+	tr FINI_PetitDejeuner PetitDejeuner_WORKING -> PetitDejeuner_FINI 	 
+	tr COMMENCE_Matin Matin_PRETE Lever_COMMENCE?1 -> Matin_WORKING Matin_COMMENCE 	 
+	tr FINI_Matin Matin_WORKING TravailMatin_FINI?1 -> Matin_FINI 	 
+	tr COMMENCE_TravailMatin TravailMatin_PRETE -> TravailMatin_WORKING TravailMatin_COMMENCE 	 
+	tr FINI_TravailMatin TravailMatin_WORKING PetitDejeuner_COMMENCE?1 -> TravailMatin_FINI 	 
+	tr COMMENCE_Dejeuner Dejeuner_PRETE Matin_FINI?1 -> Dejeuner_WORKING Dejeuner_COMMENCE 	 
+	tr FINI_Dejeuner Dejeuner_WORKING -> Dejeuner_FINI 	 
+	tr COMMENCE_ApresMidi ApresMidi_PRETE Dejeuner_FINI?1 -> ApresMidi_WORKING ApresMidi_COMMENCE 	 
+	tr FINI_ApresMidi ApresMidi_WORKING -> ApresMidi_FINI 	 
+	tr COMMENCE_TravailAprem TravailAprem_PRETE ApresMidi_COMMENCE?1 -> TravailAprem_WORKING TravailAprem_COMMENCE 	 
+	tr FINI_TravailAprem TravailAprem_WORKING -> TravailAprem_FINI 	 
+	tr COMMENCE_Diner Diner_PRETE TravailAprem_FINI?1 ApresMidi_FINI?1 -> Diner_WORKING Diner_COMMENCE 	 
+	tr FINI_Diner Diner_WORKING -> Diner_FINI 	 
+	tr COMMENCE_Coucher Coucher_PRETE Diner_FINI?1 -> Coucher_WORKING Coucher_COMMENCE 	 
+	tr FINI_Coucher Coucher_WORKING -> Coucher_FINI 	 
+

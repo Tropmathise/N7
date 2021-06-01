@@ -1,0 +1,91 @@
+module game2petrinet;
+create OUT: petrinet from  IN: game;
+
+-- Obtenir le jeu qui contient ce game element.
+helper context game!GameElement
+def: getGame(): game!Game =
+	game!Game.allInstances()
+		->select(p | p.GameElement->includes(self))
+		->asSequence()->first();
+
+-- Obtenir l'objet qui contient ce PackObjet.
+helper context game!PackObjet
+def: getObjet(): game!Objet =
+	game!Objet.allInstances()
+		->select(p | p.PackObjet->includes(self))
+		->asSequence()->first();
+
+-- Traduire un jeu en un PetriNet de même nom
+rule Game2PetriNet {
+	from g: game!Game
+	to pn: petrinet!PetriNet (name<- p.name)
+}
+
+-- Traduire un objet en une Place de PetriNet
+rule Objet2PetriNet {
+	from ob: game!Objet
+	to p: petrinet!Place(
+		nom <- ob.name,
+		nbJetons <- ob.taille,
+		reseau <- ob.getGame()
+		)
+}
+rule PackObjet2PetriNet {
+	from pack: game!PackObjet
+	to p: petrinet!Place(
+		nom <- o.getObjet().name,
+		nbJetons <- (o.quantite*o.getOjet().taille),
+		reseau <- o.getObjet().getGame()
+		)
+}
+
+-- Traduire un Lieu en une place de PetriNet 
+rule Lieu2PetriNet {
+	from l: game!Lieu
+	to place : petrinet!Place(
+		nom <- l.name,
+		nbJetons <- 1,
+		reseau <- l.getGame()
+		)
+}
+
+-- Traduire un Chemin en éléments de PetriNet
+rule Chemin2PetriNet {
+	from c: game!Chemin
+	to 
+		tr: petrinet!Transition(
+			nom <- c.name
+			reseau <- c.getGame()
+			),
+		arc1: petrinet!Arc(
+			nom <- c.lieu1.name + ' -> ' + tr.nom,
+			poids <- 1,
+			predecesseur <- c.lieu1,
+			sucesseur <- tr,
+			type <- #normal,
+			reseau <- c.getGame()
+			),
+		arc2: petrinet!Arc(
+			nom <- tr.nom + ' -> ' + c.lieu2.nom,
+			poids <- 1,
+			predecesseur <- tr,
+			sucesseur <- c.lieu2,
+			type <- #normal,
+			reseau <- c.getGame()
+			),
+}
+
+-- Traduire une Interaction en éléments de PetriNet
+rule Interaction2PetriNet {
+--TODO
+} 
+
+-- Traduire une Personne en éléments de PetriNet
+rule Personne2PetriNet {
+--TODO
+}
+
+-- Traduire une Connaissance en éléments de PetriNet
+rule Connaissance2PetriNet {
+-- TODO
+}

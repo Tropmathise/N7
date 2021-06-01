@@ -1,0 +1,129 @@
+[comment encoding = UTF-8 /]
+[module toJava('http://www.game.idmprojet/Game')]
+
+
+[template public gameToJava(aGame : Game)]
+[comment @main/]
+[file (aGame.name + '.java', false, 'UTF-8')]
+
+import java.util.Scanner;
+
+public class [aGame.name/] {
+[aGame.gameElements -> definitionLieuxToJava()/]
+	private static void bug() {
+		System.out.println("BUG : Oui, c'est un programme minimaliste, donc débrouillez-vous, j'ai la flemme de débuguer ces mauvaises réponses.");
+	}
+
+	public static void main(String['['/][']'/] args) {
+		Scanner scanner = new Scanner(System.in);
+		int reponse;
+
+		// Objets
+		[aGame.gameElements -> definitionObjetsToJava()/]
+		// Connaissances
+		[aGame.gameElements -> definitionConnaissancesToJava()/]
+		// Lieu
+		Lieux localisation = Lieux.[aGame.lieuDepart.name.toUpper()/];
+		// Inventaire
+		[aGame.explorateur.initialisationExplorateurToJava()/]
+
+		boolean fin = false;
+		while (!fin) {
+			switch (localisation) {
+			[comment TODO : cases des lieux/]
+			[for(l:Lieu | aGame.gameElements -> select(oclIsTypeOf(Lieu)) -> collect(oclAsType(Lieu)))]
+				[l.lieuToJava()/]
+			[/for]
+			default :
+				bug();
+				break;
+			}
+		}
+		scanner.close();
+	}
+}
+
+[/file]
+[/template]
+
+
+[template public definitionLieuxToJava(ges:OrderedSet(GameElement)) post (trim())]
+[for(l:Lieu | ges -> select(oclIsTypeOf(Lieu)) -> collect(oclAsType(Lieu))) before ('enum Lieux {') separator (', ') after ('};')]
+	[l.name.toUpper()/]
+[/for]
+[/template]
+
+[template public definitionObjetsToJava(ges:OrderedSet(GameElement)) post (trim())]
+[for(o:Objet | ges -> select(oclIsTypeOf(Objet)) -> collect(oclAsType(Objet)))]
+	int [o.name/] = 0;
+[/for]
+[/template]
+
+
+[template public definitionConnaissancesToJava(ges:OrderedSet(GameElement)) post (trim())]
+[for(c:Connaissance | ges -> select(oclIsTypeOf(Connaissance)) -> collect(oclAsType(Connaissance)))]
+	boolean [c.name/] = false;
+[/for]
+[/template]
+
+
+[template public initialisationExplorateurToJava(ex:Explorateur) post (trim())]
+int place_inventaire = [ex.tailleInventaire/];
+[for (po:PackObjets | ex.inventaire)]
+	[po.objet.name/] = [po.quantite/];
+[/for]
+[for (c:Connaissance | ex.connaissances)]
+	[c.name/] = true;
+[/for]
+[/template]
+
+
+
+
+
+
+
+[template public conditionToJava(c:Condition) post (trim())]
+[for (conj:Conjonction | c.conjonctions) before (' ') separator ('||') after(' ')]
+[for (lit:Litteral | conj.litteraux) before ('(') separator ('&&') after(')')]
+[if (lit.objet -> oclIsUndefined())]
+	[if not (lit.bool)] ! [/if] [lit.connaissance.name/]
+[else] [lit.objet.name/] [lit.operateur/] [lit.quantite/]
+[/if]
+[/for]
+[/for]
+[/template]
+
+
+
+
+[template public descriptionToJava(d:Description) post (trim())]
+
+[for (texte:Texte | d.textes) before ('if') separator ('else if')]
+[if (texte.condition.conjonctions -> oclIsUndefined())]
+( true ) {
+	System.out.println([texte.contenu/]);
+}
+[else]
+( [texte.condition.conditionToJava()/] ) {
+	System.out.println([texte.contenu/]);
+}
+[/if]
+[/for]
+[/template]
+
+
+
+
+[template public lieuToJava(l:Lieu) post (trim())]
+case [l.name.toUpper()/] :
+[if (l.eContainer(Game).lieuxArrivee -> collect (lf | lf.oclAsType(Lieu))->includes(l))]
+	[l.description.descriptionToJava()/]
+	fin = true;
+	break;
+[else]
+	
+
+	
+[/if]
+[/template]

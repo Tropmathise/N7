@@ -1,0 +1,20 @@
+[comment encoding = UTF-8 /]
+[module toLtl('http://www.game.idmprojet/Game')]
+
+
+[template public gameToLtl(aGame : Game)]
+[comment @main/]
+[file (aGame.name + '.ltl', false, 'UTF-8')]
+
+op finished = [for (la:Lieu | aGame.lieuxArrivee) separator ('\\/')]
+[la.name/][/for];
+
+['[]'/] (finished => dead);
+['[]'/] (dead => finished);
+
+[for (la : Lieu | aGame.lieuxArrivee) separator ('\\/')]
+- <> [la.name/];
+[/for]
+
+[/file]
+[/template]

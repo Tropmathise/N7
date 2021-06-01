@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simplepdl:Process
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:simplepdl="http://simplepdl"
+    xsi:schemaLocation="http://simplepdl SimplePDL.ecore">
+  <processElements
+      xsi:type="simplepdl:WorkDefinition"
+      name="Conception">
+    <uses quantityNeeded="2"
+        usedResources="//@processElements.4"/>
+    <uses quantityNeeded="2"
+        usedResources="//@processElements.6"/>
+  </processElements>
+  <processElements
+      xsi:type="simplepdl:WorkDefinition"
+      name="RedactionDoc">
+    <uses quantityNeeded="1"
+        usedResources="//@processElements.6"/>
+    <uses quantityNeeded="1"
+        usedResources="//@processElements.7"/>
+  </processElements>
+  <processElements
+      xsi:type="simplepdl:WorkDefinition"
+      name="Developpement">
+    <uses quantityNeeded="2"
+        usedResources="//@processElements.5"/>
+    <uses quantityNeeded="3"
+        usedResources="//@processElements.6"/>
+  </processElements>
+  <processElements
+      xsi:type="simplepdl:WorkDefinition"
+      name="RedactionTest">
+    <uses quantityNeeded="2"
+        usedResources="//@processElements.6"/>
+    <uses quantityNeeded="1"
+        usedResources="//@processElements.8"/>
+  </processElements>
+  <processElements
+      xsi:type="simplepdl:Resource"
+      name="concepteur"
+      nbOccurence="3"/>
+  <processElements
+      xsi:type="simplepdl:Resource"
+      name="developpeur"
+      nbOccurence="2"/>
+  <processElements
+      xsi:type="simplepdl:Resource"
+      name="machine"
+      nbOccurence="4"/>
+  <processElements
+      xsi:type="simplepdl:Resource"
+      name="redacteur"
+      nbOccurence="1"/>
+  <processElements
+      xsi:type="simplepdl:Resource"
+      name="testeur"
+      nbOccurence="2"/>
+</simplepdl:Process>

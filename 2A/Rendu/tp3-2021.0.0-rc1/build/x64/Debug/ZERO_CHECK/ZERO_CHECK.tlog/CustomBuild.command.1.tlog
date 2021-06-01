@@ -1,0 +1,10 @@
+^C:\USERS\THOMA\DESKTOP\N7\2A\RENDU\TP3-2021.0.0-RC1\BUILD\CMAKEFILES\8639C7699A43984783CE7885F91A6244\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/thoma/Desktop/N7/2A/Rendu/tp3-2021.0.0-rc1 -BC:/Users/thoma/Desktop/N7/2A/Rendu/tp3-2021.0.0-rc1/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/thoma/Desktop/N7/2A/Rendu/tp3-2021.0.0-rc1/build/tp3.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

@@ -1,0 +1,16 @@
+﻿  navigator.cpp
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp1-2020.1.0-rc3\navigator.cpp(58,21): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp1-2020.1.0-rc3\navigator.cpp(61,21): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp1-2020.1.0-rc3\navigator.cpp(64,21): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp1-2020.1.0-rc3\navigator.cpp(67,21): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp1-2020.1.0-rc3\navigator.cpp(85,21): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp1-2020.1.0-rc3\navigator.cpp(88,21): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp1-2020.1.0-rc3\navigator.cpp(91,21): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp1-2020.1.0-rc3\navigator.cpp(94,21): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp1-2020.1.0-rc3\navigator.cpp(97,21): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp1-2020.1.0-rc3\navigator.cpp(100,21): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp1-2020.1.0-rc3\navigator.cpp(112,15): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp1-2020.1.0-rc3\navigator.cpp(113,15): warning C4244: 'initialisation' : conversion de 'int' en 'float', perte possible de données
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp1-2020.1.0-rc3\navigator.cpp(114,46): warning C4244: 'argument' : conversion de 'float' en 'GLsizei', perte possible de données
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp1-2020.1.0-rc3\navigator.cpp(114,41): warning C4244: 'argument' : conversion de 'float' en 'GLsizei', perte possible de données
+  navigator.vcxproj -> C:\Users\thoma\Desktop\N7\2A\Rendu\tp1-2020.1.0-rc3\build\Debug\navigator.exe

@@ -1,0 +1,212 @@
+package simplepdl.manip;
+
+import java.io.IOException;
+import java.util.Collections;
+import java.util.Map;
+
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+
+import simplepdl.Process;
+import simplepdl.ProcessElement;
+import simplepdl.Guidance;
+import simplepdl.Resources;
+import simplepdl.linksResources;
+import simplepdl.WorkDefinition;
+import simplepdl.WorkSequence;
+import simplepdl.WorkSequenceType;
+import simplepdl.SimplepdlFactory;
+import simplepdl.SimplepdlPackage;
+
+import PetriNet.PetriNet;
+import PetriNet.Transition;
+import PetriNet.Place;
+import PetriNet.Arc;
+import PetriNet.PetrinetFactory;
+import PetriNet.PetrinetPackage;
+
+public class SimplePDL2PetriNet {
+
+    public static void main(String[] args){
+
+    	// Charger le package SimplePDL afin de l'enregistrer dans le registre d'Eclipse.
+        SimplepdlPackage packagePDLInstance = SimplepdlPackage.eINSTANCE;
+
+        // Charger le package PetriNet afin de l'enregistrer dans le registre d'Eclipse.
+        PetrinetPackage packagePNInstance = PetrinetPackage.eINSTANCE;
+
+        // Enregistrer l'extension ".xmi" comme devant Ãªtre ouverte Ã 
+		// l'aide d'un objet "XMIResourceFactoryImpl"
+		Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
+		Map<String, Object> m = reg.getExtensionToFactoryMap();
+		m.put("xmi", new XMIResourceFactoryImpl());
+		
+		// CrÃ©er un objet resourceSetImpl qui contiendra une ressource EMF (le modÃ¨le)
+        ResourceSet resSet = new ResourceSetImpl();
+        
+        // DÃ©finir les ressources (les modÃ¨les)
+        URI modelURI = URI.createURI("models/pdl-sujet-java-test.xmi");
+        URI modelURIPetri = URI.createURI("models/petrinet-java-test.xmi");
+        Resource resource = resSet.createResource(modelURI);
+        Resource resourcePetri = resSet.createResource(modelURIPetri);
+
+        // La fabrique pour fabriquer les Ã©lÃ©ments de petrinet
+        PetrinetFactory myFactory = PetrinetFactory.eINSTANCE;
+        
+        // RÃ©cupÃ©rer le premier Ã©lÃ©ment du modÃ¨le de processus (Ã©lÃ©ment racine)
+        Process process = (Process) resourceProcess.getContents().get(0);
+        
+        // CrÃ©er un Ã©lÃ©ment Petrinet
+        PetriNet petrinet = myFactory.createPetriNet();
+        petrinet.setName(process.getName());
+        
+        // Ajouter le Petrinet dans le modèle
+        resourcePetri.getContents().add(petrinet);
+        
+        // Convertir les Workdefinition en éléments du petrinet
+        for (Object obj : process.getProcessElement()) {
+            if (obj instanceof WorkDefinition){
+                WorkDefinition wd = (WorkDefinition) obj;
+
+                // PlacesAssociées
+                Place place1 = myFactory.createPlace();
+                String nom = wd.getName() + "_PRETE";
+                place1.setName(nom);
+                place1.setJetonInitial(1);
+                place1.setPetrinet(petrinet);
+                petrinet.getPetriElement().add(place1);
+
+                Place place2 = myFactory.createPlace()
+                nom = wd.getName() + "_WORKING"
+                place2.setName(nom);
+                place2.setJetonInitial(0);
+                petrinet.getPetriElement().add(place2);
+
+                Place place3 = myFactory.createPlace();
+                nom = wd.getName() + "_FINI";
+                place3.setName(nom);
+                place3.setJetonInitial(0);
+                petrinet.getPetriElement().add(place3);
+
+                Place place4 = myFactory.createPlace();
+                nom = wd.getName() + "_COMMENCE";
+                place4.setName(nom);
+                place4.setJetonInitial(0);
+                petrinet.getPetriElement().add(place4);
+
+                // Transitions
+                Transition transition1 = myFactory.createTransition();
+                nom = "COMMENCE_" + wd.getName();
+                transition1.setName(nom);
+                petrinet.getPetriElement().add(transition1);
+
+                Transition transition2 = myFactory.createTransition();
+                nom = "FINI_" + wd.getName();
+                transition2.setName(nom);
+                petrinet.getPetriElement().add(transition2);
+
+                // Arcs
+                Arc arc1 = myFactory.createArc();
+                Arc1.setPredecessor(place1);
+                Arc1.setSuccessor(transition1);
+                Arc1.setWeight(1);
+                petrinet.getPetriElement.add(arc1);
+
+                Arc arc2 = myFactory.createArc();
+                Arc2.setPredecessor(transition2);
+                Arc2.setSuccessor(place3);
+                Arc2.setWeight(1);
+                petrinet.getPetriElement().add(arc2);
+
+                Arc arc3 = myFactory.createArc();
+                Arc3.setPredecessor(transition2);
+                Arc3.setSuccessor(place3);
+                Arc3.setWeight(1);
+                petrinet.getPetriElement().add(arc3);
+
+                Arc arc4 = myFactory.createArc();
+                Arc4.setPredecessor(place2);
+                Arc4.setSuccessor(transition2);
+                Arc4.setWeight(1);
+                petrinet.getPetriElement().add(arc4);
+
+                Arc arc5 = myFactory.createArc();
+                Arc5.setPredecessor(transition1);
+                Arc5.setSuccessor(place4);
+                Arc5.setWeight(1);
+                petrinet.getPetriElement().add(arc5);
+
+            }
+        }
+        // Convertir les WorkSequence en éléments du PetriNet
+        for (Object obj : process.getProcessElement()){
+            if (obj instanceof WorkSequence){
+                WorkSequence ws = (WorkSequence) obj;
+                WorkDefinition wd1 = ws.getPredecessor();
+                WorkDefinition wd2 = ws.getSuccessor();
+                WorkSequenceType type = ws.getLinkType();
+                Place predecessor;
+                Transition successor;
+                if(type.equals(WorkSequenceType.FINISH_TO_START)) {
+					Arc arcf2s = myFactory.createArc();
+					//arcf2s.setIsReadArc(true);
+					arcf2s.setPoids(1);
+					predecessor = (Place) petrinet.get(wd1.getName() + "_FINI");
+					arcf2s.setPredecessor(predecessor);
+					successor = (Transition) petrinet.get("COMMENCE_" + wd2.getName());
+					arcf2s.setSuccessor(successor);
+					petrinet.getPetriElement().add(arcf2s);
+				} else if(type.equals(WorkSequenceType.START_TO_FINISH)) {
+					Arc arcs2f = myFactory.createArc();
+					//arcs2f.setIsReadArc(true);
+					arcs2f.setPoids(1);
+					predecessor = (Place) petrinet.get(wd1.getName() + "_COMMENCE");
+					arcs2f.setPredecessor(predecessor);
+					successor = (Transition) petrinet.get("FINI_" + wd2.getName());
+					arcs2f.setSuccessor(successor);
+					petrinet.getPetriElement().add(arcs2f);
+				} else if(type.equals(WorkSequenceType.START_TO_START)) {
+					Arc arcs2s = myFactory.createArc();
+					//arcs2s.setIsReadArc(true);
+					arcs2s.setPoids(1);
+					predecessor = (Place) petrinet.get(wd1.getName() + "_COMMENCE");
+					arcs2s.setPredecessor(predecessor);
+					successor = (Transition) petrinet.get("COMMENCE_" + wd2.getName());
+					arcs2s.setSuccessor(successor);
+					petrinet.getPetriElement().add(arcs2s);
+				} else if(type.equals(WorkSequenceType.FINISH_TO_FINISH)) {
+					Arc arcf2f = myFactory.createArc();
+					//arcf2f.setIsReadArc(true);
+					arcf2f.setPoids(1);
+					predecessor = (Place) petrinet.get(wd1.getName() + "_FINI");
+					arcf2f.setPredecessor(predecessor);
+					successor = (Transition) petrinet.get("FINI_" + wd2.getName());
+					arcf2f.setSuccessor(succ);
+					petrinet.getPetriElement().add(arcf2f);
+				}
+            }
+        }
+
+        // Convertir les Ressources en éléments du PetriNet
+        for (Object obj : process.getProcessElement()){
+            if (obj instanceof Resource){
+                Resource resource = (Resource) obj;
+                //place associé
+                Place placeR = myFactory.createPlace();
+                placeR.setName(resource.getName());
+                placeR.setnbJetons(resource.getnbOccurence())
+                petrinet.getPetriElement.add(placeR);
+            }
+        }
+    }
+    // Sauver la ressource
+    try {
+        resourcePetri.save(Collections.EMPTY_MAP);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}

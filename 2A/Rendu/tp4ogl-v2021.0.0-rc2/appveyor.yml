@@ -1,0 +1,31 @@
+version: '2021.0.0.{build}'
+
+image: Visual Studio 2019
+
+platform:
+  - x64
+
+configuration:
+  - Release
+  - Debug
+
+#install:
+#    - vcpkg upgrade --no-dry-run
+#    - vcpkg install
+#          opengl
+#      --triplet %PLATFORM%-windows
+
+before_build:
+    - md build
+    - cd build
+#    - cmake -G "Visual Studio 16 2019" -A x64 -T v140,host=x64 -DCMAKE_BUILD_TYPE=%configuration% -DCMAKE_TOOLCHAIN_FILE=c:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake ..
+    - cmake -G "Visual Studio 16 2019" -A x64 -T v140,host=x64 -DCMAKE_BUILD_TYPE=%configuration%  ..
+    - ls -l
+
+build:
+  verbosity: detailed
+  project: $(APPVEYOR_BUILD_FOLDER)\build\tp4.sln
+  parallel: true
+
+cache:
+#  - c:\tools\vcpkg\installed\

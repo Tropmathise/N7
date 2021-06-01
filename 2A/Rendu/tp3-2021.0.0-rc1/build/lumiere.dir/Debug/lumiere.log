@@ -1,0 +1,8 @@
+﻿  lumiere.c
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp3-2021.0.0-rc1\lumiere.c(31,22): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp3-2021.0.0-rc1\lumiere.c(84,23): warning C4244: 'fonction' : conversion de 'int' en 'GLfloat', perte possible de données
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp3-2021.0.0-rc1\lumiere.c(85,23): warning C4244: 'fonction' : conversion de 'int' en 'GLfloat', perte possible de données
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp3-2021.0.0-rc1\lumiere.c(97,1): warning C4305: 'initialisation' : troncation de 'double' à 'GLfloat'
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp3-2021.0.0-rc1\lumiere.c(104,1): warning C4244: 'initialisation' : conversion de 'int' en 'GLfloat', perte possible de données
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp3-2021.0.0-rc1\lumiere.c(366,29): warning C4113: 'void (__cdecl *)()' est différent de 'void (__cdecl *)(void)' dans les listes de paramètres
+  lumiere.vcxproj -> C:\Users\thoma\Desktop\N7\2A\Rendu\tp3-2021.0.0-rc1\build\Debug\lumiere.exe

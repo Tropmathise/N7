@@ -1,0 +1,103 @@
+import java.util.Scanner;
+
+public class enigme {
+	
+	enum Lieux {ENIGME, SUCCES, ECHEC};
+	
+	private static void bug() {
+		System.out.println("BUG : Oui, c'est un programme minimaliste, donc débrouillez-vous, j'ai la flemme de débuguer ces mauvaises réponses.");
+	}
+
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		int reponse;
+		
+		// Objets
+		int Tentative = 3;
+		int Réussite = 0;
+		// Lieu
+		Lieux lieu_actuel = Lieux.ENIGME;
+		
+		boolean fin = false;
+		
+		while (!fin) {
+			switch (lieu_actuel) {
+			case ENIGME :
+				System.out.println("Vous vous trouvez dans la salle Énigme.");
+				if (Tentative > 0 && Réussite == 0) {
+					System.out.println("Vous voyez une personne qui se présente comme étant le Sphynx. Que faites-vous ?");
+					System.out.println("1. Parler au Sphynx.");
+					reponse = scanner.nextInt();
+					switch (reponse) {
+						case 1 :
+							System.out.println("\nJe vais te poser une énigme. Quelle pile de linge a été lavée avec Olympe, la lessive des Dieux !");
+							System.out.println("1. Celle de gauche, elle est plus soyeuse, plus parfumée.");
+							System.out.println("2. Celle de droite, elle est plus douce, plus souple.");
+							reponse = scanner.nextInt();
+							switch (reponse) {
+								case 1 :
+									Tentative --;
+									System.out.println("\nMauvaise réponse, il te reste " + String.valueOf(Tentative) + " tentative(s).");
+									break;
+								case 2 :
+									Réussite ++;
+									System.out.println("\nOOOOOOOOUUIIIIII ! Il a réussi !");
+									System.out.println(" En effet, ce linge est plus souple, plus douce, plus blanc ! Les dieux font leur lessive avec Olympe, qui laisse le linge blanc et les mains douces, douces, douces !");
+									System.out.println("\n En bref, c'est la bonne réponse.");
+									break;
+								default :
+									bug();
+									break;
+							}
+							break;
+						default :
+							bug();
+							break;
+					}
+				} else if (Réussite > 0) {
+					System.out.println("\nLe Sphynx disparaît dans des éclairs. Un chemin vers la salle Succès c'est ouvert. Que faites-vous ?");
+					System.out.println("1. Se rendre dans la salle Succès.");
+					reponse = scanner.nextInt();
+					switch (reponse) {
+						case 1 :
+							System.out.println("\nVous vous rendez dans la salle Succès.");
+							lieu_actuel = Lieux.SUCCES;
+							break;
+						default :
+							bug();
+							break;
+					}
+				} else if (Tentative == 0) {
+					System.out.println("\nLe Sphynx disparaît dans des éclairs. Un chemin vers la salle Échec c'est ouvert. Que faites-vous ?");
+					System.out.println("1. Se rendre dans la salle Échec.");
+					reponse = scanner.nextInt();
+					switch (reponse) {
+						case 1 :
+							System.out.println("\nVous vous rendez dans la salle Echec.");
+							lieu_actuel = Lieux.ECHEC;
+							break;
+						default :
+							bug();
+							break;
+					}
+				}
+				break;
+				
+			case SUCCES :
+				System.out.println("\nBravo, vous avez fini le jeu.");
+				fin = true;
+				break;
+				
+			case ECHEC :
+				System.out.println("\nDommage, vous n'avez pas battu l'énigme.");
+				fin = true;
+				break;
+				
+			default :
+				bug();
+				break;
+			}
+		}
+		scanner.close();
+	}
+}

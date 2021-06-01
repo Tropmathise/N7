@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 3.10)
+project(tpTI VERSION 0.1 LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+include(GNUInstallDirs)
+
+# set the output path for the generated files
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/${CMAKE_INSTALL_BINDIR})
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR} )
+
+find_package(OpenCV 3.0 REQUIRED)
+message(STATUS "OpenCV found, version ${OpenCV_VERSION}")
+
+add_subdirectory(src)

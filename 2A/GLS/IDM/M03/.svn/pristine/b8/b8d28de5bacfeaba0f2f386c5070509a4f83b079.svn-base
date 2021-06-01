@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:petrinet="http://petrinet">
+  <petrinet:PetriNet nom="JourneeBanale"/>
+  <petrinet:Place nom="Lever_ready" nbJetons="1"/>
+  <petrinet:Place nom="Lever_started"/>
+  <petrinet:Place nom="Lever_working"/>
+  <petrinet:Place nom="Lever_finished"/>
+  <petrinet:Transition nom="Lever_starts"/>
+  <petrinet:Transition nom="Lever_finishes"/>
+  <petrinet:Arc nom="Lever_ready -> Lever_starts" poids="1" successeur="/5" predecesseur="/1"/>
+  <petrinet:Arc nom="Lever_starts -> Lever_started" poids="1" successeur="/2" predecesseur="/5"/>
+  <petrinet:Arc nom="Lever_starts -> Lever_working" poids="1" successeur="/3" predecesseur="/5"/>
+  <petrinet:Arc nom="Lever_working -> Lever_finishes" poids="1" successeur="/6" predecesseur="/3"/>
+  <petrinet:Arc nom="Lever_finishes -> Lever_finished" poids="1" successeur="/4" predecesseur="/6"/>
+  <petrinet:Place nom="PetitDejeuner_ready" nbJetons="1"/>
+  <petrinet:Place nom="PetitDejeuner_started"/>
+  <petrinet:Place nom="PetitDejeuner_working"/>
+  <petrinet:Place nom="PetitDejeuner_finished"/>
+  <petrinet:Transition nom="PetitDejeuner_starts"/>
+  <petrinet:Transition nom="PetitDejeuner_finishes"/>
+  <petrinet:Arc nom="PetitDejeuner_ready -> PetitDejeuner_starts" poids="1" successeur="/16" predecesseur="/12"/>
+  <petrinet:Arc nom="PetitDejeuner_starts -> PetitDejeuner_started" poids="1" successeur="/13" predecesseur="/16"/>
+  <petrinet:Arc nom="PetitDejeuner_starts -> PetitDejeuner_working" poids="1" successeur="/14" predecesseur="/16"/>
+  <petrinet:Arc nom="PetitDejeuner_working -> PetitDejeuner_finishes" poids="1" successeur="/17" predecesseur="/14"/>
+  <petrinet:Arc nom="PetitDejeuner_finishes -> PetitDejeuner_finished" poids="1" successeur="/15" predecesseur="/17"/>
+  <petrinet:Place nom="Matin_ready" nbJetons="1"/>
+  <petrinet:Place nom="Matin_started"/>
+  <petrinet:Place nom="Matin_working"/>
+  <petrinet:Place nom="Matin_finished"/>
+  <petrinet:Transition nom="Matin_starts"/>
+  <petrinet:Transition nom="Matin_finishes"/>
+  <petrinet:Arc nom="Matin_ready -> Matin_starts" poids="1" successeur="/27" predecesseur="/23"/>
+  <petrinet:Arc nom="Matin_starts -> Matin_started" poids="1" successeur="/24" predecesseur="/27"/>
+  <petrinet:Arc nom="Matin_starts -> Matin_working" poids="1" successeur="/25" predecesseur="/27"/>
+  <petrinet:Arc nom="Matin_working -> Matin_finishes" poids="1" successeur="/28" predecesseur="/25"/>
+  <petrinet:Arc nom="Matin_finishes -> Matin_finished" poids="1" successeur="/26" predecesseur="/28"/>
+  <petrinet:Place nom="TravailMatin_ready" nbJetons="1"/>
+  <petrinet:Place nom="TravailMatin_started"/>
+  <petrinet:Place nom="TravailMatin_working"/>
+  <petrinet:Place nom="TravailMatin_finished"/>
+  <petrinet:Transition nom="TravailMatin_starts"/>
+  <petrinet:Transition nom="TravailMatin_finishes"/>
+  <petrinet:Arc nom="TravailMatin_ready -> TravailMatin_starts" poids="1" successeur="/38" predecesseur="/34"/>
+  <petrinet:Arc nom="TravailMatin_starts -> TravailMatin_started" poids="1" successeur="/35" predecesseur="/38"/>
+  <petrinet:Arc nom="TravailMatin_starts -> TravailMatin_working" poids="1" successeur="/36" predecesseur="/38"/>
+  <petrinet:Arc nom="TravailMatin_working -> TravailMatin_finishes" poids="1" successeur="/39" predecesseur="/36"/>
+  <petrinet:Arc nom="TravailMatin_finishes -> TravailMatin_finished" poids="1" successeur="/37" predecesseur="/39"/>
+  <petrinet:Place nom="Dejeuner_ready" nbJetons="1"/>
+  <petrinet:Place nom="Dejeuner_started"/>
+  <petrinet:Place nom="Dejeuner_working"/>
+  <petrinet:Place nom="Dejeuner_finished"/>
+  <petrinet:Transition nom="Dejeuner_starts"/>
+  <petrinet:Transition nom="Dejeuner_finishes"/>
+  <petrinet:Arc nom="Dejeuner_ready -> Dejeuner_starts" poids="1" successeur="/49" predecesseur="/45"/>
+  <petrinet:Arc nom="Dejeuner_starts -> Dejeuner_started" poids="1" successeur="/46" predecesseur="/49"/>
+  <petrinet:Arc nom="Dejeuner_starts -> Dejeuner_working" poids="1" successeur="/47" predecesseur="/49"/>
+  <petrinet:Arc nom="Dejeuner_working -> Dejeuner_finishes" poids="1" successeur="/50" predecesseur="/47"/>
+  <petrinet:Arc nom="Dejeuner_finishes -> Dejeuner_finished" poids="1" successeur="/48" predecesseur="/50"/>
+  <petrinet:Place nom="ApresMidi_ready" nbJetons="1"/>
+  <petrinet:Place nom="ApresMidi_started"/>
+  <petrinet:Place nom="ApresMidi_working"/>
+  <petrinet:Place nom="ApresMidi_finished"/>
+  <petrinet:Transition nom="ApresMidi_starts"/>
+  <petrinet:Transition nom="ApresMidi_finishes"/>
+  <petrinet:Arc nom="ApresMidi_ready -> ApresMidi_starts" poids="1" successeur="/60" predecesseur="/56"/>
+  <petrinet:Arc nom="ApresMidi_starts -> ApresMidi_started" poids="1" successeur="/57" predecesseur="/60"/>
+  <petrinet:Arc nom="ApresMidi_starts -> ApresMidi_working" poids="1" successeur="/58" predecesseur="/60"/>
+  <petrinet:Arc nom="ApresMidi_working -> ApresMidi_finishes" poids="1" successeur="/61" predecesseur="/58"/>
+  <petrinet:Arc nom="ApresMidi_finishes -> ApresMidi_finished" poids="1" successeur="/59" predecesseur="/61"/>
+  <petrinet:Place nom="TravailAprem_ready" nbJetons="1"/>
+  <petrinet:Place nom="TravailAprem_started"/>
+  <petrinet:Place nom="TravailAprem_working"/>
+  <petrinet:Place nom="TravailAprem_finished"/>
+  <petrinet:Transition nom="TravailAprem_starts"/>
+  <petrinet:Transition nom="TravailAprem_finishes"/>
+  <petrinet:Arc nom="TravailAprem_ready -> TravailAprem_starts" poids="1" successeur="/71" predecesseur="/67"/>
+  <petrinet:Arc nom="TravailAprem_starts -> TravailAprem_started" poids="1" successeur="/68" predecesseur="/71"/>
+  <petrinet:Arc nom="TravailAprem_starts -> TravailAprem_working" poids="1" successeur="/69" predecesseur="/71"/>
+  <petrinet:Arc nom="TravailAprem_working -> TravailAprem_finishes" poids="1" successeur="/72" predecesseur="/69"/>
+  <petrinet:Arc nom="TravailAprem_finishes -> TravailAprem_finished" poids="1" successeur="/70" predecesseur="/72"/>
+  <petrinet:Place nom="Diner_ready" nbJetons="1"/>
+  <petrinet:Place nom="Diner_started"/>
+  <petrinet:Place nom="Diner_working"/>
+  <petrinet:Place nom="Diner_finished"/>
+  <petrinet:Transition nom="Diner_starts"/>
+  <petrinet:Transition nom="Diner_finishes"/>
+  <petrinet:Arc nom="Diner_ready -> Diner_starts" poids="1" successeur="/82" predecesseur="/78"/>
+  <petrinet:Arc nom="Diner_starts -> Diner_started" poids="1" successeur="/79" predecesseur="/82"/>
+  <petrinet:Arc nom="Diner_starts -> Diner_working" poids="1" successeur="/80" predecesseur="/82"/>
+  <petrinet:Arc nom="Diner_working -> Diner_finishes" poids="1" successeur="/83" predecesseur="/80"/>
+  <petrinet:Arc nom="Diner_finishes -> Diner_finished" poids="1" successeur="/81" predecesseur="/83"/>
+  <petrinet:Place nom="Coucher_ready" nbJetons="1"/>
+  <petrinet:Place nom="Coucher_started"/>
+  <petrinet:Place nom="Coucher_working"/>
+  <petrinet:Place nom="Coucher_finished"/>
+  <petrinet:Transition nom="Coucher_starts"/>
+  <petrinet:Transition nom="Coucher_finishes"/>
+  <petrinet:Arc nom="Coucher_ready -> Coucher_starts" poids="1" successeur="/93" predecesseur="/89"/>
+  <petrinet:Arc nom="Coucher_starts -> Coucher_started" poids="1" successeur="/90" predecesseur="/93"/>
+  <petrinet:Arc nom="Coucher_starts -> Coucher_working" poids="1" successeur="/91" predecesseur="/93"/>
+  <petrinet:Arc nom="Coucher_working -> Coucher_finishes" poids="1" successeur="/94" predecesseur="/91"/>
+  <petrinet:Arc nom="Coucher_finishes -> Coucher_finished" poids="1" successeur="/92" predecesseur="/94"/>
+  <petrinet:Arc nom="Lever -> Matin" poids="1" successeur="/27" predecesseur="/2" type="ReadArc"/>
+  <petrinet:Arc nom="Matin -> Dejeuner" poids="1" successeur="/49" predecesseur="/26" type="ReadArc"/>
+  <petrinet:Arc nom="Dejeuner -> ApresMidi" poids="1" successeur="/60" predecesseur="/48" type="ReadArc"/>
+  <petrinet:Arc nom="Diner -> Coucher" poids="1" successeur="/93" predecesseur="/81" type="ReadArc"/>
+  <petrinet:Arc nom="TravailAprem -> Diner" poids="1" successeur="/82" predecesseur="/70" type="ReadArc"/>
+  <petrinet:Arc nom="PetitDejeuner -> TravailMatin" poids="1" successeur="/39" predecesseur="/13" type="ReadArc"/>
+  <petrinet:Arc nom="ApresMidi -> Diner" poids="1" successeur="/82" predecesseur="/59" type="ReadArc"/>
+  <petrinet:Arc nom="TravailMatin -> Matin" poids="1" successeur="/28" predecesseur="/37" type="ReadArc"/>
+  <petrinet:Arc nom="Matin -> PetitDejeuner" poids="1" successeur="/16" predecesseur="/24" type="ReadArc"/>
+  <petrinet:Arc nom="ApresMidi -> TravailAprem" poids="1" successeur="/71" predecesseur="/57" type="ReadArc"/>
+  <petrinet:Place nom="Bol" nbJetons="2"/>
+  <petrinet:Place nom="Ordinateur" nbJetons="1"/>
+  <petrinet:Place nom="Assiette" nbJetons="4"/>
+  <petrinet:Arc poids="1" successeur="/16"/>
+  <petrinet:Arc poids="1" successeur="/17" predecesseur="/17"/>
+  <petrinet:Arc poids="1" successeur="/38"/>
+  <petrinet:Arc poids="1" successeur="/39" predecesseur="/39"/>
+  <petrinet:Arc poids="2" successeur="/49"/>
+  <petrinet:Arc poids="2" successeur="/50" predecesseur="/50"/>
+  <petrinet:Arc poids="1" successeur="/71"/>
+  <petrinet:Arc poids="1" successeur="/72" predecesseur="/72"/>
+  <petrinet:Arc poids="2"/>
+  <petrinet:Arc poids="2"/>
+</xmi:XMI>

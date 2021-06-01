@@ -1,0 +1,63 @@
+[comment encoding = UTF-8 /]
+[module SimplePDLtoHTML('http://simplepdl')]
+
+[template public processToHTML(aProcess : Process)]
+[comment @main/]
+[file (aProcess.name + '.html', false, 'UTF-8')]
+<head><title>[aProcess.name/]</title></head>
+<body>
+<h1>Process "[aProcess.name/]"</h1>
+<h2>Work definitions/Activites</h2>
+[let wds : OrderedSet(WorkDefinition) = aProcess.getWDs() ] 
+	[if (wds->size() > 0)]
+  <ul>
+		[for (wd : WorkDefinition | wds)]
+    <li>[wd.toHTML() /] [if(wd.uses.quantityNeeded->size() > 0)] [' A besoin de ' + wd.uses.quantityNeeded + ' ' + wd.uses.usedResources.name + ' pour fonctionner.' /][/if]</li>
+		[/for]
+  </ul> 
+	[else]
+  <b>None.</b>
+	[/if]
+[/let]
+<h2>Ressources a disposition</h2>
+[let res : OrderedSet(Resources) = aProcess.getRes() ] 
+	[if (res->size() > 0)]
+  <ul>
+		[for (ress : Resources | res)]
+    <li>[ress.name + ' : ' + ress.nbOccurence /]</li>
+		[/for]
+  </ul> 
+	[else]
+  <b>None.</b>
+	[/if]
+[/let]
+</body>
+[/file]
+[/template]
+
+[query public getWDs(p: Process) : OrderedSet(WorkDefinition) = 
+	p.processElements->select( e | e.oclIsTypeOf(WorkDefinition) )
+		->collect( e | e.oclAsType(WorkDefinition) )
+		->asOrderedSet()
+/]
+
+[query public getRes(p: Process) : OrderedSet(Resources) = 
+	p.processElements->select( e | e.oclIsTypeOf(Resources) )
+		->collect( e | e.oclAsType(Resources) )
+		->asOrderedSet()
+/]
+
+[query public toState(link: WorkSequenceType) : String =
+	if link = WorkSequenceType::startToStart or link = WorkSequenceType::startToFinish then
+		'commencer'
+	else
+		'terminer'
+	endif
+/]
+
+[template public toHTML(wd : WorkDefinition) post (trim()) ]
+[wd.name /] [for (ws: WorkSequence | wd.linksToPredecessors)
+		    before (' a besoin de ') separator (', ') after('.')
+][ws.predecessor.name /] pour [ws.linkType.toState()
+/][/for]
+[/template]

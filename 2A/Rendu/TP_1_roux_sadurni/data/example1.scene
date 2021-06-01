@@ -1,0 +1,21 @@
+
+# object filename:
+data/colored_stfdbunny.off
+# camera position:
+2.0 2.0 3.0
+# camera looks at:
+0.0 0.1 0.0
+# camera's y vector:
+0.0 -1.0 0.0
+# focal length:
+3500
+# w and h (pixels):
+640 480
+# ambient light intensity Ia
+0.5
+# point light : 3D coordinates and ligth intensity (x, y, z, Id)
+5.0 8.0 8.0 4.0
+# object material parameters (Ka, Kd, Ks, s)
+0.5 0.5 0.5 1.0
+
+

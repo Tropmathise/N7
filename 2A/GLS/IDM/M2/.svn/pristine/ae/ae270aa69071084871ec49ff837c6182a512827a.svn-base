@@ -1,0 +1,122 @@
+Game GameEnigme {
+	explorateur MarcPantel {
+		tailleInventaire 3
+		inventaire ({Tentative,3})
+	}
+	lieuDepart Enigme
+	lieuxArrivee (Succes Echec)
+	gameElements {
+		objet Tentative {
+			description {
+				{
+					"Une tentative de réponse"
+				}
+			}
+			taille 0
+		}
+		connaissance Reussite {
+			description {
+				{
+					"Obtenue lors d'une bonne réponse"
+				}
+			}
+		}
+		chemin CEnigmeSucces {
+			description {
+				{
+					"Le chemin vers la réussite"
+				}
+			}
+			conditionVisibilite (((Reussite = true)))
+			lieu1 Enigme
+			lieu2 Succes
+		}
+		chemin CEnigmeEchec {
+			description {
+				{
+					"Le chemin vers la défaite"
+				}
+			}
+			conditionVisibilite (((Tentative = 0)))
+			lieu1 Enigme
+			lieu2 Echec
+		}
+		lieu Enigme {
+			description {
+				{
+					"Vous vous trouvez dans la salle Énigme."
+				}
+			}
+			cheminsPossibles (CEnigmeSucces CEnigmeEchec)
+			entites {
+				{
+					personne Sphinx interaction {
+						seulChoixDebut choixEnigme
+						listeChoix (
+							choix choixEnigme {
+								description {
+									{
+										"Je vais te poser une énigme. Quelle pile de linge a été lavée avec Olympe, la lessive des Dieux !"
+									}
+								}
+								listeActions (
+									action {
+										description {
+											{
+												"Celle de gauche, elle est plus soyeuse, plus parfumée."
+											}
+										}
+										consommations ({Tentative,1})
+										choixSuivant ChoixMauvaiseReponse
+									}
+									action {
+										description {
+											{
+												"Celle de droite, elle est plus douce, plus souple."
+											}
+										}
+										recompenses ({Reussite})
+										choixSuivant ChoixBonneReponse
+									}
+								)
+							}
+							choix ChoixMauvaiseReponse {
+								description {
+									{
+										"Mauvaise réponse"
+									}
+								}
+								choixFin true
+							}
+							choix ChoixBonneReponse {
+								description {
+									{
+										"OOOOOOOOUUIIIIII ! Il a réussi !"
+									}
+								}
+								choixFin true
+							}
+						)
+					}
+					conditionVisibilite (((Tentative > 0) & (Reussite = true) ))
+				}
+			}
+		}
+		lieu Succes {
+			description {
+				{
+				"Bravo vous avez gagné !"
+				}	
+			}
+			cheminsPossibles (CEnigmeSucces)
+		}
+		lieu Echec {
+			description {
+				{
+				"Bravo vous avez réussi à répondre 3 fois faux alors qu'il n'y avait que 2 choix ! Vous entrez dans le Panthéon."
+				}	
+			}
+			cheminsPossibles (CEnigmeEchec)
+		}
+	}
+}

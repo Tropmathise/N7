@@ -1,0 +1,48 @@
+[comment encoding = UTF-8 /]
+[module toJava('http://www.Game.game')]
+
+
+[template public gameToJava(aGame : Game)]
+[comment @main/]
+[file (aGame.name, false, 'UTF-8')]
+
+import java.util.Scanner; '\n'
+public class [aGame.name/] {
+[comment TODO : enum des lieux/]
+	private static void bug() {
+		System.out.println("BUG : Oui, c'est un programme minimaliste, donc débrouillez-vous, j'ai la flemme de débuguer ces mauvaises réponses.");
+	}
+
+	public static void main(String['['/][']'/] args) {
+		Scanner scanner = new Scanner()
+		int reponse;
+	
+		int place_inventaire = [aGame.explorateur.tailleInventaire/];
+		// Objets
+		[comment TODO : liste des objets/]
+		// Connaissances
+		[comment TODO : liste des connaissances/]
+		// Lieu
+		Lieux localisation = Lieux.[aGame.lieuDepart.name/];
+
+		boolean fin = false;
+		while (!fin) {
+			switch (localisation) {
+			[comment TODO : cases des lieux/]
+			default :
+				bug();
+				break;
+			}
+		}
+		scanner.close();
+	}
+}
+
+[/file]
+[/template]
+
+
+
+[template public lieuToJava(l:Lieu) post (trim())]
+'case' 
+[/template]

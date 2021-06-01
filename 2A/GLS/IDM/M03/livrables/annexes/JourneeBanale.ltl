@@ -1,0 +1,11 @@
+
+op finished =  Lever_finished /\ PetitDejeuner_finished /\ Matin_finished /\ TravailMatin_finished /\ Dejeuner_finished /\ ApresMidi_finished /\ TravailAprem_finished /\ Diner_finished /\ Coucher_finished;
+op started =  Lever_started /\ PetitDejeuner_started /\ Matin_started /\ TravailMatin_started /\ Dejeuner_started /\ ApresMidi_started /\ TravailAprem_started /\ Diner_started /\ Coucher_started;
+op ready =  Lever_ready /\ PetitDejeuner_ready /\ Matin_ready /\ TravailMatin_ready /\ Dejeuner_ready /\ ApresMidi_ready /\ TravailAprem_ready /\ Diner_ready /\ Coucher_ready;
+op running =  Lever_running /\ PetitDejeuner_running /\ Matin_running /\ TravailMatin_running /\ Dejeuner_running /\ ApresMidi_running /\ TravailAprem_running /\ Diner_running /\ Coucher_running;
+
+- <> finished;
+[] (finished => - <> ready);
+[] (finished => - <> running);
+[] (started => - <> ready);
+[] (finished => started);

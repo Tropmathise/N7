@@ -1,0 +1,24 @@
+﻿  ObjModel.cpp
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp4ogl-v2021.0.0-rc2\ObjModel.cpp(64,17): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp4ogl-v2021.0.0-rc2\ObjModel.cpp(180,31): warning C4305: 'argument' : troncation de 'double' à 'GLfloat'
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp4ogl-v2021.0.0-rc2\ObjModel.cpp(181,26): warning C4305: 'argument' : troncation de 'double' à 'GLfloat'
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp4ogl-v2021.0.0-rc2\ObjModel.cpp(314,76): warning C4267: 'argument' : conversion de 'size_t' en 'GLsizei', perte possible de données
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp4ogl-v2021.0.0-rc2\ObjModel.cpp(464,46): warning C4244: 'argument' : conversion de '_Ty' en 'const float', perte possible de données
+          with
+          [
+              _Ty=size_t
+          ]
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp4ogl-v2021.0.0-rc2\ObjModel.cpp(527,34): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp4ogl-v2021.0.0-rc2\ObjModel.cxx(157,26): warning C4305: 'argument' : troncation de 'double' à 'GLfloat'
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp4ogl-v2021.0.0-rc2\ObjModel.cxx(164,33): warning C4305: 'argument' : troncation de 'double' à 'const float'
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp4ogl-v2021.0.0-rc2\ObjModel.cxx(202,33): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp4ogl-v2021.0.0-rc2\ObjModel.cxx(202,27): warning C4244: 'initialisation' : conversion de 'double' en 'const float', perte possible de données
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp4ogl-v2021.0.0-rc2\ObjModel.cxx(258,22): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp4ogl-v2021.0.0-rc2\ObjModel.cxx(260,19): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp4ogl-v2021.0.0-rc2\ObjModel.cxx(263,22): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp4ogl-v2021.0.0-rc2\ObjModel.cxx(265,19): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp4ogl-v2021.0.0-rc2\ObjModel.cxx(268,22): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp4ogl-v2021.0.0-rc2\ObjModel.cxx(276,22): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp4ogl-v2021.0.0-rc2\ObjModel.cxx(358,113): warning C4267: 'argument' : conversion de 'size_t' en 'GLsizei', perte possible de données
+C:\Users\thoma\Desktop\N7\2A\Rendu\tp4ogl-v2021.0.0-rc2\ObjModel.cxx(388,121): warning C4267: 'argument' : conversion de 'size_t' en 'GLsizei', perte possible de données
+  visualizer.vcxproj -> C:\Users\thoma\Desktop\N7\2A\Rendu\tp4ogl-v2021.0.0-rc2\build\Debug\visualizer.exe

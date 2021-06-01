@@ -1,0 +1,67 @@
+Game GameEnigme {
+	explorateur MarcPantel {
+		tailleInventaire 3
+		inventaire {(Tentative,3)}
+	}
+	lieuDepart Enigme
+	lieuxArrivee (Succes Echec)
+	gameElements {
+		objet Tentative pèse 0 {
+			{("Une tentative de réponse")}
+		}
+		connaissance Reussite {
+			{("Obtenue lors d'une bonne réponse")}
+		}
+		chemin CEnigmeSucces de Enigme vers Succes {
+			{("Le chemin vers la réussite")}
+			conditionVisibilite ((Reussite = true))
+		}
+		chemin CEnigmeEchec de Enigme vers Echec {
+			{("Le chemin vers la défaite")}
+			conditionVisibilite ((Tentative = 0))
+		}
+		lieu Enigme {
+			{("Vous vous trouvez dans la salle Énigme.")}
+			cheminsPossibles (CEnigmeSucces CEnigmeEchec)
+			entites {
+					personne Sphinx {
+						seulChoixDebut choixEnigme
+						listeChoix {
+							choix choixEnigme {
+								{("Je vais te poser une énigme. Quelle pile de linge a été lavée avec Olympe, la lessive des Dieux !")}
+								listeActions {
+									action {
+										{("Celle de gauche, elle est plus soyeuse, plus parfumée.")}
+										consommations {(Tentative,1)}
+										choixSuivant ChoixMauvaiseReponse
+									}
+									action {
+										{("Celle de droite, elle est plus douce, plus souple.")}
+										recompenses {Reussite}
+										choixSuivant ChoixBonneReponse
+									}
+								}
+							}
+							choix ChoixMauvaiseReponse {
+								{("Mauvaise réponse")}
+								choixFin true
+							}
+							choix ChoixBonneReponse {
+								{("OOOOOOOOUUIIIIII ! Il a réussi !")}
+								choixFin true
+							}
+						}
+					}
+					conditionVisibilite ((Tentative > 0) & (Reussite = true) )
+				}
+		}
+		lieu Succes {
+			{("Bravo vous avez gagné !")}	
+			cheminsPossibles (CEnigmeSucces)
+		}
+		lieu Echec {
+			{("Bravo vous avez réussi à répondre 3 fois faux alors qu'il n'y avait que 2 choix ! Vous entrez dans le Panthéon.")}	
+			cheminsPossibles (CEnigmeEchec)
+		}
+	}
+}

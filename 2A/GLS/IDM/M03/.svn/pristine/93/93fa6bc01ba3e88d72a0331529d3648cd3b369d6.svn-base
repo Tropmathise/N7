@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="ASCII"?>
+<petrinet:PetriNet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:petrinet="http://petrinet" nom="JourneeBanale">
+  <Elements xsi:type="petrinet:Place" nom="Lever_PRETE" nbJetons="1"/>
+  <Elements xsi:type="petrinet:Place" nom="Lever_WORKING"/>
+  <Elements xsi:type="petrinet:Place" nom="Lever_FINI"/>
+  <Elements xsi:type="petrinet:Place" nom="Lever_COMMENCE"/>
+  <Elements xsi:type="petrinet:Transition" nom="COMMENCE_Lever"/>
+  <Elements xsi:type="petrinet:Transition" nom="FINI_Lever"/>
+  <Elements xsi:type="petrinet:Arc" nom="Lever_PRETE -> COMMENCE_Lever" poids="1" successeur="//@Elements.4" predecesseur="//@Elements.0"/>
+  <Elements xsi:type="petrinet:Arc" nom="COMMENCE_Lever -> Lever_WORKING" poids="1" successeur="//@Elements.1" predecesseur="//@Elements.4"/>
+  <Elements xsi:type="petrinet:Arc" nom="Lever_WORKING -> FINI_Lever" poids="1" successeur="//@Elements.5" predecesseur="//@Elements.1"/>
+  <Elements xsi:type="petrinet:Arc" nom="FINI_Lever -> Lever_FINI" poids="1" successeur="//@Elements.2" predecesseur="//@Elements.5"/>
+  <Elements xsi:type="petrinet:Arc" nom="COMMENCE_Lever -> Lever_COMMENCE" poids="1" successeur="//@Elements.3" predecesseur="//@Elements.4"/>
+  <Elements xsi:type="petrinet:Place" nom="PetitDejeuner_PRETE" nbJetons="1"/>
+  <Elements xsi:type="petrinet:Place" nom="PetitDejeuner_WORKING"/>
+  <Elements xsi:type="petrinet:Place" nom="PetitDejeuner_FINI"/>
+  <Elements xsi:type="petrinet:Place" nom="PetitDejeuner_COMMENCE"/>
+  <Elements xsi:type="petrinet:Transition" nom="COMMENCE_PetitDejeuner"/>
+  <Elements xsi:type="petrinet:Transition" nom="FINI_PetitDejeuner"/>
+  <Elements xsi:type="petrinet:Arc" nom="PetitDejeuner_PRETE -> COMMENCE_PetitDejeuner" poids="1" successeur="//@Elements.15" predecesseur="//@Elements.11"/>
+  <Elements xsi:type="petrinet:Arc" nom="COMMENCE_PetitDejeuner -> PetitDejeuner_WORKING" poids="1" successeur="//@Elements.12" predecesseur="//@Elements.15"/>
+  <Elements xsi:type="petrinet:Arc" nom="PetitDejeuner_WORKING -> FINI_PetitDejeuner" poids="1" successeur="//@Elements.16" predecesseur="//@Elements.12"/>
+  <Elements xsi:type="petrinet:Arc" nom="FINI_PetitDejeuner -> PetitDejeuner_FINI" poids="1" successeur="//@Elements.13" predecesseur="//@Elements.16"/>
+  <Elements xsi:type="petrinet:Arc" nom="COMMENCE_PetitDejeuner -> PetitDejeuner_COMMENCE" poids="1" successeur="//@Elements.14" predecesseur="//@Elements.15"/>
+  <Elements xsi:type="petrinet:Place" nom="Matin_PRETE" nbJetons="1"/>
+  <Elements xsi:type="petrinet:Place" nom="Matin_WORKING"/>
+  <Elements xsi:type="petrinet:Place" nom="Matin_FINI"/>
+  <Elements xsi:type="petrinet:Place" nom="Matin_COMMENCE"/>
+  <Elements xsi:type="petrinet:Transition" nom="COMMENCE_Matin"/>
+  <Elements xsi:type="petrinet:Transition" nom="FINI_Matin"/>
+  <Elements xsi:type="petrinet:Arc" nom="Matin_PRETE -> COMMENCE_Matin" poids="1" successeur="//@Elements.26" predecesseur="//@Elements.22"/>
+  <Elements xsi:type="petrinet:Arc" nom="COMMENCE_Matin -> Matin_WORKING" poids="1" successeur="//@Elements.23" predecesseur="//@Elements.26"/>
+  <Elements xsi:type="petrinet:Arc" nom="Matin_WORKING -> FINI_Matin" poids="1" successeur="//@Elements.27" predecesseur="//@Elements.23"/>
+  <Elements xsi:type="petrinet:Arc" nom="FINI_Matin -> Matin_FINI" poids="1" successeur="//@Elements.24" predecesseur="//@Elements.27"/>
+  <Elements xsi:type="petrinet:Arc" nom="COMMENCE_Matin -> Matin_COMMENCE" poids="1" successeur="//@Elements.25" predecesseur="//@Elements.26"/>
+  <Elements xsi:type="petrinet:Place" nom="TravailMatin_PRETE" nbJetons="1"/>
+  <Elements xsi:type="petrinet:Place" nom="TravailMatin_WORKING"/>
+  <Elements xsi:type="petrinet:Place" nom="TravailMatin_FINI"/>
+  <Elements xsi:type="petrinet:Place" nom="TravailMatin_COMMENCE"/>
+  <Elements xsi:type="petrinet:Transition" nom="COMMENCE_TravailMatin"/>
+  <Elements xsi:type="petrinet:Transition" nom="FINI_TravailMatin"/>
+  <Elements xsi:type="petrinet:Arc" nom="TravailMatin_PRETE -> COMMENCE_TravailMatin" poids="1" successeur="//@Elements.37" predecesseur="//@Elements.33"/>
+  <Elements xsi:type="petrinet:Arc" nom="COMMENCE_TravailMatin -> TravailMatin_WORKING" poids="1" successeur="//@Elements.34" predecesseur="//@Elements.37"/>
+  <Elements xsi:type="petrinet:Arc" nom="TravailMatin_WORKING -> FINI_TravailMatin" poids="1" successeur="//@Elements.38" predecesseur="//@Elements.34"/>
+  <Elements xsi:type="petrinet:Arc" nom="FINI_TravailMatin -> TravailMatin_FINI" poids="1" successeur="//@Elements.35" predecesseur="//@Elements.38"/>
+  <Elements xsi:type="petrinet:Arc" nom="COMMENCE_TravailMatin -> TravailMatin_COMMENCE" poids="1" successeur="//@Elements.36" predecesseur="//@Elements.37"/>
+  <Elements xsi:type="petrinet:Place" nom="Dejeuner_PRETE" nbJetons="1"/>
+  <Elements xsi:type="petrinet:Place" nom="Dejeuner_WORKING"/>
+  <Elements xsi:type="petrinet:Place" nom="Dejeuner_FINI"/>
+  <Elements xsi:type="petrinet:Place" nom="Dejeuner_COMMENCE"/>
+  <Elements xsi:type="petrinet:Transition" nom="COMMENCE_Dejeuner"/>
+  <Elements xsi:type="petrinet:Transition" nom="FINI_Dejeuner"/>
+  <Elements xsi:type="petrinet:Arc" nom="Dejeuner_PRETE -> COMMENCE_Dejeuner" poids="1" successeur="//@Elements.48" predecesseur="//@Elements.44"/>
+  <Elements xsi:type="petrinet:Arc" nom="COMMENCE_Dejeuner -> Dejeuner_WORKING" poids="1" successeur="//@Elements.45" predecesseur="//@Elements.48"/>
+  <Elements xsi:type="petrinet:Arc" nom="Dejeuner_WORKING -> FINI_Dejeuner" poids="1" successeur="//@Elements.49" predecesseur="//@Elements.45"/>
+  <Elements xsi:type="petrinet:Arc" nom="FINI_Dejeuner -> Dejeuner_FINI" poids="1" successeur="//@Elements.46" predecesseur="//@Elements.49"/>
+  <Elements xsi:type="petrinet:Arc" nom="COMMENCE_Dejeuner -> Dejeuner_COMMENCE" poids="1" successeur="//@Elements.47" predecesseur="//@Elements.48"/>
+  <Elements xsi:type="petrinet:Place" nom="ApresMidi_PRETE" nbJetons="1"/>
+  <Elements xsi:type="petrinet:Place" nom="ApresMidi_WORKING"/>
+  <Elements xsi:type="petrinet:Place" nom="ApresMidi_FINI"/>
+  <Elements xsi:type="petrinet:Place" nom="ApresMidi_COMMENCE"/>
+  <Elements xsi:type="petrinet:Transition" nom="COMMENCE_ApresMidi"/>
+  <Elements xsi:type="petrinet:Transition" nom="FINI_ApresMidi"/>
+  <Elements xsi:type="petrinet:Arc" nom="ApresMidi_PRETE -> COMMENCE_ApresMidi" poids="1" successeur="//@Elements.59" predecesseur="//@Elements.55"/>
+  <Elements xsi:type="petrinet:Arc" nom="COMMENCE_ApresMidi -> ApresMidi_WORKING" poids="1" successeur="//@Elements.56" predecesseur="//@Elements.59"/>
+  <Elements xsi:type="petrinet:Arc" nom="ApresMidi_WORKING -> FINI_ApresMidi" poids="1" successeur="//@Elements.60" predecesseur="//@Elements.56"/>
+  <Elements xsi:type="petrinet:Arc" nom="FINI_ApresMidi -> ApresMidi_FINI" poids="1" successeur="//@Elements.57" predecesseur="//@Elements.60"/>
+  <Elements xsi:type="petrinet:Arc" nom="COMMENCE_ApresMidi -> ApresMidi_COMMENCE" poids="1" successeur="//@Elements.58" predecesseur="//@Elements.59"/>
+  <Elements xsi:type="petrinet:Place" nom="TravailAprem_PRETE" nbJetons="1"/>
+  <Elements xsi:type="petrinet:Place" nom="TravailAprem_WORKING"/>
+  <Elements xsi:type="petrinet:Place" nom="TravailAprem_FINI"/>
+  <Elements xsi:type="petrinet:Place" nom="TravailAprem_COMMENCE"/>
+  <Elements xsi:type="petrinet:Transition" nom="COMMENCE_TravailAprem"/>
+  <Elements xsi:type="petrinet:Transition" nom="FINI_TravailAprem"/>
+  <Elements xsi:type="petrinet:Arc" nom="TravailAprem_PRETE -> COMMENCE_TravailAprem" poids="1" successeur="//@Elements.70" predecesseur="//@Elements.66"/>
+  <Elements xsi:type="petrinet:Arc" nom="COMMENCE_TravailAprem -> TravailAprem_WORKING" poids="1" successeur="//@Elements.67" predecesseur="//@Elements.70"/>
+  <Elements xsi:type="petrinet:Arc" nom="TravailAprem_WORKING -> FINI_TravailAprem" poids="1" successeur="//@Elements.71" predecesseur="//@Elements.67"/>
+  <Elements xsi:type="petrinet:Arc" nom="FINI_TravailAprem -> TravailAprem_FINI" poids="1" successeur="//@Elements.68" predecesseur="//@Elements.71"/>
+  <Elements xsi:type="petrinet:Arc" nom="COMMENCE_TravailAprem -> TravailAprem_COMMENCE" poids="1" successeur="//@Elements.69" predecesseur="//@Elements.70"/>
+  <Elements xsi:type="petrinet:Place" nom="Diner_PRETE" nbJetons="1"/>
+  <Elements xsi:type="petrinet:Place" nom="Diner_WORKING"/>
+  <Elements xsi:type="petrinet:Place" nom="Diner_FINI"/>
+  <Elements xsi:type="petrinet:Place" nom="Diner_COMMENCE"/>
+  <Elements xsi:type="petrinet:Transition" nom="COMMENCE_Diner"/>
+  <Elements xsi:type="petrinet:Transition" nom="FINI_Diner"/>
+  <Elements xsi:type="petrinet:Arc" nom="Diner_PRETE -> COMMENCE_Diner" poids="1" successeur="//@Elements.81" predecesseur="//@Elements.77"/>
+  <Elements xsi:type="petrinet:Arc" nom="COMMENCE_Diner -> Diner_WORKING" poids="1" successeur="//@Elements.78" predecesseur="//@Elements.81"/>
+  <Elements xsi:type="petrinet:Arc" nom="Diner_WORKING -> FINI_Diner" poids="1" successeur="//@Elements.82" predecesseur="//@Elements.78"/>
+  <Elements xsi:type="petrinet:Arc" nom="FINI_Diner -> Diner_FINI" poids="1" successeur="//@Elements.79" predecesseur="//@Elements.82"/>
+  <Elements xsi:type="petrinet:Arc" nom="COMMENCE_Diner -> Diner_COMMENCE" poids="1" successeur="//@Elements.80" predecesseur="//@Elements.81"/>
+  <Elements xsi:type="petrinet:Place" nom="Coucher_PRETE" nbJetons="1"/>
+  <Elements xsi:type="petrinet:Place" nom="Coucher_WORKING"/>
+  <Elements xsi:type="petrinet:Place" nom="Coucher_FINI"/>
+  <Elements xsi:type="petrinet:Place" nom="Coucher_COMMENCE"/>
+  <Elements xsi:type="petrinet:Transition" nom="COMMENCE_Coucher"/>
+  <Elements xsi:type="petrinet:Transition" nom="FINI_Coucher"/>
+  <Elements xsi:type="petrinet:Arc" nom="Coucher_PRETE -> COMMENCE_Coucher" poids="1" successeur="//@Elements.92" predecesseur="//@Elements.88"/>
+  <Elements xsi:type="petrinet:Arc" nom="COMMENCE_Coucher -> Coucher_WORKING" poids="1" successeur="//@Elements.89" predecesseur="//@Elements.92"/>
+  <Elements xsi:type="petrinet:Arc" nom="Coucher_WORKING -> FINI_Coucher" poids="1" successeur="//@Elements.93" predecesseur="//@Elements.89"/>
+  <Elements xsi:type="petrinet:Arc" nom="FINI_Coucher -> Coucher_FINI" poids="1" successeur="//@Elements.90" predecesseur="//@Elements.93"/>
+  <Elements xsi:type="petrinet:Arc" nom="COMMENCE_Coucher -> Coucher_COMMENCE" poids="1" successeur="//@Elements.91" predecesseur="//@Elements.92"/>
+  <Elements xsi:type="petrinet:Arc" nom="Lever_COMMENCE -> COMMENCE_Matin" poids="1" successeur="//@Elements.26" predecesseur="//@Elements.3" type="ReadArc"/>
+  <Elements xsi:type="petrinet:Arc" nom="Matin_FINI -> COMMENCE_Dejeuner" poids="1" successeur="//@Elements.48" predecesseur="//@Elements.24" type="ReadArc"/>
+  <Elements xsi:type="petrinet:Arc" nom="Dejeuner_FINI -> COMMENCE_ApresMidi" poids="1" successeur="//@Elements.59" predecesseur="//@Elements.46" type="ReadArc"/>
+  <Elements xsi:type="petrinet:Arc" nom="Diner_FINI -> COMMENCE_Coucher" poids="1" successeur="//@Elements.92" predecesseur="//@Elements.79" type="ReadArc"/>
+  <Elements xsi:type="petrinet:Arc" nom="TravailAprem_FINI -> COMMENCE_Diner" poids="1" successeur="//@Elements.81" predecesseur="//@Elements.68" type="ReadArc"/>
+  <Elements xsi:type="petrinet:Arc" nom="PetitDejeuner_COMMENCE -> FINI_TravailMatin" poids="1" successeur="//@Elements.38" predecesseur="//@Elements.14" type="ReadArc"/>
+  <Elements xsi:type="petrinet:Arc" nom="ApresMidi_FINI -> COMMENCE_Diner" poids="1" successeur="//@Elements.81" predecesseur="//@Elements.57" type="ReadArc"/>
+  <Elements xsi:type="petrinet:Arc" nom="TravailMatin_FINI -> FINI_Matin" poids="1" successeur="//@Elements.27" predecesseur="//@Elements.35" type="ReadArc"/>
+  <Elements xsi:type="petrinet:Arc" nom="Matin_COMMENCE -> COMMENCE_PetitDejeuner" poids="1" successeur="//@Elements.15" predecesseur="//@Elements.25" type="ReadArc"/>
+  <Elements xsi:type="petrinet:Arc" nom="ApresMidi_COMMENCE -> COMMENCE_TravailAprem" poids="1" successeur="//@Elements.70" predecesseur="//@Elements.58" type="ReadArc"/>
+  <Elements xsi:type="petrinet:Place" nom="Bol" nbJetons="2"/>
+  <Elements xsi:type="petrinet:Place" nom="Ordinateur" nbJetons="1"/>
+  <Elements xsi:type="petrinet:Place" nom="Assiette" nbJetons="4"/>
+</petrinet:PetriNet>

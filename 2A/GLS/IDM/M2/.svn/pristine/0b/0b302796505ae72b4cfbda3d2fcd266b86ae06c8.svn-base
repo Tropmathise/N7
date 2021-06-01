@@ -1,0 +1,660 @@
+[comment encoding = UTF-8 /]
+[module toJava('http://www.game.idmprojet/Game')]
+
+
+[template public gameToJava(aGame : Game)]
+[comment @main/]
+[file (aGame.name + '.java', false, 'UTF-8')]
+
+import java.util.Scanner;
+
+public class [aGame.name/] {
+
+	[aGame.gameElements -> definitionLieuxToJava()/]
+
+	public static void main(String['['/][']'/] args) {
+
+		Scanner scanner = new Scanner(System.in);
+		boolean erreurScanner;
+		int reponse = 0;
+		boolean continuer;
+		int i;
+		// Objets
+		[aGame.gameElements -> definitionObjetsToJava()/]
+		// Connaissances
+		[aGame.gameElements -> definitionConnaissancesToJava()/]
+		// Lieu
+		Lieux localisation = Lieux.[aGame.lieuDepart.name.toUpper()/];
+		// Inventaire
+		[aGame.explorateur.initialisationExplorateurToJava()/]
+		// Objets Lieux
+		[aGame.gameElements -> initialisationObjetsConditionsLieux()/]
+		boolean fin = false;
+		while (!fin) {
+			switch (localisation) {
+			[for(l:Lieu | aGame.gameElements -> select(oclIsTypeOf(Lieu)) -> collect(oclAsType(Lieu)))]
+				[l.lieuToJava()/]
+			[/for]
+			}
+		}
+		scanner.close();
+	}
+}
+
+[/file]
+[/template]
+
+[template public scan(p:OclAny) post (trim())]
+reponse = 0;
+erreurScanner = true;
+while(erreurScanner){
+	if (scanner.hasNextInt()){
+		reponse = scanner.nextInt();
+	} else {
+		System.out.println("Commande invalide : veuillez uniquement entrer des entiers.");
+		scanner.next();
+		continue;
+	}
+	erreurScanner = false;
+}
+[/template]
+
+
+[template public clearConsole(p:OclAny) post (trim())]
+System.out.print("\033['['/]H\033['['/]2J");
+System.out.flush();
+[/template]
+
+[template public clearInput(p:OclAny) post (trim())]
+System.out.print("\033['['/]1A");
+System.out.print("\033['['/]2K");
+[/template]
+
+[template public definitionLieuxToJava(ges:OrderedSet(GameElement)) post (replaceAll('\n', '').trim())]
+[for(l:Lieu | ges -> select(oclIsTypeOf(Lieu)) -> collect(oclAsType(Lieu))) before ('enum Lieux {') separator (', ') after ('};')]
+[l.name.toUpper()/]
+[/for]
+[/template]
+
+
+[template public definitionObjetsToJava(ges:OrderedSet(GameElement)) post (trim())]
+[for(o:Objet | ges -> select(oclIsTypeOf(Objet)) -> collect(oclAsType(Objet)))]
+int [o.name/] = 0;
+[for(l:Lieu | ges -> select(oclIsTypeOf(Lieu)) -> collect(oclAsType(Lieu)))]
+int [l.name/][o.name/] = 0;
+int [l.name/][o.name/]Deposes = 0;
+[/for]
+[/for]
+[/template]
+
+
+[template public definitionConnaissancesToJava(ges:OrderedSet(GameElement)) post (trim())]
+[for(c:Connaissance | ges -> select(oclIsTypeOf(Connaissance)) -> collect(oclAsType(Connaissance)))]
+boolean [c.name/] = false;
+[/for]
+[/template]
+
+
+[template public initialisationExplorateurToJava(ex:Explorateur) post (trim())]
+int place_inventaire = [ex.tailleInventaire/];
+[for (po:PackObjets | ex.inventaire)]
+[po.objet.name/] = [po.quantite/];
+place_inventaire -= [po.objet.taille/]*[po.quantite/];
+[/for]
+[for (c:Connaissance | ex.connaissances)]
+[c.name/] = true;
+[/for]
+[/template]
+
+
+[template public initialisationObjetsConditionsLieux(ges:OrderedSet(GameElement)) post (trim())]
+[for(l:Lieu | ges -> select(oclIsTypeOf(Lieu)) -> collect(oclAsType(Lieu)))]
+[for(po:PackObjets | l.entiteLieu -> select(oclIsTypeOf(PackObjets)) -> collect(oclAsType(PackObjets)))]
+[l.name/][po.objet.name/] = [po.quantite/];
+[/for]
+[/for]
+[/template]
+
+
+[template public conditionToJava(c:Condition) post (replaceAll('\n', '').trim())]
+[if (c.oclIsUndefined())]true
+[else]
+[for (conj:Conjonction | c.conjonctions) before (' ') separator ('||') after(' ')]
+[for (lit:Litteral | conj.litteraux) before ('(') separator ('&&') after(')')]
+[if (lit.objet.oclIsUndefined())]
+([if not (lit.bool)]![/if][lit.connaissance.name/])
+[elseif (lit.operateur = '=')]([lit.objet.name/] == [lit.quantite/])
+[else]([lit.objet.name/] [lit.operateur/] [lit.quantite/])
+[/if]
+[/for]
+[/for]
+[/if]
+[/template]
+
+
+[template public descriptionToJava(d:Description) post (trim())]
+
+[for (texte:Texte | d.textes) before ('if') separator ('else if')]
+( [texte.condition.conditionToJava()/] ) {
+	System.out.println([texte.contenu/]);
+}
+[/for]
+[/template]
+
+
+[template public lieuToJava(l:Lieu) post (trim())]
+case [l.name.toUpper()/] :
+[if (l.eContainer(Game).lieuxArrivee -> collect (lf | lf.oclAsType(Lieu))->includes(l))]
+	[l.description.descriptionToJava()/]
+	fin = true;
+	break;
+[else]
+	[clearConsole()/]
+	[for(cl:ConnaissanceLieu | l.entiteLieu -> select(oclIsTypeOf(ConnaissanceLieu)) -> collect(oclAsType(ConnaissanceLieu)))]
+	if (!([cl.connaissance.name/])){
+		if ([cl.conditionVisibilite.conditionToJava()/]) {
+			[cl.connaissance.name/] = true;
+			System.out.prinln("Vous recevez la connaissance [cl.connaissance.name/]");
+		}
+	}
+	[/for]
+	[menu()/]
+	[scan()/]
+	while((reponse < 1)||(reponse > 6)){
+		[clearInput()/]	
+		[scan()/]
+	}
+	switch (reponse) {
+		case 1 :
+			[infosInventaire()/]
+			break;
+		case 2 :
+			[infosLieu(l)/]
+			break;
+		case 3 :
+			[choisirInteraction(l)/]
+			break;
+		case 4:
+			[ramasserObjet(l)/]
+			break;
+		case 5 :
+			[deposerObjet(l)/]
+			break;
+		case 6:
+			[prendreChemin(l)/]
+			break;
+	}
+	break;
+[/if]
+[/template]
+
+
+[template public menu(p:OclAny) post (trim())]
+System.out.println("Que souhaitez-vous faire?\n");
+System.out.println("1. Afficher les informations de l'inventaire.");
+System.out.println("2. Afficher les détails du lieu courant.");
+System.out.println("3. Interagir.");
+System.out.println("4. Prendre un objet.");
+System.out.println("5. Déposer un objet.");
+System.out.println("6. Emprunter un chemin");
+[/template]
+
+
+[template public infosInventaire(p:OclAny) post (trim()) 
+	{jeu : Game = Game.allInstances() -> asSequence() -> first();}]
+continuer = true;
+while(continuer){
+	[clearConsole()/]
+	i = 0;
+	System.out.println("Vous possédez :\n");
+	[for(o:Objet | jeu.gameElements -> select(oclIsTypeOf(Objet)) -> collect(oclAsType(Objet)))]
+	if ([o.name/] > 0) {
+		i++;
+		System.out.println(String.valueOf(i) + ". " + String.valueOf([o.name/]) + " fois l'objet [o.name/], de taille [o.taille/].");
+	}
+	[/for]
+	[for(c:Connaissance | jeu.gameElements -> select(oclIsTypeOf(Connaissance)) -> collect(oclAsType(Connaissance)))]
+	if ([c.name/]) {
+		i++;
+		System.out.println(String.valueOf(i) + ". La connaissance [c.name/].");
+	}
+	[/for]
+	System.out.println("\nPlaces restantes dans l'inventaire : "+String.valueOf(place_inventaire)+"\n");
+	System.out.println("Pour plus d'informations sur un objet/connaissance, saisissez son numéro.\n");
+	i++;
+	System.out.println(String.valueOf(i) + ". Retour au menu");
+
+	[scan()/]
+	while((reponse < 1)||(reponse > i)){
+		[clearInput()/]
+		[scan()/]
+	}
+	[clearConsole()/]
+	
+	i = 0;
+	[for(o:Objet | jeu.gameElements -> select(oclIsTypeOf(Objet)) -> collect(oclAsType(Objet)))]
+	if ([o.name/] > 0) {
+		i++;
+		if (reponse == i){
+			System.out.print("objet [o.name/] : ");
+			[o.description.descriptionToJava()/]
+		}
+	} 
+	[/for]
+	[for(c:Connaissance | jeu.gameElements -> select(oclIsTypeOf(Connaissance)) -> collect(oclAsType(Connaissance)))]
+	if ([c.name/]) {
+		i++;
+		if (reponse == i){
+			System.out.print("connaissance [c.name/] : ");
+			[c.description.descriptionToJava()/]
+		}
+	} 
+	[/for]
+	i++;
+	if (reponse == i) {
+		continuer = false;
+	} else if ((reponse >= 0)&&(reponse < i)){
+		System.out.println("\n1. Retour à l'inventaire");
+		System.out.println("2. Retour au menu");
+		[scan()/]
+		while((reponse < 1)||(reponse > 2)){
+			[clearInput()/]
+			[scan()/]
+		}
+		if (reponse == 2){continuer = false;}		
+	}
+}
+[/template]
+
+[template public infosLieu(l:Lieu) post (trim()) 
+	{jeu : Game = Game.allInstances() -> asSequence() -> first();}]
+[clearConsole()/]
+System.out.println("Lieu [l.name/] : \n");
+System.out.println("Description du lieu :\n");
+[l.description.descriptionToJava()/]
+System.out.println("\nObjets visibles :\n");
+[for(po:PackObjets | l.entiteLieu -> select(oclIsTypeOf(PackObjets)) -> collect(oclAsType(PackObjets)))]
+if ([l.name/][po.objet.name/] > 0){
+	if ([po.conditionVisibilite.conditionToJava()/]) {
+		System.out.println(String.valueOf([l.name/][po.objet.name/]) + " objet(s) [po.objet.name/], de taille [po.objet.taille/]");
+	}
+}
+[/for]
+[for(o:Objet | jeu.gameElements -> select(oclIsTypeOf(Objet)) -> collect(oclAsType(Objet)))]
+if ([l.name/][o.name/]Deposes > 0){
+	System.out.println(String.valueOf([l.name/][o.name/]Deposes) + " objet(s) [o.name/] déposé(s) par vous, de taille [o.taille/]");
+}
+[/for]
+System.out.println("\nPersonnages visibles :\n");
+[for(p:Personne | l.entiteLieu -> select(oclIsTypeOf(Personne)) -> collect(oclAsType(Personne)))]
+if ([p.conditionVisibilite.conditionToJava()/]){
+	System.out.println("[p.name/]");
+}
+[/for]
+System.out.println("\nChemins visibles :\n");
+i = 0;
+[for(c:Chemin | l.cheminsPossibles -> select(oclIsTypeOf(Chemin)) -> collect(oclAsType(Chemin)))]
+if ([c.conditionVisibilite.conditionToJava()/]){
+	i++;
+	System.out.print("Chemin "+String.valueOf(i)+" : ");
+	[c.description.descriptionToJava()/]
+	if ([c.ouvert.conditionToJava()/]){System.out.println("Ce chemin est ouvert\n");}
+	else {System.out.println("Ce chemin est fermé\n");}
+}
+[/for]
+System.out.println("\n1. Retour au menu");
+[scan()/]
+while (reponse != 1){
+	[clearInput()/]
+	[scan()/]
+}
+[/template]
+
+
+[template public deposerObjet(l:Lieu) post (trim()) 
+	{jeu : Game = Game.allInstances() -> asSequence() -> first();}]
+continuer = true;
+while(continuer){
+	[clearConsole()/]
+	System.out.println("Vous possédez :\n");
+	i = 0;
+	[for(o:Objet | jeu.gameElements -> select(oclIsTypeOf(Objet)) -> collect(oclAsType(Objet)))]
+	if ([o.name/] > 0) {
+		i++;
+		System.out.println(String.valueOf(i) + ". " + String.valueOf([o.name/]) + " fois l'objet [o.name/], de taille [o.taille/].");
+	}
+	[/for]
+	i++;
+	System.out.println("\nQuel objet souhaitez-vous déposer?\n");
+	System.out.println(String.valueOf(i)+". Retour au menu\n");
+	[scan()/]
+	while((reponse < 1)||(reponse > i)){
+		[clearInput()/]
+		[scan()/]
+	}
+	i = 0;
+	[for(o:Objet | jeu.gameElements -> select(oclIsTypeOf(Objet)) -> collect(oclAsType(Objet)))]
+	if ([o.name/] > 0) {
+		i++;
+		if (reponse == i){
+			System.out.println("\nQuelle quantité voulez-vous déposer?\n");
+			System.out.println("\n0. Annuler\n");
+			[scan()/]
+			while((reponse < 0)||(reponse > [o.name/])){
+				System.out.println("Quantité invalide, veuillez donner un entier entre 0 et "+String.valueOf([o.name/]));
+				[scan()/]
+			}	
+			if (reponse != 0) {
+				[o.name/] -= reponse;
+				[l.name/][o.name/]Deposes += reponse;
+				place_inventaire += reponse*[o.taille/];
+				reponse = i;
+			}
+		}
+	}
+	[/for]
+	i++;
+	if (reponse == i){
+		continuer = false;
+	} else if (reponse != 0) {
+		System.out.println("\n"+String.valueOf(place_inventaire) + " place(s) disponibles dans l'inventaire\n");
+		System.out.println("1. Déposer un autre objet");
+		System.out.println("2. Retour au menu");
+		[scan()/]
+		while((reponse < 1)||(reponse > 2)){
+			[clearInput()/]
+			[scan()/]
+		}
+		if (reponse == 2){continuer = false;}
+	}
+}
+[/template]
+[template public ramasserObjet(l:Lieu) post (trim()) 
+	{jeu : Game = Game.allInstances() -> asSequence() -> first();}]
+continuer = true;
+while(continuer){
+	[clearConsole()/]
+	System.out.println("Objets ramassables :\n");
+	i = 0;
+	[for(po:PackObjets | l.entiteLieu -> select(oclIsTypeOf(PackObjets)) -> collect(oclAsType(PackObjets)))]
+	if ([l.name/][po.objet.name/] > 0){
+		if ([po.conditionVisibilite.conditionToJava()/]) {
+			i++;
+			System.out.println(String.valueOf(i) + ". " + String.valueOf([l.name/][po.objet.name/]) + " objet(s) [po.objet.name/], de taille [po.objet.taille/]");
+		}
+	}
+	[/for]
+	[for(o:Objet | jeu.gameElements -> select(oclIsTypeOf(Objet)) -> collect(oclAsType(Objet)))]
+	if ([l.name/][o.name/]Deposes > 0){
+		i++;
+		System.out.println(String.valueOf(i) + ". " + String.valueOf([l.name/][o.name/]Deposes) + " objet(s) [o.name/] déposé(s) par vous, de taille [o.taille/]");
+	}
+	[/for]
+	i++;
+	System.out.println("\nQuel objet souhaitez-vous ramasser?\n");
+	System.out.println(String.valueOf(i)+". Retour au menu\n");
+	[scan()/]
+	while((reponse < 1)||(reponse > i)){
+		[clearInput()/]
+		[scan()/]
+	}
+	i = 0;
+	[for(po:PackObjets | l.entiteLieu -> select(oclIsTypeOf(PackObjets)) -> collect(oclAsType(PackObjets)))]
+	if ([l.name/][po.objet.name/] > 0){
+		if ([po.conditionVisibilite.conditionToJava()/]) {
+			i++;
+			if (reponse == i){
+				System.out.println("\nQuelle quantité voulez-vous ramasser?\n");
+				System.out.println("\n0. Annuler\n");
+				[scan()/]
+				boolean continuer2 = true;
+				while(continuer2){
+					if ((reponse < 0)||(reponse > [l.name/][po.objet.name/])) {
+						System.out.println("Quantité invalide, veuillez donner un entier entre 0 et "+String.valueOf([l.name/][po.objet.name/]));
+						[scan()/]
+					} else if ((place_inventaire - reponse*[po.objet.taille/]) < 0){
+						System.out.println("Vous n'avez pas assez de place dans votre inventaire, veuillez choisir une autre quantité.");
+						[scan()/]
+					} else {
+						continuer2 = false;
+					}
+				}
+				if (reponse != 0){
+					[po.objet.name/] += reponse;
+					[l.name/][po.objet.name/] -= reponse;
+					place_inventaire -= reponse*[po.objet.taille/];
+					reponse = i;
+				}
+			}
+		}
+	}
+	[/for]
+	[for(o:Objet | jeu.gameElements -> select(oclIsTypeOf(Objet)) -> collect(oclAsType(Objet)))]
+	if ([l.name/][o.name/]Deposes > 0){
+		i++;
+		if (reponse == i){
+			System.out.println("\nQuelle quantité voulez-vous ramasser?\n");
+			System.out.println("\n0. Annuler\n");
+			[scan()/]
+			boolean continuer2 = true;
+			while(continuer2){
+				if ((reponse < 0)||(reponse > [l.name/][o.name/]Deposes)) {
+					System.out.println("Quantité invalide, veuillez donner un entier entre 0 et "+String.valueOf([l.name/][o.name/]Deposes));
+					[scan()/]
+				} else if ((place_inventaire - reponse*[o.taille/]) < 0){
+					System.out.println("Vous n'avez pas assez de place dans votre inventaire, veuillez choisir une autre quantité.");
+					[scan()/]
+				} else {
+					continuer2 = false;
+				}
+			}
+			if (reponse != 0){
+				[o.name/] += reponse;
+				[l.name/][o.name/]Deposes -= reponse;
+				place_inventaire -= reponse*[o.taille/];
+				reponse = i;
+			}
+		}
+	}
+	[/for]
+	i++;
+	if (reponse == i){
+		continuer = false;
+	} else if (reponse != 0) {
+		System.out.println("\n"+String.valueOf(place_inventaire) + " place(s) disponibles dans l'inventaire\n");
+		System.out.println("1. Ramasser un autre objet");
+		System.out.println("2. Retour au menu");
+		[scan()/]
+		while((reponse < 1)||(reponse > 2)){
+			[clearInput()/]
+			[scan()/]
+		}
+		if (reponse == 2){continuer = false;}
+	}
+}
+[/template]
+
+
+[template public prendreChemin(l:Lieu) post (trim()) 
+	{jeu : Game = Game.allInstances() -> asSequence() -> first();}]
+[clearConsole()/]
+System.out.println("\nChemins empruntables :\n");
+i = 0;
+[for(c:Chemin | l.cheminsPossibles -> select(oclIsTypeOf(Chemin)) -> collect(oclAsType(Chemin)))]
+if ([c.conditionVisibilite.conditionToJava()/]){
+	if ([c.ouvert.conditionToJava()/]){
+		i++;
+		System.out.print("Chemin "+String.valueOf(i)+" : ");
+		[c.description.descriptionToJava()/]
+		System.out.println("");
+	}
+}
+[/for]
+System.out.println("\nChoisissez un chemin");
+i++;
+System.out.println("\n"+String.valueOf(i)+". Retour au menu");
+[scan()/]
+while((reponse < 1)||(reponse > i)){
+	[clearInput()/]
+	[scan()/]
+}
+i = 0;
+[for(c:Chemin | l.cheminsPossibles -> select(oclIsTypeOf(Chemin)) -> collect(oclAsType(Chemin)))]
+if ([c.conditionVisibilite.conditionToJava()/]){
+	if ([c.ouvert.conditionToJava()/]){
+		i++;
+		if(reponse == i){
+			System.out.println("");
+			[c.consommations -> consommationsToJava()/]
+			System.out.println("");
+			[c.recompenses -> recompensesToJava()/]
+			System.out.println("");
+			[if (c.lieu1 = l)]
+			localisation = Lieux.[c.lieu2.name.toUpper()/];
+			System.out.println("Vous arrivez dans le lieu [c.lieu2.name/]");
+			[else]
+			localisation = Lieux.[c.lieu1.name.toUpper()/];
+			System.out.println("Vous arrivez dans le lieu [c.lieu1.name/]");
+			[/if]
+			System.out.println("\n1. Continuer");
+			[scan()/]
+			while(reponse != 1){
+				[scan()/]
+			}
+		}
+	}
+}
+[/for]
+[/template]
+
+
+[template public consommationsToJava(consos:OrderedSet(PackObjets)) post (trim())]
+[for(po:PackObjets | consos)]
+[po.objet.name/] -= [po.quantite/];
+place_inventaire += [po.quantite/]*[po.objet.taille/];
+System.out.println("Vous perdez [po.quantite/] objet(s) [po.objet.name/]");
+[/for]
+[/template]
+
+
+[template public recompensesToJava(rs:OrderedSet(Recompense)) post (trim())]
+[for (r:Recompense | rs)]
+if([r.conditionObtention.conditionToJava()/]){
+	[if (r.connaissanceObtenue.oclIsUndefined())]
+	[r.objetsObtenus.objet.name/] += [r.objetsObtenus.quantite/];
+	place_inventaire -= [r.objetsObtenus.quantite/]*[r.objetsObtenus.objet.taille/];
+	System.out.println("Vous recevez [r.objetsObtenus.quantite/] objet(s) [r.objetsObtenus.objet.name/]");
+	[else]
+	if(!([r.connaissanceObtenue.name/])){
+		[r.connaissanceObtenue.name/] = true;
+		System.out.println("Vous recevez la connaissance [r.connaissanceObtenue.name/]");
+	}
+	[/if]	
+}
+[/for]
+[/template]
+
+
+[template public choisirInteraction(l:Lieu) post (trim())]
+[clearConsole()/]
+System.out.println("Personnages visibles :\n");
+i = 0;
+[for (p:Personne | l.entiteLieu -> select(oclIsTypeOf(Personne))-> collect(oclAsType(Personne)))]
+if([p.conditionVisibilite.conditionToJava()/]){
+	i++;
+	System.out.println(String.valueOf(i)+". [p.name/]");
+}
+[/for]
+i++;
+System.out.println("\n"+String.valueOf(i)+". Retour au menu");
+[scan()/]
+while((reponse < 1)||(reponse > i)){
+	[clearInput()/]
+	[scan()/]
+}
+i = 0;
+[for (p:Personne | l.entiteLieu -> select(oclIsTypeOf(Personne))-> collect(oclAsType(Personne)))]
+if([p.conditionVisibilite.conditionToJava()/]){
+	i++;
+	if(reponse == i){
+		[p.interaction.interactionToJava()/]
+		break;
+	}
+}
+[/for]
+[/template]
+
+
+[template public interactionToJava(i:Interaction) post (trim())]
+[clearConsole()/]
+[i.recompenses -> recompensesToJava()/]
+String choix = "";
+[if(i.seulChoixDebut.oclIsUndefined())]
+[for (c:ChoixDebut | listeChoixDebuts)]
+if([c.condition.conditionToJava()/]){
+	choix = "[c.choix.name/]";
+}
+[/for]
+[else]
+choix = "[i.seulChoixDebut.name/]";
+[/if]
+continuer = true;
+while(continuer){
+	switch(choix){
+		[for (c:Choix | listeChoix)]
+		[c.choixToJava()/]
+		[/for]
+	}
+}
+[/template]
+
+[template public choixToJava(c:Choix)]
+case "[c.name/]":
+	[c.description.descriptionToJava()/]
+	System.out.println("\n");
+	i = 0;
+	[for (a:Action | c.listeActions)]
+	if([a.condition.conditionToJava()/]){
+		i++;
+		System.out.print(String.valueOf(i)+". ");
+		[a.description.descriptionToJava()/]
+		System.out.println("");
+	}
+	[/for]
+	[if not (c.choixFin.oclIsUndefined())]
+	if([c.choixFin.conditionToJava()/]){
+	[else]if([c.choixFinBool/]){
+		i++;
+		System.out.println("\n"+String.valueOf(i)+". Quitter l'interaction");
+	}
+	[/if]
+	[scan()/]
+	while((reponse < 1)||(reponse > i)){
+		[clearInput()/]
+		[scan()/]
+	}
+	i = 0;
+	[for (a:Action | c.listeActions)]
+	if([a.condition.conditionToJava()/]){
+		i++;
+		if(reponse == i){
+			choix = "[a.choixSuivant.name/]";
+			System.out.println("");
+			[a.consommations -> consommationsToJava()/]
+			System.out.println("");
+			[a.recompenses -> recompensesToJava()/]
+			System.out.println("\n");
+		}
+	}
+	[/for]
+	[if not (c.choixFin.oclIsUndefined())]
+	if([c.choixFin.conditionToJava()/]){
+	[else]if([c.choixFinBool/]){
+		i++;
+		if(reponse == i){
+			continuer = false;
+		}
+	}
+	[/if]
+break;
+[/template]

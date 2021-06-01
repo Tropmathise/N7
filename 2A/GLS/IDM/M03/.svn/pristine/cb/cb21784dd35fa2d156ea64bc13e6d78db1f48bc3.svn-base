@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simplepdl:Process xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:simplepdl="http://simplepdl" name="JourneeBanale">
+  <processElements xsi:type="simplepdl:WorkDefinition" linksToSuccessors="//@processElements.9" name="Lever"/>
+  <processElements xsi:type="simplepdl:WorkDefinition" linksToPredecessors="//@processElements.17" linksToSuccessors="//@processElements.14" name="PetitDejeuner">
+    <uses quantityNeeded="1" usedResources="//@processElements.19"/>
+  </processElements>
+  <processElements xsi:type="simplepdl:WorkDefinition" linksToPredecessors="//@processElements.9 //@processElements.16" linksToSuccessors="//@processElements.17 //@processElements.10" name="Matin"/>
+  <processElements xsi:type="simplepdl:WorkDefinition" linksToPredecessors="//@processElements.14" linksToSuccessors="//@processElements.16" name="TravailMatin">
+    <uses quantityNeeded="1" usedResources="//@processElements.20"/>
+  </processElements>
+  <processElements xsi:type="simplepdl:WorkDefinition" linksToPredecessors="//@processElements.10" linksToSuccessors="//@processElements.11" name="Dejeuner">
+    <uses quantityNeeded="2" usedResources="//@processElements.21"/>
+  </processElements>
+  <processElements xsi:type="simplepdl:WorkDefinition" linksToPredecessors="//@processElements.11 //@processElements.15" linksToSuccessors="//@processElements.12 //@processElements.18" name="ApresMidi"/>
+  <processElements xsi:type="simplepdl:WorkDefinition" linksToPredecessors="//@processElements.18" linksToSuccessors="//@processElements.13" name="TravailAprem">
+    <uses quantityNeeded="1" usedResources="//@processElements.20"/>
+  </processElements>
+  <processElements xsi:type="simplepdl:WorkDefinition" linksToPredecessors="//@processElements.13" linksToSuccessors="//@processElements.15" name="Diner">
+    <uses quantityNeeded="2" usedResources="//@processElements.21"/>
+  </processElements>
+  <processElements xsi:type="simplepdl:WorkDefinition" linksToPredecessors="//@processElements.12" name="Coucher"/>
+  <processElements xsi:type="simplepdl:WorkSequence" linkType="finishToStart" predecessor="//@processElements.0" successor="//@processElements.2"/>
+  <processElements xsi:type="simplepdl:WorkSequence" linkType="finishToStart" predecessor="//@processElements.2" successor="//@processElements.4"/>
+  <processElements xsi:type="simplepdl:WorkSequence" linkType="finishToStart" predecessor="//@processElements.4" successor="//@processElements.5"/>
+  <processElements xsi:type="simplepdl:WorkSequence" linkType="finishToStart" predecessor="//@processElements.5" successor="//@processElements.8"/>
+  <processElements xsi:type="simplepdl:WorkSequence" linkType="finishToStart" predecessor="//@processElements.6" successor="//@processElements.7"/>
+  <processElements xsi:type="simplepdl:WorkSequence" linkType="startToFinish" predecessor="//@processElements.1" successor="//@processElements.3"/>
+  <processElements xsi:type="simplepdl:WorkSequence" linkType="finishToFinish" predecessor="//@processElements.7" successor="//@processElements.5"/>
+  <processElements xsi:type="simplepdl:WorkSequence" linkType="finishToFinish" predecessor="//@processElements.3" successor="//@processElements.2"/>
+  <processElements xsi:type="simplepdl:WorkSequence" predecessor="//@processElements.2" successor="//@processElements.1"/>
+  <processElements xsi:type="simplepdl:WorkSequence" predecessor="//@processElements.5" successor="//@processElements.6"/>
+  <processElements xsi:type="simplepdl:Resources" name="Bol" nbOccurence="2"/>
+  <processElements xsi:type="simplepdl:Resources" name="Ordinateur" nbOccurence="1"/>
+  <processElements xsi:type="simplepdl:Resources" name="Assiette" nbOccurence="4"/>
+</simplepdl:Process>

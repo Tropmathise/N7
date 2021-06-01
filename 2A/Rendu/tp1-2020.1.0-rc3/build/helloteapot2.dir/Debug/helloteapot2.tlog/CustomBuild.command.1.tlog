@@ -1,0 +1,10 @@
+^C:\USERS\THOMA\DESKTOP\N7\2A\RENDU\TP1-2020.1.0-RC3\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/thoma/Desktop/N7/2A/Rendu/tp1-2020.1.0-rc3 -BC:/Users/thoma/Desktop/N7/2A/Rendu/tp1-2020.1.0-rc3/build --check-stamp-file C:/Users/thoma/Desktop/N7/2A/Rendu/tp1-2020.1.0-rc3/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

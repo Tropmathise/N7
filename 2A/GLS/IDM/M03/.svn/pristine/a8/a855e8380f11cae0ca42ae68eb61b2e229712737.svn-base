@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PetriNet:PetriNet
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:PetriNet="http://PetriNet"
+    xsi:schemaLocation="http://PetriNet PetriNet.ecore">
+  <places nom="Hiver"
+      nbJetons="1"
+      nbJetonsInitial="1"/>
+  <places nom="Printemps"/>
+  <places nom="Ete"/>
+  <places nom="Automne"/>
+  <transitions
+      nom="HP"
+      entrees="//@arcs.0"
+      sorties="//@arcs.2"/>
+  <transitions
+      nom="PE"
+      entrees="//@arcs.3"
+      sorties="//@arcs.4"/>
+  <transitions
+      nom="EA"
+      entrees="//@arcs.5"
+      sorties="//@arcs.6"/>
+  <transitions
+      nom="AH"
+      entrees="//@arcs.7"
+      sorties="//@arcs.1"/>
+  <arcs poids="1"
+      placeAssociee="//@places.0"/>
+  <arcs poids="1"
+      placeAssociee="//@places.0"/>
+  <arcs poids="1"
+      placeAssociee="//@places.1"/>
+  <arcs poids="1"
+      placeAssociee="//@places.1"/>
+  <arcs poids="1"
+      placeAssociee="//@places.2"/>
+  <arcs poids="1"
+      placeAssociee="//@places.2"/>
+  <arcs poids="1"
+      placeAssociee="//@places.3"/>
+  <arcs poids="1"
+      placeAssociee="//@places.3"/>
+</PetriNet:PetriNet>

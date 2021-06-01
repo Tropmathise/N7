@@ -1,0 +1,19 @@
+<ul>
+<li>BUGFIX: Version 1.18.14 could not be installed in Eclipse, it would break Eclipse.</li>
+<li>BREAKING CHANGE: mapstruct users should now add a dependency to lombok-mapstruct-binding. This solves compiling modules with lombok (and mapstruct).</li>
+<li>IMPROBABLE BREAKING CHANGE: The generated hashcode has changed for classes that include both primitive fields and reference fields.</li>
+<li>FEATURE: Similar to <code>@Builder</code>, you can now configure a <code>@SuperBuilder</code>'s 'setter' prefixes via <code>@SuperBuilder(setterPrefix = "set")</code> for example. We still discourage doing this. Pull Request #2357.</li>
+<li>FEATURE: If using <code>@Synchronized("lockVar")</code>, if <code>lockVar</code> is referring to a static field, the code lombok generates no longer causes a warning about accessing a static entity incorrectly.</li>
+<li>FEATURE: <code>@Jacksonized</code> on a <code>@Builder</code> or <code>@SuperBuilder</code> will configure Jackson to use this builder when deserializing. Pull Request #2387 thanks to <strong>@JanRieke</strong>. @Jacksonized documentation.</li>
+<li>FEATURE: The checkerframework support has been updated; the relevant annotations were renamed in checkerframework's APIs, lombok now generates the annotations according to their current API names.</li>
+<li>PLATFORM: Added support for compiling projects with OpenJ9 Pull Request #2437</li>
+<li>PLATFORM: Improved support for recent JVM/javac versions (14 and 15) and new language features.</li>
+<li>PERFORMANCE: Several performance improvements during parsing/compilation, both using javac and Eclipse. Thanks <strong>@Rawi01</strong>!</li>
+<li>PERFORMANCE: The generated equals method will first compare primitives, then primitive wrappers and then reference fields. Manual re-ordering is possible using <code>@Include(rank=n)</code>. Pull Request #2485,</li>
+<li>BUGFIX: Delombok prints the first <code>this</code> parameter.</li>
+<li>BUGFIX: Using <code>val</code> in combination with values whose generics include wildcards that reference themselves would cause a <code>StackOverflowError</code> in javac. .</li>
+<li>BUGFIX: Using <code>@SuperBuilder</code> on a class that has some fairly convoluted generics usage would fail with 'Wrong number of type arguments'.  Pull Request #2362</li>
+<li>BUGFIX: Various lombok annotations on classes nested inside enums or interfaces would cause errors in eclipse.</li>
+<li>BUGFIX: Trying to add <code>@ExtensionMethod</code>s with exactly 2 arguments would fail in eclipse.  Pull Request #2376 thanks to <strong>@Rawi01</strong>.</li>
+<li>BUGFIX: Javac sets incorrect annotated type on with methods.</li>
+</ul>

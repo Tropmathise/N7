@@ -1,0 +1,258 @@
+html,
+body
+{
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.viewer
+{
+  position: relative;
+  height: calc(100% - 40px);
+}
+
+.toolbar
+{
+  height: 40px;
+  padding: 0 20px;
+  text-align: center;
+  font-size: 16px;
+  background: #aaa;
+}
+.toolbar::-moz-selection
+{
+  background: transparent;
+}
+.toolbar::selection
+{
+  background: transparent;
+}
+.toolbar > *
+{
+  display: inline-block;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.toolbar > *.left
+{
+  float: left;
+}
+.toolbar > *.right
+{
+  float: right;
+}
+/*
+.toolbar *[title]:hover
+{
+  cursor: help;
+  position: relative;
+}
+.toolbar *[title]:hover:after
+{
+  content: attr(title);
+  position: absolute;
+  top: calc(-100% - 15px);
+  left: 0;
+  z-index: 10;
+  padding: 5px;
+  border: 1px solid #aaa;
+  background: white;
+  white-space: nowrap;
+}
+*/
+.toolbar input,
+.toolbar output
+{
+  margin: 0 10px;
+  text-align: center;
+}
+.toolbar input
+{
+  display: none;
+  width: 40px;
+}
+.toolbar output
+{
+  display: block;
+  white-space: nowrap;
+}
+
+.pdfContainer
+{
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+  background: #fff;
+}
+
+.pdfControl
+{
+  display: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 20%;
+  opacity: 0;
+}
+.pdfControl.left
+{
+  left: 0;
+  cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAWCAYAAADafVyIAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAlNJREFUeNrUVTuLGlEUvjMsioXYi6AEYiqjjQrBQlAQbFIYnM0iVvYpV4il+CjzD+zEGVJYWfgK6C7YqakmCUmabawsFPF5c87EK9fZcd0QlpALH/ecO3i+81aglJKnPMJTExAkaLfbJBAIEJPJdAS/389DhjcV72az+bxcLhO73U5O3WgPbV88RD4cDokgCEz1qqrqhtstSRJNJBIfQZbPBSA+Jkqfz4cYouxyuUitVkvW6/XXoN4Akn9NgJEUCoX34DlhJP1+/6pSqbw6R8RS9AxQRGcNHNihEI/HtQez2UzS6TRBsnA4TFqt1hXWsFQq/YTP7wAfjlKHhYCC1OgfnO12S9frNV0sFnQ2m9HpdEonkwlVFIVmMpkcFPlmb/N3mwaDwdpgMEg+tvOA4AAguofNZkM8Hs+X5XL5QksR5hdIMNf6FLl5BX6gRbzb7bQbCZjM3/iur8E3gKQzrqJB/cwwo/yNHjPgG+LBLvJ6vYhxp9O5R8B7iQb5dPHQR3A4jUaDidfZbJaMRqM37GE+nxsaY17zuiEBeo5G9+c7GH/J0sQ81qeJFZpPG7/fRD58/SKE6f3c7XaPCsd7zBvlyffy7twkU+iu61gs9tVisRCr1UpsNtvBCHp9ioyvgbAftJPrHI6Sz+cToVBI84z1+Wq1OtJhdRCYJazhLRBcOJ3OH6BfnttFtFqtSrlcTuFThUDHer2etp6j0ehtsVj8JIpiTpZlHNgg4NKwi4wGF0jewu4Rx+Oxh//gcDjuIpFIG1ZEJZVK3f2Tf7T/n+CXAAMAAhI6Ro9USZ8AAAAASUVORK5CYII='), auto;
+}
+.pdfControl.right
+{
+  right: 0;
+  cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAWCAYAAADafVyIAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAApRJREFUeNrUVT2IWkEQXv+xsvcaLRI7owgKIqhoo02KcJp0V9inPDQWWviDVpZ2amPUs7AIViqC1wiCxi6B4wTTWFmIIv68zDzcd+tv7gqLLCyzs2/3m/lmZueJOI4j1xxicuUhpQtkkkqliEgk2jtgMpno93ehUCg2GAw+wBjAlo89B/vC2mg0kkQiQZxO54uBdDp9BI6j1+uh8FWr1U/lcvkWFZ1Od9FrdJaGng+RxWI5d9aXyWQea7Xax1Kp5NNoNPymwWDow0RJ/pVD6QXgrwD4nMvlrG6320rZ+f1+Eo/Hv+Ha6/W+PgcssFarfc5ms1aXy2WVSqWk0WgQYEAKhQLZAf84KJTtAU4fZhDmE0/RbDaX1Gr1YyAQCFcqFW4ymXDT6ZSbzWbcYrHgVqsVt9lsuLcMxERsnkG/3zcMh8P34K1VJpMRACPr9ZpPulgsJtvt9mQBvKlMERTB0CoCUkn3cY0SDSkUikOcX6yCRUDzJBhAAJzoOR/YHRhKNEKdkEgkZLlc7qHvDOpexQBBcR7q1BgyY8PVbDYJPLyfpx7cEQMEZePO6qwhpVIpAAD4QzKZvGdBg8Hg6VZBQTEMUDkCIOp0H+V8PufXu/DoPR7P00EO9g0A+JaNPa0gNsGsTpm1220EG8J9jBnHRoO+8KMc0Ms06agjG/4wPDqVSiVcBvm7Xq/fw/mz/UKEh6EXfR+NRlqgvQa6VuxNNpuNB8R3gVIul+/pnU6HhMPhKty/Zb1nR7fbFUL0GV4wMrjJ5/N30GrdUIpyNGa324nD4RCYYexbrRaJRqOVYrH45ZL3QoiYsvsDxmLQc2JoDBrdXSQScY3H4xv2kl6vH0JvQvDNOWDoZy8h+q9/mVc38FeAAQA1p5lQ5V8+GwAAAABJRU5ErkJggg=='), auto;
+}
+
+.pdfPreload
+{
+  position: relative;
+  height: 100%;
+}
+.pdfPreload > *
+{
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+.pdfPreload i
+{
+  font-size: 20vh;
+}
+.pdfPreload p
+{
+  font-size: 24px;
+}
+.pdfPreload p:after
+{
+  content: '%';
+  margin-left: 3px;
+  font-size: 16px;
+}
+
+.pdfError
+{
+  display: none;
+  position: relative;
+  top: 20px;
+  margin: 0 20px;
+  padding: 20px;
+  background: red;
+}
+.pdfError summary
+{
+  outline: none;
+}
+.pdfError p
+{
+  overflow: hidden;
+  padding: 20px 17px;
+  text-overflow: ellipsis;
+  background: white;
+}
+
+.simpleMode
+{
+  overflow: hidden !important;
+}
+.simpleMode .page
+{
+  margin-top: 100vh !important;
+}
+.simpleMode .page:last-child
+{
+  margin-bottom: 100vh !important;
+}
+
+.continuousMode .page
+{
+  margin: 10px auto 0 !important;
+}
+.continuousMode .page:first-child
+{
+  margin-top: 0 !important;
+}
+
+.pdfBottom,
+.pdfBetween
+{
+  text-align: center;
+  vertical-align: top;
+}
+.pdfBottom > ins,
+.pdfBetween > ins
+{
+  display: block;
+}
+
+.pdfBottom
+{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: calc(90px + 10px * 2);
+}
+.pdfBottom > ins
+{
+  margin: 10px;
+}
+
+.pdfBetween
+{
+  width: calc(100% - 20px);
+  text-align: center;
+  vertical-align: top;
+}
+.pdfBetween > ins
+{
+  margin-top: 10px;
+}
+
+.simpleMode.ads
+{
+  bottom: calc(90px + 10px * 2);
+}
+
+@media (max-device-width: 575px) and (orientation: portrait)
+{
+  .simpleMode.ads
+  {
+    bottom: calc(50px + 2 * 10px);
+  }
+
+  .simpleMode.ads ~ .pdfBottom
+  {
+    height: calc(50px + 2 * 10px);
+  }
+}
+
+@media (max-device-width: 767px) and (orientation: landscape)
+{
+  .simpleMode.ads
+  {
+    bottom: 0;
+  }
+
+  .simpleMode.ads ~ .pdfBottom
+  {
+    display: none;
+  }
+}
+
+.simpleMode .pdfBetween
+{
+  display: none;
+}
+
+.continuousMode ~ .pdfBottom
+{
+  display: none;
+}

@@ -1,0 +1,87 @@
+$(window).load(function()
+{
+	var container = $('#content');
+	var width = container.width() / 4;
+
+	container.isotope(
+	{
+		resizable: false,
+		masonry:
+		{
+			columnWidth: width
+		}
+	});
+
+	$(window).smartresize(function()
+	{
+		container.isotope(
+		{
+			masonry:
+			{
+				columnWidth: width
+			}
+		});
+	});
+});
+
+$(document).ready(function()
+{
+	var container = $('#content');
+	container.imagesLoaded(function()
+	{
+		container.isotope(
+		{
+			filter: '*',
+			animationOptions:
+			{
+				duration: 750,
+				easing: 'linear',
+				queue: false,
+			}
+		});
+	});
+});
+
+$(window).load(function()
+{
+	$('#carousel-choice').show()
+		.carouFredSel(
+	{
+		items :
+		{
+			width: 200,
+			height: 295,
+			visible:
+			{
+				min: 1,
+				max: 4
+			}
+		},
+		width: '200px',
+		height: '295px',
+		responsive: true,
+		auto: true,
+		circular: true,
+		infinite: false,
+		prev:
+		{
+			button: "#carousel-prev",
+			key: "left",
+		},
+		next:
+		{
+			button: "#carousel-next",
+			key: "right",
+		},
+		swipe:
+		{
+			onMouse: true,
+			onTouch: true
+		},
+		scroll:
+		{
+			easing: "",
+			duration: 1200
+		}
+	});
+});

@@ -1,0 +1,31 @@
+import 'PetriNet.ecore'
+
+package PetriNet
+
+context PetriElement 
+inv validName('Invalid name: ' + self.nom):
+	self.nom.matches('[A-Za-z_][A-Za-z0-9_]*')
+inv hasName('Empty name :' + self.nom):
+	self.nom <> ''
+
+context Place
+inv positiveToken('The number of tokens must be positive:'):
+	self.nbJetons >= 0
+
+context Arc
+inv validName('Invalid name: ' + self.nom):
+	self.nom.matches('[A-Za-z_][A-Za-z0-9_]*')
+inv hasName('Empty name :' + self.nom):
+	self.nom <> ''
+inv arcWeight('The weight of the arc is not positive:'):
+	self.poids >= 1
+inv goodLink('The links between predecessor and sucessor are incorrect'):
+	(self.predecesseur.oclIsTypeOf(Place) implies self.successeur.oclIsTypeOf(Transition)) and (self.predecesseur.oclIsTypeOf(Transition) implies self.successeur.oclIsTypeOf(Place))
+
+context Noeud 
+inv validName('Invalid name: ' + self.nom):
+	self.nom.matches('[A-Za-z_][A-Za-z0-9_]*')
+inv hasName('Empty name :' + self.nom):
+	self.nom <> ''
+	
+endpackage

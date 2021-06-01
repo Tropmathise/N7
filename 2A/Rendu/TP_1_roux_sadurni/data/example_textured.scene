@@ -1,0 +1,19 @@
+
+# object filename:
+data/textured_facet.off
+# camera position:
+0.75 1.25 0.5
+# camera looks at:
+0.5 0.5 0.0
+# camera's y vector:
+0.0 0.0 1.0
+# focal length (pixels):
+256
+# w and h (pixels):
+512 512
+# ambient light intensity Ia
+0.1
+# point light : 3D coordinates and ligth intensity (x, y, z, Id)
+0.0 0.0 8.0 0.9
+# object material parameters (Ka, Kd, Ks, s)
+0.5 0.5 0.5 10.0

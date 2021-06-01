@@ -1,0 +1,30 @@
+[comment encoding = UTF-8 /]
+[module PetriNetToDot('http://petrinet')]
+
+
+[template public toDot(aPetriNet : PetriNet)]
+[comment @main/]
+[file (aPetriNet.nom + '.dot', false, 'UTF-8')]
+digraph [aPetriNet.nom/]{
+	[for(transition : Transition | aPetriNet.Elements -> getTransitions())]
+	[for(arc : Arc | transition.sorties)]
+		[transition.nom/] -> [arc.successeur.nom /]
+	[/for]
+	[for (arc : Arc | transition.entrees)]
+		[arc.predecesseur.nom /] -> [transition.nom/]	
+	[/for]
+	[/for]
+}
+[/file]
+[/template]
+
+[query public getTransitions(elements : OrderedSet(PetriElement)) : OrderedSet(Transition) =
+	elements->select( e | e.oclIsTypeOf(Transition) )
+		->collect( e | e.oclAsType(Transition))
+		->asOrderedSet()
+/]
+[query public getPlaces(elements : OrderedSet(PetriElement)) : OrderedSet(Place) =
+	elements->select( e | e.oclIsTypeOf(Place))
+		->collect( e | e.oclAsType(Place) )
+		->asOrderedSet()
+/]
